@@ -39,17 +39,15 @@ public class Post {
     @Indexed
     private String communityId; // Null si ce n'est pas un post de communauté
 
-    // Si pageId et communityId sont null, c'est un post de statut personnel.
-
-    private PostType type; // ex: STATUS, RECIPE, ...
+    private PostType type;
 
     private String text;
 
-    private Media media; // Objet embarqué
+    private Media media;
 
-    private PostVisibility visibility; // ex: PUBLIC, MEMBERS_ONLY
+    private PostVisibility visibility;
 
-    private PostStats stats; // Objet embarqué
+    private PostStats stats;
 
     @CreatedDate
     private LocalDateTime createdAt;

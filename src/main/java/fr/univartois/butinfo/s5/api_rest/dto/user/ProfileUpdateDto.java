@@ -1,0 +1,21 @@
+package fr.univartois.butinfo.s5.api_rest.dto.user;
+
+import jakarta.validation.constraints.Size;
+import java.util.List;
+
+/**
+ * DTO pour la mise à jour du profil public d'un utilisateur.
+ */
+public record ProfileUpdateDto(
+        @Size(min = 3, max = 30)
+        String pseudo,
+
+        @Size(max = 300, message = "La biographie ne doit pas dépasser 300 caractères")
+        String bio,
+
+        @Size(max = 100)
+        String location,
+
+        List<String> languages
+) {
+}

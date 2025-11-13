@@ -20,7 +20,7 @@ import java.time.LocalDateTime;
 public class User {
 
     @Id
-    private String id; // Correction : Doit être String pour l'ObjectId
+    private String id;
 
     @Indexed(unique = true) // Important pour la performance et l'unicité
     private String username;

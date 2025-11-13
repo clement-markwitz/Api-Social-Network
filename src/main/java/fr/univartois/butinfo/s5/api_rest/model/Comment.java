@@ -28,8 +28,6 @@ public class Comment {
 
     private String text;
 
-    // ----- Champs Bonus (non inclus dans votre JSON mais courants) -----
-
     /**
      * Pour les réponses imbriquées (répondre à un autre commentaire).
      * Si null, c'est un commentaire de premier niveau.
@@ -41,8 +39,6 @@ public class Comment {
      * Nombre de "likes" sur CE commentaire (dénormalisé).
      */
     private int likeCount;
-
-    // -------------------------------------------------------------------
 
     @CreatedDate
     private LocalDateTime createdAt;

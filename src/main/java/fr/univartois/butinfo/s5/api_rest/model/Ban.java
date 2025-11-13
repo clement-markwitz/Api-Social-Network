@@ -26,7 +26,7 @@ public class Ban {
      * L'ID de l'utilisateur qui est banni.
      * Référence Manuelle à la collection 'users'.
      */
-    @Indexed // TRÈS important d'indexer ce champ pour les recherches !
+    @Indexed // Important d'indexer ce champ pour les recherches !
     private String userId;
 
     /**
@@ -60,8 +60,8 @@ public class Ban {
     private boolean active;
 
     @CreatedDate
-    private LocalDateTime createdAt; // Date de création de l'enregistrement du ban
+    private LocalDateTime createdAt;
 
     @LastModifiedDate
-    private LocalDateTime updatedAt; // Date de dernière modification (ex: si le ban est révoqué)
+    private LocalDateTime updatedAt;
 }
