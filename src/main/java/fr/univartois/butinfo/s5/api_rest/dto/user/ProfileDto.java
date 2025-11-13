@@ -1,7 +1,6 @@
 // (Utilisé pour la lecture ET la mise à jour du profil)
-package fr.univartois.butinfo.s5.api_rest.dto;
+package fr.univartois.butinfo.s5.api_rest.dto.user;
 
-import lombok.Data;
 import java.util.List;
 
 /**

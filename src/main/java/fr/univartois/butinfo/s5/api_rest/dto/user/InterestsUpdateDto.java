@@ -1,4 +1,4 @@
-package fr.univartois.butinfo.s5.api_rest.dto;
+package fr.univartois.butinfo.s5.api_rest.dto.user;
 
 import java.util.List;
 
