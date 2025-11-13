@@ -1,6 +1,7 @@
 package fr.univartois.butinfo.s5.api_rest.model;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.CreatedDate;
@@ -13,6 +14,8 @@ import java.time.LocalDateTime;
 
 @Data
 @NoArgsConstructor
+@AllArgsConstructor
+@Builder // Pour un pattern de construction plus fluide lors de tests avec AllArgsConstructor
 @Document(collection = "users")
 public class User {
 
