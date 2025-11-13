@@ -5,13 +5,14 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 import lombok.Data;
 
-@Data
-public class PasswordChangeRequestDto {
-
+/**
+ * DTO (entrée) pour la demande de changement de mot de passe.
+ */
+public record PasswordChangeRequestDto(
     @NotBlank
-    private String oldPassword;
+    String oldPassword,
 
     @NotBlank
     @Size(min = 8, max = 100)
-    private String newPassword;
-}
+    String newPassword
+) {}

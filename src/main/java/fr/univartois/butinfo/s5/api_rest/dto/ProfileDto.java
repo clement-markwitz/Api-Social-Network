@@ -4,11 +4,14 @@ package fr.univartois.butinfo.s5.api_rest.dto;
 import lombok.Data;
 import java.util.List;
 
-@Data
-public class ProfileDto {
-    private String pseudo;
-    private String bio;
-    private String avatarUrl;
-    private String location;
-    private List<String> languages;
+/**
+ * DTO (sortie) pour l'objet embarqué Profile.
+ */
+public record ProfileDto (
+    String pseudo,
+    String bio,
+    String avatarUrl,
+    String location,
+    List<String> languages
+){
 }

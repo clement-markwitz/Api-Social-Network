@@ -3,9 +3,9 @@ package fr.univartois.butinfo.s5.api_rest.dto;
 import java.util.List;
 
 /**
- * DTO (sortie) pour l'objet embarqué Interests.
+ * DTO (entrée) pour la mise à jour manuelle des intérêts.
  */
-public record InterestsDto(
+public record InterestsUpdateDto(
         List<String> cuisines,
         List<String> techniques
 ) {

@@ -3,9 +3,9 @@ package fr.univartois.butinfo.s5.api_rest.dto;
 import java.util.List;
 
 /**
- * DTO (sortie) pour l'objet embarqué Preferences.
+ * DTO pour la mise à jour des préférences de l'utilisateur.
  */
-public record PreferencesDto(
+public record PreferencesUpdateDto(
         List<String> diets,
         List<String> allergies,
         List<String> dislikedIngredients
