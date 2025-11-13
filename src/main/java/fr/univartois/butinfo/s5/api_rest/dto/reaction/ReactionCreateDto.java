@@ -1,0 +1,13 @@
+package fr.univartois.butinfo.s5.api_rest.dto.reaction;
+
+import fr.univartois.butinfo.s5.api_rest.model.ReactionType;
+import jakarta.validation.constraints.NotNull;
+
+/**
+ * DTO (entrée) pour créer ou mettre à jour une réaction sur un post.
+ */
+public record ReactionCreateDto(
+        @NotNull(message = "Un type de réaction est requis")
+        ReactionType type // L'utilisateur envoie le type de réaction (ex: LIKE)
+) {
+}
