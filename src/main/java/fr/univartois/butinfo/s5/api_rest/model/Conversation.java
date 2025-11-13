@@ -19,13 +19,13 @@ import java.util.List;
 public class Conversation {
 
     @Id
-    private String id; // L'ObjectId de la conversation
+    private String id;
 
     /**
      * Liste des ID de tous les utilisateurs membres de cette conversation.
      * C'est ce qui permet les discussions de groupe.
      */
-    @Indexed // Index VITAL pour trouver les conversations d'un utilisateur
+    @Indexed // Index pour trouver les conversations d'un utilisateur
     private List<String> members;
 
     /**
@@ -38,14 +38,10 @@ public class Conversation {
      */
     private ConversationStatus status;
 
-    // ----- Champs optionnels pour les groupes -----
-
     /**
      * Nom de la conversation (utile pour les groupes).
      */
     private String name;
-
-    // ---------------------------------------------
 
     @CreatedDate
     private LocalDateTime createdAt;

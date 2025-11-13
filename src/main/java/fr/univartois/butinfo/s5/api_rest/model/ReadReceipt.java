@@ -19,7 +19,7 @@ public class ReadReceipt {
     /**
      * L'ID de l'utilisateur qui a lu le message.
      */
-    @Indexed // Indexe le champ userId dans l'objet embarqué
+    @Indexed
     private String userId;
 
     /**
