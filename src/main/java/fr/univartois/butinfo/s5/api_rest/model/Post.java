@@ -23,21 +23,21 @@ public class Post {
     private String id;
 
     @Indexed
-    private String authorId; // Référence à 'User'
+    private User author; // Référence à 'User'
 
     /**
      * Le post est-il sur une page ?
      * Référence à 'Page'.
      */
     @Indexed
-    private String pageId; // Null si ce n'est pas un post de page
+    private Page page; // Null si ce n'est pas un post de page
 
     /**
      * Le post est-il dans une communauté ?
      * Référence à 'Community'.
      */
     @Indexed
-    private String communityId; // Null si ce n'est pas un post de communauté
+    private Community community; // Null si ce n'est pas un post de communauté
 
     private PostType type;
 

@@ -27,14 +27,14 @@ public class Ban {
      * Référence Manuelle à la collection 'users'.
      */
     @Indexed // Important d'indexer ce champ pour les recherches !
-    private String userId;
+    private User user;
 
     /**
      * L'ID de l'utilisateur (modérateur) qui a émis le ban.
      * Référence Manuelle à la collection 'users'.
      */
     @Indexed // Utile pour rechercher tous les bans d'un modérateur
-    private String moderatorId;
+    private User moderator;
 
     private String reason;
 

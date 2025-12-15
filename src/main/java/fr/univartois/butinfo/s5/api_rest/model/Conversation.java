@@ -26,12 +26,12 @@ public class Conversation {
      * C'est ce qui permet les discussions de groupe.
      */
     @Indexed // Index pour trouver les conversations d'un utilisateur
-    private List<String> members;
+    private List<User> members;
 
     /**
      * L'ID de l'utilisateur qui a initié la conversation.
      */
-    private String initiatorId;
+    private User initiator;
 
     /**
      * Statut de la conversation (ex: ACTIVE, PENDING_INVITE, LEFT_GROUP).
