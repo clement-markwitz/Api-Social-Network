@@ -24,10 +24,10 @@ public class Reaction {
     private String id;
 
     @Indexed // Index pour trouver toutes les réactions d'un post
-    private String postId;
+    private Post post;
 
     @Indexed // Index pour trouver toutes les réactions d'un user
-    private String userId;
+    private User user;
 
     /**
      * Le type de réaction (ex: LIKE, HELPFUL, LAUGH).
