@@ -1,0 +1,19 @@
+meta {
+  name: createPage
+  type: http
+  seq: 1
+}
+
+post {
+  url: http://localhost:8080/api/pages
+  body: json
+  auth: inherit
+}
+
+body:json {
+  {
+    "name": "Tokyo Street",
+    "description": "Tout sur la cuisine de rue japonaise : Takoyaki, Yakitori et Ramen.",
+    "topics": ["Asie", "Street Food", "Voyage"]
+  }
+}
