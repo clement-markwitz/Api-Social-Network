@@ -1,0 +1,9 @@
+{
+  "version": "1",
+  "name": "SAE S5.A.01",
+  "type": "collection",
+  "ignore": [
+    "node_modules",
+    ".git"
+  ]
+}

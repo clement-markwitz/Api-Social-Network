@@ -25,26 +25,24 @@ public class Page {
 
     @Indexed(unique = true)
     private String name;
+
     private String description;
+
     private String avatarUrl;
 
     /**
-     * Liste des ID des utilisateurs qui gèrent la page (poster, modifier, etc.).
-     * (Votre champ 'admins' du JSON)
+     * CORRECTION : On stocke les IDs des admins (String) et non les objets User.
+     * Cela correspond à ce que ton Mapper essaie de faire.
      */
-    private List<User> admins;
+    private List<String> adminIds;
 
-    /**
-     * Nombre total d'abonnés. C'est de la "dénormalisation".
-     * Doit être mis à jour manuellement (ex: +1 ou -1)
-     * à chaque création/suppression de PageSubscription.
-     */
     private int followerCount;
 
     private List<String> topics;
 
     @CreatedDate
     private LocalDateTime createdAt;
+
     @LastModifiedDate
     private LocalDateTime updatedAt;
 }
