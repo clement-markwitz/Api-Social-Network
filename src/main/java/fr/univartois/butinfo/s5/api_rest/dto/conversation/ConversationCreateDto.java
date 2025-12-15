@@ -9,9 +9,9 @@ import java.util.List;
  */
 public record ConversationCreateDto(
         @NotEmpty(message = "Il doit y avoir au moins un autre membre")
-        List<String> memberIds, // IDs des *autres* utilisateurs à inviter
+        List<String> memberIds,
 
         @Size(max = 100)
-        String name // Optionnel, pour les conversations de groupe
+        String name
 ) {
 }

@@ -1,7 +1,8 @@
-	plugins {
+plugins {
 	java
 	id("org.springframework.boot") version "3.5.5"
 	id("io.spring.dependency-management") version "1.1.7"
+    id("org.sonarqube") version "7.2.0.6526"
 }
 
 group = "fr.univartois.butinfo.s5"
@@ -12,6 +13,13 @@ java {
 	toolchain {
 		languageVersion = JavaLanguageVersion.of(21)
 	}
+}
+
+sonar {
+    properties {
+        property("sonar.projectKey", "api-rest")
+        property("sonar.host.url", "https://sonarqube.univ-artois.fr")
+    }
 }
 
 repositories {
