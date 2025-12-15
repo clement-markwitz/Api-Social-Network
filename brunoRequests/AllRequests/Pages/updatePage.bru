@@ -1,0 +1,18 @@
+meta {
+  name: updatePage
+  type: http
+  seq: 4
+}
+
+put {
+  url: http://localhost:8080/api/pages/6940109fc0de33e8b2a41d2e
+  body: json
+  auth: inherit
+}
+
+body:json {
+  {
+    "description": "Nouvelle description : Vive la tartiflette aussi !",
+    "topics": ["Fromage", "Hiver", "Pomme de terre"]
+  }
+}

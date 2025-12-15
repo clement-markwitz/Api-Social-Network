@@ -1,0 +1,20 @@
+meta {
+  name: conversation
+  type: http
+  seq: 1
+}
+
+post {
+  url: http://localhost:8080/api/conversations
+  body: json
+  auth: inherit
+}
+
+body:json {
+  {
+    "name": "Projet de groupe",
+    "memberIds": [
+      "6940254d24866417681f8a2e","6940255024866417681f8a2f" 
+    ]
+  }
+}

@@ -27,14 +27,14 @@ public class Follow {
      * Référence manuelle à la collection 'users'.
      */
     @Indexed // Indexe pour la requête : "Qui est-ce que je suis ?"
-    private String followerId;
+    private User follower;
 
     /**
      * L'ID de l'utilisateur qui EST suivi.
      * Référence manuelle à la collection 'users'.
      */
     @Indexed // Indexe pour la requête : "Qui me suit ?"
-    private String followingId;
+    private User following;
 
     @CreatedDate
     private LocalDateTime createdAt;
