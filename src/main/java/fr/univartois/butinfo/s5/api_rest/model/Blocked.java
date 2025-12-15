@@ -7,6 +7,7 @@ import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.index.CompoundIndex;
 import org.springframework.data.mongodb.core.index.Indexed;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.time.LocalDateTime;
@@ -29,6 +30,7 @@ public class Blocked {
      * Référence manuelle à la collection 'users'.
      */
     @Indexed // Index simple pour "Qui ai-je bloqué ?"
+    @DBRef
     private User blocker;
 
     /**
@@ -36,6 +38,7 @@ public class Blocked {
      * Référence manuelle à la collection 'users'.
      */
     @Indexed // Index simple pour "Qui m'a bloqué ?"
+    @DBRef
     private User blocked;
 
     private String reason; // Optionnel

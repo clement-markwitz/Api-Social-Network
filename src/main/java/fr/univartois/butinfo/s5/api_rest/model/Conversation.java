@@ -7,6 +7,7 @@ import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.mongodb.core.index.Indexed;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.time.LocalDateTime;
@@ -26,11 +27,13 @@ public class Conversation {
      * C'est ce qui permet les discussions de groupe.
      */
     @Indexed // Index pour trouver les conversations d'un utilisateur
+    @DBRef
     private List<User> members;
 
     /**
      * L'ID de l'utilisateur qui a initié la conversation.
      */
+    @DBRef
     private User initiator;
 
     /**

@@ -8,6 +8,7 @@ import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.mongodb.core.index.Indexed;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.time.LocalDateTime;
@@ -30,11 +31,8 @@ public class Page {
 
     private String avatarUrl;
 
-    /**
-     * CORRECTION : On stocke les IDs des admins (String) et non les objets User.
-     * Cela correspond à ce que ton Mapper essaie de faire.
-     */
-    private List<String> adminIds;
+    @DBRef
+    private List<User> admin;
 
     private int followerCount;
 
