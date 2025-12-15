@@ -32,7 +32,7 @@ public class Community {
      * Liste des ID des utilisateurs qui gèrent la communauté.
      * (Standardisé à partir de votre champ 'admin' du JSON)
      */
-    private List<String> adminIds;
+    private List<User> admins;
 
     /**
      * Nombre total de membres (dénormalisé).

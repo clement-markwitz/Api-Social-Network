@@ -29,14 +29,14 @@ public class Blocked {
      * Référence manuelle à la collection 'users'.
      */
     @Indexed // Index simple pour "Qui ai-je bloqué ?"
-    private String blockerId;
+    private User blocker;
 
     /**
      * L'ID de l'utilisateur qui est bloqué.
      * Référence manuelle à la collection 'users'.
      */
     @Indexed // Index simple pour "Qui m'a bloqué ?"
-    private String blockedId;
+    private User blocked;
 
     private String reason; // Optionnel
 

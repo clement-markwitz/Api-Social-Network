@@ -22,10 +22,10 @@ public class PageSubscription {
     private String id;
 
     @Indexed
-    private String userId; // L'utilisateur qui s'abonne
+    private User user; // L'utilisateur qui s'abonne
 
     @Indexed
-    private String pageId; // La page à laquelle il s'abonne
+    private Page page; // La page à laquelle il s'abonne
 
     @CreatedDate
     private LocalDateTime createdAt;
