@@ -32,7 +32,7 @@ public class Page {
      * Liste des ID des utilisateurs qui gèrent la page (poster, modifier, etc.).
      * (Votre champ 'admins' du JSON)
      */
-    private List<String> adminIds;
+    private List<User> admins;
 
     /**
      * Nombre total d'abonnés. C'est de la "dénormalisation".

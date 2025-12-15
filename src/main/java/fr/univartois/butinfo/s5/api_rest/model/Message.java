@@ -25,14 +25,14 @@ public class Message {
      * C'est une "Référence Manuelle" à Conversation.id
      */
     @Indexed // Index pour récupérer les messages d'une conversation
-    private String conversationId;
+    private Conversation conversation;
 
     /**
      * L'ID de l'utilisateur qui a envoyé ce message.
      * C'est votre "fromId".
      */
     @Indexed // Utile pour indexer les messages d'un expéditeur
-    private String senderId;
+    private User sender;
 
     private String text;
 

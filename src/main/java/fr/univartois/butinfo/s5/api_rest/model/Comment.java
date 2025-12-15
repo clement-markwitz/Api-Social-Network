@@ -21,10 +21,10 @@ public class Comment {
     private String id;
 
     @Indexed // Index VITAL pour lister tous les commentaires d'un post
-    private String postId;
+    private Post post;
 
     @Indexed // Index pour lister tous les commentaires d'un auteur
-    private String authorId;
+    private User author;
 
     private String text;
 
@@ -33,7 +33,7 @@ public class Comment {
      * Si null, c'est un commentaire de premier niveau.
      */
     @Indexed
-    private String parentCommentId;
+    private Comment parentComment;
 
     /**
      * Nombre de "likes" sur CE commentaire (dénormalisé).

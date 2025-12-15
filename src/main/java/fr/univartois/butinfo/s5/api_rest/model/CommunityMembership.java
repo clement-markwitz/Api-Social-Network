@@ -22,10 +22,10 @@ public class CommunityMembership {
     private String id;
 
     @Indexed
-    private String userId; // L'utilisateur qui rejoint
+    private User user; // L'utilisateur qui rejoint
 
     @Indexed
-    private String communityId; // La communauté qu'il rejoint
+    private Community community; // La communauté qu'il rejoint
 
     @CreatedDate
     private LocalDateTime createdAt;

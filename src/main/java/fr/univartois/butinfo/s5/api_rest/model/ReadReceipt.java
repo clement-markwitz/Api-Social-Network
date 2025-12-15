@@ -20,7 +20,7 @@ public class ReadReceipt {
      * L'ID de l'utilisateur qui a lu le message.
      */
     @Indexed
-    private String userId;
+    private User user;
 
     /**
      * L'heure à laquelle il l'a lu.
