@@ -9,8 +9,8 @@ import java.time.LocalDateTime;
  */
 public record BanDto(
         String id,
-        UserSummaryDto user, // L'utilisateur qui EST banni
-        UserSummaryDto moderator, // L'utilisateur qui A banni
+        String userId, // L'utilisateur qui EST banni
+        String moderatorId, // L'utilisateur qui A banni
         String reason,
         int durationDays,
         LocalDateTime startAt,

@@ -10,9 +10,9 @@ import java.time.LocalDateTime;
 public record CommentDto(
         String id,
         String postId,
-        UserSummaryDto author, // Enrichi
+        String authorId, // Enrichi
         String text,
-        String parentCommentId, // Gardé pour la logique de "tree" du front-end
+        String parentCommentId,
         int likeCount,
         LocalDateTime createdAt,
         LocalDateTime updatedAt

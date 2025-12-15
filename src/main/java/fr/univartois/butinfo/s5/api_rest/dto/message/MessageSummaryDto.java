@@ -8,6 +8,7 @@ import java.time.LocalDateTime;
  */
 public record MessageSummaryDto(
         String text,
-        LocalDateTime createdAt
+        LocalDateTime createdAt,
+        boolean isRead
 ) {
 }

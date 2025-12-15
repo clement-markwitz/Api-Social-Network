@@ -1,6 +1,7 @@
 package fr.univartois.butinfo.s5.api_rest.dto.conversation;
 
 import fr.univartois.butinfo.s5.api_rest.dto.message.MessageSummaryDto;
+import fr.univartois.butinfo.s5.api_rest.dto.message.ReadReceiptDto;
 import fr.univartois.butinfo.s5.api_rest.dto.user.UserSummaryDto;
 
 import java.time.LocalDateTime;
@@ -13,8 +14,6 @@ import java.util.List;
 public record ConversationSummaryDto(
         String id,
         String name, // Nom du groupe, ou nom du destinataire (si 1-to-1)
-        List<UserSummaryDto> members, // Liste des membres
-        MessageSummaryDto lastMessage, // Un résumé du dernier message
-        LocalDateTime updatedAt // Pour trier la liste
+        MessageSummaryDto lastMessage // Dernier message de la conversation
 ) {
 }
