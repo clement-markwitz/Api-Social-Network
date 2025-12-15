@@ -1,0 +1,163 @@
+{
+  "name": "SAE-SPRING",
+  "version": "1",
+  "items": [
+    {
+      "type": "folder",
+      "name": "Users",
+      "filename": "Users",
+      "root": {
+        "meta": {
+          "name": "Users"
+        }
+      },
+      "items": [
+        {
+          "type": "http",
+          "name": "addUsers",
+          "filename": "addUsers.bru",
+          "seq": 1,
+          "request": {
+            "url": "{{base}}/users/register",
+            "method": "POST",
+            "headers": [],
+            "params": [],
+            "body": {
+              "mode": "json",
+              "json": "{\n  \"pseudo\": \"alwin2\",\n  \"username\": \"alwin.zawad2\",\n  \"email\": \"alwin.zawad2@example.com\",\n  \"password\": \"GrosSecret2\",\n  \"firstName\": \"Alwin2\",\n  \"lastName\": \"Zawad2\"\n}",
+              "formUrlEncoded": [],
+              "multipartForm": [],
+              "file": []
+            },
+            "script": {},
+            "vars": {},
+            "assertions": [],
+            "tests": "",
+            "docs": "",
+            "auth": {
+              "mode": "inherit"
+            }
+          }
+        },
+        {
+          "type": "http",
+          "name": "getAllUsers",
+          "filename": "getAllUsers.bru",
+          "seq": 2,
+          "request": {
+            "url": "{{base}}/users",
+            "method": "GET",
+            "headers": [],
+            "params": [],
+            "body": {
+              "mode": "none",
+              "formUrlEncoded": [],
+              "multipartForm": [],
+              "file": []
+            },
+            "script": {},
+            "vars": {},
+            "assertions": [],
+            "tests": "",
+            "docs": "",
+            "auth": {
+              "mode": "inherit"
+            }
+          }
+        },
+        {
+          "type": "http",
+          "name": "deleteUser",
+          "filename": "deleteUser.bru",
+          "seq": 3,
+          "request": {
+            "url": "{{base}}/users/:id",
+            "method": "DELETE",
+            "headers": [],
+            "params": [
+              {
+                "name": "id",
+                "value": "ff17a05d7fcc4f1aa1c9f626",
+                "type": "path",
+                "enabled": true
+              }
+            ],
+            "body": {
+              "mode": "none",
+              "formUrlEncoded": [],
+              "multipartForm": [],
+              "file": []
+            },
+            "script": {},
+            "vars": {},
+            "assertions": [],
+            "tests": "",
+            "docs": "",
+            "auth": {
+              "mode": "inherit"
+            }
+          }
+        },
+        {
+          "type": "http",
+          "name": "getUser",
+          "filename": "getUser.bru",
+          "seq": 4,
+          "request": {
+            "url": "{{base}}/users/:id",
+            "method": "GET",
+            "headers": [],
+            "params": [
+              {
+                "name": "id",
+                "value": "4e75068c4d344fa5a0711804",
+                "type": "path",
+                "enabled": true
+              }
+            ],
+            "body": {
+              "mode": "none",
+              "formUrlEncoded": [],
+              "multipartForm": [],
+              "file": []
+            },
+            "script": {},
+            "vars": {},
+            "assertions": [],
+            "tests": "",
+            "docs": "",
+            "auth": {
+              "mode": "inherit"
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "activeEnvironmentUid": "O7AyU4qIvflI1yL6EGnN9",
+  "environments": [
+    {
+      "variables": [
+        {
+          "name": "base",
+          "value": "http://localhost:8080/api",
+          "enabled": true,
+          "secret": false,
+          "type": "text"
+        }
+      ],
+      "name": "spring"
+    }
+  ],
+  "brunoConfig": {
+    "version": "1",
+    "name": "SAE-SPRING",
+    "type": "collection",
+    "ignore": [
+      "node_modules",
+      ".git"
+    ],
+    "size": 0,
+    "filesCount": 0
+  }
+}
