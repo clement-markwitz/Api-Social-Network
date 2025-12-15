@@ -11,6 +11,6 @@ public record CommentCreateDto(
         @Size(max = 2000)
         String text,
 
-        String parentCommentId // Optionnel: ID du commentaire parent pour les réponses
+        String parentCommentId
 ) {
 }

@@ -25,7 +25,7 @@ public record PostDto(
         LocalDateTime updatedAt,
 
         // Le post peut être lié à une Page OU une Communauté
-        PageSummaryDto page, // Enrichi
-        CommunitySummaryDto community // Enrichi
+        String pageId,
+        String communityId
 ) {
 }

@@ -13,7 +13,7 @@ public record CommunityDetailDto(
         String name,
         String description,
         String avatarUrl,
-        List<UserSummaryDto> admins, // Enrichi
+        List<String> adminIds,
         int memberCount,
         List<String> topics,
         LocalDateTime createdAt
