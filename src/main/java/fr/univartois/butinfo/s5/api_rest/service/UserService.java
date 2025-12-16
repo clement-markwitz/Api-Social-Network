@@ -21,28 +21,57 @@ import java.util.List;
 public class UserService implements UserDetailsService {
 
     private final UserRepository userRepository;
-    private final UserMapper userMapper;
 
+    /**
+     * Constructor for UserService.
+     * @param userRepository userRepository
+     * @param userMapper userMapper
+     */
     public UserService(UserRepository userRepository, UserMapper userMapper) {
         this.userRepository = userRepository;
-        this.userMapper = userMapper;
     }
 
+    /**
+     * Get user by id.
+     *
+     * @param id user id
+     * @return User
+     */
     public User getById(String id) {
         return userRepository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Utilisateur introuvable"));
     }
 
+    /**
+     * Get all users.
+     *
+     * @return List of users
+     */
     public List<User> getAll() {
         return userRepository.findAll();
     }
 
-    public void delete(String id) {
-        if (!userRepository.existsById(id)) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Utilisateur introuvable");
+
+    /**
+     * Check if user exists by id.
+     *
+     * @param id user id
+     * @return boolean
+     */
+    public boolean delete(String id) {
+        if (userRepository.existsById(id)) {
+            userRepository.deleteById(id);
+            return true;
         }
-        userRepository.deleteById(id);
+        return false;
     }
 
+    /**
+     * Load user by username for authentication.
+     *
+     * @param username username
+     * @return UserDetails
+     * @throws UsernameNotFoundException if user not found
+     */
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         return userRepository.findByUsername(username).orElseThrow(() -> new UsernameNotFoundException("Utilisateur non trouvé"));
