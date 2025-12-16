@@ -27,6 +27,9 @@ public class ConversationService {
     private final UserRepository userRepository;
     private final ConversationMapper conversationMapper;
 
+    public Conversation findById(String id) {
+        return conversationRepository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND,"Conversation introuvable"));
+    }
     public Conversation createConversation(ConversationCreateDto dto, String currentUserId) {
         Conversation conversation = conversationMapper.toEntity(dto);
 
