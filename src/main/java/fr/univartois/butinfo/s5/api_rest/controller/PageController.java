@@ -37,7 +37,7 @@ public class PageController {
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public PageDetailDto createPage(@RequestBody @Valid PageCreateDto pageCreateDto) {
-        String userId = "user_temporaire_pour_test";
+        String userId = "6941203e6e49a2111667cb3c";
         return pageService.createPage(pageCreateDto, userId);
     }
 
