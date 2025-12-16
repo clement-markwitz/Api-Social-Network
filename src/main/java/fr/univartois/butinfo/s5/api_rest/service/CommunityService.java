@@ -1,8 +1,11 @@
 package fr.univartois.butinfo.s5.api_rest.service;
 
 import fr.univartois.butinfo.s5.api_rest.model.Community;
+import fr.univartois.butinfo.s5.api_rest.model.User;
 import fr.univartois.butinfo.s5.api_rest.repository.CommunityRepository;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 
@@ -15,11 +18,20 @@ public class CommunityService {
         this.communityRepository = communityRepository;
     }
 
-    public List<Community> findAll() {
+    public void checkAdminRights(Community community, User user) {
+        boolean isAdmin = community.getAdmins() != null && community.getAdmins().stream()
+                .anyMatch(admin -> admin.getId().equals(user.getId()));
+
+        if (!isAdmin) {
+            throw new ResponseStatusException(HttpStatus.FORBIDDEN, "Vous devez être administrateur de cette communauté pour effectuer cette action.");
+        }
+    }
+
+    public List<Community> getAll() {
         return communityRepository.findAll();
     }
 
-    public Community findById(String id) {
+    public Community getById(String id) {
         return communityRepository.findById(id).orElse(null);
     }
 
