@@ -15,32 +15,34 @@ import java.time.LocalDateTime;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Document(collection = "blocked")
-// CORRECTION : J'ai mis à jour le nom du champ dans l'index aussi ('blocked' -> 'blockedUser')
-// Note : Les champs s'appellent 'blocker' et 'blockedUser' dans ta classe, pas 'blockerId'.
-@CompoundIndex(name = "blocker_blocked_unique_idx", def = "{'blocker': 1, 'blockedUser': 1}", unique = true)
-public class Blocked {
+@Document(collection = "block")
+// Index composé pour la requête la plus fréquente :
+// "Est-ce que l'utilisateur A (blockerId) a bloqué l'utilisateur B (blockedId) ?"
+// L'unicité (unique = true) empêche de créer plusieurs fois le même blocage.
+@CompoundIndex(name = "blocker_blocked_unique_idx", def = "{'blocker': 1, 'blocked': 1}", unique = true)
+public class Block {
 
     @Id
     private String id;
 
     /**
      * L'ID de l'utilisateur qui effectue le blocage.
+     * Référence manuelle à la collection 'users'.
      */
-    @Indexed
+    @Indexed // Index simple pour "Qui ai-je bloqué ?"
     @DBRef
     private User blocker;
 
     /**
      * L'ID de l'utilisateur qui est bloqué.
+     * Référence manuelle à la collection 'users'.
      */
-    @Indexed
+    @Indexed // Index simple pour "Qui m'a bloqué ?"
     @DBRef
-    // CORRECTION SONAR : Renommé de 'blocked' à 'blockedUser' pour éviter le conflit avec le nom de la classe
-    private User blockedUser;
+    private User blocked;
 
-    private String reason;
+    private String reason; // Optionnel
 
     @CreatedDate
-    private LocalDateTime createdAt;
+    private LocalDateTime createdAt; // Date de création du blocage
 }
