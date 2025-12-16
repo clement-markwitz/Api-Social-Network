@@ -65,4 +65,49 @@ public class ConversationService {
         return conversationRepository.findById(id)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Conversation introuvable"));
     }
+    public void joinConversation(String conversationId, String currentUserId) {
+        Conversation conversation = getConversationById(conversationId);
+
+        // Vérifier si déjà membre
+        boolean alreadyMember = conversation.getMembers().stream()
+                .anyMatch(u -> u.getId().equals(currentUserId));
+
+        if (alreadyMember) {
+            throw new ResponseStatusException(HttpStatus.CONFLICT, "Vous êtes déjà membre de cette conversation");
+        }
+
+        // Récupérer l'user et l'ajouter
+        User user = userRepository.findById(currentUserId)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Utilisateur introuvable"));
+
+        conversation.getMembers().add(user);
+        conversationRepository.save(conversation);
+    }
+    public void leaveConversation(String conversationId, String currentUserId) {
+        Conversation conversation = getConversationById(conversationId);
+
+        // Vérifier si membre
+        boolean isMember = conversation.getMembers().stream()
+                .anyMatch(u -> u.getId().equals(currentUserId));
+
+        if (!isMember) {
+            throw new ResponseStatusException(HttpStatus.FORBIDDEN, "Vous ne faites pas partie de cette conversation");
+        }
+
+        // Retirer l'utilisateur de la liste
+        conversation.getMembers().removeIf(u -> u.getId().equals(currentUserId));
+
+        if (conversation.getMembers().isEmpty()) {
+            // S'il n'y a plus personne, on supprime tout
+            // 1. Supprimer les messages associés
+            List<Message> messages = messageRepository.findByConversation_IdOrderByCreatedAtAsc(conversationId);
+            messageRepository.deleteAll(messages);
+
+            // 2. Supprimer la conversation
+            conversationRepository.delete(conversation);
+        } else {
+            // Sinon, on sauvegarde juste le départ
+            conversationRepository.save(conversation);
+        }
+    }
 }
