@@ -15,12 +15,12 @@ import java.time.LocalDateTime;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Document(collection = "blocked")
+@Document(collection = "block")
 // Index composé pour la requête la plus fréquente :
 // "Est-ce que l'utilisateur A (blockerId) a bloqué l'utilisateur B (blockedId) ?"
 // L'unicité (unique = true) empêche de créer plusieurs fois le même blocage.
 @CompoundIndex(name = "blocker_blocked_unique_idx", def = "{'blockerId': 1, 'blockedId': 1}", unique = true)
-public class Blocked {
+public class Block {
 
     @Id
     private String id;
