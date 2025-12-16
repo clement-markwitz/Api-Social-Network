@@ -1,10 +1,6 @@
 package fr.univartois.butinfo.s5.api_rest.service;
 
-import fr.univartois.butinfo.s5.api_rest.dto.user.UserCreateDto;
-import fr.univartois.butinfo.s5.api_rest.model.Interests;
-import fr.univartois.butinfo.s5.api_rest.model.Preferences;
 import fr.univartois.butinfo.s5.api_rest.model.User;
-import fr.univartois.butinfo.s5.api_rest.mapper.UserMapper;
 import fr.univartois.butinfo.s5.api_rest.repository.UserRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -14,7 +10,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -25,9 +20,8 @@ public class UserService implements UserDetailsService {
     /**
      * Constructor for UserService.
      * @param userRepository userRepository
-     * @param userMapper userMapper
      */
-    public UserService(UserRepository userRepository, UserMapper userMapper) {
+    public UserService(UserRepository userRepository) {
         this.userRepository = userRepository;
     }
 

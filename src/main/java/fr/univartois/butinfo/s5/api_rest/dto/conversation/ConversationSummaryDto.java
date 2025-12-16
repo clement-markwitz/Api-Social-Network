@@ -1,11 +1,6 @@
 package fr.univartois.butinfo.s5.api_rest.dto.conversation;
 
 import fr.univartois.butinfo.s5.api_rest.dto.message.MessageSummaryDto;
-import fr.univartois.butinfo.s5.api_rest.dto.message.ReadReceiptDto;
-import fr.univartois.butinfo.s5.api_rest.dto.user.UserSummaryDto;
-
-import java.time.LocalDateTime;
-import java.util.List;
 
 /**
  * DTO (sortie) pour afficher une conversation dans la liste principale.
