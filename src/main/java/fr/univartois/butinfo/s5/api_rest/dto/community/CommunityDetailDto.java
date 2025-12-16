@@ -1,6 +1,5 @@
 package fr.univartois.butinfo.s5.api_rest.dto.community;
 
-import fr.univartois.butinfo.s5.api_rest.dto.user.UserSummaryDto;
 
 import java.time.LocalDateTime;
 import java.util.List;
