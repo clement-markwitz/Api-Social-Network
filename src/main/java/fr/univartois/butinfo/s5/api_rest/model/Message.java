@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.index.Indexed;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.time.LocalDateTime;
@@ -25,6 +26,7 @@ public class Message {
      * C'est une "Référence Manuelle" à Conversation.id
      */
     @Indexed // Index pour récupérer les messages d'une conversation
+    @DBRef
     private Conversation conversation;
 
     /**
@@ -32,6 +34,7 @@ public class Message {
      * C'est votre "fromId".
      */
     @Indexed // Utile pour indexer les messages d'un expéditeur
+    @DBRef
     private User sender;
 
     private String text;

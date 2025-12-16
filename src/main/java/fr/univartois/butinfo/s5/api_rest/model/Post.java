@@ -8,6 +8,7 @@ import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.mongodb.core.index.Indexed;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.time.LocalDateTime;
@@ -23,6 +24,7 @@ public class Post {
     private String id;
 
     @Indexed
+    @DBRef
     private User author; // Référence à 'User'
 
     /**
@@ -30,6 +32,7 @@ public class Post {
      * Référence à 'Page'.
      */
     @Indexed
+    @DBRef
     private Page page; // Null si ce n'est pas un post de page
 
     /**
@@ -37,6 +40,7 @@ public class Post {
      * Référence à 'Community'.
      */
     @Indexed
+    @DBRef
     private Community community; // Null si ce n'est pas un post de communauté
 
     private PostType type;
@@ -47,6 +51,7 @@ public class Post {
 
     private PostVisibility visibility;
 
+    @DBRef
     private PostStats stats;
 
     @CreatedDate

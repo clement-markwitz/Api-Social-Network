@@ -8,6 +8,7 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.mongodb.core.index.CompoundIndex;
 import org.springframework.data.mongodb.core.index.Indexed;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.time.LocalDateTime;
@@ -27,6 +28,7 @@ public class Ban {
      * Référence Manuelle à la collection 'users'.
      */
     @Indexed // Important d'indexer ce champ pour les recherches !
+    @DBRef
     private User user;
 
     /**
@@ -34,6 +36,7 @@ public class Ban {
      * Référence Manuelle à la collection 'users'.
      */
     @Indexed // Utile pour rechercher tous les bans d'un modérateur
+    @DBRef
     private User moderator;
 
     private String reason;
