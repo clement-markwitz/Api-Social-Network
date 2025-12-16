@@ -42,6 +42,21 @@ public class UserService implements UserDetailsService {
     }
 
     /**
+     * Check if current user has rights to modify target user.
+     *
+     * @param targetUserId target user id
+     * @param currentUser current user
+     */
+    public void checkUserRights(String targetUserId, User currentUser) {
+        boolean isAdmin = "ADMIN".equals(currentUser.getRole());
+        boolean isSelf = currentUser.getId().equals(targetUserId);
+
+        if (!isSelf && !isAdmin) {
+            throw new ResponseStatusException(HttpStatus.FORBIDDEN, "Vous n'avez pas le droit de modifier ce profil.");
+        }
+    }
+
+    /**
      * Get all users.
      *
      * @return List of users
@@ -63,6 +78,11 @@ public class UserService implements UserDetailsService {
             return true;
         }
         return false;
+    }
+
+    public User updateUser(User user) {
+        user.setUpdatedAt(LocalDateTime.now());
+        return userRepository.save(user);
     }
 
     /**
