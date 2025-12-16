@@ -39,6 +39,7 @@ public class SecurityConfiguration {
                                 "/swagger-ui/**",
                                 "/swagger-ui.html"
                         ).permitAll()
+                        .requestMatchers("/ws/**").permitAll()
                         .requestMatchers("/api/users/ban/**").hasRole("ADMIN")
                         .requestMatchers(HttpMethod.DELETE, "/api/users/**").hasRole("ADMIN")
 
@@ -55,6 +56,7 @@ public class SecurityConfiguration {
                                 SecurityContextHolder.clearContext()
                         )
                 );
+
 
         return http.build();
     }
