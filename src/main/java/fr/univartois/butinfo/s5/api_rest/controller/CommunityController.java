@@ -8,6 +8,7 @@ import fr.univartois.butinfo.s5.api_rest.mapper.CommunityMapper;
 import fr.univartois.butinfo.s5.api_rest.model.Community;
 import fr.univartois.butinfo.s5.api_rest.model.User;
 import fr.univartois.butinfo.s5.api_rest.service.CommunityService;
+import fr.univartois.butinfo.s5.api_rest.service.UserService;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,9 +16,11 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.stream.Collectors;
+import org.springframework.security.core.Authentication;
+import org.springframework.web.server.ResponseStatusException;
 
 @RestController
-@RequestMapping("/community")
+@RequestMapping("/api/community")
 public class CommunityController {
 
     private final CommunityService communityService;
@@ -33,7 +36,7 @@ public class CommunityController {
      */
     @GetMapping
     public ResponseEntity<List<CommunitySummaryDto>> getAllCommunities() {
-        List<CommunitySummaryDto> summaries = communityService.findAll().stream()
+        List<CommunitySummaryDto> summaries = communityService.getAll().stream()
                 .map(communityMapper::toSummaryDto)
                 .collect(Collectors.toList());
         return ResponseEntity.ok(summaries);
@@ -44,7 +47,7 @@ public class CommunityController {
      */
     @GetMapping("/{id}")
     public ResponseEntity<CommunityDetailDto> getCommunity(@PathVariable String id) {
-        Community community = communityService.findById(id); // Attention: Assure-toi que ton Service utilise String
+        Community community = communityService.getById(id); // Attention: Assure-toi que ton Service utilise String
         if (community == null) {
             return ResponseEntity.notFound().build();
         }
@@ -55,21 +58,18 @@ public class CommunityController {
      * Créer une nouvelle communauté.
      */
     @PostMapping
-    public ResponseEntity<CommunityDetailDto> createCommunity(@Valid @RequestBody CommunityCreateDto createDto) {
-        // 1. Conversion DTO -> Entité
+    public ResponseEntity<CommunityDetailDto> createCommunity(@Valid @RequestBody CommunityCreateDto createDto, Authentication authentication) {
+        // Conversion DTO -> Entité
         Community entity = communityMapper.toEntity(createDto);
 
-        // creer un user courant simulé
-        User currentUser = new User();
-        currentUser.setId("current-user-id");
+        // Récupération de l'utilisateur connecté pour le définir comme admin
+        User admin = (User) authentication.getPrincipal();
+        entity.addAdmin(admin);
 
-        // TODO: Ici, ajouter l'utilisateur connecté comme admin et verifier les droits
-        // ex: entity.setAdmins(List.of(currentUser));
-
-        // 2. Sauvegarde via le Service
+        // Sauvegarde via le Service
         Community savedCommunity = communityService.createCommunity(entity);
 
-        // 3. Conversion Entité -> DTO Détail pour la réponse
+        // Conversion Entité -> DTO Détail pour la réponse
         return ResponseEntity.status(HttpStatus.CREATED)
                 .body(communityMapper.toDetailDto(savedCommunity));
     }
@@ -80,17 +80,20 @@ public class CommunityController {
     @PutMapping("/{id}")
     public ResponseEntity<CommunityDetailDto> updateCommunity(
             @PathVariable String id,
-            @Valid @RequestBody CommunityUpdateDto updateDto) {
+            @Valid @RequestBody CommunityUpdateDto updateDto,
+            Authentication authentication) {
 
-        Community existingCommunity = communityService.findById(id);
+        Community existingCommunity = communityService.getById(id);
         if (existingCommunity == null) {
             return ResponseEntity.notFound().build();
         }
 
-        // 1. Mise à jour partielle de l'entité existante avec le mapper
-        communityMapper.updateEntityFromDto(updateDto, existingCommunity);
+        // 1. Vérification des droits
+        User currentUser = (User) authentication.getPrincipal();
+        communityService.checkAdminRights(existingCommunity, currentUser);
 
-        // 2. Sauvegarde
+        // 2. Mise à jour
+        communityMapper.updateEntityFromDto(updateDto, existingCommunity);
         Community updatedCommunity = communityService.updateCommunity(existingCommunity);
 
         return ResponseEntity.ok(communityMapper.toDetailDto(updatedCommunity));
@@ -100,11 +103,18 @@ public class CommunityController {
      * Supprimer une communauté.
      */
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteCommunity(@PathVariable String id) {
-        boolean deleted = communityService.deleteCommunity(id);
-        if (!deleted) {
+    public ResponseEntity<Void> deleteCommunity(@PathVariable String id, Authentication authentication) {
+        Community existingCommunity = communityService.getById(id);
+        if (existingCommunity == null) {
             return ResponseEntity.notFound().build();
         }
+
+        // 1. Vérification des droits
+        User currentUser = (User) authentication.getPrincipal();
+        communityService.checkAdminRights(existingCommunity, currentUser);
+
+        // 2. Suppression
+        communityService.deleteCommunity(id);
         return ResponseEntity.noContent().build();
     }
 }
