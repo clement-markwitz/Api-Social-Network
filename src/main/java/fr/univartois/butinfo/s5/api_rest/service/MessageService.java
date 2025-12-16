@@ -13,10 +13,13 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
+import org.springframework.messaging.simp.SimpMessagingTemplate;
+
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 @Service
 @RequiredArgsConstructor
@@ -26,6 +29,8 @@ public class MessageService {
     private final ConversationRepository conversationRepository;
     private final UserRepository userRepository;
     private final MessageMapper messageMapper;
+
+    private final SimpMessagingTemplate messagingTemplate;
 
     public MessageDto sendMessage(String conversationId, MessageCreateDto dto, String senderId) {
         // 1. Check conversation
@@ -51,12 +56,13 @@ public class MessageService {
         message.setReadBy(new ArrayList<>());
 
         Message saved = messageRepository.save(message);
-
         // 5. Update Conversation timestamp
         conversation.setUpdatedAt(LocalDateTime.now());
         conversationRepository.save(conversation);
-
-        return messageMapper.toDto(saved);
+        MessageDto messageDto = messageMapper.toDto(saved);
+        //websocket
+        messagingTemplate.convertAndSend("/topic/conversation/" + conversationId, messageDto);
+        return messageDto;
     }
 
     public List<MessageDto> getMessages(String conversationId, String currentUserId) {
@@ -85,5 +91,13 @@ public class MessageService {
         }
 
         messageRepository.delete(message);
+
+
+        Map<String, String> deleteEvent = Map.of(
+                "type", "DELETE_MESSAGE",
+                "messageId", messageId
+        );
+
+        messagingTemplate.convertAndSend("/topic/conversation/" + conversationId, deleteEvent);
     }
 }
