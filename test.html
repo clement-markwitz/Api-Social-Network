@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Test WebSocket Chat + Delete</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.5.1/sockjs.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
+    <style>
+        body { font-family: 'Segoe UI', sans-serif; padding: 20px; max-width: 800px; margin: 0 auto; }
+        .box { border: 1px solid #ddd; padding: 15px; margin-bottom: 15px; border-radius: 8px; background: #fdfdfd; }
+        input { padding: 8px; border: 1px solid #ccc; border-radius: 4px; margin-right: 5px; }
+        button { padding: 8px 15px; cursor: pointer; background-color: #007bff; color: white; border: none; border-radius: 4px; }
+        button:hover { background-color: #0056b3; }
+        button.del-btn { background-color: #dc3545; padding: 2px 8px; font-size: 12px; margin-left: 10px; }
+        button.del-btn:hover { background-color: #a71d2a; }
+
+        #messages { height: 400px; overflow-y: scroll; border: 1px solid #333; background: #fff; padding: 10px; border-radius: 8px; }
+        .msg { padding: 8px; border-bottom: 1px solid #eee; display: flex; justify-content: space-between; align-items: center; }
+        .msg:hover { background-color: #f1f1f1; }
+
+        .system-msg { color: #888; font-style: italic; font-size: 0.9em; text-align: center; margin: 5px 0; }
+        .info { color: green; font-weight: bold; }
+        .error { color: red; font-weight: bold; }
+    </style>
+</head>
+<body>
+<h2>🚀 Chat Temps Réel (Test Complet)</h2>
+
+<div class="box">
+    <h3>1. Connexion</h3>
+    <input type="text" id="token" placeholder="Collez votre Bearer Token JWT ici" style="width: 100%; margin-bottom: 10px;">
+    <input type="text" id="convId" placeholder="ID de la Conversation" style="width: 200px;">
+    <button onclick="connect()">SE CONNECTER AU FLUX</button>
+</div>
+
+<div id="messages"></div>
+
+<script>
+    var stompClient = null;
+    var currentConvId = null;
+    var userToken = null;
+
+    function connect() {
+        currentConvId = document.getElementById('convId').value;
+        userToken = document.getElementById('token').value;
+
+        if(!currentConvId || !userToken) {
+            alert("Il faut l'ID de conversation ET le Token !");
+            return;
+        }
+
+        // Connexion Socket
+        var socket = new SockJS('http://localhost:8080/ws');
+        stompClient = Stomp.over(socket);
+        stompClient.debug = null;
+
+        stompClient.connect({}, function (frame) {
+            log(`✅ Connecté à la conversation ${currentConvId}`, "info");
+
+            stompClient.subscribe('/topic/conversation/' + currentConvId, function (messageOutput) {
+                handleSocketEvent(JSON.parse(messageOutput.body));
+            });
+        }, function(error) {
+            log("❌ Erreur WebSocket : " + error, "error");
+        });
+    }
+
+    function handleSocketEvent(payload) {
+        if (payload.type === "DELETE_MESSAGE") {
+            removeMessageFromDom(payload.messageId);
+            return;
+        }
+        displayMessage(payload);
+    }
+
+    function displayMessage(msg) {
+        var div = document.getElementById('messages');
+
+        var msgDiv = document.createElement('div');
+        msgDiv.className = "msg";
+        msgDiv.id = `msg-${msg.id}`;
+
+        var content = `<span><b>${msg.sender ? msg.sender.pseudo : 'Inconnu'}</b> : ${msg.text}</span>`;
+
+
+
+
+        msgDiv.innerHTML = content + deleteBtn;
+        div.appendChild(msgDiv);
+        div.scrollTop = div.scrollHeight;
+    }
+
+    function removeMessageFromDom(messageId) {
+        var el = document.getElementById(`msg-${messageId}`);
+        if (el) {
+            el.style.backgroundColor = "#ffcccc";
+            setTimeout(() => el.remove(), 500);
+            log(`🗑️ Un message a été supprimé (ID: ${messageId})`, "#888");
+        }
+    }
+
+
+    function log(text, color) {
+        var div = document.getElementById('messages');
+        var p = document.createElement('div');
+        p.className = "system-msg";
+        p.style.color = color || '#888';
+        p.innerHTML = text;
+        div.appendChild(p);
+        div.scrollTop = div.scrollHeight;
+    }
+</script>
+</body>
+</html>
