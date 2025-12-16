@@ -9,5 +9,5 @@ import java.util.Optional;
 @Repository
 public interface BanRepository extends MongoRepository<Ban, String> {
     // Find an active ban for a user
-    Optional<Ban> findByUserAndActiveTrue(String userId);
+    Optional<Ban> findByUserIdAndActiveTrue(String userId);
 }
