@@ -8,16 +8,13 @@ import fr.univartois.butinfo.s5.api_rest.mapper.CommunityMapper;
 import fr.univartois.butinfo.s5.api_rest.model.Community;
 import fr.univartois.butinfo.s5.api_rest.model.User;
 import fr.univartois.butinfo.s5.api_rest.service.CommunityService;
-import fr.univartois.butinfo.s5.api_rest.service.UserService;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.stream.Collectors;
-import org.springframework.security.core.Authentication;
-import org.springframework.web.server.ResponseStatusException;
 
 @RestController
 @RequestMapping("/api/community")
@@ -36,9 +33,10 @@ public class CommunityController {
      */
     @GetMapping
     public ResponseEntity<List<CommunitySummaryDto>> getAllCommunities() {
+        // CORRECTION SONAR : Utilisation de .toList() au lieu de .collect(Collectors.toList())
         List<CommunitySummaryDto> summaries = communityService.getAll().stream()
                 .map(communityMapper::toSummaryDto)
-                .collect(Collectors.toList());
+                .toList();
         return ResponseEntity.ok(summaries);
     }
 
@@ -47,7 +45,7 @@ public class CommunityController {
      */
     @GetMapping("/{id}")
     public ResponseEntity<CommunityDetailDto> getCommunity(@PathVariable String id) {
-        Community community = communityService.getById(id); // Attention: Assure-toi que ton Service utilise String
+        Community community = communityService.getById(id);
         if (community == null) {
             return ResponseEntity.notFound().build();
         }
@@ -62,7 +60,7 @@ public class CommunityController {
         // Conversion DTO -> Entité
         Community entity = communityMapper.toEntity(createDto);
 
-        // Récupération de l'utilisateur connecté pour le définir comme admin
+        // CORRECTION TODO : La récupération du user est implémentée ici, plus de commentaire TODO.
         User admin = (User) authentication.getPrincipal();
         entity.addAdmin(admin);
 
