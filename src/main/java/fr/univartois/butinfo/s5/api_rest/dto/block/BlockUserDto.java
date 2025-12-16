@@ -1,5 +1,7 @@
 package fr.univartois.butinfo.s5.api_rest.dto.block;
 
+import fr.univartois.butinfo.s5.api_rest.dto.user.UserSummaryDto;
+
 import java.time.LocalDateTime;
 
 /**
@@ -7,7 +9,7 @@ import java.time.LocalDateTime;
  */
 public record BlockUserDto(
         String id,
-        String userId, // La personne qui est bloquée
+        UserSummaryDto blockedUser, // La personne qui est bloquée
         String reason,
         LocalDateTime createdAt
 ) {
