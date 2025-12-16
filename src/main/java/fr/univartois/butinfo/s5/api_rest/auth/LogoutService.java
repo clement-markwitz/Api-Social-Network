@@ -1,6 +1,5 @@
 package fr.univartois.butinfo.s5.api_rest.auth;
 
-import fr.univartois.butinfo.s5.api_rest.model.Token;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.security.core.Authentication;
