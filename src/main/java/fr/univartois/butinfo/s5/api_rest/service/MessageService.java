@@ -70,4 +70,20 @@ public class MessageService {
         List<Message> messages = messageRepository.findByConversation_IdOrderByCreatedAtAsc(conversationId);
         return messageMapper.toDtoList(messages);
     }
+    public void deleteMessage(String conversationId, String messageId, String currentUserId) {
+        Message message = messageRepository.findById(messageId)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Message introuvable"));
+
+        // Vérification de cohérence (le message appartient bien à la conversation)
+        if (!message.getConversation().getId().equals(conversationId)) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Ce message n'appartient pas à cette conversation");
+        }
+
+        // Vérification des droits (Seul l'auteur peut supprimer)
+        if (!message.getSender().getId().equals(currentUserId)) {
+            throw new ResponseStatusException(HttpStatus.FORBIDDEN, "Vous ne pouvez supprimer que vos propres messages");
+        }
+
+        messageRepository.delete(message);
+    }
 }
