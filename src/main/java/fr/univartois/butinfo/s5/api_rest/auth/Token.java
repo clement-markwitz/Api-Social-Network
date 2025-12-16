@@ -19,15 +19,15 @@ public class Token {
     private String id; // Changé en 'private'
 
     @Indexed(unique = true)
-    private String tokenValue; // Renommé (token -> tokenValue) et mis en 'private'
+    private String token;
 
-    @Builder.Default // Ajouté pour garder la valeur "BEARER" par défaut avec le Builder
-    private String tokenType = "BEARER"; // Mis en 'private'
+    @Builder.Default
+    private String tokenType = "BEARER";
 
-    private boolean revoked; // Mis en 'private'
+    private boolean revoked;
 
-    private boolean expired; // Mis en 'private'
+    private boolean expired;
 
     @Indexed
-    private String userId; // Mis en 'private'
+    private String userId;
 }
