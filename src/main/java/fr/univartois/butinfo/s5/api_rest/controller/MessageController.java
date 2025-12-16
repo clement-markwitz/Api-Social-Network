@@ -3,7 +3,6 @@ package fr.univartois.butinfo.s5.api_rest.controller;
 import fr.univartois.butinfo.s5.api_rest.dto.message.MessageCreateDto;
 import fr.univartois.butinfo.s5.api_rest.dto.message.MessageDto;
 import fr.univartois.butinfo.s5.api_rest.model.User;
-import fr.univartois.butinfo.s5.api_rest.repository.UserRepository;
 import fr.univartois.butinfo.s5.api_rest.service.MessageService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -20,15 +19,17 @@ import java.util.List;
 public class MessageController {
 
     private final MessageService messageService;
-    private final UserRepository userRepository;
+    // UserRepository supprimé (inutile car on a déjà l'User dans l'Authentication)
 
+    /**
+     * Récupère l'ID de l'utilisateur connecté depuis le contexte de sécurité.
+     * Évite un appel inutile à la base de données.
+     */
     private String getCurrentUserId(Authentication authentication) {
-        if (authentication == null) {
-            throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Utilisateur non authentifié");
+        if (authentication != null && authentication.getPrincipal() instanceof User user) {
+            return user.getId();
         }
-        return userRepository.findByUsername(authentication.getName())
-                .map(User::getId)
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Utilisateur introuvable"));
+        throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Utilisateur non authentifié");
     }
 
     @PostMapping

@@ -1,10 +1,6 @@
 package fr.univartois.butinfo.s5.api_rest.service;
 
-import fr.univartois.butinfo.s5.api_rest.dto.user.UserCreateDto;
-import fr.univartois.butinfo.s5.api_rest.model.Interests;
-import fr.univartois.butinfo.s5.api_rest.model.Preferences;
 import fr.univartois.butinfo.s5.api_rest.model.User;
-import fr.univartois.butinfo.s5.api_rest.mapper.UserMapper;
 import fr.univartois.butinfo.s5.api_rest.repository.UserRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -13,19 +9,17 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
-import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
 public class UserService implements UserDetailsService {
 
     private final UserRepository userRepository;
-    private final UserMapper userMapper;
+    // CORRECTION SONAR : J'ai supprimé 'private final UserMapper userMapper' car il n'était pas utilisé.
 
-    public UserService(UserRepository userRepository, UserMapper userMapper) {
+    public UserService(UserRepository userRepository) {
         this.userRepository = userRepository;
-        this.userMapper = userMapper;
+        // CORRECTION SONAR : J'ai retiré userMapper du constructeur aussi.
     }
 
     public User getById(String id) {

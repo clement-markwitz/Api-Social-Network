@@ -8,12 +8,12 @@ import fr.univartois.butinfo.s5.api_rest.model.User;
 import fr.univartois.butinfo.s5.api_rest.service.UserService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.Authentication; // Import important
-import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
-import java.util.stream.Collectors;
+// J'ai supprimé l'import "java.util.stream.Collectors" qui ne sert plus à rien
 
 @RestController
 @RequestMapping("/api/users")
@@ -32,8 +32,11 @@ public class UserController {
      */
     @GetMapping("/me")
     public ResponseEntity<UserPrivateProfileDto> authenticatedUser(Authentication authentication) {
-        User user = (User) authentication.getPrincipal();
-        return ResponseEntity.ok(userMapper.toPrivateProfileDto(user));
+        // CORRECTION : Cast sécurisé (Pattern Matching) comme dans tes autres fichiers
+        if (authentication != null && authentication.getPrincipal() instanceof User user) {
+            return ResponseEntity.ok(userMapper.toPrivateProfileDto(user));
+        }
+        throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Non authentifié");
     }
 
     @GetMapping("/{id}")
@@ -45,9 +48,10 @@ public class UserController {
     @GetMapping
     public List<UserSummaryDto> getAllUsers() {
         List<User> users =  userService.getAll();
+        // CORRECTION SONAR : Remplacement de .collect(Collectors.toList()) par .toList()
         return users.stream()
                 .map(userMapper::toSummaryDto)
-                .collect(Collectors.toList());
+                .toList();
     }
 
     @DeleteMapping("/{id}")

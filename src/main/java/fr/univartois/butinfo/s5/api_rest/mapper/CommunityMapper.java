@@ -13,7 +13,7 @@ import org.mapstruct.Named;
 
 import java.util.Collections;
 import java.util.List;
-import java.util.stream.Collectors;
+// J'ai supprimé l'import "java.util.stream.Collectors" qui ne sert plus
 
 @Mapper(componentModel = "spring")
 public interface CommunityMapper {
@@ -43,8 +43,9 @@ public interface CommunityMapper {
         if (users == null) {
             return Collections.emptyList();
         }
+        // CORRECTION SONAR : .toList() au lieu de .collect(Collectors.toList())
         return users.stream()
                 .map(User::getId)
-                .collect(Collectors.toList());
+                .toList();
     }
 }
