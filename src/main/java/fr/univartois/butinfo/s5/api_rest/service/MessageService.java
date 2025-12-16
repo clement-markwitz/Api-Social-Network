@@ -28,22 +28,18 @@ public class MessageService {
     private final MessageMapper messageMapper;
 
     public MessageDto sendMessage(String conversationId, MessageCreateDto dto, String senderId) {
-        // 1. Check conversation
         Conversation conversation = conversationRepository.findById(conversationId)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Conversation introuvable"));
 
-        // 2. Check membership
         boolean isMember = conversation.getMembers().stream()
                 .anyMatch(u -> u.getId().equals(senderId));
         if (!isMember) {
             throw new ResponseStatusException(HttpStatus.FORBIDDEN, "Non membre");
         }
 
-        // 3. Fetch sender object
         User sender = userRepository.findById(senderId)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Expéditeur introuvable"));
 
-        // 4. Create Message
         Message message = messageMapper.toEntity(dto);
         message.setConversation(conversation);
         message.setSender(sender);
@@ -52,7 +48,6 @@ public class MessageService {
 
         Message saved = messageRepository.save(message);
 
-        // 5. Update Conversation timestamp
         conversation.setUpdatedAt(LocalDateTime.now());
         conversationRepository.save(conversation);
 

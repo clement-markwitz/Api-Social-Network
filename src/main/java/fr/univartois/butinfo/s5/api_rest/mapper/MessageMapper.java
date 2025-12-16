@@ -15,7 +15,6 @@ import java.util.List;
 @Mapper(componentModel = "spring", uses = {UserMapper.class})
 public interface MessageMapper {
 
-    // --- Vers Entity (Création) ---
     @Mapping(target = "id", ignore = true)
     @Mapping(target = "conversation", ignore = true) // Géré par le service
     @Mapping(target = "sender", ignore = true)       // Géré par le service
@@ -23,24 +22,19 @@ public interface MessageMapper {
     @Mapping(target = "readBy", ignore = true)
     Message toEntity(MessageCreateDto dto);
 
-    // --- Vers DTO Complet (Chat) ---
-    // MapStruct utilise UserMapper pour convertir message.sender (User) -> sender (UserSummaryDto)
     @Mapping(source = "conversation.id", target = "conversationId")
     MessageDto toDto(Message message);
 
     List<MessageDto> toDtoList(List<Message> messages);
 
-    // --- Vers DTO Résumé (Liste Conversations) ---
     @Mapping(target = "text", source = "message.text")
     @Mapping(target = "createdAt", source = "message.createdAt")
     @Mapping(target = "isRead", expression = "java(isReadByCurrentUser(message, currentUserId))")
     MessageSummaryDto toSummaryDto(Message message, @Context String currentUserId);
 
-    // --- ReadReceipt ---
     @Mapping(source = "user", target = "user")
     ReadReceiptDto toReadReceiptDto(ReadReceipt readReceipt);
 
-    // Helper pour calculer 'isRead'
     default boolean isReadByCurrentUser(Message message, String currentUserId) {
         if (message == null || message.getReadBy() == null) return false;
         return message.getReadBy().stream()

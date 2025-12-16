@@ -18,7 +18,6 @@ public class ConversationController {
 
     private final ConversationService conversationService;
 
-    // TODO: Remplacer par la récupération du User connecté (Spring Security)
     private String getCurrentUserId() {
         return "694026c224866417681f8a36";
     }

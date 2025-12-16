@@ -30,12 +30,10 @@ public class ConversationService {
     public Conversation createConversation(ConversationCreateDto dto, String currentUserId) {
         Conversation conversation = conversationMapper.toEntity(dto);
 
-        // 1. Récupérer l'initiateur
         User initiator = userRepository.findById(currentUserId)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Utilisateur connecté introuvable"));
         conversation.setInitiator(initiator);
 
-        // 2. Récupérer les membres (Initiateur + liste des invités)
         List<String> memberIds = new ArrayList<>(dto.memberIds());
         if (!memberIds.contains(currentUserId)) {
             memberIds.add(currentUserId);
@@ -44,7 +42,6 @@ public class ConversationService {
         List<User> members = userRepository.findAllById(memberIds);
         conversation.setMembers(members);
 
-        // 3. Dates
         conversation.setCreatedAt(LocalDateTime.now());
         conversation.setUpdatedAt(LocalDateTime.now());
 
