@@ -6,6 +6,24 @@ meta {
 
 post {
   url: http://localhost:8080/api/posts
-  body: none
-  auth: inherit
+  body: json
+  auth: bearer
+}
+
+auth:bearer {
+  token: eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJ0ZXN0YXV0aDIiLCJpYXQiOjE3NjU4ODAwNDgsImV4cCI6MTc2NTk2NjQ0OH0.BFPjpc8UVRFhU4R-vAzB9rY83_Ut3n3G-BysOw2YFXoFXgHFSv15sHD7KXopyAp9
+}
+
+body:json {
+  {
+    "text": "Ceci est un post créé avec un token JWefeffefsfs",
+    "type": "STATUS",
+    "visibility": "PUBLIC",
+    "media": {
+      "imageUrl": "https://via.placeholder.com/150",
+      "videoUrl": null
+    },
+    "pageId": null,
+    "communityId": null
+  }
 }

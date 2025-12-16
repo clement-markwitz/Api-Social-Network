@@ -7,12 +7,14 @@ import fr.univartois.butinfo.s5.api_rest.dto.post.PostDto;
 import fr.univartois.butinfo.s5.api_rest.dto.post.PostUpdateDto;
 import fr.univartois.butinfo.s5.api_rest.dto.reaction.ReactionCreateDto;
 import fr.univartois.butinfo.s5.api_rest.dto.reaction.ReactionDto;
+import fr.univartois.butinfo.s5.api_rest.model.User;
 import fr.univartois.butinfo.s5.api_rest.service.CommentService;
 import fr.univartois.butinfo.s5.api_rest.service.PostService;
 import fr.univartois.butinfo.s5.api_rest.service.ReactionService;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -34,9 +36,11 @@ public class PostController {
     @PostMapping
     public ResponseEntity<PostDto> createPost(
             @Valid @RequestBody PostCreateDto createDto,
-            @RequestParam String authorId) {
+            Authentication authentication) {
 
-        PostDto createdPost = postService.createPost(createDto, authorId);
+        User user = (User) authentication.getPrincipal();
+
+        PostDto createdPost = postService.createPost(createDto, user.getId());
         return ResponseEntity.status(HttpStatus.CREATED).body(createdPost);
     }
 
@@ -53,14 +57,21 @@ public class PostController {
     @PutMapping("/{id}")
     public ResponseEntity<PostDto> updatePost(
             @PathVariable String id,
-            @Valid @RequestBody PostUpdateDto updateDto) {
-        return ResponseEntity.ok(postService.updatePost(id, updateDto));
+            @Valid @RequestBody PostUpdateDto updateDto,
+            Authentication authentication) {
+
+        User user = (User) authentication.getPrincipal();
+        return ResponseEntity.ok(postService.updatePost(id, updateDto, user.getId()));
     }
 
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void deletePost(@PathVariable String id) {
-        postService.deletePost(id);
+    public void deletePost(
+            @PathVariable String id,
+            Authentication authentication) {
+
+        User user = (User) authentication.getPrincipal();
+        postService.deletePost(id, user.getId());
     }
 
     // Methode pour les reaction d'un post
@@ -74,9 +85,11 @@ public class PostController {
     public ResponseEntity<ReactionDto> addReaction(
             @PathVariable String id,
             @Valid @RequestBody ReactionCreateDto dto,
-            @RequestParam String userId) {
+            Authentication authentication) {
+
+        User user = (User) authentication.getPrincipal();
         return ResponseEntity.status(HttpStatus.CREATED)
-                .body(reactionService.createReaction(id, dto, userId));
+                .body(reactionService.createReaction(id, dto, user.getId()));
     }
 
     @DeleteMapping("/{id}/reactions/{reactionId}")
@@ -95,8 +108,10 @@ public class PostController {
     public ResponseEntity<CommentDto> addComment(
             @PathVariable String id,
             @Valid @RequestBody CommentCreateDto dto,
-            @RequestParam String authorId) {
+            Authentication authentication) {
+
+        User user = (User) authentication.getPrincipal();
         return ResponseEntity.status(HttpStatus.CREATED)
-                .body(commentService.createComment(id, dto, authorId));
+                .body(commentService.createComment(id, dto, user.getId()));
     }
 }

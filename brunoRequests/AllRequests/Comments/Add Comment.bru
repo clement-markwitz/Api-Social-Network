@@ -5,13 +5,13 @@ meta {
 }
 
 post {
-  url: http://localhost:8080/api/posts/abb256fd19e44ccb9eb9eed4/comments?authorId=7134e496cdc44d7b97a9402d
+  url: http://localhost:8080/api/posts/c75b04ebd2ea42bb8283b112/comments
   body: json
-  auth: inherit
+  auth: bearer
 }
 
-params:query {
-  authorId: 7134e496cdc44d7b97a9402d
+auth:bearer {
+  token: eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJ0ZXN0YXV0aDIiLCJpYXQiOjE3NjU4ODAwNDgsImV4cCI6MTc2NTk2NjQ0OH0.BFPjpc8UVRFhU4R-vAzB9rY83_Ut3n3G-BysOw2YFXoFXgHFSv15sHD7KXopyAp9
 }
 
 body:json {
