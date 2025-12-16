@@ -7,6 +7,7 @@ import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.index.CompoundIndex;
 import org.springframework.data.mongodb.core.index.Indexed;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.time.LocalDateTime;
@@ -27,6 +28,7 @@ public class Follow {
      * Référence manuelle à la collection 'users'.
      */
     @Indexed // Indexe pour la requête : "Qui est-ce que je suis ?"
+    @DBRef
     private User follower;
 
     /**
@@ -34,6 +36,7 @@ public class Follow {
      * Référence manuelle à la collection 'users'.
      */
     @Indexed // Indexe pour la requête : "Qui me suit ?"
+    @DBRef
     private User following;
 
     @CreatedDate

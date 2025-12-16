@@ -7,6 +7,7 @@ import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.index.CompoundIndex;
 import org.springframework.data.mongodb.core.index.Indexed;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.time.LocalDateTime;
@@ -24,9 +25,11 @@ public class Reaction {
     private String id;
 
     @Indexed // Index pour trouver toutes les réactions d'un post
+    @DBRef
     private Post post;
 
     @Indexed // Index pour trouver toutes les réactions d'un user
+    @DBRef
     private User user;
 
     /**
