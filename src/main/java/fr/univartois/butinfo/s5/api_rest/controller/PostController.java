@@ -1,10 +1,13 @@
 package fr.univartois.butinfo.s5.api_rest.controller;
 
+import fr.univartois.butinfo.s5.api_rest.dto.comment.CommentCreateDto;
+import fr.univartois.butinfo.s5.api_rest.dto.comment.CommentDto;
 import fr.univartois.butinfo.s5.api_rest.dto.post.PostCreateDto;
 import fr.univartois.butinfo.s5.api_rest.dto.post.PostDto;
 import fr.univartois.butinfo.s5.api_rest.dto.post.PostUpdateDto;
 import fr.univartois.butinfo.s5.api_rest.dto.reaction.ReactionCreateDto;
 import fr.univartois.butinfo.s5.api_rest.dto.reaction.ReactionDto;
+import fr.univartois.butinfo.s5.api_rest.service.CommentService;
 import fr.univartois.butinfo.s5.api_rest.service.PostService;
 import fr.univartois.butinfo.s5.api_rest.service.ReactionService;
 import jakarta.validation.Valid;
@@ -20,8 +23,10 @@ public class PostController {
 
     private final PostService postService;
     private final ReactionService reactionService;
+    private final CommentService commentService;
 
-    public PostController(PostService postService, ReactionService reactionService) {
+    public PostController(PostService postService , CommentService commentService, ReactionService reactionService) {
+        this.commentService = commentService;
         this.reactionService = reactionService;
         this.postService = postService;
     }
@@ -78,5 +83,20 @@ public class PostController {
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteReaction(@PathVariable String id, @PathVariable String reactionId) {
         reactionService.deleteReaction(reactionId);
+    }
+
+    // Methode pour les commentaires d'un post
+    @GetMapping("/{id}/comments")
+    public List<CommentDto> getComments(@PathVariable String id) {
+        return commentService.getCommentsByPostId(id);
+    }
+
+    @PostMapping("/{id}/comments")
+    public ResponseEntity<CommentDto> addComment(
+            @PathVariable String id,
+            @Valid @RequestBody CommentCreateDto dto,
+            @RequestParam String authorId) {
+        return ResponseEntity.status(HttpStatus.CREATED)
+                .body(commentService.createComment(id, dto, authorId));
     }
 }

@@ -1,0 +1,21 @@
+meta {
+  name: addReaction
+  type: http
+  seq: 1
+}
+
+post {
+  url: http://localhost:8080/api/posts/abb256fd19e44ccb9eb9eed4/reactions?userId=7134e496cdc44d7b97a9402d
+  body: json
+  auth: inherit
+}
+
+params:query {
+  userId: 7134e496cdc44d7b97a9402d
+}
+
+body:json {
+  {
+    "type": "LOVE"
+  }
+}
