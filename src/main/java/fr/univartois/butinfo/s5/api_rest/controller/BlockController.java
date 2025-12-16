@@ -77,29 +77,27 @@ public class BlockController {
     }
 
     @GetMapping
-    public ResponseEntity<List<UserSummaryDto>> getMyBlockedUsersSummary(Authentication authentication) {
+    public ResponseEntity<List<BlockUserDto>> getMyBlockedUsers(Authentication authentication) {
         User blocker = (User) authentication.getPrincipal();
         List<Block> blocks = blockService.findBlocksByBlocker(blocker.getId());
 
-        // On extrait l'utilisateur 'blocked' de chaque blocage et on le mappe
-        List<UserSummaryDto> userSummaries = blocks.stream()
-                .map(block -> userMapper.toSummaryDto(block.getBlocked()))
+        List<BlockUserDto> userSummaries = blocks.stream()
+                .map(blockMapper::toDto)
                 .collect(Collectors.toList());
 
         return ResponseEntity.ok(userSummaries);
     }
 
-    @GetMapping("/{userId}")
-    public ResponseEntity<BlockUserDto> getBlockByIdBlocker(@PathVariable String userId, Authentication authentication) {
-        Block block = blockService.getBlockByBlockerAndBlocked(
-                ((User) authentication.getPrincipal()).getId(),
-                userId
-        );
-
+    @GetMapping("/{id}")
+    public ResponseEntity<BlockUserDto> getBlockById(@PathVariable String id, Authentication authentication) {
+        User blocker = (User) authentication.getPrincipal();
+        Block block = blockService.getBlockById(id);
         if (block == null) {
             return ResponseEntity.notFound().build();
         }
-
+        if (!block.getBlocker().getId().equals(blocker.getId())) {
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
+        }
         return ResponseEntity.ok(blockMapper.toDto(block));
     }
 }
