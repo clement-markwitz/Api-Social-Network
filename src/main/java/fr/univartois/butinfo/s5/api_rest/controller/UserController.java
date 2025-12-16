@@ -1,11 +1,10 @@
 package fr.univartois.butinfo.s5.api_rest.controller;
 
-import fr.univartois.butinfo.s5.api_rest.dto.user.UserPrivateProfileDto;
-import fr.univartois.butinfo.s5.api_rest.dto.user.UserPublicProfileDto;
-import fr.univartois.butinfo.s5.api_rest.dto.user.UserSummaryDto;
+import fr.univartois.butinfo.s5.api_rest.dto.user.*;
 import fr.univartois.butinfo.s5.api_rest.mapper.UserMapper;
 import fr.univartois.butinfo.s5.api_rest.model.User;
 import fr.univartois.butinfo.s5.api_rest.service.UserService;
+import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
@@ -78,7 +77,80 @@ public class UserController {
      * @return Boolean indicating success
      */
     @DeleteMapping("/{id}")
-    public Boolean deleteUser(@PathVariable String id) {
+    public Boolean deleteUser(@PathVariable String id, Authentication authentication) {
+        User currentUser = (User) authentication.getPrincipal();
+
+        userService.checkUserRights(id, currentUser);
+
         return userService.delete(id);
+    }
+
+    /**
+     * Update a user's profile.
+     *
+     * @param id the user's ID
+     * @param updateDto the profile update data
+     * @param authentication the authentication object
+     * @return ResponseEntity with updated UserPublicProfileDto
+     */
+    @PutMapping("/{id}/profile")
+    public ResponseEntity<UserPublicProfileDto> updateProfile(@PathVariable String id, @Valid @RequestBody ProfileUpdateDto updateDto, Authentication authentication) {
+        User existingUser = userService.getById(id);
+        if (existingUser == null) {
+            return ResponseEntity.notFound().build();
+        }
+
+        User currentUser = (User) authentication.getPrincipal();
+        userService.checkUserRights(existingUser.getId(), currentUser);
+
+        userMapper.updateProfileFromDto(updateDto, existingUser.getProfile());
+
+        User updatedUser = userService.updateUser(existingUser);
+
+        return ResponseEntity.ok(userMapper.toPublicProfileDto(updatedUser));
+    }
+
+    /**
+     * Update a user's preferences.
+     *
+     * @param id the user's ID
+     * @param updateDto the preferences update data
+     * @param authentication the authentication object
+     * @return ResponseEntity with updated PreferencesDto
+     */
+    @PutMapping("/{id}/preferences")
+    public ResponseEntity<PreferencesDto> updatePreferences(@PathVariable String id, @RequestBody PreferencesUpdateDto updateDto, Authentication authentication) {
+        User existingUser = userService.getById(id);
+        if (existingUser == null) return ResponseEntity.notFound().build();
+
+        User currentUser = (User) authentication.getPrincipal();
+        userService.checkUserRights(existingUser.getId(), currentUser);
+
+        userMapper.updatePreferencesFromDto(updateDto, existingUser.getPrefs());
+        User updatedUser = userService.updateUser(existingUser);
+
+        return ResponseEntity.ok(userMapper.toPreferencesDto(updatedUser.getPrefs()));
+    }
+
+    /**
+     * Update a user's interests.
+     *
+     * @param id the user's ID
+     * @param updateDto the interests update data
+     * @param authentication the authentication object
+     * @return ResponseEntity with updated InterestsDto
+     */
+    @PutMapping("/{id}/interests")
+    public ResponseEntity<InterestsDto> updateInterests(@PathVariable String id, @RequestBody InterestsUpdateDto updateDto, Authentication authentication) {
+        User existingUser = userService.getById(id);
+        if (existingUser == null) return ResponseEntity.notFound().build();
+
+        User currentUser = (User) authentication.getPrincipal();
+        userService.checkUserRights(existingUser.getId(), currentUser);
+
+        userMapper.updateInterestsFromDto(updateDto, existingUser.getInterests());
+        User updatedUser = userService.updateUser(existingUser);
+
+        return ResponseEntity.ok(userMapper.toInterestsDto(updatedUser.getInterests()));
     }
 }
