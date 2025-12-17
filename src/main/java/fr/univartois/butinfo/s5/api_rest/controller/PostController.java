@@ -18,6 +18,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 
 @RestController
 @RequestMapping("/api/posts")
@@ -50,8 +51,12 @@ public class PostController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<PostDto> getPostById(@PathVariable String id) {
-        return ResponseEntity.ok(postService.getPostById(id));
+    public ResponseEntity<?> getPostById(@PathVariable String id) {
+        try {
+            return ResponseEntity.ok(postService.getPostById(id));
+        } catch (NoSuchElementException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+        }
     }
 
     @GetMapping("/search")
@@ -63,23 +68,33 @@ public class PostController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<PostDto> updatePost(
+    public ResponseEntity<?> updatePost(
             @PathVariable String id,
             @Valid @RequestBody PostUpdateDto updateDto,
             Authentication authentication) {
-
         User user = (User) authentication.getPrincipal();
-        return ResponseEntity.ok(postService.updatePost(id, updateDto, user.getId()));
+        try {
+            return ResponseEntity.ok(postService.updatePost(id, updateDto, user.getId()));
+        } catch (NoSuchElementException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+        } catch (SecurityException e) {
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).body(e.getMessage());
+        }
     }
 
     @DeleteMapping("/{id}")
-    @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void deletePost(
+    public ResponseEntity<?> deletePost(
             @PathVariable String id,
             Authentication authentication) {
-
         User user = (User) authentication.getPrincipal();
-        postService.deletePost(id, user.getId());
+        try {
+            postService.deletePost(id, user.getId());
+            return ResponseEntity.noContent().build();
+        } catch (NoSuchElementException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+        } catch (SecurityException e) {
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).body(e.getMessage());
+        }
     }
 
     // Methode pour les reaction d'un post
