@@ -12,6 +12,9 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.time.LocalDateTime;
 
+/**
+ * Represent a "follow" relationship between two users.
+ */
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -24,16 +27,16 @@ public class Follow {
     private String id;
 
     /**
-     * L'ID de l'utilisateur qui suit.
-     * Référence manuelle à la collection 'users'.
+     * ID of the user who FOLLOWS.
+     * Manual reference to the 'users' collection.
      */
     @Indexed // Indexe pour la requête : "Qui est-ce que je suis ?"
     @DBRef
     private User follower;
 
     /**
-     * L'ID de l'utilisateur qui EST suivi.
-     * Référence manuelle à la collection 'users'.
+     * ID of the user being FOLLOWED.
+     * Manual reference to the 'users' collection.
      */
     @Indexed // Indexe pour la requête : "Qui me suit ?"
     @DBRef

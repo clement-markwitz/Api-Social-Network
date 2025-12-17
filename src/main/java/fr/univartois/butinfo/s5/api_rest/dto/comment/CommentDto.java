@@ -4,7 +4,7 @@ import fr.univartois.butinfo.s5.api_rest.dto.user.UserSummaryDto;
 import java.time.LocalDateTime;
 
 /**
- * DTO (sortie) pour afficher un commentaire.
+ * DTO (output) representing a comment.
  */
 public record CommentDto(
         String id,

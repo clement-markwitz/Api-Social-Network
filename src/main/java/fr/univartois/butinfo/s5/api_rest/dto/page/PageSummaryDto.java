@@ -1,7 +1,7 @@
 package fr.univartois.butinfo.s5.api_rest.dto.page;
 
 /**
- * DTO (sortie) résumé pour une Page (utilisé dans les listes).
+ * DTO (output) for summarizing page information.
  */
 public record PageSummaryDto(
         String id,

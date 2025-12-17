@@ -5,7 +5,7 @@ import fr.univartois.butinfo.s5.api_rest.dto.user.UserSummaryDto;
 import java.time.LocalDateTime;
 
 /**
- * DTO (sortie) pour l'objet embarqué ReadReceipt.
+ * DTO (output) representing a read receipt for a message.
  */
 public record ReadReceiptDto(
         UserSummaryDto user,

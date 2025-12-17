@@ -13,6 +13,11 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.time.LocalDateTime;
 
+/**
+ * Represent a ban imposed on a user by a moderator.
+ * The ban can be temporary or permanent.
+ * A scheduled job will periodically check for expired bans and deactivate them.
+ */
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -24,16 +29,16 @@ public class Ban {
     private String id;
 
     /**
-     * L'ID de l'utilisateur qui est banni.
-     * Référence Manuelle à la collection 'users'.
+     * ID from the banned user.
+     * Ref to the 'users' collection.
      */
     @Indexed // Important d'indexer ce champ pour les recherches !
     @DBRef
     private User user;
 
     /**
-     * L'ID de l'utilisateur (modérateur) qui a émis le ban.
-     * Référence Manuelle à la collection 'users'.
+     * ID from the moderator who issued the ban.
+     * Ref to the 'users' collection.
      */
     @Indexed // Utile pour rechercher tous les bans d'un modérateur
     @DBRef
@@ -42,23 +47,24 @@ public class Ban {
     private String reason;
 
     /**
-     * Durée du ban en jours.
+     * Duration of the ban in days.
+     * A value of 0 indicates a permanent ban.
      */
     private int durationDays;
 
     /**
-     * Date et heure de début effectif du ban.
+     * Date and time when the ban starts.
      */
     private LocalDateTime startAt;
 
     /**
-     * Date et heure de fin calculée du ban.
+     * Date and time when the ban ends.
+     * Null if the ban is permanent.
      */
     private LocalDateTime endAt;
 
     /**
-     * Indique si le ban est actuellement en vigueur.
-     * Un "job" va passer ce champ à 'false' lorsque 'endAt' est dépassé.
+     * Indicates whether the ban is currently active.
      */
     private boolean active;
 

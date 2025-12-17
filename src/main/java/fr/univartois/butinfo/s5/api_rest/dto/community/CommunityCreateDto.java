@@ -5,7 +5,7 @@ import jakarta.validation.constraints.Size;
 import java.util.List;
 
 /**
- * DTO (entrée) pour la création d'une nouvelle Communauté.
+ * DTO (entry) for creating a new community.
  */
 public record CommunityCreateDto(
         @NotBlank(message = "Le nom ne peut pas être vide")

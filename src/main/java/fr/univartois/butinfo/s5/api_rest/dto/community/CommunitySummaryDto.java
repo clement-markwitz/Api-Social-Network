@@ -1,7 +1,7 @@
 package fr.univartois.butinfo.s5.api_rest.dto.community;
 
 /**
- * DTO (sortie) résumé pour une Communauté (utilisé dans les listes).
+ * DTO (output) for summarizing community information.
  */
 public record CommunitySummaryDto(
         String id,

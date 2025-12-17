@@ -12,6 +12,9 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.time.LocalDateTime;
 
+/**
+ * Represent a comment on a post.
+ */
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -32,14 +35,13 @@ public class Comment {
     private String text;
 
     /**
-     * Pour les réponses imbriquées (répondre à un autre commentaire).
-     * Si null, c'est un commentaire de premier niveau.
+     * For threaded comments: reference to the parent comment (if any).
      */
     @Indexed
     private Comment parentComment;
 
     /**
-     * Nombre de "likes" sur CE commentaire (dénormalisé).
+     * Number of likes for this comment.
      */
     private int likeCount;
 
