@@ -7,6 +7,9 @@ import fr.univartois.butinfo.s5.api_rest.mapper.BanMapper;
 import fr.univartois.butinfo.s5.api_rest.model.Ban;
 import fr.univartois.butinfo.s5.api_rest.model.User;
 import fr.univartois.butinfo.s5.api_rest.service.BanService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,6 +19,9 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+/**
+ * Controller for managing user bans.
+ */
 @RestController
 @RequestMapping("/api/admin")
 @PreAuthorize("hasRole('ADMIN')")
@@ -28,7 +34,15 @@ public class BanController {
         this.banMapper = banMapper;
     }
 
+    /**
+     * Get a list of all bans.
+     * @return List of BanSummaryDto
+     */
     @GetMapping("/bans")
+    @Operation(summary = "Get all bans", description = "Retrieve a list of all bans.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "List of bans retrieved successfully")
+    })
     public List<BanSummaryDto> getAllBans() {
 
         return banService.getAllBans().stream()
@@ -36,7 +50,20 @@ public class BanController {
                 .toList();
     }
 
+    /**
+     * Ban a user.
+     * @param idUser ID of the user to ban
+     * @param dto BanCreateDto containing ban details
+     * @param authentication Authentication object of the admin performing the ban
+     * @return ResponseEntity with BanDto
+     */
     @PostMapping("/users/{idUser}/ban")
+    @Operation(summary = "Ban a user", description = "Ban a user specified by their ID.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "201", description = "User successfully banned"),
+            @ApiResponse(responseCode = "404", description = "User not found"),
+            @ApiResponse(responseCode = "400", description = "Invalid ban data"),
+    })
     public ResponseEntity<BanDto> banUser(
             @PathVariable String idUser,
             @Valid @RequestBody BanCreateDto dto,
@@ -48,7 +75,17 @@ public class BanController {
         return ResponseEntity.status(HttpStatus.CREATED).body(banMapper.toDto(savedBan));
     }
 
+    /**
+     * Unban a user.
+     * @param idUser ID of the user to unban
+     * @return ResponseEntity with success message
+     */
     @PostMapping("/users/{idUser}/unban")
+    @Operation(summary = "Unban a user", description = "Unban a user specified by their ID.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "User successfully unbanned"),
+            @ApiResponse(responseCode = "404", description = "User not found or not banned")
+    })
     public ResponseEntity<String> unbanUser(@PathVariable String idUser) {
         banService.unbanUser(idUser);
         return ResponseEntity.ok("Utilisateur débanni avec succès");

@@ -4,7 +4,7 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Positive;
 
 /**
- * DTO (entrée) pour la création d'un nouveau bannissement.
+ *  DTO for creating a new ban.
  */
 public record BanCreateDto(
         @NotBlank

@@ -7,7 +7,7 @@ import fr.univartois.butinfo.s5.api_rest.model.User;
 import java.time.LocalDateTime;
 
 /**
- * DTO (sortie) pour afficher les détails d'un bannissement.
+ * DTO (output) representing a user ban.
  */
 public record BanDto(
         String id,

@@ -6,8 +6,8 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 
 /**
- * DTO pour l'enregistrement (création) d'un nouvel utilisateur.
- * C'est ce que le client envoie.
+ * DTO for creating a new user.
+ * Its fields are validated.
  */
 public record UserCreateDto(
         @NotBlank(message = "Le nom d'utilisateur ne peut pas être vide")

@@ -7,7 +7,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 /**
- * DTO (sortie) pour afficher un message complet dans un chat.
+ * DTO (output) representing a message in a conversation.
  */
 public record MessageDto(
         String id,

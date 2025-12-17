@@ -13,6 +13,9 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.time.LocalDateTime;
 
+/**
+ * Represent a post created by a user.
+ */
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -28,16 +31,16 @@ public class Post {
     private User author; // Référence à 'User'
 
     /**
-     * Le post est-il sur une page ?
-     * Référence à 'Page'.
+     * The post is it on a page?
+     * Reference to 'Page'.
      */
     @Indexed
     @DBRef
     private Page page; // Null si ce n'est pas un post de page
 
     /**
-     * Le post est-il dans une communauté ?
-     * Référence à 'Community'.
+     * The post is it in a community?
+     * Reference to 'Community'.
      */
     @Indexed
     @DBRef

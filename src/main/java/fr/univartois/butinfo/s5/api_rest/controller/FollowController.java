@@ -1,11 +1,10 @@
 package fr.univartois.butinfo.s5.api_rest.controller;
 
 import fr.univartois.butinfo.s5.api_rest.dto.user.UserSummaryDto;
-import fr.univartois.butinfo.s5.api_rest.service.FollowService;
+import fr.univartois.butinfo.s5.api_rest.mapper.UserMapper;
 import fr.univartois.butinfo.s5.api_rest.model.User;
-import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.responses.ApiResponse;
-import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import fr.univartois.butinfo.s5.api_rest.service.FollowService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
@@ -13,42 +12,39 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
+/**
+ * Controller for managing user follow relationships.
+ */
 @RestController
 @RequestMapping("/api/follows")
 public class FollowController {
 
-    private final FollowService followService;
+    @Autowired
+    private FollowService followService;
 
-    public FollowController(FollowService followService) {
-        this.followService = followService;
-    }
+    @Autowired
+    private UserMapper userMapper;
 
     /**
-     * Récupère l'ID MongoDB de l'utilisateur connecté.
+     * Helper method to get the authenticated user's ID.
+     * @return Authenticated user's ID
      */
     private String getAuthenticatedUserId() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-
-        if (authentication != null && authentication.getPrincipal() instanceof User userDetails) {
-            return userDetails.getId();
+        if (authentication != null && authentication.getPrincipal() instanceof User) {
+            return ((User) authentication.getPrincipal()).getId();
         }
-
         throw new org.springframework.security.access.AccessDeniedException("Utilisateur non authentifié.");
     }
 
     /**
-     * Create a follow relationship.
-     *
-     * @param followingId the ID of the user to follow
+     * Follow a user.
+     * @param followingId ID of the user to follow
      * @return ResponseEntity with status CREATED
      */
     @PostMapping("/{followingId}")
-    @Operation(summary = "Suivre un utilisateur", description = "Permet à l'utilisateur authentifié de suivre un autre utilisateur spécifié par son ID.")
-    @ApiResponses(value = {
-            @ApiResponse(responseCode = "201", description = "Utilisateur suivi avec succès"),
-            @ApiResponse(responseCode = "404", description = "Utilisateur à suivre non trouvé")
-    })
     public ResponseEntity<Void> followUser(@PathVariable String followingId) {
         String followerId = getAuthenticatedUserId();
         followService.followUser(followerId, followingId);
@@ -56,52 +52,47 @@ public class FollowController {
     }
 
     /**
-     * Get the list of users the authenticated user is following.
-     *
-     * @return ResponseEntity with list of UserSummaryDto
-     */
-    @GetMapping("/following")
-    @Operation(summary = "Lister les utilisateurs suivis", description = "Récupère une liste des utilisateurs que l'utilisateur authentifié suit.")
-    @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Liste des utilisateurs suivis récupérée avec succès")
-    })
-    public ResponseEntity<List<UserSummaryDto>> getFollowing() {
-        String followerId = getAuthenticatedUserId();
-        List<UserSummaryDto> following = followService.getFollowing(followerId);
-        return ResponseEntity.ok(following);
-    }
-
-    /**
-     * Get the list of followers of the authenticated user.
-     *
-     * @return ResponseEntity with list of UserSummaryDto
-     */
-    @GetMapping("/followers")
-    @Operation(summary = "Lister les abonnés", description = "Récupère une liste des utilisateurs qui suivent l'utilisateur authentifié.")
-    @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Liste des abonnés récupérée avec succès")
-    })
-    public ResponseEntity<List<UserSummaryDto>> getFollowers() {
-        String followingId = getAuthenticatedUserId();
-        List<UserSummaryDto> followers = followService.getFollowers(followingId);
-        return ResponseEntity.ok(followers);
-    }
-
-    /**
      * Unfollow a user.
-     *
-     * @param followingId the ID of the user to unfollow
+     * @param followingId ID of the user to unfollow
      * @return ResponseEntity with status NO_CONTENT
      */
     @DeleteMapping("/{followingId}")
-    @Operation(summary = "Ne plus suivre un utilisateur", description = "Permet à l'utilisateur authentifié de ne plus suivre un autre utilisateur spécifié par son ID.")
-    @ApiResponses(value = {
-            @ApiResponse(responseCode = "204", description = "Utilisateur non suivi avec succès"),
-            @ApiResponse(responseCode = "404", description = "Utilisateur à ne plus suivre non trouvé")
-    })
     public ResponseEntity<Void> unfollowUser(@PathVariable String followingId) {
         String followerId = getAuthenticatedUserId();
         followService.unfollowUser(followerId, followingId);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+
+    /**
+     * Get the list of users the authenticated user is following.
+     * @return List of UserSummaryDto
+     */
+    @GetMapping("/following")
+    public ResponseEntity<List<UserSummaryDto>> getFollowing() {
+        String followerId = getAuthenticatedUserId();
+        List<User> users = followService.getFollowing(followerId);
+        return ResponseEntity.ok(users.stream().map(userMapper::toSummaryDto).collect(Collectors.toList()));
+    }
+
+    /**
+     * Get the list of users following the authenticated user.
+     * @return List of UserSummaryDto
+     */
+    @GetMapping("/followers")
+    public ResponseEntity<List<UserSummaryDto>> getFollowers() {
+        String followingId = getAuthenticatedUserId();
+        List<User> users = followService.getFollowers(followingId);
+        return ResponseEntity.ok(users.stream().map(userMapper::toSummaryDto).collect(Collectors.toList()));
+    }
+
+    /**
+     * Get the list of friends (mutual followers) of a user.
+     * @param userId ID of the user
+     * @return List of UserSummaryDto
+     */
+    @GetMapping("/{userId}/friends")
+    public ResponseEntity<List<UserSummaryDto>> getFriends(@PathVariable String userId) {
+        List<User> friends = followService.getFriends(userId);
+        return ResponseEntity.ok(friends.stream().map(userMapper::toSummaryDto).collect(Collectors.toList()));
     }
 }

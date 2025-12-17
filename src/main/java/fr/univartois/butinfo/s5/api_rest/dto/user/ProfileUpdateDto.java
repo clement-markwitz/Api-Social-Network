@@ -4,7 +4,7 @@ import jakarta.validation.constraints.Size;
 import java.util.List;
 
 /**
- * DTO pour la mise à jour du profil public d'un utilisateur.
+ * DTO for updating user profile information.
  */
 public record ProfileUpdateDto(
         @Size(min = 3, max = 30)

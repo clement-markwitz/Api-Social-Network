@@ -15,6 +15,9 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.NoSuchElementException;
 
+/**
+ * Service class for managing posts.
+ */
 @Service
 public class PostService {
 
@@ -28,6 +31,13 @@ public class PostService {
         this.postMapper = postMapper;
     }
 
+    /**
+     * Create a new post.
+     *
+     * @param dto      the post creation data
+     * @param authorId the ID of the author
+     * @return the created post as a DTO
+     */
     public PostDto createPost(PostCreateDto dto, String authorId) {
         Post post = postMapper.toEntity(dto);
         User author = new User();
@@ -44,24 +54,48 @@ public class PostService {
         return postMapper.toDto(savedPost);
     }
 
+    /**
+     * Get a post by its ID.
+     *
+     * @param id the ID of the post
+     * @return the post as a DTO
+     */
     public PostDto getPostById(String id) {
         Post post = postRepository.findById(id)
                 .orElseThrow(() -> new NoSuchElementException("Post introuvable"));
         return postMapper.toDto(post);
     }
 
+    /**
+     * Get all posts.
+     *
+     * @return a list of all posts as DTOs
+     */
     public List<PostDto> getAllPosts() {
         return postRepository.findAll().stream()
                 .map(postMapper::toDto)
                 .toList();
     }
 
+    /**
+     * Search posts by keyword.
+     *
+     * @param keyword the keyword to search for
+     * @return a list of matching posts as DTOs
+     */
     public List<PostDto> searchPosts(String keyword) {
         return postRepository.findAllByTextContainingIgnoreCase(keyword).stream()
                 .map(postMapper::toDto)
                 .toList();
     }
-
+    /**
+     * Update an existing post.
+     *
+     * @param id            the ID of the post to update
+     * @param dto           the post update data
+     * @param requestUserId the ID of the user making the request
+     * @return the updated post as a DTO
+     */
     public PostDto updatePost(String id, PostUpdateDto dto, String requestUserId) {
         Post post = postRepository.findById(id)
                 .orElseThrow(() -> new NoSuchElementException("Post introuvable"));
@@ -77,6 +111,12 @@ public class PostService {
         return postMapper.toDto(savedPost);
     }
 
+    /**
+     * Delete a post by its ID.
+     *
+     * @param id            the ID of the post to delete
+     * @param requestUserId the ID of the user making the request
+     */
     public void deletePost(String id, String requestUserId) {
         Post post = postRepository.findById(id)
                 .orElseThrow(() -> new NoSuchElementException("Post introuvable"));

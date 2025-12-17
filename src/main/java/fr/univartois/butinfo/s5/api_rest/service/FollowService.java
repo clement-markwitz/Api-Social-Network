@@ -1,11 +1,10 @@
 package fr.univartois.butinfo.s5.api_rest.service;
 
-import fr.univartois.butinfo.s5.api_rest.dto.user.UserSummaryDto;
 import fr.univartois.butinfo.s5.api_rest.model.Follow;
 import fr.univartois.butinfo.s5.api_rest.model.User;
 import fr.univartois.butinfo.s5.api_rest.repository.FollowRepository;
 import fr.univartois.butinfo.s5.api_rest.repository.UserRepository;
-import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -13,84 +12,116 @@ import org.springframework.web.server.ResponseStatusException;
 
 import java.time.LocalDateTime;
 import java.util.List;
-// J'ai supprimé l'import "java.util.stream.Collectors" car on n'en a plus besoin avec .toList()
+import java.util.stream.Collectors;
 
+/**
+ * Service class for managing follow relationships between users.
+ */
 @Service
-@RequiredArgsConstructor // CORRECTION 1 : Génère le constructeur pour l'injection
 public class FollowService {
 
-    // CORRECTION 1 : On remplace @Autowired par private final
-    private final FollowRepository followRepository;
-    private final UserRepository userRepository;
-
-    private UserSummaryDto mapToUserSummaryDto(String userId) {
-        return new UserSummaryDto(
-                userId,
-                "Pseudo-" + userId.substring(0, Math.min(userId.length(), 5)),
-                "avatar/url/" + userId.substring(0, Math.min(userId.length(), 5))
-        );
-    }
+    @Autowired
+    private FollowRepository followRepository;
+    @Autowired
+    private UserRepository userRepository;
 
     /**
-     * Crée une relation de suivi (Follow).
+     * Allows a user to follow another user.
+     *
+     * @param followerId  the ID of the user who wants to follow
+     * @param followingId the ID of the user to be followed
      */
     public void followUser(String followerId, String followingId) {
         if (followerId.equals(followingId)) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Cannot follow yourself.");
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "On ne peut pas se suivre soi-même.");
         }
 
-        if (followRepository.findByFollowerIdAndFollowingId(followerId, followingId).isPresent()) {
-            return;
+        // On récupère les VRAIS objets User car Follow utilise @DBRef
+        User follower = getUserById(followerId);
+        User following = getUserById(followingId);
+
+        if (followRepository.findByFollowerAndFollowing(follower, following).isPresent()) {
+            return; // Déjà suivi
         }
 
-        User follower = userRepository.findById(followerId)
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Follower introuvable"));
-        User following = userRepository.findById(followingId)
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Utilisateur à suivre introuvable"));
-
-        Follow newFollow = new Follow(
-                null,
-                follower,
-                following,
-                LocalDateTime.now()
-        );
+        Follow newFollow = new Follow(null, follower, following, LocalDateTime.now());
         followRepository.save(newFollow);
     }
 
     /**
-     * Supprime une relation de suivi (Unfollow).
+     * Allows a user to unfollow another user.
+     *
+     * @param followerId  the ID of the user who wants to unfollow
+     * @param followingId the ID of the user to be unfollowed
      */
     @Transactional
     public void unfollowUser(String followerId, String followingId) {
-        long deletedCount = followRepository.deleteByFollowerIdAndFollowingId(followerId, followingId);
+        User follower = getUserById(followerId);
+        User following = getUserById(followingId);
+
+        long deletedCount = followRepository.deleteByFollowerAndFollowing(follower, following);
         if (deletedCount == 0) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Follow relationship not found.");
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Relation de suivi introuvable.");
         }
     }
 
+    // Retourne des User (pas de DTO)
     /**
-     * Récupère la liste des personnes suivies par l'utilisateur (Following).
+     * Retrieves the list of users that a specific user is following.
+     *
+     * @param followerId the ID of the user whose followings are to be retrieved
+     * @return a list of users being followed by the specified user
      */
-    public List<UserSummaryDto> getFollowing(String followerId) {
-        List<Follow> follows = followRepository.findAllByFollowerId(followerId);
+    public List<User> getFollowing(String followerId) {
+        User follower = getUserById(followerId);
+        return followRepository.findAllByFollower(follower).stream()
+                .map(Follow::getFollowing)
+                .collect(Collectors.toList());
+    }
 
-        // CORRECTION 2 : Optimisation du stream et utilisation de .toList()
-        return follows.stream()
-                .map(f -> f.getFollowing().getId())
-                .map(this::mapToUserSummaryDto)
-                .toList(); // <--- Ici, c'est la version moderne que Sonar attend
+    // Retourne des User (pas de DTO)
+    /**
+     * Retrieves the list of users who are following a specific user.
+     *
+     * @param followingId the ID of the user whose followers are to be retrieved
+     * @return a list of users following the specified user
+     */
+    public List<User> getFollowers(String followingId) {
+        User following = getUserById(followingId);
+        return followRepository.findAllByFollowing(following).stream()
+                .map(Follow::getFollower)
+                .collect(Collectors.toList());
+    }
+
+    // Retourne des User (Amis)
+    /**
+     * Retrieves the list of mutual friends for a specific user.
+     *
+     * @param userId the ID of the user whose friends are to be retrieved
+     * @return a list of users who are mutual friends with the specified user
+     */
+    public List<User> getFriends(String userId) {
+        User currentUser = getUserById(userId);
+
+        // 1. Qui est-ce que je suis ?
+        List<User> myFollowings = followRepository.findAllByFollower(currentUser).stream()
+                .map(Follow::getFollowing)
+                .toList();
+
+        // 2. Parmi eux, qui me suit en retour ?
+        return myFollowings.stream()
+                .filter(targetUser -> followRepository.findByFollowerAndFollowing(targetUser, currentUser).isPresent())
+                .collect(Collectors.toList());
     }
 
     /**
-     * Récupère la liste des utilisateurs qui suivent l'utilisateur (Followers).
+     * Helper method to retrieve a User by ID, throwing an exception if not found.
+     *
+     * @param id the ID of the user
+     * @return the User object
      */
-    public List<UserSummaryDto> getFollowers(String followingId) {
-        List<Follow> follows = followRepository.findAllByFollowingId(followingId);
-
-        // CORRECTION 2 : Optimisation du stream et utilisation de .toList()
-        return follows.stream()
-                .map(f -> f.getFollower().getId())
-                .map(this::mapToUserSummaryDto)
-                .toList(); // <--- Ici aussi
+    private User getUserById(String id) {
+        return userRepository.findById(id)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Utilisateur introuvable : " + id));
     }
 }

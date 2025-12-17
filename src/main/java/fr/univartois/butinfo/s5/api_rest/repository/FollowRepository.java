@@ -1,44 +1,51 @@
 package fr.univartois.butinfo.s5.api_rest.repository;
 
 import fr.univartois.butinfo.s5.api_rest.model.Follow;
+import fr.univartois.butinfo.s5.api_rest.model.User;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * Repository interface for managing Follow relationships between users.
+ */
 @Repository
 public interface FollowRepository extends MongoRepository<Follow, String> {
 
+    // On cherche maintenant avec des objets User
     /**
-     * Trouve une relation de suivi spécifique.
-     * @param followerId L'ID de l'utilisateur qui suit.
-     * @param followingId L'ID de l'utilisateur qui est suivi.
-     * @return Le Follow si trouvé.
+     * Find a follow relationship by follower and following users.
+     *
+     * @param follower  the user who is following
+     * @param following the user being followed
+     * @return an Optional containing the Follow relationship if found, otherwise empty
      */
-    Optional<Follow> findByFollowerIdAndFollowingId(String followerId, String followingId);
+    Optional<Follow> findByFollowerAndFollowing(User follower, User following);
 
     /**
-     * Récupère toutes les relations de suivi où cet utilisateur est le suiveur.
-     * (Liste des personnes que l'utilisateur suit - "Following").
-     * @param followerId L'ID de l'utilisateur qui suit.
-     * @return Liste des Follows.
+     * Find all follow relationships where the specified user is the follower.
+     *
+     * @param follower the user who is following others
+     * @return a list of Follow relationships
      */
-    List<Follow> findAllByFollowerId(String followerId);
+    List<Follow> findAllByFollower(User follower);
 
     /**
-     * Récupère toutes les relations de suivi où cet utilisateur est le suivi.
-     * (Liste des personnes qui suivent l'utilisateur - "Followers").
-     * @param followingId L'ID de l'utilisateur qui est suivi.
-     * @return Liste des Follows.
+     * Find all follow relationships where the specified user is being followed.
+     *
+     * @param following the user who is being followed
+     * @return a list of Follow relationships
      */
-    List<Follow> findAllByFollowingId(String followingId);
+    List<Follow> findAllByFollowing(User following);
 
     /**
-     * Supprime une relation de suivi spécifique.
-     * @param followerId L'ID de l'utilisateur qui suit.
-     * @param followingId L'ID de l'utilisateur qui est suivi.
-     * @return Le nombre d'enregistrements supprimés.
+     * Delete a follow relationship by follower and following users.
+     *
+     * @param follower  the user who is following
+     * @param following the user being followed
+     * @return the number of deleted follow relationships
      */
-    long deleteByFollowerIdAndFollowingId(String followerId, String followingId);
+    long deleteByFollowerAndFollowing(User follower, User following);
 }

@@ -5,7 +5,7 @@ import fr.univartois.butinfo.s5.api_rest.dto.user.UserSummaryDto;
 import java.time.LocalDateTime;
 
 /**
- * DTO (sortie) pour lister un utilisateur bloqué.
+ * DTO (output) for representing a blocked user.
  */
 public record BlockUserDto(
         String id,

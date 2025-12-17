@@ -5,7 +5,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 /**
- * DTO (sortie) détaillé pour une Communauté.
+ * DTO (output) for detailed information about a community.
  */
 public record CommunityDetailDto(
         String id,

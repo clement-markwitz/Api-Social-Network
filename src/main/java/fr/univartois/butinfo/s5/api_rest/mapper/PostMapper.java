@@ -11,9 +11,18 @@ import org.mapstruct.Mapping;
 import org.mapstruct.MappingTarget;
 import org.mapstruct.Named;
 
+/**
+ * Mapper for converting between Post entities and their DTO representations.
+ */
 @Mapper(componentModel = "spring")
 public interface PostMapper {
 
+    /**
+     * Converts a PostCreateDto to a Post entity.
+     *
+     * @param dto the PostCreateDto to convert
+     * @return the resulting Post entity
+     */
     @Mapping(target = "id", ignore = true)
     @Mapping(target = "author", ignore = true)
     @Mapping(target = "stats", ignore = true)
@@ -23,10 +32,22 @@ public interface PostMapper {
     @Mapping(target = "community", source = "communityId", qualifiedByName = "idToCommunity")
     Post toEntity(PostCreateDto dto);
 
+    /**
+     * Converts a Post entity to a PostDto.
+     *
+     * @param post the Post entity to convert
+     * @return the resulting PostDto
+     */
     @Mapping(target = "pageId", source = "page.id")
     @Mapping(target = "communityId", source = "community.id")
     PostDto toDto(Post post);
 
+    /**
+     * Updates an existing Post entity from a PostUpdateDto.
+     *
+     * @param dto the PostUpdateDto containing updated data
+     * @param post the existing Post entity to update
+     */
     @Mapping(target = "id", ignore = true)
     @Mapping(target = "author", ignore = true)
     @Mapping(target = "media", ignore = true)
@@ -39,6 +60,12 @@ public interface PostMapper {
     @Mapping(target = "community", ignore = true)
     void updatePostFromDto(PostUpdateDto dto, @MappingTarget Post post);
 
+    /**
+     * Helper method to convert an ID string to a Page entity.
+     *
+     * @param id the ID of the Page
+     * @return the Page entity with the given ID
+     */
     @Named("idToPage")
     default Page idToPage(String id) {
         if (id == null) return null;
@@ -47,6 +74,12 @@ public interface PostMapper {
         return page;
     }
 
+    /**
+     * Helper method to convert an ID string to a Community entity.
+     *
+     * @param id the ID of the Community
+     * @return the Community entity with the given ID
+     */
     @Named("idToCommunity")
     default Community idToCommunity(String id) {
         if (id == null) return null;

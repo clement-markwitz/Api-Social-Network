@@ -6,6 +6,9 @@ import lombok.NoArgsConstructor;
 
 import java.util.List;
 
+/**
+ * Model representing a user profile.
+ */
 @Data
 @NoArgsConstructor
 @AllArgsConstructor

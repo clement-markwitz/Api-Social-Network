@@ -6,6 +6,9 @@ import lombok.NoArgsConstructor;
 
 import java.util.List;
 
+/**
+ * Model representing user interests.
+ */
 @Data
 @NoArgsConstructor
 @AllArgsConstructor

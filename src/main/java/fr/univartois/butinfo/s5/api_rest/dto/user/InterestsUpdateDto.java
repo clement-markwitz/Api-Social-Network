@@ -3,7 +3,7 @@ package fr.univartois.butinfo.s5.api_rest.dto.user;
 import java.util.List;
 
 /**
- * DTO (entrée) pour la mise à jour manuelle des intérêts.
+ * DTO (entry point) for updating user interests.
  */
 public record InterestsUpdateDto(
         List<String> cuisines,
