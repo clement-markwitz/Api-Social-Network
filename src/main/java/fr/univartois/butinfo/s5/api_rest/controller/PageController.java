@@ -34,9 +34,9 @@ public class PageController {
      * @return a page of PageSummaryDto
      */
     @GetMapping
-    @Operation(summary = "Lister toutes les pages", description = "Récupère une liste paginée de toutes les pages au format résumé.")
+    @Operation(summary = "List all pages", description = "Retrieves a paginated list of all pages in summary format.")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Liste des pages récupérée avec succès")
+            @ApiResponse(responseCode = "200", description = "Pages list retrieved successfully")
     })
     public Page<PageSummaryDto> getAllPages(@PageableDefault(size = 20) Pageable pageable) {
         return pageService.getAllPages(pageable);
@@ -49,10 +49,10 @@ public class PageController {
      * @return the PageDetailDto
      */
     @GetMapping("/{id}")
-    @Operation(summary = "Récupérer une page par ID", description = "Récupère les détails d'une page spécifiée par son ID.")
+    @Operation(summary = "Get a page by ID", description = "Retrieves details of a page specified by its ID.")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Page récupérée avec succès"),
-            @ApiResponse(responseCode = "404", description = "Page non trouvée")
+            @ApiResponse(responseCode = "200", description = "Page retrieved successfully"),
+            @ApiResponse(responseCode = "404", description = "Page not found")
     })
     public PageDetailDto getPage(@PathVariable String id) {
         return pageService.getPageById(id);
@@ -67,9 +67,9 @@ public class PageController {
      */
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    @Operation(summary = "Créer une nouvelle page", description = "Permet de créer une nouvelle page.")
+    @Operation(summary = "Create a new page", description = "Creates a new page.")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "201", description = "Page créée avec succès")
+            @ApiResponse(responseCode = "201", description = "Page created successfully")
     })
     public PageDetailDto createPage(@RequestBody @Valid PageCreateDto pageCreateDto, Authentication authentication) {
         User user = (User) authentication.getPrincipal();
@@ -84,10 +84,10 @@ public class PageController {
      * @return the updated PageDetailDto
      */
     @PutMapping("/{id}")
-    @Operation(summary = "Mettre à jour une page", description = "Permet de mettre à jour une page existante.")
+    @Operation(summary = "Update a page", description = "Updates an existing page.")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Page mise à jour avec succès"),
-            @ApiResponse(responseCode = "404", description = "Page non trouvée")
+            @ApiResponse(responseCode = "200", description = "Page updated successfully"),
+            @ApiResponse(responseCode = "404", description = "Page not found")
     })
     public PageDetailDto updatePage(@PathVariable String id, @RequestBody @Valid PageUpdateDto pageUpdateDto) {
         return pageService.updatePage(id, pageUpdateDto);
@@ -100,10 +100,10 @@ public class PageController {
      */
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    @Operation(summary = "Supprimer une page", description = "Permet de supprimer une page spécifiée par son ID.")
+    @Operation(summary = "Delete a page", description = "Deletes a page specified by its ID.")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "204", description = "Page supprimée avec succès"),
-            @ApiResponse(responseCode = "404", description = "Page non trouvée")
+            @ApiResponse(responseCode = "204", description = "Page deleted successfully"),
+            @ApiResponse(responseCode = "404", description = "Page not found")
     })
     public void deletePage(@PathVariable String id) {
         pageService.deletePage(id);
