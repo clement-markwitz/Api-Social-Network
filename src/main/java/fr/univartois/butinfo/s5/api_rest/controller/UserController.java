@@ -50,12 +50,11 @@ public class UserController {
             @ApiResponse(responseCode = "401", description = "Utilisateur non authentifié")
     })
     public ResponseEntity<UserPrivateProfileDto> authenticatedUser(Authentication authentication) {
-        if (authentication == null || authentication.getPrincipal() == null) {
-            throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Non authentifié");
+        if (authentication != null && authentication.getPrincipal() instanceof User user) {
+            return ResponseEntity.ok(userMapper.toPrivateProfileDto(user));
         }
 
-        User user = (User) authentication.getPrincipal();
-        return ResponseEntity.ok(userMapper.toPrivateProfileDto(user));
+        throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Utilisateur non authentifié");
     }
 
     /**
