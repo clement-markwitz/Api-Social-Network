@@ -9,12 +9,11 @@ import fr.univartois.butinfo.s5.api_rest.model.PostStats;
 import fr.univartois.butinfo.s5.api_rest.model.User;
 import fr.univartois.butinfo.s5.api_rest.repository.PostRepository;
 import fr.univartois.butinfo.s5.api_rest.repository.PostStatsRepository;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
-import org.springframework.web.server.ResponseStatusException;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.NoSuchElementException;
 
 @Service
 public class PostService {
@@ -47,7 +46,7 @@ public class PostService {
 
     public PostDto getPostById(String id) {
         Post post = postRepository.findById(id)
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Post introuvable"));
+                .orElseThrow(() -> new NoSuchElementException("Post introuvable"));
         return postMapper.toDto(post);
     }
 
@@ -57,13 +56,18 @@ public class PostService {
                 .toList();
     }
 
+    public List<PostDto> searchPosts(String keyword) {
+        return postRepository.findAllByTextContainingIgnoreCase(keyword).stream()
+                .map(postMapper::toDto)
+                .toList();
+    }
+
     public PostDto updatePost(String id, PostUpdateDto dto, String requestUserId) {
         Post post = postRepository.findById(id)
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Post introuvable"));
+                .orElseThrow(() -> new NoSuchElementException("Post introuvable"));
 
-        // Verify if the requesting user is the author of the post
         if (!post.getAuthor().getId().equals(requestUserId)) {
-            throw new ResponseStatusException(HttpStatus.FORBIDDEN, "Vous ne pouvez pas modifier ce post");
+            throw new SecurityException("Vous ne pouvez pas modifier ce post");
         }
 
         postMapper.updatePostFromDto(dto, post);
@@ -75,10 +79,10 @@ public class PostService {
 
     public void deletePost(String id, String requestUserId) {
         Post post = postRepository.findById(id)
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Post introuvable"));
-        // Verify if the requesting user is the author of the post
+                .orElseThrow(() -> new NoSuchElementException("Post introuvable"));
+
         if (!post.getAuthor().getId().equals(requestUserId)) {
-            throw new ResponseStatusException(HttpStatus.FORBIDDEN, "Vous ne pouvez pas supprimer ce post");
+            throw new SecurityException("Vous ne pouvez pas supprimer ce post");
         }
 
         if (post.getStats() != null && post.getStats().getId() != null) {

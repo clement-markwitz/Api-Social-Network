@@ -1,0 +1,15 @@
+meta {
+  name: SearchUser
+  type: http
+  seq: 8
+}
+
+get {
+  url: {{base}}/users/search?q=test
+  body: none
+  auth: inherit
+}
+
+params:query {
+  q: test
+}
