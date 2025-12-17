@@ -2,17 +2,17 @@ package fr.univartois.butinfo.s5.api_rest.model;
 
 public enum ConversationStatus {
     /**
-     * Conversation 1-to-1 ou de groupe active.
+     * Conversion 1 to 1 active.
      */
     ACTIVE,
 
     /**
-     * Un utilisateur a été invité mais n'a pas encore rejoint (pour les groupes).
+     * A user has a pending invite to join the group.
      */
     PENDING_INVITE,
 
     /**
-     * Un utilisateur a quitté le groupe.
+     * A user has a pending request to join the group.
      */
     ARCHIVED
 }

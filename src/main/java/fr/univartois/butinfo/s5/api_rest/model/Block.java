@@ -12,6 +12,10 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.time.LocalDateTime;
 
+/**
+ * Represent a blocking relationship between two users.
+ * When user A blocks user B, user A (blocker) will not see any content from user B (blocked).
+ */
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -26,16 +30,16 @@ public class Block {
     private String id;
 
     /**
-     * L'ID de l'utilisateur qui effectue le blocage.
-     * Référence manuelle à la collection 'users'.
+     * ID of the user who is blocking.
+     * Reference to the 'users' collection.
      */
     @Indexed // Index simple pour "Qui ai-je bloqué ?"
     @DBRef
     private User blocker;
 
     /**
-     * L'ID de l'utilisateur qui est bloqué.
-     * Référence manuelle à la collection 'users'.
+     * ID of the user who is being blocked.
+     * Reference to the 'users' collection.
      */
     @Indexed // Index simple pour "Qui m'a bloqué ?"
     @DBRef

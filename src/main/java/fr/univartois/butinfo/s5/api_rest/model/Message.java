@@ -12,6 +12,9 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import java.time.LocalDateTime;
 import java.util.List;
 
+/**
+ * Represent a message sent in a conversation between users.
+ */
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -22,16 +25,16 @@ public class Message {
     private String id;
 
     /**
-     * L'ID de la conversation à laquelle ce message appartient.
-     * C'est une "Référence Manuelle" à Conversation.id
+     * ID of the conversation this message belongs to.
+     *  It's your "conversationId".
      */
     @Indexed // Index pour récupérer les messages d'une conversation
     @DBRef
     private Conversation conversation;
 
     /**
-     * L'ID de l'utilisateur qui a envoyé ce message.
-     * C'est votre "fromId".
+     * ID of the user who sent the message.
+     * It's your "senderId".
      */
     @Indexed // Utile pour indexer les messages d'un expéditeur
     @DBRef
@@ -40,7 +43,7 @@ public class Message {
     private String text;
 
     /**
-     * Liste d'URLs vers des pièces jointes (images, fichiers).
+     * List of attachment URLs.
      */
     private List<String> attachments;
 
@@ -48,7 +51,7 @@ public class Message {
     private LocalDateTime createdAt;
 
     /**
-     * Liste des accusés de lecture.
+     * List of read receipts indicating which users have read the message.
      */
     @Indexed // Pour rechercher rapidement qui a lu le message
     private List<ReadReceipt> readBy;

@@ -14,6 +14,10 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import java.time.LocalDateTime;
 import java.util.List;
 
+/**
+ * Represent a Page in the social media application.
+ * A Page can be created by users to represent businesses, organizations, public figures, etc.
+ */
 @Data
 @NoArgsConstructor
 @AllArgsConstructor

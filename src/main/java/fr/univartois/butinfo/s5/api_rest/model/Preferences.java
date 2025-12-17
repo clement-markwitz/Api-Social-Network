@@ -5,6 +5,9 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import java.util.List;
 
+/**
+ * Represent user preferences regarding diets, allergies, and disliked ingredients.
+ */
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
