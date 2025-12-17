@@ -1,5 +1,6 @@
 package fr.univartois.butinfo.s5.api_rest.service;
 
+import fr.univartois.butinfo.s5.api_rest.dto.conversation.ConversationCreateDto;
 import fr.univartois.butinfo.s5.api_rest.dto.conversation.ConversationSummaryDto;
 import fr.univartois.butinfo.s5.api_rest.mapper.ConversationMapper;
 import fr.univartois.butinfo.s5.api_rest.model.Conversation;
@@ -25,7 +26,9 @@ public class ConversationService {
     private final UserRepository userRepository;
     private final ConversationMapper conversationMapper;
 
-
+    public Conversation findById(String id) {
+        return conversationRepository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND,"Conversation introuvable"));
+    }
 
     public Conversation createConversation(Conversation conversation,List<User> members) {
         conversation.setMembers(members);

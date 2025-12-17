@@ -5,13 +5,13 @@ import fr.univartois.butinfo.s5.api_rest.mapper.UserMapper;
 import fr.univartois.butinfo.s5.api_rest.model.User;
 import fr.univartois.butinfo.s5.api_rest.service.UserService;
 import jakarta.validation.Valid;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
-// J'ai supprimé l'import "java.util.stream.Collectors" qui ne sert plus à rien
 
 /**
  * Controller for user-related endpoints.
@@ -42,7 +42,6 @@ public class UserController {
      */
     @GetMapping("/me")
     public ResponseEntity<UserPrivateProfileDto> authenticatedUser(Authentication authentication) {
-        // CORRECTION : Cast sécurisé (Pattern Matching) comme dans tes autres fichiers
         if (authentication != null && authentication.getPrincipal() instanceof User user) {
             return ResponseEntity.ok(userMapper.toPrivateProfileDto(user));
         }
