@@ -1,0 +1,15 @@
+meta {
+  name: Get Following
+  type: http
+  seq: 6
+}
+
+get {
+  url: http://localhost:8080/api/users/{{ID_DU_SUIVEUR}}/following
+  body: none
+  auth: bearer
+}
+
+auth:bearer {
+  token: {{votre_token_ici}}
+}
