@@ -1,6 +1,5 @@
 package fr.univartois.butinfo.s5.api_rest.service;
 
-import fr.univartois.butinfo.s5.api_rest.dto.conversation.ConversationCreateDto;
 import fr.univartois.butinfo.s5.api_rest.dto.conversation.ConversationSummaryDto;
 import fr.univartois.butinfo.s5.api_rest.mapper.ConversationMapper;
 import fr.univartois.butinfo.s5.api_rest.model.Conversation;
@@ -15,7 +14,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -27,27 +25,12 @@ public class ConversationService {
     private final UserRepository userRepository;
     private final ConversationMapper conversationMapper;
 
-    public Conversation createConversation(ConversationCreateDto dto, String currentUserId) {
-        Conversation conversation = conversationMapper.toEntity(dto);
 
-        // 1. Récupérer l'initiateur
-        User initiator = userRepository.findById(currentUserId)
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Utilisateur connecté introuvable"));
-        conversation.setInitiator(initiator);
 
-        // 2. Récupérer les membres (Initiateur + liste des invités)
-        List<String> memberIds = new ArrayList<>(dto.memberIds());
-        if (!memberIds.contains(currentUserId)) {
-            memberIds.add(currentUserId);
-        }
-
-        List<User> members = userRepository.findAllById(memberIds);
+    public Conversation createConversation(Conversation conversation,List<User> members) {
         conversation.setMembers(members);
-
-        // 3. Dates
         conversation.setCreatedAt(LocalDateTime.now());
         conversation.setUpdatedAt(LocalDateTime.now());
-
         return conversationRepository.save(conversation);
     }
 
@@ -108,6 +91,61 @@ public class ConversationService {
         } else {
             // Sinon, on sauvegarde juste le départ
             conversationRepository.save(conversation);
+        }
+    }
+
+    /**
+     * Ajoute une liste d'utilisateurs à une conversation existante.
+     * Réservé à l'initiateur.
+     */
+    public void addMembersToConversation(String conversationId, List<String> userIdsToAdd, String currentUserId) {
+        Conversation conversation = getConversationById(conversationId);
+
+        if (!conversation.getInitiator().getId().equals(currentUserId)) {
+            throw new ResponseStatusException(HttpStatus.FORBIDDEN, "Seul l'initiateur peut ajouter des membres");
+        }
+
+        List<User> newUsers = userRepository.findAllById(userIdsToAdd);
+
+        boolean updated = false;
+        for (User userToAdd : newUsers) {
+            boolean alreadyIn = conversation.getMembers().stream()
+                    .anyMatch(member -> member.getId().equals(userToAdd.getId()));
+
+            if (!alreadyIn) {
+                conversation.getMembers().add(userToAdd);
+                updated = true;
+            }
+        }
+
+        if (updated) {
+            conversation.setUpdatedAt(LocalDateTime.now());
+            conversationRepository.save(conversation);
+        }
+    }
+
+    /**
+     * Retire un utilisateur spécifique de la conversation.
+     * Réservé à l'initiateur.
+     */
+    public void kickMemberFromConversation(String conversationId, String memberIdToRemove, String currentUserId) {
+        Conversation conversation = getConversationById(conversationId);
+
+        if (!conversation.getInitiator().getId().equals(currentUserId)) {
+            throw new ResponseStatusException(HttpStatus.FORBIDDEN, "Seul l'initiateur peut exclure des membres");
+        }
+
+        if (memberIdToRemove.equals(currentUserId)) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Utilisez 'leave' pour quitter la conversation");
+        }
+
+        boolean removed = conversation.getMembers().removeIf(u -> u.getId().equals(memberIdToRemove));
+
+        if (removed) {
+            conversation.setUpdatedAt(LocalDateTime.now());
+            conversationRepository.save(conversation);
+        } else {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Cet utilisateur n'est pas dans la conversation");
         }
     }
 }
