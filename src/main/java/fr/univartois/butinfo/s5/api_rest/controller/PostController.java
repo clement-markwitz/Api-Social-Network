@@ -142,14 +142,14 @@ public class PostController {
 
     // Methode pour les reaction d'un post
 
-    @GetMapping("/{id}/reactions")
+    @GetMapping("/{idPost}/reactions")
     @Operation(summary = "Lister les réactions d'un post", description = "Récupère la liste des réactions associées à un post spécifié par son ID.")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Liste des réactions récupérée avec succès"),
             @ApiResponse(responseCode = "404", description = "Post non trouvé")
     })
-    public List<ReactionDto> getReactions(@PathVariable String id) {
-        return reactionService.getReactionsByPostId(id).stream()
+    public List<ReactionDto> getReactions(@PathVariable String idPost) {
+        return reactionService.getReactionsByPostId(idPost).stream()
                 .map(reactionMapper::toDto)
                 .toList();
     }
