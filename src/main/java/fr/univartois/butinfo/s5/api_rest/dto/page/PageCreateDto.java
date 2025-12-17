@@ -5,7 +5,7 @@ import jakarta.validation.constraints.Size;
 import java.util.List;
 
 /**
- * DTO (entrée) pour la création d'une nouvelle Page.
+ * DTO (entry) for creating a new page.
  */
 public record PageCreateDto(
         @NotBlank(message = "Le nom ne peut pas être vide")

@@ -21,6 +21,9 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ * Controller for managing user blocks.
+ */
 @RestController
 @RequestMapping("/api")
 public class BlockController {
@@ -36,7 +39,7 @@ public class BlockController {
     }
 
     /**
-     * Bloquer un utilisateur.
+     * Bloc a user.
      */
     @PostMapping("/users/{userId}/blocks")
     @Operation(summary = "Bloquer un utilisateur", description = "Permet de bloquer un utilisateur spécifié par son ID.")
@@ -61,7 +64,7 @@ public class BlockController {
     }
 
     /**
-     * Débloquer un utilisateur.
+     * Unblock a user.
      */
     @DeleteMapping("/users/{userId}/blocks")
     @Operation(summary = "Débloquer un utilisateur", description = "Permet de débloquer un utilisateur spécifié par son ID.")
@@ -78,6 +81,10 @@ public class BlockController {
         return ResponseEntity.noContent().build();
     }
 
+    /**
+     * Get the list of users blocked by the authenticated user.
+     * @return List of BlockUserDto
+     */
     @GetMapping("/users/blocks")
     @Operation(summary = "Lister les utilisateurs bloqués", description = "Récupère la liste des utilisateurs que l'utilisateur authentifié a bloqués.")
     @ApiResponses(value = {
@@ -95,6 +102,11 @@ public class BlockController {
         return ResponseEntity.ok(userSummaries);
     }
 
+    /**
+     * Get a specific block by its ID.
+     * @param id Block ID
+     * @return BlockUserDto
+     */
     @GetMapping("/users/{id}/blocks")
     @Operation(summary = "Récupérer un blocage par ID", description = "Récupère les détails d'un blocage spécifique par son ID.")
     @ApiResponses(value = {

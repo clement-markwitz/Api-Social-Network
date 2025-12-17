@@ -3,7 +3,7 @@ package fr.univartois.butinfo.s5.api_rest.dto.user;
 import jakarta.validation.constraints.NotBlank;
 
 /**
- * DTO pour la connexion (login) d'un utilisateur.
+ * DTO for the user login process.
  */
 public record UserLoginDto(
         @NotBlank(message = "Le nom d'utilisateur ne peut pas être vide")

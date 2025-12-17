@@ -17,6 +17,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
+/**
+ * Controller for managing pages.
+ */
 @RestController
 @RequestMapping("/api/pages")
 public class PageController {

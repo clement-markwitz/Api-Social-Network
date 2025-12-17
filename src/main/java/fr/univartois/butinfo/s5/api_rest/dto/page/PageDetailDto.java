@@ -6,7 +6,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 /**
- * DTO (sortie) détaillé pour une Page.
+ * DTO (output) for detailed information about a page.
  */
 public record PageDetailDto(
         String id,

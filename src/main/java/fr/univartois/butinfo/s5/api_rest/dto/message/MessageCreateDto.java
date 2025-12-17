@@ -4,7 +4,7 @@ import jakarta.validation.constraints.NotBlank;
 import java.util.List;
 
 /**
- * DTO (entrée) pour envoyer un nouveau message dans une conversation.
+ * DTO for creating a new message.
  */
 public record MessageCreateDto(
         @NotBlank

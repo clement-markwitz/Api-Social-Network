@@ -4,7 +4,7 @@ package fr.univartois.butinfo.s5.api_rest.dto.user;
 import java.util.List;
 
 /**
- * DTO (sortie) pour l'objet embarqué Profile.
+ * DTO (output) representing a user's profile.
  */
 public record ProfileDto (
     String pseudo,

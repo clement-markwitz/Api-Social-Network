@@ -19,6 +19,9 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+/**
+ * Controller for managing communities.
+ */
 @RestController
 @RequestMapping("/api/community")
 public class CommunityController {
@@ -32,7 +35,7 @@ public class CommunityController {
     }
 
     /**
-     * Récupérer toutes les communautés (Format Résumé).
+     * List all the communities (Summary Format).
      */
     @GetMapping
     @Operation(summary = "Lister toutes les communautés", description = "Récupère une liste de toutes les communautés au format résumé.")
@@ -40,7 +43,6 @@ public class CommunityController {
             @ApiResponse(responseCode = "200", description = "Liste des communautés récupérée avec succès")
     })
     public ResponseEntity<List<CommunitySummaryDto>> getAllCommunities() {
-        // CORRECTION SONAR : Utilisation de .toList() au lieu de .collect(Collectors.toList())
         List<CommunitySummaryDto> summaries = communityService.getAll().stream()
                 .map(communityMapper::toSummaryDto)
                 .toList();
@@ -48,7 +50,7 @@ public class CommunityController {
     }
 
     /**
-     * Récupérer une communauté par son ID (Format Détail).
+     * Retrieve a community by ID.
      */
     @GetMapping("/{id}")
     @Operation(summary = "Récupérer une communauté par ID", description = "Récupère les détails d'une communauté spécifiée par son ID.")
@@ -65,7 +67,7 @@ public class CommunityController {
     }
 
     /**
-     * Créer une nouvelle communauté.
+     * Create a new community.
      */
     @PostMapping
     @Operation(summary = "Créer une nouvelle communauté", description = "Permet de créer une nouvelle communauté.")
@@ -89,7 +91,7 @@ public class CommunityController {
     }
 
     /**
-     * Mettre à jour une communauté.
+     * Update an existing community.
      */
     @PutMapping("/{id}")
     @Operation(summary = "Mettre à jour une communauté", description = "Permet de mettre à jour une communauté spécifiée par son ID.")
@@ -120,7 +122,7 @@ public class CommunityController {
     }
 
     /**
-     * Supprimer une communauté.
+     * Delete a community.
      */
     @DeleteMapping("/{id}")
     @Operation(summary = "Supprimer une communauté", description = "Permet de supprimer une communauté spécifiée par son ID.")
