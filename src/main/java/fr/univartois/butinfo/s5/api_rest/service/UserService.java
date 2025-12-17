@@ -102,7 +102,7 @@ public class UserService implements UserDetailsService {
      */
     public List<User> searchUsers(String query) {
         if (query == null || query.isBlank()) {
-            return getAll(); // Si vide ou null, on retourne tous les utilisateurs
+            return getAll();
         }
         return userRepository.findByProfilePseudoContainingIgnoreCase(query);
     }
