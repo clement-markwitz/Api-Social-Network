@@ -6,7 +6,22 @@ import org.springframework.data.mongodb.repository.MongoRepository;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * Repository interface for managing User entities in MongoDB.
+ */
 public interface UserRepository extends MongoRepository<User, String> {
+    /**
+     * Find a user by their username.
+     *
+     * @param username the username to search for
+     * @return an Optional containing the User if found, or empty if not found
+     */
     Optional<User> findByUsername(String username);
+    /**
+     * Find users whose profile pseudo contains the given string, case insensitive.
+     *
+     * @param pseudo the pseudo substring to search for
+     * @return a list of Users whose profile pseudo contains the given string
+     */
     List<User> findByProfilePseudoContainingIgnoreCase(String pseudo);
 }

@@ -4,6 +4,9 @@ import fr.univartois.butinfo.s5.api_rest.model.PostStats;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Repository;
 
+/**
+ * Repository interface for PostStats entity.
+ */
 @Repository
 public interface PostStatsRepository extends MongoRepository<PostStats, String> {
 }
