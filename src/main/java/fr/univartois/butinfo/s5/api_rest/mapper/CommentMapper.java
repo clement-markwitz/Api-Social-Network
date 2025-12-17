@@ -35,8 +35,6 @@ public interface CommentMapper {
      * @param comment the Comment entity
      * @return the CommentDto
      */
-    @Mapping(target = "postId", source = "post.id")
-    @Mapping(target = "authorId", source = "author.id")
     @Mapping(target = "parentCommentId", source = "parentComment.id")
     CommentDto toDto(Comment comment);
 
