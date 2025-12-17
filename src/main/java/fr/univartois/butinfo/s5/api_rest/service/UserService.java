@@ -93,4 +93,17 @@ public class UserService implements UserDetailsService {
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         return userRepository.findByUsername(username).orElseThrow(() -> new UsernameNotFoundException("Utilisateur non trouvé"));
     }
+
+    /**
+     * Search users by pseudo.
+     *
+     * @param query search query
+     * @return List of users matching the query
+     */
+    public List<User> searchUsers(String query) {
+        if (query == null || query.isBlank()) {
+            return getAll(); // Si vide ou null, on retourne tous les utilisateurs
+        }
+        return userRepository.findByProfilePseudoContainingIgnoreCase(query);
+    }
 }
