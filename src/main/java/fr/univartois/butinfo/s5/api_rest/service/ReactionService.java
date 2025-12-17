@@ -16,6 +16,9 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * Service class for managing reactions to posts.
+ */
 @Service
 public class ReactionService {
 
@@ -29,6 +32,13 @@ public class ReactionService {
         this.reactionMapper = reactionMapper;
     }
 
+    /**
+     * Retrieves all reactions for a specific post.
+     *
+     * @param postId the ID of the post
+     * @return a list of ReactionDto objects related to the specified post
+     * @throws ResponseStatusException if the post is not found
+     */
     public List<ReactionDto> getReactionsByPostId(String postId) {
         if (!postRepository.existsById(postId)) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Post introuvable");
@@ -38,6 +48,15 @@ public class ReactionService {
                 .toList();
     }
 
+    /**
+     * Creates a new reaction for a specific post by a user.
+     *
+     * @param postId the ID of the post
+     * @param dto the ReactionCreateDto containing reaction details
+     * @param userId the ID of the user creating the reaction
+     * @return the created ReactionDto
+     * @throws ResponseStatusException if the post is not found or if the user has already reacted to the post
+     */
     public ReactionDto createReaction(String postId, ReactionCreateDto dto, String userId) {
         if (!postRepository.existsById(postId)) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Post introuvable");
@@ -66,6 +85,12 @@ public class ReactionService {
         return reactionMapper.toDto(saved);
     }
 
+    /**
+     * Deletes a reaction by its ID.
+     *
+     * @param reactionId the ID of the reaction to delete
+     * @throws ResponseStatusException if the reaction is not found
+     */
     public void deleteReaction(String reactionId) {
         if (!reactionRepository.existsById(reactionId)) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Réaction introuvable");

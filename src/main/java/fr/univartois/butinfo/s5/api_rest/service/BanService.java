@@ -14,6 +14,9 @@ import org.springframework.web.server.ResponseStatusException;
 import java.time.LocalDateTime;
 import java.util.List;
 
+/**
+ * Service class for managing user bans.
+ */
 @Service
 public class BanService {
     private final BanRepository banRepository;
@@ -24,10 +27,21 @@ public class BanService {
         this.userRepository = userRepository;
     }
 
+    /**
+     * Get all bans.
+     * @return
+     */
     public List<Ban> getAllBans() {
         return banRepository.findAll();
     }
 
+    /**
+     * Ban a user.
+     * @param targetUserId
+     * @param ban
+     * @param admin
+     * @return
+     */
     public Ban banUser(String targetUserId, Ban ban, User admin) {
         // Verify if the user to be banned exists
         User targetUser = userRepository.findById(targetUserId)
@@ -55,6 +69,10 @@ public class BanService {
         return savedBan;
     }
 
+    /**
+     * Unban a user.
+     * @param targetUserId
+     */
     public void unbanUser(String targetUserId) {
         Ban activeBan = banRepository.findByUserIdAndActiveTrue(targetUserId)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Aucun bannissement actif trouvé pour cet utilisateur"));

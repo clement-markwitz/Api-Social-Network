@@ -15,6 +15,9 @@ import org.springframework.web.server.ResponseStatusException;
 import java.time.LocalDateTime;
 import java.util.List;
 
+/**
+ * Service class for managing comments.
+ */
 @Service
 public class CommentService {
 
@@ -28,6 +31,12 @@ public class CommentService {
         this.commentMapper = commentMapper;
     }
 
+    /**
+     * Get all comments for a specific post.
+     *
+     * @param postId the ID of the post
+     * @return list of CommentDto
+     */
     public List<CommentDto> getCommentsByPostId(String postId) {
         if (!postRepository.existsById(postId)) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Post introuvable");
@@ -37,6 +46,14 @@ public class CommentService {
                 .toList();
     }
 
+    /**
+     * Create a new comment for a specific post.
+     *
+     * @param postId   the ID of the post
+     * @param dto      the CommentCreateDto containing comment data
+     * @param authorId the ID of the author
+     * @return the created CommentDto
+     */
     public CommentDto createComment(String postId, CommentCreateDto dto, String authorId) {
         if (!postRepository.existsById(postId)) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Post introuvable");
