@@ -1,12 +1,14 @@
 package fr.univartois.butinfo.s5.api_rest.service;
 
 import fr.univartois.butinfo.s5.api_rest.model.Block;
+import fr.univartois.butinfo.s5.api_rest.model.User;
 import fr.univartois.butinfo.s5.api_rest.repository.BlockRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -21,16 +23,18 @@ public class BlockService {
     /**
      * Enregistre un blocage (reçoit une Entité complète).
      */
-    public Block createBlock(Block block) {
-        // Validation métier : on ne se bloque pas soi-même
-        if (block.getBlocker().getId().equals(block.getBlocked().getId())) {
+    public Block createBlock(Block block, User blocker, User blocked) {
+
+        if (blocker.getId().equals(blocked.getId())) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Vous ne pouvez pas vous bloquer vous-même.");
         }
-
-        // Validation métier : unicité
-        if (blockRepository.existsByBlockerIdAndBlockedId(block.getBlocker().getId(), block.getBlocked().getId())) {
+        if (blockRepository.existsByBlockerIdAndBlockedId(blocker.getId(), blocked.getId())) {
             throw new ResponseStatusException(HttpStatus.CONFLICT, "Vous avez déjà bloqué cet utilisateur.");
         }
+
+        block.setBlocker(blocker);
+        block.setBlocked(blocked);
+        block.setCreatedAt(LocalDateTime.now());
 
         return blockRepository.save(block);
     }

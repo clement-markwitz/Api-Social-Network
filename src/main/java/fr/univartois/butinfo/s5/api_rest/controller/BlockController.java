@@ -22,59 +22,48 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("/api/blocks")
+@RequestMapping("/api")
 public class BlockController {
 
     private final BlockService blockService;
     private final UserService userService;
     private final BlockMapper blockMapper;
-    private final UserMapper userMapper;
 
-    public BlockController(BlockService blockService, UserService userService, BlockMapper blockMapper, UserMapper userMapper) {
+    public BlockController(BlockService blockService, UserService userService, BlockMapper blockMapper) {
         this.blockService = blockService;
         this.userService = userService;
         this.blockMapper = blockMapper;
-        this.userMapper = userMapper;
     }
 
     /**
      * Bloquer un utilisateur.
      */
-    @PostMapping("/{userId}")
+    @PostMapping("/users/{userId}/blocks")
     @Operation(summary = "Bloquer un utilisateur", description = "Permet de bloquer un utilisateur spécifié par son ID.")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "201", description = "Utilisateur bloqué avec succès"),
             @ApiResponse(responseCode = "404", description = "Utilisateur non trouvé")
     })
-    public ResponseEntity<Void> blockUser(
+    public ResponseEntity<Block> blockUser(
             @PathVariable String userId,
             @RequestBody(required = false) BlockCreateDto dto,
             Authentication authentication) {
 
-        // 1. Préparer le DTO (gestion du null)
         BlockCreateDto createDto = (dto != null) ? dto : new BlockCreateDto(null);
-
-        // 2. Conversion DTO -> Entité
         Block block = blockMapper.toEntity(createDto);
-
-        // 3. Récupération des Users et Hydratation de l'Entité
         User blocker = (User) authentication.getPrincipal();
-        User blocked = userService.getById(userId); // UserService lance 404 si pas trouvé
-
-        block.setBlocker(blocker);
-        block.setBlocked(blocked);
-        block.setCreatedAt(LocalDateTime.now());
+        User blocked = userService.getById(userId);
 
         // 4. Appel du Service
-        blockService.createBlock(block);
+        Block createdBlock = blockService.createBlock(block, blocker, blocked);
 
-        return ResponseEntity.status(HttpStatus.CREATED).build();
+        return ResponseEntity.status(HttpStatus.CREATED).body(createdBlock);
     }
 
     /**
      * Débloquer un utilisateur.
      */
-    @DeleteMapping("/{userId}")
+    @DeleteMapping("/users/{userId}/blocks")
     @Operation(summary = "Débloquer un utilisateur", description = "Permet de débloquer un utilisateur spécifié par son ID.")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "204", description = "Utilisateur débloqué avec succès"),
@@ -89,7 +78,7 @@ public class BlockController {
         return ResponseEntity.noContent().build();
     }
 
-    @GetMapping
+    @GetMapping("/users/blocks")
     @Operation(summary = "Lister les utilisateurs bloqués", description = "Récupère la liste des utilisateurs que l'utilisateur authentifié a bloqués.")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Liste récupérée avec succès"),
@@ -106,7 +95,7 @@ public class BlockController {
         return ResponseEntity.ok(userSummaries);
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/users/{id}/blocks")
     @Operation(summary = "Récupérer un blocage par ID", description = "Récupère les détails d'un blocage spécifique par son ID.")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Blocage récupéré avec succès"),
