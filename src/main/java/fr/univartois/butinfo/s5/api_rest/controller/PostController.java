@@ -25,6 +25,9 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.NoSuchElementException;
 
+/**
+ * Controller for managing posts.
+ */
 @RestController
 @RequestMapping("/api/posts")
 public class PostController {
@@ -41,6 +44,12 @@ public class PostController {
         this.postService = postService;
     }
 
+    /**
+     * Create a new post.
+     * @param createDto the post creation data
+     * @param authentication the authentication object
+     * @return ResponseEntity with created PostDto
+     */
     @PostMapping
     @Operation(summary = "Create a post", description = "Allows the authenticated user to create a new post.")
     @ApiResponses(value = {
@@ -57,15 +66,29 @@ public class PostController {
         return ResponseEntity.status(HttpStatus.CREATED).body(createdPost);
     }
 
+    /**
+     * Get all posts.
+     * @return List of PostDto
+     */
     @GetMapping
     @Operation(summary = "List all posts", description = "Retrieves a list of all posts.")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Posts list retrieved successfully")
     })
+
+    /**
+     * Get all posts.
+     * @return List of PostDto
+     */
     public List<PostDto> getAllPosts() {
         return postService.getAllPosts();
     }
 
+    /**
+     * Get a post by its ID.
+     * @param id the ID of the post
+     * @return ResponseEntity with PostDto
+     */
     @GetMapping("/{id}")
     @Operation(summary = "Get a post by ID", description = "Retrieves details of a post specified by its ID.")
     @ApiResponses(value = {
@@ -80,6 +103,11 @@ public class PostController {
         }
     }
 
+    /**
+     * Search posts by a query string.
+     * @param query the search query
+     * @return ResponseEntity with list of PostDto
+     */
     @GetMapping("/search")
     @Operation(summary = "Search posts", description = "Searches posts containing the specified term in their title or content.")
     @ApiResponses(value = {
@@ -92,6 +120,13 @@ public class PostController {
         return ResponseEntity.ok(postService.searchPosts(query));
     }
 
+    /**
+     * Update a post.
+     * @param id the ID of the post to update
+     * @param updateDto the post update data
+     * @param authentication the authentication object
+     * @return ResponseEntity with updated PostDto
+     */
     @PutMapping("/{id}")
     @Operation(summary = "Update a post", description = "Allows the authenticated user to update a post they created.")
     @ApiResponses(value = {
@@ -114,6 +149,12 @@ public class PostController {
         }
     }
 
+    /**
+     * Delete a post.
+     * @param id the ID of the post to delete
+     * @param authentication the authentication object
+     * @return ResponseEntity with no content
+     */
     @DeleteMapping("/{id}")
     @Operation(summary = "Delete a post", description = "Allows the authenticated user to delete a post they created.")
     @ApiResponses(value = {
@@ -137,6 +178,11 @@ public class PostController {
 
     // Methode pour les reaction d'un post
 
+    /**
+     * Get reactions for a post.
+     * @param id the ID of the post
+     * @return List of ReactionDto
+     */
     @GetMapping("/{id}/reactions")
     @Operation(summary = "List reactions for a post", description = "Retrieves the list of reactions associated with a post specified by its ID.")
     @ApiResponses(value = {
@@ -147,6 +193,13 @@ public class PostController {
         return reactionService.getReactionsByPostId(id);
     }
 
+    /**
+     * Add a reaction to a post.
+     * @param id the ID of the post
+     * @param dto the reaction creation data
+     * @param authentication the authentication object
+     * @return ResponseEntity with created ReactionDto
+     */
     @PostMapping("/{id}/reactions")
     @Operation(summary = "Add a reaction to a post", description = "Allows the authenticated user to add a reaction to a post specified by its ID.")
     @ApiResponses(value = {
@@ -164,6 +217,11 @@ public class PostController {
                 .body(reactionService.createReaction(id, dto, user.getId()));
     }
 
+    /**
+     * Delete a reaction from a post.
+     * @param id the ID of the post
+     * @param reactionId the ID of the reaction to delete
+     */
     @DeleteMapping("/{id}/reactions/{reactionId}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @Operation(summary = "Delete a reaction from a post", description = "Allows the authenticated user to delete a reaction they added to a post specified by its ID.")
@@ -177,6 +235,12 @@ public class PostController {
     }
 
     // Methode pour les commentaires d'un post
+
+    /**
+     * Get comments for a post.
+     * @param id the ID of the post
+     * @return List of CommentDto
+     */
     @GetMapping("/{id}/comments")
     @Operation(summary = "List comments for a post", description = "Retrieves the list of comments associated with a post specified by its ID.")
     @ApiResponses(value = {
@@ -192,6 +256,13 @@ public class PostController {
         return ResponseEntity.ok(commentDtos);
     }
 
+    /**
+     * Add a comment to a post.
+     * @param id the ID of the post
+     * @param dto the comment creation data
+     * @param authentication the authentication object
+     * @return ResponseEntity with created CommentDto
+     */
     @PostMapping("/{id}/comments")
     @Operation(summary = "Add a comment to a post", description = "Allows the authenticated user to add a comment to a post specified by its ID.")
     @ApiResponses(value = {

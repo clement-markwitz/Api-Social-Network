@@ -6,6 +6,9 @@ import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+/**
+ * Represent statistics related to a post, such as number of reactions and comments.
+ */
 @Data
 @NoArgsConstructor
 @AllArgsConstructor

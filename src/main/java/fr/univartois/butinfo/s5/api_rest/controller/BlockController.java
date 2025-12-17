@@ -21,6 +21,9 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ * Controller for managing user blocks.
+ */
 @RestController
 @RequestMapping("/api")
 public class BlockController {
@@ -36,7 +39,7 @@ public class BlockController {
     }
 
     /**
-     * Bloquer un utilisateur.
+     * Bloc a user.
      */
     @PostMapping("/{userId}")
     @Operation(summary = "Block a user", description = "Blocks a user specified by their ID.")
@@ -49,13 +52,8 @@ public class BlockController {
             @RequestBody(required = false) BlockCreateDto dto,
             Authentication authentication) {
 
-        // 1. Préparer le DTO (gestion du null)
         BlockCreateDto createDto = (dto != null) ? dto : new BlockCreateDto(null);
-
-        // 2. Conversion DTO -> Entité
         Block block = blockMapper.toEntity(createDto);
-
-        // 3. Récupération des Users et Hydratation de l'Entité
         User blocker = (User) authentication.getPrincipal();
         User blocked = userService.getById(userId);
 
@@ -66,7 +64,7 @@ public class BlockController {
     }
 
     /**
-     * Débloquer un utilisateur.
+     * Unblock a user.
      */
     @DeleteMapping("/{userId}")
     @Operation(summary = "Unblock a user", description = "Allows unblocking a user specified by their ID.")
@@ -83,7 +81,11 @@ public class BlockController {
         return ResponseEntity.noContent().build();
     }
 
-    @GetMapping
+    /**
+     * Get the list of users blocked by the authenticated user.
+     * @return List of BlockUserDto
+     */
+    @GetMapping("/users/blocks")
     @Operation(summary = "List blocked users", description = "Retrieves the list of users that the authenticated user has blocked.")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "List retrieved successfully"),
@@ -100,7 +102,12 @@ public class BlockController {
         return ResponseEntity.ok(userSummaries);
     }
 
-    @GetMapping("/{id}")
+    /**
+     * Get a specific block by its ID.
+     * @param id Block ID
+     * @return BlockUserDto
+     */
+    @GetMapping("/users/{id}/blocks")
     @Operation(summary = "Get a block by ID", description = "Retrieves details of a specific block by its ID.")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Block retrieved successfully"),

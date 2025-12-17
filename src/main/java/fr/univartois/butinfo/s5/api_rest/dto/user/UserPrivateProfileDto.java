@@ -3,8 +3,8 @@ package fr.univartois.butinfo.s5.api_rest.dto.user;
 import java.time.LocalDateTime;
 
 /**
- * DTO (sortie) pour l'affichage des données complètes de l'utilisateur connecté.
- * Inclus les informations privées et les préférences.
+ * DTO (output) représentant le profil privé d'un utilisateur.
+ * Include information that should only be visible to the user themselves.
  */
 public record UserPrivateProfileDto(
         String id,

@@ -9,8 +9,7 @@ import org.springframework.data.mongodb.core.mapping.DBRef;
 import java.time.LocalDateTime;
 
 /**
- * Objet embarqué dans Message.
- * N'est PAS un @Document.
+ * Represent a read receipt for a message in a conversation.
  */
 @Data
 @NoArgsConstructor
@@ -18,14 +17,14 @@ import java.time.LocalDateTime;
 public class ReadReceipt {
 
     /**
-     * L'ID de l'utilisateur qui a lu le message.
+     * ID of the user who has read the message.
      */
     @Indexed
     @DBRef
     private User user;
 
     /**
-     * L'heure à laquelle il l'a lu.
+     * Timestamp when the message was read.
      */
     private LocalDateTime readAt;
 }

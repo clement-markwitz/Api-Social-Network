@@ -6,13 +6,40 @@ import org.springframework.data.mongodb.repository.MongoRepository;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * Repository interface for managing Community entities in MongoDB.
+ */
 public interface CommunityRepository extends MongoRepository<Community, String> {
 
+    /**
+     * Find a community by its name.
+     *
+     * @param name the name of the community
+     * @return an Optional containing the found Community or empty if not found
+     */
     Optional<Community> findByName(String name);
 
+    /**
+     * Check if a community exists by its name.
+     *
+     * @param name the name of the community
+     * @return true if a community with the given name exists, false otherwise
+     */
     boolean existsByName(String name);
 
+    /**
+     * Find communities with names containing the specified string, case insensitive.
+     *
+     * @param name the substring to search for in community names
+     * @return a list of communities with names containing the specified string
+     */
     List<Community> findByNameContainingIgnoreCase(String name);
 
+    /**
+     * Find communities administered by a specific user.
+     *
+     * @param userId the ID of the user
+     * @return a list of communities administered by the specified user
+     */
     List<Community> findByAdminsId(String userId);
 }

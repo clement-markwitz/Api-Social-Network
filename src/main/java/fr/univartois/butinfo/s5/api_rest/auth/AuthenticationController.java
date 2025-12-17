@@ -15,6 +15,11 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
 
+/**
+ * Controller for handling authentication-related endpoints.
+ * @author Your Name
+ * @version 1.0
+ */
 @RestController
 @RequestMapping("/api/auth")
 public class AuthenticationController {
@@ -29,6 +34,11 @@ public class AuthenticationController {
         this.userMapper = userMapper;
     }
 
+    /**
+     * Register a new user.
+     * @param dto
+     * @return
+     */
     @PostMapping("/register")
     @ResponseStatus(HttpStatus.CREATED)
     @Operation(summary = "Create a new user", description = "Creates a new user with the provided information.")
@@ -41,6 +51,11 @@ public class AuthenticationController {
         return userMapper.toPrivateProfileDto(registeredUser);
     }
 
+    /**
+     * Authenticate a user and return a JWT token.
+     * @param dto
+     * @return
+     */
     @PostMapping("/login")
     @Operation(summary = "Authenticate a user", description = "Allows a user to log in and receive a JWT token.")
     @ApiResponses(value = {

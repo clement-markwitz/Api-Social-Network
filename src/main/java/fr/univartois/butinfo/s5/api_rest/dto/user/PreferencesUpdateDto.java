@@ -3,7 +3,7 @@ package fr.univartois.butinfo.s5.api_rest.dto.user;
 import java.util.List;
 
 /**
- * DTO pour la mise à jour des préférences de l'utilisateur.
+ * DTO for the update of user preferences.
  */
 public record PreferencesUpdateDto(
         List<String> diets,

@@ -7,38 +7,48 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * Repository for managing Block entities in MongoDB.
+ */
 @Repository
 public interface BlockRepository extends MongoRepository<Block, String> {
 
     /**
-     * Récupère la liste des blocages effectués par un utilisateur.
-     * C'est la méthode que tu as demandée pour "connaitre les utilisateurs qu'il a bloqué".
-     *
-     * @param blockerId L'ID de l'utilisateur qui a bloqué.
-     * @return Une liste d'objets Block.
+     * Get all blocks initiated by a specific user.
+     * @param blockerId
+     * @return
      */
     List<Block> findAllByBlockerId(String blockerId);
 
     /**
-     * Vérifie si un blocage existe déjà entre deux personnes.
-     * Utile pour empêcher les doublons avant de créer un blocage.
+     * Test if a block exists between two users.
+     * @param blockerId
+     * @param blockedId
+     * @return
      */
     boolean existsByBlockerIdAndBlockedId(String blockerId, String blockedId);
 
     /**
-     * Trouve un blocage spécifique.
-     * Utile si tu veux récupérer les détails d'un blocage (raison, date) via les IDs des users.
+     * Get a block between two users.
+     * @param blockerId
+     * @param blockedId
+     * @return
      */
     Optional<Block> findByBlockerIdAndBlockedId(String blockerId, String blockedId);
 
     /**
-     * Supprime un blocage spécifique (Débloquer).
-     * Permet de débloquer quelqu'un juste avec son ID, sans avoir besoin de l'ID de l'objet Block.
+     * Delete a block between two users.
+     * @param blockerId
+     * @param blockedId
      */
     void deleteByBlockerIdAndBlockedId(String blockerId, String blockedId);
 
     /**
-     * Récupère un blocage par l'id du blocker et l'id du blocked.
+     * Find a block by its id, blocker id, and blocked id.
+     * @param id
+     * @param blockerId
+     * @param blockedId
+     * @return
      */
     Optional<Block> findByIdAndBlockerIdAndBlockedId(String id, String blockerId, String blockedId);
 }

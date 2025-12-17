@@ -12,6 +12,9 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.time.LocalDateTime;
 
+/**
+ * Represent a reaction (like, helpful, etc.) given by a user to a post.
+ */
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -33,8 +36,7 @@ public class Reaction {
     private User user;
 
     /**
-     * Le type de réaction (ex: LIKE, HELPFUL, LAUGH).
-     * Géré via un Enum pour la robustesse.
+     * The type of reaction (LIKE, HELPFUL, etc.).
      */
     private ReactionType type;
 

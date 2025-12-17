@@ -19,6 +19,9 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+/**
+ * Controller for managing user bans.
+ */
 @RestController
 @RequestMapping("/api/admin")
 @PreAuthorize("hasRole('ADMIN')")
@@ -31,6 +34,10 @@ public class BanController {
         this.banMapper = banMapper;
     }
 
+    /**
+     * Get a list of all bans.
+     * @return List of BanSummaryDto
+     */
     @GetMapping("/bans")
     @Operation(summary = "Get all bans", description = "Retrieve a list of all bans.")
     @ApiResponses(value = {
@@ -43,6 +50,13 @@ public class BanController {
                 .toList();
     }
 
+    /**
+     * Ban a user.
+     * @param idUser ID of the user to ban
+     * @param dto BanCreateDto containing ban details
+     * @param authentication Authentication object of the admin performing the ban
+     * @return ResponseEntity with BanDto
+     */
     @PostMapping("/users/{idUser}/ban")
     @Operation(summary = "Ban a user", description = "Ban a user specified by their ID.")
     @ApiResponses(value = {
@@ -61,6 +75,11 @@ public class BanController {
         return ResponseEntity.status(HttpStatus.CREATED).body(banMapper.toDto(savedBan));
     }
 
+    /**
+     * Unban a user.
+     * @param idUser ID of the user to unban
+     * @return ResponseEntity with success message
+     */
     @PostMapping("/users/{idUser}/unban")
     @Operation(summary = "Unban a user", description = "Unban a user specified by their ID.")
     @ApiResponses(value = {

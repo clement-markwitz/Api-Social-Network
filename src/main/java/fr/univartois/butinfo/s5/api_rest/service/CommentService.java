@@ -11,20 +11,25 @@ import org.springframework.web.server.ResponseStatusException;
 import java.time.LocalDateTime;
 import java.util.List;
 
+/**
+ * Service class for managing comments.
+ */
 @Service
 public class CommentService {
 
     private final CommentRepository commentRepository;
     private final PostRepository postRepository;
 
-    // Plus besoin du mapper ici !
     public CommentService(CommentRepository commentRepository, PostRepository postRepository) {
         this.commentRepository = commentRepository;
         this.postRepository = postRepository;
     }
 
     /**
-     * Récupère la liste des commentaires (Entités).
+     * Get all comments for a specific post.
+     *
+     * @param postId the ID of the post
+     * @return list of CommentDto
      */
     public List<Comment> getCommentsByPostId(String postId) {
         if (!postRepository.existsById(postId)) {
@@ -34,7 +39,9 @@ public class CommentService {
     }
 
     /**
-     * Crée un commentaire (Prend une Entité -> Retourne une Entité).
+     * Create a new comment for a specific post.
+     * @param postId   the ID of the post
+     * @return the created CommentDto
      */
     public Comment createComment(String postId, Comment comment, User author) {
         if (!postRepository.existsById(postId)) {

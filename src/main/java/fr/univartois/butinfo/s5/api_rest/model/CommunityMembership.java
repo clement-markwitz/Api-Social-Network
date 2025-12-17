@@ -12,6 +12,9 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.time.LocalDateTime;
 
+/**
+ * Represents the membership of a user in a community.
+ */
 @Data
 @NoArgsConstructor
 @AllArgsConstructor

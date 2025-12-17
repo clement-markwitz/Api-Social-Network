@@ -10,8 +10,7 @@ import fr.univartois.butinfo.s5.api_rest.model.PostVisibility;
 import java.time.LocalDateTime;
 
 /**
- * DTO (sortie) principal pour un Post.
- * Entièrement enrichi pour l'affichage.
+ * DTO (output) representing a post with enriched author information.
  */
 public record PostDto(
         String id,

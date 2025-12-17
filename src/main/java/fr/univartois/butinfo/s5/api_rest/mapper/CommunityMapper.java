@@ -13,37 +13,47 @@ import org.mapstruct.Named;
 
 import java.util.Collections;
 import java.util.List;
-// J'ai supprimé l'import "java.util.stream.Collectors" qui ne sert plus
 
+/**
+ * Mapper pour les communautés.
+ * Utilise MapStruct pour la conversion entre entités et DTOs.
+ */
 @Mapper(componentModel = "spring")
 public interface CommunityMapper {
 
     // --- Entrée (Input) ---
-
+    /**
+     * Convertit un DTO de création en Entité.
+     */
     Community toEntity(CommunityCreateDto dto);
 
+    /**
+     * Met à jour une Entité existante à partir d'un DTO de mise à jour.
+     */
     void updateEntityFromDto(CommunityUpdateDto dto, @MappingTarget Community entity);
 
     // --- Sortie (Output) ---
 
+    /**
+     * Convertit une Entité en DTO résumé.
+     */
     CommunitySummaryDto toSummaryDto(Community entity);
 
     /**
-     * Convertit une Entité en DTO détaillé.
-     * Transformation explicite de List<User> (entité) vers List<String> (DTO).
+     * We need to explicitly map the list of admins (List<User>) to a list of their IDs (List<String>)
+     * when converting to CommunityDetailDto.
      */
     @Mapping(target = "adminIds", source = "admins", qualifiedByName = "mapUsersToIds")
     CommunityDetailDto toDetailDto(Community entity);
 
     /**
-     * Méthode helper utilisée par MapStruct pour extraire les IDs d'une liste d'utilisateurs.
+     * Method helper to map a list of User entities to a list of their IDs.
      */
     @Named("mapUsersToIds")
     default List<String> mapUsersToIds(List<User> users) {
         if (users == null) {
             return Collections.emptyList();
         }
-        // CORRECTION SONAR : .toList() au lieu de .collect(Collectors.toList())
         return users.stream()
                 .map(User::getId)
                 .toList();

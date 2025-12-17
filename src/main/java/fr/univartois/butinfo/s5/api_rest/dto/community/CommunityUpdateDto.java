@@ -4,7 +4,7 @@ import jakarta.validation.constraints.Size;
 import java.util.List;
 
 /**
- * DTO (entrée) pour la mise à jour d'une Communauté existante.
+ * DTO for updating community information.
  */
 public record CommunityUpdateDto(
 

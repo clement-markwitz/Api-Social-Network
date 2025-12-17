@@ -13,6 +13,9 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import java.time.LocalDateTime;
 import java.util.List;
 
+/**
+ * Represent a conversation between users.
+ */
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -23,26 +26,25 @@ public class Conversation {
     private String id;
 
     /**
-     * Liste des ID de tous les utilisateurs membres de cette conversation.
-     * C'est ce qui permet les discussions de groupe.
+     * List of users participating in the conversation.
      */
     @Indexed // Index pour trouver les conversations d'un utilisateur
     @DBRef
     private List<User> members;
 
     /**
-     * L'ID de l'utilisateur qui a initié la conversation.
+     * id of the user who initiated the conversation.
      */
     @DBRef
     private User initiator;
 
     /**
-     * Statut de la conversation (ex: ACTIVE, PENDING_INVITE, LEFT_GROUP).
+     * Status of the conversation.
      */
     private ConversationStatus status;
 
     /**
-     * Nom de la conversation (utile pour les groupes).
+     * Name of the conversation (optional).
      */
     private String name;
 

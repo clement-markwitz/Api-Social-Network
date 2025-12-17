@@ -4,7 +4,7 @@ import jakarta.validation.constraints.Size;
 import java.util.List;
 
 /**
- * DTO (entrée) pour la mise à jour d'une Page existante.
+ * DTO for updating page information.
  */
 public record PageUpdateDto(
         @Size(max = 500)

@@ -4,7 +4,7 @@ import fr.univartois.butinfo.s5.api_rest.model.ReactionType;
 import jakarta.validation.constraints.NotNull;
 
 /**
- * DTO (entrée) pour créer ou mettre à jour une réaction sur un post.
+ * DTO (entry point) for creating a new reaction.
  */
 public record ReactionCreateDto(
         @NotNull(message = "Un type de réaction est requis")

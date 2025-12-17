@@ -3,8 +3,7 @@ package fr.univartois.butinfo.s5.api_rest.dto.message;
 import java.time.LocalDateTime;
 
 /**
- * DTO (sortie) minimal pour le *dernier message* affiché dans la liste
- * des conversations.
+ * DTO representing a summary of a message for listing purposes.
  */
 public record MessageSummaryDto(
         String text,

@@ -4,7 +4,7 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 
 /**
- * DTO (entrée) pour la création d'un nouveau commentaire.
+ * DTO (entry point) for creating a new comment.
  */
 public record CommentCreateDto(
         @NotBlank(message = "Le commentaire ne peut pas être vide")
