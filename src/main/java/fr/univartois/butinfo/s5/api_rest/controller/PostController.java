@@ -7,6 +7,8 @@ import fr.univartois.butinfo.s5.api_rest.dto.post.PostDto;
 import fr.univartois.butinfo.s5.api_rest.dto.post.PostUpdateDto;
 import fr.univartois.butinfo.s5.api_rest.dto.reaction.ReactionCreateDto;
 import fr.univartois.butinfo.s5.api_rest.dto.reaction.ReactionDto;
+import fr.univartois.butinfo.s5.api_rest.mapper.CommentMapper;
+import fr.univartois.butinfo.s5.api_rest.model.Comment;
 import fr.univartois.butinfo.s5.api_rest.model.User;
 import fr.univartois.butinfo.s5.api_rest.service.CommentService;
 import fr.univartois.butinfo.s5.api_rest.service.PostService;
@@ -30,9 +32,11 @@ public class PostController {
     private final PostService postService;
     private final ReactionService reactionService;
     private final CommentService commentService;
+    private final CommentMapper commentMapper;
 
-    public PostController(PostService postService , CommentService commentService, ReactionService reactionService) {
+    public PostController(PostService postService , CommentService commentService, ReactionService reactionService, CommentMapper commentMapper) {
         this.commentService = commentService;
+        this.commentMapper = commentMapper;
         this.reactionService = reactionService;
         this.postService = postService;
     }
@@ -179,8 +183,13 @@ public class PostController {
             @ApiResponse(responseCode = "200", description = "Comments list retrieved successfully"),
             @ApiResponse(responseCode = "404", description = "Post not found")
     })
-    public List<CommentDto> getComments(@PathVariable String id) {
-        return commentService.getCommentsByPostId(id);
+    public  ResponseEntity<List<CommentDto>> getComments(@PathVariable String id) {
+        List<Comment> comments = commentService.getCommentsByPostId(id);
+        List<CommentDto> commentDtos = comments.stream()
+                .map(commentMapper::toDto)
+                .toList();
+
+        return ResponseEntity.ok(commentDtos);
     }
 
     @PostMapping("/{id}/comments")
@@ -191,12 +200,16 @@ public class PostController {
             @ApiResponse(responseCode = "404", description = "Post not found")
     })
     public ResponseEntity<CommentDto> addComment(
-            @PathVariable String id,
+            @PathVariable String idPost,
             @Valid @RequestBody CommentCreateDto dto,
             Authentication authentication) {
 
         User user = (User) authentication.getPrincipal();
+
+        Comment commentEntity = commentMapper.toEntity(dto);
+        Comment savedComment = commentService.createComment(idPost, commentEntity, user);
+
         return ResponseEntity.status(HttpStatus.CREATED)
-                .body(commentService.createComment(id, dto, user.getId()));
+                .body(commentMapper.toDto(savedComment));
     }
 }
