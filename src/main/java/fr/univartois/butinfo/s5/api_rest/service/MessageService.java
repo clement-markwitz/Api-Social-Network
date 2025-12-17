@@ -7,7 +7,6 @@ import fr.univartois.butinfo.s5.api_rest.model.Message;
 import fr.univartois.butinfo.s5.api_rest.model.User;
 import fr.univartois.butinfo.s5.api_rest.repository.ConversationRepository;
 import fr.univartois.butinfo.s5.api_rest.repository.MessageRepository;
-import fr.univartois.butinfo.s5.api_rest.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;

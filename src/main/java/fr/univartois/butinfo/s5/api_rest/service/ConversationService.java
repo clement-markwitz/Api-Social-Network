@@ -1,6 +1,5 @@
 package fr.univartois.butinfo.s5.api_rest.service;
 
-import fr.univartois.butinfo.s5.api_rest.dto.conversation.ConversationCreateDto;
 import fr.univartois.butinfo.s5.api_rest.dto.conversation.ConversationSummaryDto;
 import fr.univartois.butinfo.s5.api_rest.mapper.ConversationMapper;
 import fr.univartois.butinfo.s5.api_rest.model.Conversation;
