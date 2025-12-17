@@ -38,19 +38,24 @@ public class BlockController {
     /**
      * Bloquer un utilisateur.
      */
-    @PostMapping("/users/{userId}/blocks")
-    @Operation(summary = "Bloquer un utilisateur", description = "Permet de bloquer un utilisateur spécifié par son ID.")
+    @PostMapping("/{userId}")
+    @Operation(summary = "Block a user", description = "Blocks a user specified by their ID.")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "201", description = "Utilisateur bloqué avec succès"),
-            @ApiResponse(responseCode = "404", description = "Utilisateur non trouvé")
+            @ApiResponse(responseCode = "201", description = "User successfully blocked"),
+            @ApiResponse(responseCode = "404", description = "User not found")
     })
     public ResponseEntity<Block> blockUser(
             @PathVariable String userId,
             @RequestBody(required = false) BlockCreateDto dto,
             Authentication authentication) {
 
+        // 1. Préparer le DTO (gestion du null)
         BlockCreateDto createDto = (dto != null) ? dto : new BlockCreateDto(null);
+
+        // 2. Conversion DTO -> Entité
         Block block = blockMapper.toEntity(createDto);
+
+        // 3. Récupération des Users et Hydratation de l'Entité
         User blocker = (User) authentication.getPrincipal();
         User blocked = userService.getById(userId);
 
@@ -63,11 +68,11 @@ public class BlockController {
     /**
      * Débloquer un utilisateur.
      */
-    @DeleteMapping("/users/{userId}/blocks")
-    @Operation(summary = "Débloquer un utilisateur", description = "Permet de débloquer un utilisateur spécifié par son ID.")
+    @DeleteMapping("/{userId}")
+    @Operation(summary = "Unblock a user", description = "Allows unblocking a user specified by their ID.")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "204", description = "Utilisateur débloqué avec succès"),
-            @ApiResponse(responseCode = "404", description = "Utilisateur non trouvé ou non bloqué")
+            @ApiResponse(responseCode = "204", description = "User successfully unblocked"),
+            @ApiResponse(responseCode = "404", description = "User not found or not blocked")
     })
     public ResponseEntity<Void> unblockUser(@PathVariable String userId, Authentication authentication) {
         User blocker = (User) authentication.getPrincipal();
@@ -78,11 +83,11 @@ public class BlockController {
         return ResponseEntity.noContent().build();
     }
 
-    @GetMapping("/users/blocks")
-    @Operation(summary = "Lister les utilisateurs bloqués", description = "Récupère la liste des utilisateurs que l'utilisateur authentifié a bloqués.")
+    @GetMapping
+    @Operation(summary = "List blocked users", description = "Retrieves the list of users that the authenticated user has blocked.")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Liste récupérée avec succès"),
-            @ApiResponse(responseCode = "401", description = "Non authentifié")
+            @ApiResponse(responseCode = "200", description = "List retrieved successfully"),
+            @ApiResponse(responseCode = "401", description = "Unauthenticated")
     })
     public ResponseEntity<List<BlockUserDto>> getMyBlockedUsers(Authentication authentication) {
         User blocker = (User) authentication.getPrincipal();
@@ -95,12 +100,12 @@ public class BlockController {
         return ResponseEntity.ok(userSummaries);
     }
 
-    @GetMapping("/users/{id}/blocks")
-    @Operation(summary = "Récupérer un blocage par ID", description = "Récupère les détails d'un blocage spécifique par son ID.")
+    @GetMapping("/{id}")
+    @Operation(summary = "Get a block by ID", description = "Retrieves details of a specific block by its ID.")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Blocage récupéré avec succès"),
-            @ApiResponse(responseCode = "403", description = "Accès refusé (le blocage n'appartient pas à l'utilisateur)"),
-            @ApiResponse(responseCode = "404", description = "Blocage non trouvé")
+            @ApiResponse(responseCode = "200", description = "Block retrieved successfully"),
+            @ApiResponse(responseCode = "403", description = "Access denied (the block does not belong to the user)"),
+            @ApiResponse(responseCode = "404", description = "Block not found")
     })
     public ResponseEntity<BlockUserDto> getBlockById(@PathVariable String id, Authentication authentication) {
         User blocker = (User) authentication.getPrincipal();

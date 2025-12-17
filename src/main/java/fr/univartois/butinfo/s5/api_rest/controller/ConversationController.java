@@ -62,10 +62,10 @@ public class ConversationController {
      */
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    @Operation(summary = "Créer une conversertion", description = "Créer une nouvelle conversation avec des membres initiaux.")
+    @Operation(summary = "Create a conversation", description = "Create a new conversation with initial members.")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "201", description = "Conversation créée avec succès"),
-            @ApiResponse(responseCode = "404", description = "Utilisateur initiateur non trouvé")
+            @ApiResponse(responseCode = "201", description = "Conversation created successfully"),
+            @ApiResponse(responseCode = "404", description = "Initiator user not found")
     })
     public Conversation create(
             @RequestBody @Valid ConversationCreateDto dto,
@@ -93,10 +93,10 @@ public class ConversationController {
      * @return A list of {@link ConversationSummaryDto} representing the user's conversations.
      */
     @GetMapping
-    @Operation(summary = "Lister mes conversations", description = "Récupère toutes les conversations dont l'utilisateur authentifié est membre.")
+    @Operation(summary = "List my conversations", description = "Retrieves all conversations where the authenticated user is a member.")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Liste des conversations récupérée avec succès"),
-            @ApiResponse(responseCode = "401", description = "Utilisateur non authentifié")
+            @ApiResponse(responseCode = "200", description = "Conversations list retrieved successfully"),
+            @ApiResponse(responseCode = "401", description = "User not authenticated")
     })
     public List<ConversationSummaryDto> getAll(Authentication authentication) {
         return conversationService.getMyConversations(getCurrentUserId(authentication));
@@ -109,10 +109,10 @@ public class ConversationController {
      * @return The {@link Conversation} entity.
      */
     @GetMapping("/{id}")
-    @Operation(summary = "Récupérer une conversation", description = "Récupère les détails d'une conversation spécifiée par son ID.")
+    @Operation(summary = "Get a conversation", description = "Retrieves details of a conversation specified by its ID.")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Conversation récupérée avec succès"),
-            @ApiResponse(responseCode = "404", description = "Conversation non trouvée")
+            @ApiResponse(responseCode = "200", description = "Conversation retrieved successfully"),
+            @ApiResponse(responseCode = "404", description = "Conversation not found")
     })
     public Conversation getOne(@PathVariable String id) {
         return conversationService.findById(id);
@@ -127,11 +127,11 @@ public class ConversationController {
      */
     @PostMapping("/{id}/join")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    @Operation(summary = "Rejoindre une conversation", description = "Permet à l'utilisateur authentifié de rejoindre une conversation existante.")
+    @Operation(summary = "Join a conversation", description = "Allows the authenticated user to join an existing conversation.")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "204", description = "Rejoint la conversation avec succès"),
-            @ApiResponse(responseCode = "409", description = "L'utilisateur est déjà membre de la conversation"),
-            @ApiResponse(responseCode = "404", description = "Utilisateur non trouvé")
+            @ApiResponse(responseCode = "204", description = "Joined the conversation successfully"),
+            @ApiResponse(responseCode = "409", description = "The user is already a member of the conversation"),
+            @ApiResponse(responseCode = "404", description = "User not found")
     })
     public void join(
             @PathVariable String id,
@@ -160,10 +160,10 @@ public class ConversationController {
      */
     @PostMapping("/{id}/leave")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    @Operation(summary = "Quitter une conversation", description = "Permet à l'utilisateur authentifié de quitter une conversation.")
+    @Operation(summary = "Leave a conversation", description = "Allows the authenticated user to leave a conversation.")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "204", description = "Quitte la conversation avec succès"),
-            @ApiResponse(responseCode = "403", description = "L'utilisateur n'est pas membre de la conversation")
+            @ApiResponse(responseCode = "204", description = "Left the conversation successfully"),
+            @ApiResponse(responseCode = "403", description = "The user is not a member of the conversation")
     })
     public void leave(
             @PathVariable String id,
@@ -193,10 +193,10 @@ public class ConversationController {
      */
     @PostMapping("/{id}/members")
     @ResponseStatus(HttpStatus.OK)
-    @Operation(summary = "Ajouter des membres à une conversation", description = "Permet à l'initiateur de la conversation d'ajouter des membres.")
+    @Operation(summary = "Add members to a conversation", description = "Allows the initiator of the conversation to add members.")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Membres ajoutés avec succès"),
-            @ApiResponse(responseCode = "403", description = "Seul l'initiateur peut ajouter des membres")
+            @ApiResponse(responseCode = "200", description = "Members added successfully"),
+            @ApiResponse(responseCode = "403", description = "Only the initiator can add members")
     })
     public void addMembers(
             @PathVariable String id,
@@ -226,12 +226,12 @@ public class ConversationController {
      */
     @DeleteMapping("/{id}/members/{memberId}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    @Operation(summary = "Expulser un membre d'une conversation", description = "Permet à l'initiateur de la conversation d'expulser un membre.")
+    @Operation(summary = "Kick a member from a conversation", description = "Allows the initiator of the conversation to remove a member.")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "204", description = "Membre expulsé avec succès"),
-            @ApiResponse(responseCode = "403", description = "Seul l'initiateur peut expulser des membres"),
-            @ApiResponse(responseCode = "400", description = "Vous ne pouvez pas vous expulser vous-même. Utilisez 'quitter' à la place."),
-            @ApiResponse(responseCode = "404", description = "Ce membre n'est pas dans la conversation")
+            @ApiResponse(responseCode = "204", description = "Member removed successfully"),
+            @ApiResponse(responseCode = "403", description = "Only the initiator can remove members"),
+            @ApiResponse(responseCode = "400", description = "You cannot remove yourself. Use 'leave' instead."),
+            @ApiResponse(responseCode = "404", description = "The user is not in the conversation")
     })
     public void kickMember(
             @PathVariable String id,

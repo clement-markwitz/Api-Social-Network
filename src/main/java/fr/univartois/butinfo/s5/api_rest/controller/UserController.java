@@ -44,10 +44,10 @@ public class UserController {
      * @return ResponseEntity with UserPrivateProfileDto
      */
     @GetMapping("/me")
-    @Operation(summary = "Récupérer le profil privé du user connecté", description = "Permet de récupérer les informations privées du profil de l'utilisateur actuellement authentifié.")
+    @Operation(summary = "Get authenticated user's private profile", description = "Retrieves private profile information of the currently authenticated user.")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Profil privé récupéré avec succès"),
-            @ApiResponse(responseCode = "401", description = "Utilisateur non authentifié")
+            @ApiResponse(responseCode = "200", description = "Private profile retrieved successfully"),
+            @ApiResponse(responseCode = "401", description = "User not authenticated")
     })
     public ResponseEntity<UserPrivateProfileDto> authenticatedUser(Authentication authentication) {
         if (authentication != null && authentication.getPrincipal() instanceof User user) {
@@ -64,10 +64,10 @@ public class UserController {
      * @return UserPublicProfileDto
      */
     @GetMapping("/{id}")
-    @Operation(summary = "Récupérer le profil public d'un utilisateur par ID", description = "Permet de récupérer les informations publiques du profil d'un utilisateur spécifié par son ID.")
+    @Operation(summary = "Get a user's public profile by ID", description = "Retrieves the public profile information of a user specified by their ID.")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Profil public récupéré avec succès"),
-            @ApiResponse(responseCode = "404", description = "Utilisateur non trouvé")
+            @ApiResponse(responseCode = "200", description = "Public profile retrieved successfully"),
+            @ApiResponse(responseCode = "404", description = "User not found")
     })
     public UserPublicProfileDto getUser(@PathVariable String id) {
         User user = userService.getById(id);
@@ -80,9 +80,9 @@ public class UserController {
      * @return List of UserSummaryDto
      */
     @GetMapping
-    @Operation(summary = "Lister tous les utilisateurs", description = "Récupère une liste de tous les utilisateurs au format résumé.")
+    @Operation(summary = "List all users", description = "Retrieves a list of all users in summary format.")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Liste des utilisateurs récupérée avec succès")
+            @ApiResponse(responseCode = "200", description = "Users list retrieved successfully")
     })
     public List<UserSummaryDto> getAllUsers() {
         List<User> users =  userService.getAll();
@@ -98,11 +98,11 @@ public class UserController {
      * @return Boolean indicating success
      */
     @DeleteMapping("/{id}")
-    @Operation(summary = "Supprimer un utilisateur par ID", description = "Permet de supprimer un utilisateur spécifié par son ID.")
+    @Operation(summary = "Delete a user by ID", description = "Deletes a user specified by their ID.")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Utilisateur supprimé avec succès"),
-            @ApiResponse(responseCode = "403", description = "Droits insuffisants pour supprimer cet utilisateur"),
-            @ApiResponse(responseCode = "404", description = "Utilisateur non trouvé")
+            @ApiResponse(responseCode = "200", description = "User deleted successfully"),
+            @ApiResponse(responseCode = "403", description = "Insufficient rights to delete this user"),
+            @ApiResponse(responseCode = "404", description = "User not found")
     })
     public Boolean deleteUser(@PathVariable String id, Authentication authentication) {
         User currentUser = (User) authentication.getPrincipal();
@@ -121,11 +121,11 @@ public class UserController {
      * @return ResponseEntity with updated UserPublicProfileDto
      */
     @PutMapping("/{id}/profile")
-    @Operation(summary = "Mettre à jour le profil d'un utilisateur", description = "Permet de mettre à jour les informations du profil d'un utilisateur spécifié par son ID.")
+    @Operation(summary = "Update a user's profile", description = "Updates profile information of a user specified by their ID.")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Profil mis à jour avec succès"),
-            @ApiResponse(responseCode = "403", description = "Droits insuffisants pour mettre à jour ce profil"),
-            @ApiResponse(responseCode = "404", description = "Utilisateur non trouvé")
+            @ApiResponse(responseCode = "200", description = "Profile updated successfully"),
+            @ApiResponse(responseCode = "403", description = "Insufficient rights to update this profile"),
+            @ApiResponse(responseCode = "404", description = "User not found")
     })
     public ResponseEntity<UserPublicProfileDto> updateProfile(@PathVariable String id, @Valid @RequestBody ProfileUpdateDto updateDto, Authentication authentication) {
         User existingUser = userService.getById(id);
@@ -152,11 +152,11 @@ public class UserController {
      * @return ResponseEntity with updated PreferencesDto
      */
     @PutMapping("/{id}/preferences")
-    @Operation(summary = "Mettre à jour les préférences d'un utilisateur", description = "Permet de mettre à jour les préférences d'un utilisateur spécifié par son ID.")
+    @Operation(summary = "Update a user's preferences", description = "Updates the preferences of a user specified by their ID.")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Préférences mises à jour avec succès"),
-            @ApiResponse(responseCode = "403", description = "Droits insuffisants pour mettre à jour ces préférences"),
-            @ApiResponse(responseCode = "404", description = "Utilisateur non trouvé")
+            @ApiResponse(responseCode = "200", description = "Preferences updated successfully"),
+            @ApiResponse(responseCode = "403", description = "Insufficient rights to update these preferences"),
+            @ApiResponse(responseCode = "404", description = "User not found")
     })
     public ResponseEntity<PreferencesDto> updatePreferences(@PathVariable String id, @RequestBody PreferencesUpdateDto updateDto, Authentication authentication) {
         User existingUser = userService.getById(id);
@@ -180,11 +180,11 @@ public class UserController {
      * @return ResponseEntity with updated InterestsDto
      */
     @PutMapping("/{id}/interests")
-    @Operation(summary = "Mettre à jour les intérêts d'un utilisateur", description = "Permet de mettre à jour les intérêts d'un utilisateur spécifié par son ID.")
+    @Operation(summary = "Update a user's interests", description = "Updates the interests of a user specified by their ID.")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Intérêts mis à jour avec succès"),
-            @ApiResponse(responseCode = "403", description = "Droits insuffisants pour mettre à jour ces intérêts"),
-            @ApiResponse(responseCode = "404", description = "Utilisateur non trouvé")
+            @ApiResponse(responseCode = "200", description = "Interests updated successfully"),
+            @ApiResponse(responseCode = "403", description = "Insufficient rights to update these interests"),
+            @ApiResponse(responseCode = "404", description = "User not found")
     })
     public ResponseEntity<InterestsDto> updateInterests(@PathVariable String id, @RequestBody InterestsUpdateDto updateDto, Authentication authentication) {
         User existingUser = userService.getById(id);
@@ -207,9 +207,9 @@ public class UserController {
      * @return List of UserSummaryDto matching the query
      */
     @GetMapping("/search")
-    @Operation(summary = "Rechercher des profils d'utilisateurs", description = "Permet de rechercher des profils d'utilisateurs en fonction d'une requête de recherche.")
+    @Operation(summary = "Search user profiles", description = "Searches for user profiles using a search query.")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Profils d'utilisateurs récupérés avec succès")
+            @ApiResponse(responseCode = "200", description = "User profiles retrieved successfully")
     })
     public List<UserSummaryDto> searchProfiles(@RequestParam("q") String query) {
         List<User> users = userService.searchUsers(query);
