@@ -9,6 +9,9 @@ import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 
+/**
+ * Service class for managing communities.
+ */
 @Service
 public class CommunityService {
 
@@ -18,6 +21,11 @@ public class CommunityService {
         this.communityRepository = communityRepository;
     }
 
+    /**
+     * Verify if the user has admin rights in the community.
+     * @param community
+     * @param user
+     */
     public void checkAdminRights(Community community, User user) {
         boolean isAdmin = community.getAdmins() != null && community.getAdmins().stream()
                 .anyMatch(admin -> admin.getId().equals(user.getId()));
@@ -27,22 +35,46 @@ public class CommunityService {
         }
     }
 
+    /**
+     * Get all communities.
+     * @return
+     */
     public List<Community> getAll() {
         return communityRepository.findAll();
     }
 
+    /**
+     * Get a community by its ID.
+     * @param id
+     * @return
+     */
     public Community getById(String id) {
         return communityRepository.findById(id).orElse(null);
     }
 
+    /**
+     * Create a new community.
+     * @param community
+     * @return
+     */
     public Community createCommunity(Community community) {
         return communityRepository.save(community);
     }
 
+    /**
+     * Update an existing community.
+     * @param community
+     * @return
+     */
     public Community updateCommunity(Community community) {
         return communityRepository.save(community);
     }
 
+    /**
+     * Delete a community by its ID.
+     * @param id
+     * @return
+     */
     public boolean deleteCommunity(String id) {
         if (!communityRepository.existsById(id)) {
             return false;
