@@ -57,6 +57,12 @@ public class PostService {
                 .toList();
     }
 
+    public List<PostDto> searchPosts(String keyword) {
+        return postRepository.findAllByTextContainingIgnoreCase(keyword).stream()
+                .map(postMapper::toDto)
+                .toList();
+    }
+
     public PostDto updatePost(String id, PostUpdateDto dto, String requestUserId) {
         Post post = postRepository.findById(id)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Post introuvable"));

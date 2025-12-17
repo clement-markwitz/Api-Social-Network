@@ -54,6 +54,14 @@ public class PostController {
         return ResponseEntity.ok(postService.getPostById(id));
     }
 
+    @GetMapping("/search")
+    public ResponseEntity<List<PostDto>> searchPosts(@RequestParam("query") String query) {
+        if (query == null || query.isBlank()) {
+            return ResponseEntity.ok(postService.getAllPosts());
+        }
+        return ResponseEntity.ok(postService.searchPosts(query));
+    }
+
     @PutMapping("/{id}")
     public ResponseEntity<PostDto> updatePost(
             @PathVariable String id,
