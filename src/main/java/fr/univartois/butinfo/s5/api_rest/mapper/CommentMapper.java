@@ -7,9 +7,10 @@ import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Named;
 
-@Mapper(componentModel = "spring")
+@Mapper(componentModel = "spring", uses = {UserMapper.class})
 public interface CommentMapper {
 
+    // --- Vers Entity (Création) ---
     @Mapping(target = "id", ignore = true)
     @Mapping(target = "post", ignore = true)
     @Mapping(target = "author", ignore = true)
@@ -19,8 +20,6 @@ public interface CommentMapper {
     @Mapping(target = "parentComment", source = "parentCommentId", qualifiedByName = "idToComment")
     Comment toEntity(CommentCreateDto dto);
 
-    @Mapping(target = "postId", source = "post.id")
-    @Mapping(target = "authorId", source = "author.id")
     @Mapping(target = "parentCommentId", source = "parentComment.id")
     CommentDto toDto(Comment comment);
 
