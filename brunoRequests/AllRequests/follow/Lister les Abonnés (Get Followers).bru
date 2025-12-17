@@ -1,0 +1,20 @@
+meta {
+  name: Lister les Abonnés (Get Followers)
+  type: http
+  seq: 4
+}
+
+get {
+  url: http://localhost:8080/api/follows/followers
+  body: none
+  auth: bearer
+}
+
+auth:bearer {
+  token: eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJmb2xsb3dlcl91c2VyIiwiaWF0IjoxNzY1OTc1NDIyLCJleHAiOjE3NjYwNjE4MjJ9.QEp1rjZm2VB92K1KVTUjaQiwxR3w6PEso1HR9tmlRemAwT94B0OvoidoTwAyRzdz
+}
+
+settings {
+  encodeUrl: true
+  timeout: 0
+}
