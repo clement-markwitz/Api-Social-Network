@@ -7,6 +7,8 @@ import fr.univartois.butinfo.s5.api_rest.dto.post.PostDto;
 import fr.univartois.butinfo.s5.api_rest.dto.post.PostUpdateDto;
 import fr.univartois.butinfo.s5.api_rest.dto.reaction.ReactionCreateDto;
 import fr.univartois.butinfo.s5.api_rest.dto.reaction.ReactionDto;
+import fr.univartois.butinfo.s5.api_rest.mapper.CommentMapper;
+import fr.univartois.butinfo.s5.api_rest.model.Comment;
 import fr.univartois.butinfo.s5.api_rest.model.User;
 import fr.univartois.butinfo.s5.api_rest.service.CommentService;
 import fr.univartois.butinfo.s5.api_rest.service.PostService;
@@ -33,9 +35,11 @@ public class PostController {
     private final PostService postService;
     private final ReactionService reactionService;
     private final CommentService commentService;
+    private final CommentMapper commentMapper;
 
-    public PostController(PostService postService , CommentService commentService, ReactionService reactionService) {
+    public PostController(PostService postService , CommentService commentService, ReactionService reactionService, CommentMapper commentMapper) {
         this.commentService = commentService;
+        this.commentMapper = commentMapper;
         this.reactionService = reactionService;
         this.postService = postService;
     }
@@ -47,10 +51,10 @@ public class PostController {
      * @return ResponseEntity with created PostDto
      */
     @PostMapping
-    @Operation(summary = "Créer un post", description = "Permet à l'utilisateur authentifié de créer un nouveau post.")
+    @Operation(summary = "Create a post", description = "Allows the authenticated user to create a new post.")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "201", description = "Post créé avec succès"),
-            @ApiResponse(responseCode = "400", description = "Données de création de post invalides")
+            @ApiResponse(responseCode = "201", description = "Post created successfully"),
+            @ApiResponse(responseCode = "400", description = "Invalid post creation data")
     })
     public ResponseEntity<PostDto> createPost(
             @Valid @RequestBody PostCreateDto createDto,
@@ -67,9 +71,9 @@ public class PostController {
      * @return List of PostDto
      */
     @GetMapping
-    @Operation(summary = "Lister tous les posts", description = "Récupère une liste de tous les posts.")
+    @Operation(summary = "List all posts", description = "Retrieves a list of all posts.")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Liste des posts récupérée avec succès")
+            @ApiResponse(responseCode = "200", description = "Posts list retrieved successfully")
     })
 
     /**
@@ -86,10 +90,10 @@ public class PostController {
      * @return ResponseEntity with PostDto
      */
     @GetMapping("/{id}")
-    @Operation(summary = "Récupérer un post par ID", description = "Récupère les détails d'un post spécifié par son ID.")
+    @Operation(summary = "Get a post by ID", description = "Retrieves details of a post specified by its ID.")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Post récupéré avec succès"),
-            @ApiResponse(responseCode = "404", description = "Post non trouvé")
+            @ApiResponse(responseCode = "200", description = "Post retrieved successfully"),
+            @ApiResponse(responseCode = "404", description = "Post not found")
     })
     public ResponseEntity<?> getPostById(@PathVariable String id) {
         try {
@@ -105,9 +109,9 @@ public class PostController {
      * @return ResponseEntity with list of PostDto
      */
     @GetMapping("/search")
-    @Operation(summary = "Rechercher des posts", description = "Recherche des posts contenant le terme spécifié dans leur titre ou contenu.")
+    @Operation(summary = "Search posts", description = "Searches posts containing the specified term in their title or content.")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Résultats de la recherche récupérés avec succès")
+            @ApiResponse(responseCode = "200", description = "Search results retrieved successfully")
     })
     public ResponseEntity<List<PostDto>> searchPosts(@RequestParam("query") String query) {
         if (query == null || query.isBlank()) {
@@ -124,12 +128,12 @@ public class PostController {
      * @return ResponseEntity with updated PostDto
      */
     @PutMapping("/{id}")
-    @Operation(summary = "Mettre à jour un post", description = "Permet à l'utilisateur authentifié de mettre à jour un post qu'il a créé.")
+    @Operation(summary = "Update a post", description = "Allows the authenticated user to update a post they created.")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Post mis à jour avec succès"),
-            @ApiResponse(responseCode = "400", description = "Données de mise à jour de post invalides"),
-            @ApiResponse(responseCode = "403", description = "Accès refusé (l'utilisateur n'est pas l'auteur du post)"),
-            @ApiResponse(responseCode = "404", description = "Post non trouvé")
+            @ApiResponse(responseCode = "200", description = "Post updated successfully"),
+            @ApiResponse(responseCode = "400", description = "Invalid post update data"),
+            @ApiResponse(responseCode = "403", description = "Access denied (you are not the author of the post)"),
+            @ApiResponse(responseCode = "404", description = "Post not found")
     })
     public ResponseEntity<?> updatePost(
             @PathVariable String id,
@@ -152,11 +156,11 @@ public class PostController {
      * @return ResponseEntity with no content
      */
     @DeleteMapping("/{id}")
-    @Operation(summary = "Supprimer un post", description = "Permet à l'utilisateur authentifié de supprimer un post qu'il a créé.")
+    @Operation(summary = "Delete a post", description = "Allows the authenticated user to delete a post they created.")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "204", description = "Post supprimé avec succès"),
-            @ApiResponse(responseCode = "403", description = "Accès refusé (l'utilisateur n'est pas l'auteur du post)"),
-            @ApiResponse(responseCode = "404", description = "Post non trouvé")
+            @ApiResponse(responseCode = "204", description = "Post deleted successfully"),
+            @ApiResponse(responseCode = "403", description = "Access denied (you are not the author of the post)"),
+            @ApiResponse(responseCode = "404", description = "Post not found")
     })
     public ResponseEntity<?> deletePost(
             @PathVariable String id,
@@ -180,10 +184,10 @@ public class PostController {
      * @return List of ReactionDto
      */
     @GetMapping("/{id}/reactions")
-    @Operation(summary = "Lister les réactions d'un post", description = "Récupère la liste des réactions associées à un post spécifié par son ID.")
+    @Operation(summary = "List reactions for a post", description = "Retrieves the list of reactions associated with a post specified by its ID.")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Liste des réactions récupérée avec succès"),
-            @ApiResponse(responseCode = "404", description = "Post non trouvé")
+            @ApiResponse(responseCode = "200", description = "Reactions list retrieved successfully"),
+            @ApiResponse(responseCode = "404", description = "Post not found")
     })
     public List<ReactionDto> getReactions(@PathVariable String id) {
         return reactionService.getReactionsByPostId(id);
@@ -197,11 +201,11 @@ public class PostController {
      * @return ResponseEntity with created ReactionDto
      */
     @PostMapping("/{id}/reactions")
-    @Operation(summary = "Ajouter une réaction à un post", description = "Permet à l'utilisateur authentifié d'ajouter une réaction à un post spécifié par son ID.")
+    @Operation(summary = "Add a reaction to a post", description = "Allows the authenticated user to add a reaction to a post specified by its ID.")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "201", description = "Réaction ajoutée avec succès"),
-            @ApiResponse(responseCode = "400", description = "Données de création de réaction invalides"),
-            @ApiResponse(responseCode = "404", description = "Post non trouvé")
+            @ApiResponse(responseCode = "201", description = "Reaction added successfully"),
+            @ApiResponse(responseCode = "400", description = "Invalid reaction creation data"),
+            @ApiResponse(responseCode = "404", description = "Post not found")
     })
     public ResponseEntity<ReactionDto> addReaction(
             @PathVariable String id,
@@ -220,11 +224,11 @@ public class PostController {
      */
     @DeleteMapping("/{id}/reactions/{reactionId}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    @Operation(summary = "Supprimer une réaction d'un post", description = "Permet à l'utilisateur authentifié de supprimer une réaction qu'il a ajoutée à un post spécifié par son ID.")
+    @Operation(summary = "Delete a reaction from a post", description = "Allows the authenticated user to delete a reaction they added to a post specified by its ID.")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "204", description = "Réaction supprimée avec succès"),
-            @ApiResponse(responseCode = "403", description = "Accès refusé (l'utilisateur n'est pas l'auteur de la réaction)"),
-            @ApiResponse(responseCode = "404", description = "Réaction non trouvée")
+            @ApiResponse(responseCode = "204", description = "Reaction deleted successfully"),
+            @ApiResponse(responseCode = "403", description = "Access denied (you are not the author of the reaction)"),
+            @ApiResponse(responseCode = "404", description = "Reaction not found")
     })
     public void deleteReaction(@PathVariable String id, @PathVariable String reactionId) {
         reactionService.deleteReaction(reactionId);
@@ -238,13 +242,18 @@ public class PostController {
      * @return List of CommentDto
      */
     @GetMapping("/{id}/comments")
-    @Operation(summary = "Lister les commentaires d'un post", description = "Récupère la liste des commentaires associés à un post spécifié par son ID.")
+    @Operation(summary = "List comments for a post", description = "Retrieves the list of comments associated with a post specified by its ID.")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Liste des commentaires récupérée avec succès"),
-            @ApiResponse(responseCode = "404", description = "Post non trouvé")
+            @ApiResponse(responseCode = "200", description = "Comments list retrieved successfully"),
+            @ApiResponse(responseCode = "404", description = "Post not found")
     })
-    public List<CommentDto> getComments(@PathVariable String id) {
-        return commentService.getCommentsByPostId(id);
+    public  ResponseEntity<List<CommentDto>> getComments(@PathVariable String id) {
+        List<Comment> comments = commentService.getCommentsByPostId(id);
+        List<CommentDto> commentDtos = comments.stream()
+                .map(commentMapper::toDto)
+                .toList();
+
+        return ResponseEntity.ok(commentDtos);
     }
 
     /**
@@ -255,19 +264,23 @@ public class PostController {
      * @return ResponseEntity with created CommentDto
      */
     @PostMapping("/{id}/comments")
-    @Operation(summary = "Ajouter un commentaire à un post", description = "Permet à l'utilisateur authentifié d'ajouter un commentaire à un post spécifié par son ID.")
+    @Operation(summary = "Add a comment to a post", description = "Allows the authenticated user to add a comment to a post specified by its ID.")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "201", description = "Commentaire ajouté avec succès"),
-            @ApiResponse(responseCode = "400", description = "Données de création de commentaire invalides"),
-            @ApiResponse(responseCode = "404", description = "Post non trouvé")
+            @ApiResponse(responseCode = "201", description = "Comment added successfully"),
+            @ApiResponse(responseCode = "400", description = "Invalid comment creation data"),
+            @ApiResponse(responseCode = "404", description = "Post not found")
     })
     public ResponseEntity<CommentDto> addComment(
-            @PathVariable String id,
+            @PathVariable String idPost,
             @Valid @RequestBody CommentCreateDto dto,
             Authentication authentication) {
 
         User user = (User) authentication.getPrincipal();
+
+        Comment commentEntity = commentMapper.toEntity(dto);
+        Comment savedComment = commentService.createComment(idPost, commentEntity, user);
+
         return ResponseEntity.status(HttpStatus.CREATED)
-                .body(commentService.createComment(id, dto, user.getId()));
+                .body(commentMapper.toDto(savedComment));
     }
 }

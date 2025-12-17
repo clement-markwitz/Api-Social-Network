@@ -10,7 +10,7 @@ import org.mapstruct.Named;
 /**
  * Mapper for Comment entities and DTOs.
  */
-@Mapper(componentModel = "spring")
+@Mapper(componentModel = "spring", uses = {UserMapper.class})
 public interface CommentMapper {
 
     /**

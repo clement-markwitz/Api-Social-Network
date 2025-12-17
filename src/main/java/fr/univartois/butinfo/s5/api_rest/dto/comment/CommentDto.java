@@ -1,6 +1,6 @@
 package fr.univartois.butinfo.s5.api_rest.dto.comment;
 
-
+import fr.univartois.butinfo.s5.api_rest.dto.user.UserSummaryDto;
 import java.time.LocalDateTime;
 
 /**
@@ -8,8 +8,7 @@ import java.time.LocalDateTime;
  */
 public record CommentDto(
         String id,
-        String postId,
-        String authorId, // Enrichi
+        UserSummaryDto author,
         String text,
         String parentCommentId,
         int likeCount,
