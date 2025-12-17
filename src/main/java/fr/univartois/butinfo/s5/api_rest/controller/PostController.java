@@ -7,6 +7,8 @@ import fr.univartois.butinfo.s5.api_rest.dto.post.PostDto;
 import fr.univartois.butinfo.s5.api_rest.dto.post.PostUpdateDto;
 import fr.univartois.butinfo.s5.api_rest.dto.reaction.ReactionCreateDto;
 import fr.univartois.butinfo.s5.api_rest.dto.reaction.ReactionDto;
+import fr.univartois.butinfo.s5.api_rest.mapper.CommentMapper;
+import fr.univartois.butinfo.s5.api_rest.model.Comment;
 import fr.univartois.butinfo.s5.api_rest.model.User;
 import fr.univartois.butinfo.s5.api_rest.service.CommentService;
 import fr.univartois.butinfo.s5.api_rest.service.PostService;
@@ -26,9 +28,11 @@ public class PostController {
     private final PostService postService;
     private final ReactionService reactionService;
     private final CommentService commentService;
+    private final CommentMapper commentMapper;
 
-    public PostController(PostService postService , CommentService commentService, ReactionService reactionService) {
+    public PostController(PostService postService , CommentService commentService, ReactionService reactionService, CommentMapper commentMapper) {
         this.commentService = commentService;
+        this.commentMapper = commentMapper;
         this.reactionService = reactionService;
         this.postService = postService;
     }
@@ -49,69 +53,80 @@ public class PostController {
         return postService.getAllPosts();
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<PostDto> getPostById(@PathVariable String id) {
-        return ResponseEntity.ok(postService.getPostById(id));
+    @GetMapping("/{idPost}")
+    public ResponseEntity<PostDto> getPostById(@PathVariable String idPost) {
+        return ResponseEntity.ok(postService.getPostById(idPost));
     }
 
-    @PutMapping("/{id}")
+    @PutMapping("/{idPost}")
     public ResponseEntity<PostDto> updatePost(
-            @PathVariable String id,
+            @PathVariable String idPost,
             @Valid @RequestBody PostUpdateDto updateDto,
             Authentication authentication) {
 
         User user = (User) authentication.getPrincipal();
-        return ResponseEntity.ok(postService.updatePost(id, updateDto, user.getId()));
+        return ResponseEntity.ok(postService.updatePost(idPost, updateDto, user.getId()));
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/{idPost}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deletePost(
-            @PathVariable String id,
+            @PathVariable String idPost,
             Authentication authentication) {
 
         User user = (User) authentication.getPrincipal();
-        postService.deletePost(id, user.getId());
+        postService.deletePost(idPost, user.getId());
     }
 
     // Methode pour les reaction d'un post
 
-    @GetMapping("/{id}/reactions")
-    public List<ReactionDto> getReactions(@PathVariable String id) {
-        return reactionService.getReactionsByPostId(id);
+    @GetMapping("/{idPost}/reactions")
+    public List<ReactionDto> getReactions(@PathVariable String idPost) {
+        return reactionService.getReactionsByPostId(idPost);
     }
 
-    @PostMapping("/{id}/reactions")
+    @PostMapping("/{idPost}/reactions")
     public ResponseEntity<ReactionDto> addReaction(
-            @PathVariable String id,
+            @PathVariable String idPost,
             @Valid @RequestBody ReactionCreateDto dto,
             Authentication authentication) {
 
         User user = (User) authentication.getPrincipal();
         return ResponseEntity.status(HttpStatus.CREATED)
-                .body(reactionService.createReaction(id, dto, user.getId()));
+                .body(reactionService.createReaction(idPost, dto, user.getId()));
     }
 
-    @DeleteMapping("/{id}/reactions/{reactionId}")
+    @DeleteMapping("/{idPost}/reactions/{reactionId}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteReaction(@PathVariable String id, @PathVariable String reactionId) {
         reactionService.deleteReaction(reactionId);
     }
 
     // Methode pour les commentaires d'un post
-    @GetMapping("/{id}/comments")
-    public List<CommentDto> getComments(@PathVariable String id) {
-        return commentService.getCommentsByPostId(id);
+
+    @GetMapping("/{idPost}/comments")
+    public ResponseEntity<List<CommentDto>> getComments(@PathVariable String idPost) {
+
+        List<Comment> comments = commentService.getCommentsByPostId(idPost);
+        List<CommentDto> commentDtos = comments.stream()
+                .map(commentMapper::toDto)
+                .toList();
+
+        return ResponseEntity.ok(commentDtos);
     }
 
-    @PostMapping("/{id}/comments")
+    @PostMapping("/{idPost}/comments")
     public ResponseEntity<CommentDto> addComment(
-            @PathVariable String id,
+            @PathVariable String idPost,
             @Valid @RequestBody CommentCreateDto dto,
             Authentication authentication) {
 
         User user = (User) authentication.getPrincipal();
+
+        Comment commentEntity = commentMapper.toEntity(dto);
+        Comment savedComment = commentService.createComment(idPost, commentEntity, user);
+
         return ResponseEntity.status(HttpStatus.CREATED)
-                .body(commentService.createComment(id, dto, user.getId()));
+                .body(commentMapper.toDto(savedComment));
     }
 }
