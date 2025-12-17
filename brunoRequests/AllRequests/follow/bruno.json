@@ -1,6 +1,6 @@
 {
   "version": "1",
-  "name": "follow",
+  "name": "Sample API Collection",
   "type": "collection",
   "ignore": [
     "node_modules",
