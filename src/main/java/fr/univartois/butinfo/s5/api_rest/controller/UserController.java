@@ -157,4 +157,18 @@ public class UserController {
 
         return ResponseEntity.ok(userMapper.toInterestsDto(updatedUser.getInterests()));
     }
+
+
+    /**
+     * Search for user profiles by query.
+     *
+     * @param query the search query
+     * @return List of UserSummaryDto matching the query
+     */
+    @GetMapping("/search")
+    public List<UserSummaryDto> searchProfiles(@RequestParam("q") String query) {
+        List<User> users = userService.searchUsers(query);
+
+        return users.stream().map(userMapper::toSummaryDto).toList();
+    }
 }
