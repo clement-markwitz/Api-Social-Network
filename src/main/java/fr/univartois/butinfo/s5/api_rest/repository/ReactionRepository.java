@@ -28,4 +28,6 @@ public interface ReactionRepository extends MongoRepository<Reaction,String> {
      * @return an Optional containing the Reaction if found, or empty if not found
      */
     Optional<Reaction> findByPostIdAndUserId(String postId, String userId);
+
+    void deleteByPostIdAndUserId(String postId, String userId);
 }

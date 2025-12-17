@@ -1,13 +1,11 @@
 package fr.univartois.butinfo.s5.api_rest.service;
 
-import fr.univartois.butinfo.s5.api_rest.dto.reaction.ReactionCreateDto;
-import fr.univartois.butinfo.s5.api_rest.dto.reaction.ReactionDto;
-import fr.univartois.butinfo.s5.api_rest.mapper.ReactionMapper;
 import fr.univartois.butinfo.s5.api_rest.model.Post;
 import fr.univartois.butinfo.s5.api_rest.model.Reaction;
 import fr.univartois.butinfo.s5.api_rest.model.User;
 import fr.univartois.butinfo.s5.api_rest.repository.PostRepository;
 import fr.univartois.butinfo.s5.api_rest.repository.ReactionRepository;
+import fr.univartois.butinfo.s5.api_rest.repository.UserRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
@@ -16,85 +14,51 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
-/**
- * Service class for managing reactions to posts.
- */
 @Service
 public class ReactionService {
 
     private final ReactionRepository reactionRepository;
     private final PostRepository postRepository;
-    private final ReactionMapper reactionMapper;
+    private final UserRepository userRepository;
 
-    public ReactionService(ReactionRepository reactionRepository, PostRepository postRepository, ReactionMapper reactionMapper) {
+    public ReactionService(ReactionRepository reactionRepository, PostRepository postRepository, UserRepository userRepository) {
         this.reactionRepository = reactionRepository;
         this.postRepository = postRepository;
-        this.reactionMapper = reactionMapper;
+        this.userRepository = userRepository;
     }
 
-    /**
-     * Retrieves all reactions for a specific post.
-     *
-     * @param postId the ID of the post
-     * @return a list of ReactionDto objects related to the specified post
-     * @throws ResponseStatusException if the post is not found
-     */
-    public List<ReactionDto> getReactionsByPostId(String postId) {
+    public List<Reaction> getReactionsByPostId(String postId) {
         if (!postRepository.existsById(postId)) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Post introuvable");
         }
-        return reactionRepository.findAllByPostId(postId).stream()
-                .map(reactionMapper::toDto)
-                .toList();
+        return reactionRepository.findAllByPostId(postId);
     }
 
-    /**
-     * Creates a new reaction for a specific post by a user.
-     *
-     * @param postId the ID of the post
-     * @param dto the ReactionCreateDto containing reaction details
-     * @param userId the ID of the user creating the reaction
-     * @return the created ReactionDto
-     * @throws ResponseStatusException if the post is not found or if the user has already reacted to the post
-     */
-    public ReactionDto createReaction(String postId, ReactionCreateDto dto, String userId) {
-        if (!postRepository.existsById(postId)) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Post introuvable");
-        }
+    public Reaction createReaction(String postId, Reaction reaction, String userId) {
 
-        // Verifier si l'utilisateur a deja reagi a ce post
+        Post post = postRepository.findById(postId)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Post introuvable"));
+
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Utilisateur introuvable"));
+
         Optional<Reaction> existingReaction = reactionRepository.findByPostIdAndUserId(postId, userId);
         if (existingReaction.isPresent()) {
             throw new ResponseStatusException(HttpStatus.CONFLICT, "Vous avez déjà réagi à ce post");
         }
 
-        Reaction reaction = reactionMapper.toEntity(dto);
-
-        //  On associe le post et l'utilisateur
-        Post post = new Post();
-        post.setId(postId);
         reaction.setPost(post);
-
-        User user = new User();
-        user.setId(userId);
         reaction.setUser(user);
-
         reaction.setCreatedAt(LocalDateTime.now());
 
-        Reaction saved = reactionRepository.save(reaction);
-        return reactionMapper.toDto(saved);
+        return reactionRepository.save(reaction);
     }
 
-    /**
-     * Deletes a reaction by its ID.
-     *
-     * @param reactionId the ID of the reaction to delete
-     * @throws ResponseStatusException if the reaction is not found
-     */
-    public void deleteReaction(String reactionId) {
-        if (!reactionRepository.existsById(reactionId)) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Réaction introuvable");
+    public void deleteReaction(String postId, String userId) {
+        if(!postRepository.existsById(postId)) {
+              throw  new ResponseStatusException(HttpStatus.NOT_FOUND, "Post introuvable");
         }
-        reactionRepository.deleteById(reactionId);
+        reactionRepository.deleteByPostIdAndUserId(postId, userId);
+
     }
 }
