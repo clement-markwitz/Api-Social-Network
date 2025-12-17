@@ -8,9 +8,6 @@ import jakarta.validation.constraints.Positive;
  */
 public record BanCreateDto(
         @NotBlank
-        String userId, // L'ID de l'utilisateur à bannir
-
-        @NotBlank
         String reason,
 
         @Positive(message = "La durée doit être un nombre positif de jours")

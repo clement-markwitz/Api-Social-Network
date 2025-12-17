@@ -2,6 +2,9 @@ package fr.univartois.butinfo.s5.api_rest.controller;
 
 import fr.univartois.butinfo.s5.api_rest.dto.ban.BanCreateDto;
 import fr.univartois.butinfo.s5.api_rest.dto.ban.BanDto;
+import fr.univartois.butinfo.s5.api_rest.dto.ban.BanSummaryDto;
+import fr.univartois.butinfo.s5.api_rest.mapper.BanMapper;
+import fr.univartois.butinfo.s5.api_rest.model.Ban;
 import fr.univartois.butinfo.s5.api_rest.model.User;
 import fr.univartois.butinfo.s5.api_rest.service.BanService;
 import jakarta.validation.Valid;
@@ -18,30 +21,36 @@ import java.util.List;
 @PreAuthorize("hasRole('ADMIN')")
 public class BanController {
     private final BanService banService;
+    private final BanMapper banMapper;
 
-    public BanController(BanService banService) {
+    public BanController(BanService banService, BanMapper banMapper) {
         this.banService = banService;
+        this.banMapper = banMapper;
     }
 
     @GetMapping("/bans")
-    public List<BanDto> getAllBans() {
-        return banService.getAllBans();
+    public List<BanSummaryDto> getAllBans() {
+
+        return banService.getAllBans().stream()
+                .map(banMapper::toSummaryDto)
+                .toList();
     }
 
-    @PostMapping("/users/{id}/ban")
+    @PostMapping("/users/{idUser}/ban")
     public ResponseEntity<BanDto> banUser(
-            @PathVariable String id,
+            @PathVariable String idUser,
             @Valid @RequestBody BanCreateDto dto,
             Authentication authentication) {
 
         User admin = (User) authentication.getPrincipal();
-        return ResponseEntity.status(HttpStatus.CREATED)
-                .body(banService.banUser(id, dto, admin.getId()));
+        Ban ban = banMapper.toEntity(dto);
+        Ban savedBan = banService.banUser(idUser, ban, admin);
+        return ResponseEntity.status(HttpStatus.CREATED).body(banMapper.toDto(savedBan));
     }
 
-    @PostMapping("/users/{id}/unban")
-    public ResponseEntity<String> unbanUser(@PathVariable String id) {
-        banService.unbanUser(id);
+    @PostMapping("/users/{idUser}/unban")
+    public ResponseEntity<String> unbanUser(@PathVariable String idUser) {
+        banService.unbanUser(idUser);
         return ResponseEntity.ok("Utilisateur débanni avec succès");
     }
 }
