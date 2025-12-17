@@ -1,11 +1,9 @@
 package fr.univartois.butinfo.s5.api_rest.service;
 
-import fr.univartois.butinfo.s5.api_rest.dto.user.UserSummaryDto;
 import fr.univartois.butinfo.s5.api_rest.model.Follow;
 import fr.univartois.butinfo.s5.api_rest.model.User;
 import fr.univartois.butinfo.s5.api_rest.repository.FollowRepository;
-import fr.univartois.butinfo.s5.api_rest.repository.UserRepository; // Import du UserRepository (à créer)
-
+import fr.univartois.butinfo.s5.api_rest.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -24,87 +22,67 @@ public class FollowService {
     @Autowired
     private UserRepository userRepository;
 
-    private UserSummaryDto mapToUserSummaryDto(String userId) {
-        return new UserSummaryDto(
-                userId,
-                "Pseudo-" + userId.substring(0, Math.min(userId.length(), 5)),
-                "avatar/url/" + userId.substring(0, Math.min(userId.length(), 5))
-        );
-    }
-
-
-    /**
-     * Crée une relation de suivi (Follow).
-     * @param followerId The ID of the user performing the follow.
-     * @param followingId The ID of the target user.
-     */
     public void followUser(String followerId, String followingId) {
         if (followerId.equals(followingId)) {
-            // Empêche un utilisateur de se suivre lui-même
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Cannot follow yourself.");
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "On ne peut pas se suivre soi-même.");
         }
 
-        if (followRepository.findByFollowerIdAndFollowingId(followerId, followingId).isPresent()) {
-            return;
+        // On récupère les VRAIS objets User car Follow utilise @DBRef
+        User follower = getUserById(followerId);
+        User following = getUserById(followingId);
+
+        if (followRepository.findByFollowerAndFollowing(follower, following).isPresent()) {
+            return; // Déjà suivi
         }
 
-        User follower = userRepository.findById(followerId)
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Follower introuvable"));
-        User following = userRepository.findById(followingId)
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Utilisateur à suivre introuvable"));
-
-        Follow newFollow = new Follow(
-                null,
-                follower,
-                following,
-                LocalDateTime.now()
-        );
+        Follow newFollow = new Follow(null, follower, following, LocalDateTime.now());
         followRepository.save(newFollow);
     }
 
-    /**
-     * Supprime une relation de suivi (Unfollow).
-     * @param followerId The ID of the user stopping the follow.
-     * @param followingId The ID of the target user.
-     */
     @Transactional
     public void unfollowUser(String followerId, String followingId) {
-        long deletedCount = followRepository.deleteByFollowerIdAndFollowingId(followerId, followingId);
+        User follower = getUserById(followerId);
+        User following = getUserById(followingId);
+
+        long deletedCount = followRepository.deleteByFollowerAndFollowing(follower, following);
         if (deletedCount == 0) {
-            // La relation de suivi n'existait pas
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Follow relationship not found.");
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Relation de suivi introuvable.");
         }
     }
 
-    /**
-     * Récupère la liste des personnes suivies par l'utilisateur (Following).
-     * @param followerId The ID of the requesting user.
-     * @return List of UserSummaryDto of the followed users.
-     */
-    public List<UserSummaryDto> getFollowing(String followerId) {
-        List<Follow> follows = followRepository.findAllByFollowerId(followerId);
-        List<String> followingIds = follows.stream()
-                .map(f -> f.getFollowing().getId())
-                .collect(Collectors.toList());
-
-        return followingIds.stream()
-                .map(this::mapToUserSummaryDto)
+    // Retourne des User (pas de DTO)
+    public List<User> getFollowing(String followerId) {
+        User follower = getUserById(followerId);
+        return followRepository.findAllByFollower(follower).stream()
+                .map(Follow::getFollowing)
                 .collect(Collectors.toList());
     }
 
-    /**
-     * Récupère la liste des utilisateurs qui suivent l'utilisateur (Followers).
-     * @param followingId The ID of the requesting user.
-     * @return List of UserSummaryDto of the followers.
-     */
-    public List<UserSummaryDto> getFollowers(String followingId) {
-        List<Follow> follows = followRepository.findAllByFollowingId(followingId);
-        List<String> followerIds = follows.stream()
-                .map(f -> f.getFollower().getId())
+    // Retourne des User (pas de DTO)
+    public List<User> getFollowers(String followingId) {
+        User following = getUserById(followingId);
+        return followRepository.findAllByFollowing(following).stream()
+                .map(Follow::getFollower)
                 .collect(Collectors.toList());
+    }
 
-        return followerIds.stream()
-                .map(this::mapToUserSummaryDto)
+    // Retourne des User (Amis)
+    public List<User> getFriends(String userId) {
+        User currentUser = getUserById(userId);
+
+        // 1. Qui est-ce que je suis ?
+        List<User> myFollowings = followRepository.findAllByFollower(currentUser).stream()
+                .map(Follow::getFollowing)
+                .toList();
+
+        // 2. Parmi eux, qui me suit en retour ?
+        return myFollowings.stream()
+                .filter(targetUser -> followRepository.findByFollowerAndFollowing(targetUser, currentUser).isPresent())
                 .collect(Collectors.toList());
+    }
+
+    private User getUserById(String id) {
+        return userRepository.findById(id)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Utilisateur introuvable : " + id));
     }
 }

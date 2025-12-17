@@ -1,20 +1,15 @@
 meta {
-  name: Arrêter de Suivre un Utilisateur (Unfollow)
+  name: Get Friends
   type: http
-  seq: 5
+  seq: 6
 }
 
-delete {
-  url: http://localhost:8080/api/follows/6942868cc0b43abc9ed40b24
+get {
+  url: http://localhost:8080/api/follows/6942868cc0b43abc9ed40b24/friends
   body: none
   auth: bearer
 }
 
 auth:bearer {
   token: eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJmb2xsb3dlcl91c2VyIiwiaWF0IjoxNzY1OTY3NTY5LCJleHAiOjE3NjYwNTM5Njl9.1UjNtHTiAS0k0aabgpEQ1ezEX3nx7R1Ep9AT1M7D7vAPHWK2rjBZQqIUwraOttv-
-}
-
-settings {
-  encodeUrl: true
-  timeout: 0
 }
