@@ -23,9 +23,9 @@ import java.util.List;
 @RequiredArgsConstructor
 public class MessageController {
 
+    private final ConversationService conversationService;
     private final MessageService messageService;
     private final UserRepository userRepository;
-    private final ConversationService conversationService;
     private final MessageMapper messageMapper;
 
     private String getCurrentUserId(Authentication authentication) {
