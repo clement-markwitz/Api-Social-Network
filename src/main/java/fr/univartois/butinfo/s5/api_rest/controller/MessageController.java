@@ -9,6 +9,9 @@ import fr.univartois.butinfo.s5.api_rest.model.User;
 import fr.univartois.butinfo.s5.api_rest.repository.UserRepository;
 import fr.univartois.butinfo.s5.api_rest.service.ConversationService;
 import fr.univartois.butinfo.s5.api_rest.service.MessageService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -65,6 +68,7 @@ public class MessageController {
      */
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
+    @Operation(summary = "Envoyer un message", description = "Envoie un nouveau message dans une conversation spécifiée.")
     public MessageDto send(
             @PathVariable String conversationId,
             @RequestBody @Valid MessageCreateDto dto,
@@ -97,6 +101,11 @@ public class MessageController {
      * @throws ResponseStatusException if the user is not a member of the conversation (403).
      */
     @GetMapping
+    @Operation(summary = "Récupérer les messages", description = "Récupère tous les messages d'une conversation spécifiée.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Messages récupérés avec succès"),
+            @ApiResponse(responseCode = "403", description = "Accès refusé (Vous n'êtes pas membre de cette conversation)")
+    })
     public List<MessageDto> getAll(
             @PathVariable String conversationId,
             Authentication authentication) {
@@ -127,6 +136,12 @@ public class MessageController {
      */
     @DeleteMapping("/{messageId}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
+    @Operation(summary = "Supprimer un message", description = "Supprime un message spécifié d'une conversation.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "204", description = "Message supprimé avec succès"),
+            @ApiResponse(responseCode = "400", description = "Le message ne fait pas partie de cette conversation"),
+            @ApiResponse(responseCode = "403", description = "Accès refusé (Vous ne pouvez supprimer que vos propres messages)")
+    })
     public void delete(
             @PathVariable String conversationId,
             @PathVariable String messageId,
