@@ -18,21 +18,17 @@ import java.util.List;
 public class BanService {
     private final BanRepository banRepository;
     private final UserRepository userRepository;
-    private final BanMapper banMapper;
 
-    public BanService(BanRepository banRepository, UserRepository userRepository, BanMapper banMapper) {
+    public BanService(BanRepository banRepository, UserRepository userRepository) {
         this.banRepository = banRepository;
         this.userRepository = userRepository;
-        this.banMapper = banMapper;
     }
 
-    public List<BanDto> getAllBans() {
-        return banRepository.findAll().stream()
-                .map(banMapper::toDto)
-                .toList();
+    public List<Ban> getAllBans() {
+        return banRepository.findAll();
     }
 
-    public BanDto banUser(String targetUserId, BanCreateDto dto, String moderatorId) {
+    public Ban banUser(String targetUserId, Ban ban, User admin) {
         // Verify if the user to be banned exists
         User targetUser = userRepository.findById(targetUserId)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Utilisateur introuvable"));
@@ -42,15 +38,12 @@ public class BanService {
             throw new ResponseStatusException(HttpStatus.CONFLICT, "L'utilisateur est déjà banni");
         }
 
-        Ban ban = banMapper.toEntity(dto);
-
-        User moderator = new User();
-        moderator.setId(moderatorId);
-        ban.setModerator(moderator);
+        ban.setUser(targetUser);
+        ban.setModerator(admin);
 
         ban.setActive(true);
         ban.setStartAt(LocalDateTime.now());
-        ban.setEndAt(LocalDateTime.now().plusDays(dto.durationDays()));
+        ban.setEndAt(LocalDateTime.now().plusDays(ban.getDurationDays()));
         ban.setCreatedAt(LocalDateTime.now());
         ban.setUpdatedAt(LocalDateTime.now());
 
@@ -59,7 +52,7 @@ public class BanService {
         targetUser.setBanned(true);
         userRepository.save(targetUser);
 
-        return banMapper.toDto(savedBan);
+        return savedBan;
     }
 
     public void unbanUser(String targetUserId) {
