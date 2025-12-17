@@ -1,0 +1,19 @@
+meta {
+  name: Search Post
+  type: http
+  seq: 6
+}
+
+get {
+  url: http://localhost:8080/api/posts/search?query=brioche
+  body: none
+  auth: bearer
+}
+
+params:query {
+  query: brioche
+}
+
+auth:bearer {
+  token: eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJ0ZXN0YXV0aDJxcXFzZHFzZHMiLCJpYXQiOjE3NjU5NjE2MzUsImV4cCI6MTc2NjA0ODAzNX0.gbO0okdUmk4JlguCQdH8EuN_9ELerImAhchtuWMljk9kaXC8BByuHWNCXUcoQBpj
+}
