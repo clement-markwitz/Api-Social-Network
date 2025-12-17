@@ -12,7 +12,7 @@ import org.mapstruct.Named;
 import java.time.LocalDateTime;
 import java.util.Collections;
 import java.util.List;
-import java.util.stream.Collectors;
+// Import "java.util.stream.Collectors" supprimé car inutile avec .toList()
 
 @Mapper(componentModel = "spring", imports = {LocalDateTime.class, List.class, User.class, Collections.class})
 public interface PageMapper {
@@ -34,9 +34,11 @@ public interface PageMapper {
     @Named("mapUsersToIds")
     default List<String> mapUsersToIds(List<User> admins) {
         if (admins == null) return Collections.emptyList();
+
+        // CORRECTION SONAR : Utilisation de .toList() directement
         return admins.stream()
                 .map(User::getId)
-                .collect(Collectors.toList());
+                .toList();
     }
 
     @Named("mapCreatorToAdminList")

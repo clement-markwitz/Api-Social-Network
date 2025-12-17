@@ -12,6 +12,7 @@ import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Data
@@ -48,4 +49,42 @@ public class Community {
     private LocalDateTime createdAt;
     @LastModifiedDate
     private LocalDateTime updatedAt;
+
+    /**
+     * Ajoute un administrateur à la communauté de manière sécurisée.
+     */
+    public void addAdmin(User user) {
+        if (this.admins == null) {
+            this.admins = new ArrayList<>();
+        }
+        this.admins.add(user);
+    }
+
+    /**
+     * Supprime un administrateur en toute sécurité.
+     */
+    public void removeAdmin(User user) {
+        if (this.admins != null) {
+            this.admins.remove(user);
+        }
+    }
+
+    /**
+     * Ajoute un topic en initialisant la liste si nécessaire.
+     */
+    public void addTopic(String topic) {
+        if (this.topics == null) {
+            this.topics = new ArrayList<>();
+        }
+        this.topics.add(topic);
+    }
+
+    /**
+     * Supprime un topic en toute sécurité.
+     */
+    public void removeTopic(String topic) {
+        if (this.topics != null) {
+            this.topics.remove(topic);
+        }
+    }
 }

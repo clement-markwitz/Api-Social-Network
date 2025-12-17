@@ -16,17 +16,18 @@ import org.springframework.data.mongodb.core.mapping.Document;
 public class Token {
 
     @Id
-    public String id;
+    private String id; // Changé en 'private'
 
     @Indexed(unique = true)
-    public String token;
+    private String token;
 
-    public String tokenType = "BEARER";
+    @Builder.Default
+    private String tokenType = "BEARER";
 
-    public boolean revoked;
+    private boolean revoked;
 
-    public boolean expired;
+    private boolean expired;
 
     @Indexed
-    public String userId;
+    private String userId;
 }

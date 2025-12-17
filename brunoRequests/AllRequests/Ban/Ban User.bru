@@ -1,0 +1,23 @@
+meta {
+  name: Ban User
+  type: http
+  seq: 1
+}
+
+post {
+  url: http://localhost:8080/api/admin/users/9c50f425a2c04de8915de080/ban
+  body: json
+  auth: bearer
+}
+
+auth:bearer {
+  token: eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJtYXRoaWFzNjIiLCJpYXQiOjE3NjU4OTgyNzksImV4cCI6MTc2NTk4NDY3OX0.TTt2kp1Xig5YrTTyuUnChVNUgwHk9h4cVCuGVomf96IAKC9Y_5mqQoAm0WKJ559T
+}
+
+body:json {
+  {
+    "userId": "9c50f425a2c04de8915de080",
+    "reason": "Insultes répétées dans les commentaires",
+    "durationDays": 7
+  }
+}

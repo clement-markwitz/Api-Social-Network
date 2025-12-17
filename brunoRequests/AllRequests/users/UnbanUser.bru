@@ -1,0 +1,15 @@
+meta {
+  name: UnbanUser
+  type: http
+  seq: 4
+}
+
+post {
+  url: http://localhost:8080/api/admin/users/6941769984a3684a7536ee82/unban
+  body: json
+  auth: bearer
+}
+
+auth:bearer {
+  token: eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJtYXRoaWFzNjIiLCJpYXQiOjE3NjU4OTgyNzksImV4cCI6MTc2NTk4NDY3OX0.TTt2kp1Xig5YrTTyuUnChVNUgwHk9h4cVCuGVomf96IAKC9Y_5mqQoAm0WKJ559T
+}

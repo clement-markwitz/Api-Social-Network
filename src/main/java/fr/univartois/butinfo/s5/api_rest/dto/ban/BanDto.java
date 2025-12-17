@@ -1,6 +1,8 @@
 package fr.univartois.butinfo.s5.api_rest.dto.ban;
 
+
 import fr.univartois.butinfo.s5.api_rest.dto.user.UserSummaryDto;
+import fr.univartois.butinfo.s5.api_rest.model.User;
 
 import java.time.LocalDateTime;
 
@@ -9,8 +11,8 @@ import java.time.LocalDateTime;
  */
 public record BanDto(
         String id,
-        String userId, // L'utilisateur qui EST banni
-        String moderatorId, // L'utilisateur qui A banni
+        UserSummaryDto bannedUser, // L'utilisateur qui EST banni
+        UserSummaryDto moderator, // L'utilisateur qui A banni
         String reason,
         int durationDays,
         LocalDateTime startAt,

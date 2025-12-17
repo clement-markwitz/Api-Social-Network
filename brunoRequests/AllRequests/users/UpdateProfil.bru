@@ -1,0 +1,28 @@
+meta {
+  name: UpdateProfil
+  type: http
+  seq: 4
+}
+
+put {
+  url: {{base}}/users/:userId/profile
+  body: json
+  auth: bearer
+}
+
+params:path {
+  userId: 69417f8c70a53f33f6c69832
+}
+
+auth:bearer {
+  token: eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJ0ZXN0YXV0aDJxcXFzZHFzZHMiLCJpYXQiOjE3NjU5MDAxODAsImV4cCI6MTc2NTk4NjU4MH0.iuh7_9Q8knUMycRBF8q7cKsExrLHfRSeUHTNPwDbIGTWcvwi9OqkV6NX45456Uc2
+}
+
+body:json {
+  {
+    "pseudo": "Chef Etoilé 2025",
+    "bio": "Passionné de gastronomie française et de pâtisserie.",
+    "location": "Paris, France",
+    "languages": ["Français", "Anglais", "Espagnol"]
+  }
+}

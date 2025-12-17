@@ -1,0 +1,20 @@
+meta {
+  name: Suivre un utilisateur
+  type: http
+  seq: 5
+}
+
+post {
+  url: http://localhost:8080/api/follows/user-B
+  body: none
+  auth: bearer
+}
+
+auth:bearer {
+  token: eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJ1c2VyQSIsImlhdCI6MTc2NTg3OTI5MCwiZXhwIjoxNzY1OTY1NjkwfQ.DURgLpS6yNyW94F3T9Fk6Ncop_AnUogDUeXTuy5oUrvHHC-JXklwSq7uCwVTQcPK
+}
+
+settings {
+  encodeUrl: true
+  timeout: 0
+}
