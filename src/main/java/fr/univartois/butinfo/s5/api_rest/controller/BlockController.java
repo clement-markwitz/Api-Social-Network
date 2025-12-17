@@ -2,6 +2,7 @@ package fr.univartois.butinfo.s5.api_rest.controller;
 
 import fr.univartois.butinfo.s5.api_rest.dto.block.BlockCreateDto;
 import fr.univartois.butinfo.s5.api_rest.dto.block.BlockUserDto;
+import fr.univartois.butinfo.s5.api_rest.dto.user.UserSummaryDto;
 import fr.univartois.butinfo.s5.api_rest.mapper.BlockMapper;
 import fr.univartois.butinfo.s5.api_rest.mapper.UserMapper;
 import fr.univartois.butinfo.s5.api_rest.model.Block;
@@ -21,19 +22,17 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("/api/blocks")
+@RequestMapping("/api")
 public class BlockController {
 
     private final BlockService blockService;
     private final UserService userService;
     private final BlockMapper blockMapper;
-    private final UserMapper userMapper;
 
-    public BlockController(BlockService blockService, UserService userService, BlockMapper blockMapper, UserMapper userMapper) {
+    public BlockController(BlockService blockService, UserService userService, BlockMapper blockMapper) {
         this.blockService = blockService;
         this.userService = userService;
         this.blockMapper = blockMapper;
-        this.userMapper = userMapper;
     }
 
     /**
@@ -45,7 +44,7 @@ public class BlockController {
             @ApiResponse(responseCode = "201", description = "User successfully blocked"),
             @ApiResponse(responseCode = "404", description = "User not found")
     })
-    public ResponseEntity<Void> blockUser(
+    public ResponseEntity<Block> blockUser(
             @PathVariable String userId,
             @RequestBody(required = false) BlockCreateDto dto,
             Authentication authentication) {
@@ -58,16 +57,12 @@ public class BlockController {
 
         // 3. Récupération des Users et Hydratation de l'Entité
         User blocker = (User) authentication.getPrincipal();
-        User blocked = userService.getById(userId); // UserService lance 404 si pas trouvé
-
-        block.setBlocker(blocker);
-        block.setBlocked(blocked);
-        block.setCreatedAt(LocalDateTime.now());
+        User blocked = userService.getById(userId);
 
         // 4. Appel du Service
-        blockService.createBlock(block);
+        Block createdBlock = blockService.createBlock(block, blocker, blocked);
 
-        return ResponseEntity.status(HttpStatus.CREATED).build();
+        return ResponseEntity.status(HttpStatus.CREATED).body(createdBlock);
     }
 
     /**
