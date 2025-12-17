@@ -68,7 +68,6 @@ public class UserController {
     @GetMapping
     public List<UserSummaryDto> getAllUsers() {
         List<User> users =  userService.getAll();
-        // CORRECTION SONAR : Remplacement de .collect(Collectors.toList()) par .toList()
         return users.stream()
                 .map(userMapper::toSummaryDto)
                 .toList();
