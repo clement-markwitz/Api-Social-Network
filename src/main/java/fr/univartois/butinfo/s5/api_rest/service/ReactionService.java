@@ -1,13 +1,11 @@
 package fr.univartois.butinfo.s5.api_rest.service;
 
-import fr.univartois.butinfo.s5.api_rest.dto.reaction.ReactionCreateDto;
-import fr.univartois.butinfo.s5.api_rest.dto.reaction.ReactionDto;
-import fr.univartois.butinfo.s5.api_rest.mapper.ReactionMapper;
 import fr.univartois.butinfo.s5.api_rest.model.Post;
 import fr.univartois.butinfo.s5.api_rest.model.Reaction;
 import fr.univartois.butinfo.s5.api_rest.model.User;
 import fr.univartois.butinfo.s5.api_rest.repository.PostRepository;
 import fr.univartois.butinfo.s5.api_rest.repository.ReactionRepository;
+import fr.univartois.butinfo.s5.api_rest.repository.UserRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
@@ -21,55 +19,46 @@ public class ReactionService {
 
     private final ReactionRepository reactionRepository;
     private final PostRepository postRepository;
-    private final ReactionMapper reactionMapper;
+    private final UserRepository userRepository;
 
-    public ReactionService(ReactionRepository reactionRepository, PostRepository postRepository, ReactionMapper reactionMapper) {
+    public ReactionService(ReactionRepository reactionRepository, PostRepository postRepository, UserRepository userRepository) {
         this.reactionRepository = reactionRepository;
         this.postRepository = postRepository;
-        this.reactionMapper = reactionMapper;
+        this.userRepository = userRepository;
     }
 
-    public List<ReactionDto> getReactionsByPostId(String postId) {
+    public List<Reaction> getReactionsByPostId(String postId) {
         if (!postRepository.existsById(postId)) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Post introuvable");
         }
-        return reactionRepository.findAllByPostId(postId).stream()
-                .map(reactionMapper::toDto)
-                .toList();
+        return reactionRepository.findAllByPostId(postId);
     }
 
-    public ReactionDto createReaction(String postId, ReactionCreateDto dto, String userId) {
-        if (!postRepository.existsById(postId)) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Post introuvable");
-        }
+    public Reaction createReaction(String postId, Reaction reaction, String userId) {
 
-        // Verifier si l'utilisateur a deja reagi a ce post
+        Post post = postRepository.findById(postId)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Post introuvable"));
+
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Utilisateur introuvable"));
+
         Optional<Reaction> existingReaction = reactionRepository.findByPostIdAndUserId(postId, userId);
         if (existingReaction.isPresent()) {
             throw new ResponseStatusException(HttpStatus.CONFLICT, "Vous avez déjà réagi à ce post");
         }
 
-        Reaction reaction = reactionMapper.toEntity(dto);
-
-        //  On associe le post et l'utilisateur
-        Post post = new Post();
-        post.setId(postId);
         reaction.setPost(post);
-
-        User user = new User();
-        user.setId(userId);
         reaction.setUser(user);
-
         reaction.setCreatedAt(LocalDateTime.now());
 
-        Reaction saved = reactionRepository.save(reaction);
-        return reactionMapper.toDto(saved);
+        return reactionRepository.save(reaction);
     }
 
-    public void deleteReaction(String reactionId) {
-        if (!reactionRepository.existsById(reactionId)) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Réaction introuvable");
+    public void deleteReaction(String postId, String userId) {
+        if(!postRepository.existsById(postId)) {
+              throw  new ResponseStatusException(HttpStatus.NOT_FOUND, "Post introuvable");
         }
-        reactionRepository.deleteById(reactionId);
+        reactionRepository.deleteByPostIdAndUserId(postId, userId);
+
     }
 }

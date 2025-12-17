@@ -12,4 +12,6 @@ public interface ReactionRepository extends MongoRepository<Reaction,String> {
 
     // Pour verifier si un utilisateur a deja reagi a un post
     Optional<Reaction> findByPostIdAndUserId(String postId, String userId);
+
+    void deleteByPostIdAndUserId(String postId, String userId);
 }
