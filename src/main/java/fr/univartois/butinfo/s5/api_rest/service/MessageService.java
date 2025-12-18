@@ -79,7 +79,6 @@ public class MessageService {
 
         MessageDto messageDto = messageMapper.toDto(saved);
 
-        // Broadcast to WebSocket subscribers: /topic/conversation/{id}
         messagingTemplate.convertAndSend("/topic/conversation/" + conversation.getId(), messageDto);
 
         return messageDto;

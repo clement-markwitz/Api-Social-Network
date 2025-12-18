@@ -17,7 +17,7 @@ java {
 
 sonar {
     properties {
-        property("sonar.projectKey", "api-rest")
+        property("sonar.projectKey", "api-rest-groupe-5")
         property("sonar.host.url", "https://sonarqube.univ-artois.fr")
     }
 }

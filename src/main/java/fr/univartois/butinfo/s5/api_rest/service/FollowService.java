@@ -14,16 +14,21 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static java.util.stream.Collectors.toList;
+
 /**
  * Service class for managing follow relationships between users.
  */
 @Service
 public class FollowService {
 
-    @Autowired
-    private FollowRepository followRepository;
-    @Autowired
-    private UserRepository userRepository;
+    private final FollowRepository followRepository;
+    private final UserRepository userRepository;
+
+    public FollowService(FollowRepository followRepository, UserRepository userRepository) {
+        this.followRepository = followRepository;
+        this.userRepository = userRepository;
+    }
 
     /**
      * Allows a user to follow another user.
@@ -76,7 +81,7 @@ public class FollowService {
         User follower = getUserById(followerId);
         return followRepository.findAllByFollower(follower).stream()
                 .map(Follow::getFollowing)
-                .collect(Collectors.toList());
+                .toList();
     }
 
     // Retourne des User (pas de DTO)
@@ -90,7 +95,7 @@ public class FollowService {
         User following = getUserById(followingId);
         return followRepository.findAllByFollowing(following).stream()
                 .map(Follow::getFollower)
-                .collect(Collectors.toList());
+                .toList();
     }
 
     // Retourne des User (Amis)
@@ -111,7 +116,7 @@ public class FollowService {
         // 2. Parmi eux, qui me suit en retour ?
         return myFollowings.stream()
                 .filter(targetUser -> followRepository.findByFollowerAndFollowing(targetUser, currentUser).isPresent())
-                .collect(Collectors.toList());
+                .toList();
     }
 
     /**

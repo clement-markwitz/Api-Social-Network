@@ -4,7 +4,6 @@ import fr.univartois.butinfo.s5.api_rest.dto.user.UserSummaryDto;
 import fr.univartois.butinfo.s5.api_rest.mapper.UserMapper;
 import fr.univartois.butinfo.s5.api_rest.model.User;
 import fr.univartois.butinfo.s5.api_rest.service.FollowService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
@@ -12,7 +11,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.stream.Collectors;
+
 
 /**
  * Controller for managing user follow relationships.
@@ -21,11 +20,13 @@ import java.util.stream.Collectors;
 @RequestMapping("/api/follows")
 public class FollowController {
 
-    @Autowired
-    private FollowService followService;
+    private final FollowService followService;
+    private final UserMapper userMapper;
 
-    @Autowired
-    private UserMapper userMapper;
+    public FollowController(FollowService followService, UserMapper userMapper) {
+        this.followService = followService;
+        this.userMapper = userMapper;
+    }
 
     /**
      * Helper method to get the authenticated user's ID.
@@ -33,8 +34,8 @@ public class FollowController {
      */
     private String getAuthenticatedUserId() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        if (authentication != null && authentication.getPrincipal() instanceof User) {
-            return ((User) authentication.getPrincipal()).getId();
+        if (authentication != null && authentication.getPrincipal() instanceof User user) {
+            return user.getId();
         }
         throw new org.springframework.security.access.AccessDeniedException("Utilisateur non authentifié.");
     }
@@ -71,7 +72,7 @@ public class FollowController {
     public ResponseEntity<List<UserSummaryDto>> getFollowing() {
         String followerId = getAuthenticatedUserId();
         List<User> users = followService.getFollowing(followerId);
-        return ResponseEntity.ok(users.stream().map(userMapper::toSummaryDto).collect(Collectors.toList()));
+        return ResponseEntity.ok(users.stream().map(userMapper::toSummaryDto).toList());
     }
 
     /**
@@ -82,7 +83,7 @@ public class FollowController {
     public ResponseEntity<List<UserSummaryDto>> getFollowers() {
         String followingId = getAuthenticatedUserId();
         List<User> users = followService.getFollowers(followingId);
-        return ResponseEntity.ok(users.stream().map(userMapper::toSummaryDto).collect(Collectors.toList()));
+        return ResponseEntity.ok(users.stream().map(userMapper::toSummaryDto).toList());
     }
 
     /**
@@ -93,6 +94,6 @@ public class FollowController {
     @GetMapping("/{userId}/friends")
     public ResponseEntity<List<UserSummaryDto>> getFriends(@PathVariable String userId) {
         List<User> friends = followService.getFriends(userId);
-        return ResponseEntity.ok(friends.stream().map(userMapper::toSummaryDto).collect(Collectors.toList()));
+        return ResponseEntity.ok(friends.stream().map(userMapper::toSummaryDto).toList());
     }
 }

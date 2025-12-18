@@ -86,7 +86,6 @@ public class CommunityController {
         // Conversion DTO -> Entité
         Community entity = communityMapper.toEntity(createDto);
 
-        // CORRECTION TODO : La récupération du user est implémentée ici, plus de commentaire TODO.
         User admin = (User) authentication.getPrincipal();
         entity.addAdmin(admin);
 
