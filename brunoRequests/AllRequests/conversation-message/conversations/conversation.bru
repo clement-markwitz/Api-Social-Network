@@ -10,11 +10,17 @@ post {
   auth: bearer
 }
 
+auth:bearer {
+  token: {{token_userA}}
+}
+
 body:json {
   {
-    "name": "Projet de groupe",
-    "memberIds": [
-      "6940255024866417681f8a2f" 
-    ]
+    "name": "Projet Secret",
+    "memberIds": ["id"]
   }
+}
+
+script:post-response {
+  bru.setEnvVar("convId", res.body.id);
 }

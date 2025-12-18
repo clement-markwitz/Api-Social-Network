@@ -1,0 +1,15 @@
+meta {
+  name: rejoindre
+  type: http
+  seq: 3
+}
+
+post {
+  url: http://localhost:8080/api/conversations/{{convId}}/join
+  body: none
+  auth: bearer
+}
+
+auth:bearer {
+  token: {{token_userB}}
+}

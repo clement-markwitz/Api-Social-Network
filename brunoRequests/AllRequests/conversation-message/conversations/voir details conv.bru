@@ -1,11 +1,11 @@
 meta {
-  name: voir message
+  name: voir details conv
   type: http
-  seq: 3
+  seq: 5
 }
 
 get {
-  url: http://localhost:8080/api/conversations/{{convId}}/messages
+  url: http://localhost:8080/api/conversations/{{convId}}
   body: none
   auth: bearer
 }
