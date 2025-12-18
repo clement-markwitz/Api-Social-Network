@@ -6,6 +6,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Repository;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 /**
@@ -44,4 +45,13 @@ public interface PostRepository extends MongoRepository<Post, String> {
      * @return a list of posts containing the specified text
      */
     List<Post> findAllByTextContainingIgnoreCase(String text);
+
+    /**
+     * Count the number of posts created between the specified start and end dates.
+     *
+     * @param start the start date
+     * @param end the end date
+     * @return the count of posts created in the specified date range
+     */
+    long countByCreatedAtBetween(LocalDateTime start, LocalDateTime end);
 }
