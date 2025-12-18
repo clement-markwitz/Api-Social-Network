@@ -5,11 +5,11 @@ meta {
 }
 
 delete {
-  url: http://localhost:8080/api/conversations/694187b5b8dda7ff4e5c6096/messages/694187d0b8dda7ff4e5c6097
+  url: http://localhost:8080/api/conversations/{{convId}}/messages/{{msgId_B}}
   body: none
   auth: bearer
 }
 
 auth:bearer {
-  token: eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJib2IiLCJpYXQiOjE3NjU5MDIyNDksImV4cCI6MTc2NTk4ODY0OX0.Eka2ByI8XQtoKLfXK8i0PABEv2E9jpvc8RIT2e_9JqZ5C7HkK6Hwj-uFo0bw_ogm
+  token: {{token_userB}}
 }

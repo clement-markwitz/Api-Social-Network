@@ -3,6 +3,7 @@ package fr.univartois.butinfo.s5.api_rest.repository;
 import fr.univartois.butinfo.s5.api_rest.model.Community;
 import org.springframework.data.mongodb.repository.MongoRepository;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -42,4 +43,13 @@ public interface CommunityRepository extends MongoRepository<Community, String> 
      * @return a list of communities administered by the specified user
      */
     List<Community> findByAdminsId(String userId);
+
+    /**
+     * Count the number of communities created between the specified start and end dates.
+     *
+     * @param start the start date
+     * @param end the end date
+     * @return the count of communities created in the specified date range
+     */
+    long countByCreatedAtBetween(LocalDateTime start, LocalDateTime end);
 }

@@ -16,3 +16,11 @@ body:json {
     "password": "password123"
   }
 }
+
+script:post-response {
+  if (res.status === 200 || res.status === 201) {
+      bru.setEnvVar("token_userB", res.body.token);
+      bru.setEnvVar("id_userB", res.body.id);
+      console.log("User B configuré : " + res.body.username);
+  }
+}

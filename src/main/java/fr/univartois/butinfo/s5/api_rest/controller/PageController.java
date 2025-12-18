@@ -4,8 +4,12 @@ import fr.univartois.butinfo.s5.api_rest.dto.page.PageCreateDto;
 import fr.univartois.butinfo.s5.api_rest.dto.page.PageDetailDto;
 import fr.univartois.butinfo.s5.api_rest.dto.page.PageSummaryDto;
 import fr.univartois.butinfo.s5.api_rest.dto.page.PageUpdateDto;
+import fr.univartois.butinfo.s5.api_rest.dto.post.PostDto;
+import fr.univartois.butinfo.s5.api_rest.mapper.PostMapper;
+import fr.univartois.butinfo.s5.api_rest.model.Post;
 import fr.univartois.butinfo.s5.api_rest.model.User;
 import fr.univartois.butinfo.s5.api_rest.service.PageService;
+import fr.univartois.butinfo.s5.api_rest.service.PostService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
@@ -14,8 +18,11 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 /**
  * Controller for managing pages.
@@ -25,9 +32,13 @@ import org.springframework.web.bind.annotation.*;
 public class PageController {
 
     private final PageService pageService;
+    private final PostService postService;
+    private final PostMapper postMapper;
 
-    public PageController(PageService pageService) {
+    public PageController(PageService pageService, PostService postService, PostMapper postMapper) {
         this.pageService = pageService;
+        this.postService = postService;
+        this.postMapper = postMapper;
     }
 
     /**
@@ -110,5 +121,14 @@ public class PageController {
     })
     public void deletePage(@PathVariable String id) {
         pageService.deletePage(id);
+    }
+
+    @GetMapping("/{id}/posts")
+    public ResponseEntity<List<PostDto>> getPagePosts(@PathVariable String id) {
+        List<Post> posts = postService.getPostsByPage(id);
+        List<PostDto> postDtos = posts.stream()
+                .map(postMapper::toDto)
+                .toList();
+        return ResponseEntity.ok(postDtos);
     }
 }

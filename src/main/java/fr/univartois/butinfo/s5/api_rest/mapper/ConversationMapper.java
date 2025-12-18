@@ -1,6 +1,7 @@
 package fr.univartois.butinfo.s5.api_rest.mapper;
 
 import fr.univartois.butinfo.s5.api_rest.dto.conversation.ConversationCreateDto;
+import fr.univartois.butinfo.s5.api_rest.dto.conversation.ConversationDto;
 import fr.univartois.butinfo.s5.api_rest.dto.conversation.ConversationSummaryDto;
 import fr.univartois.butinfo.s5.api_rest.model.Conversation;
 import fr.univartois.butinfo.s5.api_rest.model.Message;
@@ -39,7 +40,13 @@ public interface ConversationMapper {
      */
     @Mapping(source = "conversation.id", target = "id")
     @Mapping(source = "conversation.name", target = "name")
-    // Appelle MessageMapper.toSummaryDto pour le dernier message
     @Mapping(source = "lastMessage", target = "lastMessage")
     ConversationSummaryDto toSummaryDto(Conversation conversation, Message lastMessage, @Context String currentUserId);
+
+    /**
+     * Convert a Conversation entity to a ConversationDto.
+     * @param conversation
+     * @return
+     */
+    ConversationDto toDto(Conversation conversation);
 }

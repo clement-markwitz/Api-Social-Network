@@ -1,8 +1,12 @@
 package fr.univartois.butinfo.s5.api_rest.controller;
 
+import fr.univartois.butinfo.s5.api_rest.dto.recommendation.FriendRecommendationDto;
+import fr.univartois.butinfo.s5.api_rest.dto.recommendation.PageRecommendationDto;
+import fr.univartois.butinfo.s5.api_rest.dto.recommendation.PostRecommendationDto;
 import fr.univartois.butinfo.s5.api_rest.dto.user.*;
 import fr.univartois.butinfo.s5.api_rest.mapper.UserMapper;
 import fr.univartois.butinfo.s5.api_rest.model.User;
+import fr.univartois.butinfo.s5.api_rest.service.RecommendationService;
 import fr.univartois.butinfo.s5.api_rest.service.UserService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -25,6 +29,7 @@ public class UserController {
 
     private final UserService userService;
     private final UserMapper userMapper;
+    private final RecommendationService recommendationService;
 
     /**
      * Constructor for UserController.
@@ -32,9 +37,10 @@ public class UserController {
      * @param userService the user service
      * @param userMapper the user mapper
      */
-    public UserController(UserService userService, UserMapper userMapper) {
+    public UserController(UserService userService, UserMapper userMapper, RecommendationService recommendationService) {
         this.userService = userService;
         this.userMapper = userMapper;
+        this.recommendationService = recommendationService;
     }
 
     /**
@@ -61,7 +67,7 @@ public class UserController {
      * Get a user's public profile by ID.
      *
      * @param id the user's ID
-     * @return UserPublicProfileDto
+     * @return ResponseEntity containing UserPublicProfileDto
      */
     @GetMapping("/{id}")
     @Operation(summary = "Get a user's public profile by ID", description = "Retrieves the public profile information of a user specified by their ID.")
@@ -69,9 +75,14 @@ public class UserController {
             @ApiResponse(responseCode = "200", description = "Public profile retrieved successfully"),
             @ApiResponse(responseCode = "404", description = "User not found")
     })
-    public UserPublicProfileDto getUser(@PathVariable String id) {
+    public ResponseEntity<UserPublicProfileDto> getUser(@PathVariable String id) {
         User user = userService.getById(id);
-        return userMapper.toPublicProfileDto(user);
+
+        if (user == null) {
+            return ResponseEntity.notFound().build();
+        }
+
+        return ResponseEntity.ok(userMapper.toPublicProfileDto(user));
     }
 
     /**
@@ -215,5 +226,71 @@ public class UserController {
         List<User> users = userService.searchUsers(query);
 
         return users.stream().map(userMapper::toSummaryDto).toList();
+    }
+
+    /**
+     * Retrieves friend recommendations for a specific user.
+     * <p>
+     * This endpoint calls the recommendation service to suggest users that the target user might know.
+     * </p>
+     *
+     * @param id The unique identifier of the user.
+     * @return A list of {@link FriendRecommendationDto} containing friend suggestions.
+     * @throws ResponseStatusException if the user is not found (404).
+     */
+    @GetMapping("/{id}/recommendations")
+    @Operation(summary = "Get friend recommendations", description = "Retrieves a list of potential friends for the specified user.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Recommendations retrieved successfully"),
+            @ApiResponse(responseCode = "404", description = "User not found")
+    })
+    public ResponseEntity<List<FriendRecommendationDto>> getUserRecommendations(@PathVariable String id) {
+        // Verify user existence (throws exception if not found)
+        userService.getById(id);
+
+        List<FriendRecommendationDto> recommendations = recommendationService.getFriendRecommendations(id);
+        return ResponseEntity.ok(recommendations);
+    }
+
+    /**
+     * Retrieves page recommendations for a specific user.
+     * <p>
+     * Suggests communities, businesses, or public pages based on the user's profile.
+     * </p>
+     *
+     * @param id The unique identifier of the user.
+     * @return A list of {@link PageRecommendationDto} containing page suggestions.
+     * @throws ResponseStatusException if the user is not found (404).
+     */
+    @GetMapping("/{id}/recommendations/pages")
+    @Operation(summary = "Get page recommendations", description = "Retrieves a list of pages the user might be interested in.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Page recommendations retrieved successfully"),
+            @ApiResponse(responseCode = "404", description = "User not found")
+    })
+    public ResponseEntity<List<PageRecommendationDto>> getPageRecommendations(@PathVariable String id) {
+        userService.getById(id);
+        return ResponseEntity.ok(recommendationService.getPageRecommendations(id));
+    }
+
+    /**
+     * Retrieves post recommendations for a specific user.
+     * <p>
+     * Suggests content (posts) from across the platform that matches the user's interests.
+     * </p>
+     *
+     * @param id The unique identifier of the user.
+     * @return A list of {@link PostRecommendationDto} containing post suggestions.
+     * @throws ResponseStatusException if the user is not found (404).
+     */
+    @GetMapping("/{id}/recommendations/posts")
+    @Operation(summary = "Get post recommendations", description = "Retrieves a list of posts tailored to the user's interests.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Post recommendations retrieved successfully"),
+            @ApiResponse(responseCode = "404", description = "User not found")
+    })
+    public ResponseEntity<List<PostRecommendationDto>> getPostRecommendations(@PathVariable String id) {
+        userService.getById(id);
+        return ResponseEntity.ok(recommendationService.getPostRecommendations(id));
     }
 }

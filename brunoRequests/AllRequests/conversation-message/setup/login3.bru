@@ -1,0 +1,26 @@
+meta {
+  name: login3
+  type: http
+  seq: 6
+}
+
+post {
+  url: http://localhost:8080/api/auth/login
+  body: json
+  auth: inherit
+}
+
+body:json {
+  {
+    "username": "clem",
+    "password": "password123"
+  }
+}
+
+script:post-response {
+  if (res.status === 200 || res.status === 201) {
+      bru.setEnvVar("token_userC", res.body.token);
+      bru.setEnvVar("id_userC", res.body.id);
+      console.log("User C configuré : " + res.body.username);
+  }
+}

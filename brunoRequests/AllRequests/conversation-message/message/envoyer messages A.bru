@@ -1,0 +1,26 @@
+meta {
+  name: envoyer messages A
+  type: http
+  seq: 1
+}
+
+post {
+  url: http://localhost:8080/api/conversations/{{convId}}/messages
+  body: json
+  auth: bearer
+}
+
+auth:bearer {
+  token: {{token_userA}}
+}
+
+body:json {
+  {
+    "text": "Salut Bob ! Tu as reçu mon invitation ?",
+    "attachments": []
+  }
+}
+
+script:post-response {
+  bru.setEnvVar("msgId_A", res.body.id);
+}

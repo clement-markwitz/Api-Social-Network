@@ -1,0 +1,19 @@
+meta {
+  name: add member
+  type: http
+  seq: 4
+}
+
+post {
+  url: http://localhost:8080/api/conversations/{{convId}}/members
+  body: json
+  auth: bearer
+}
+
+auth:bearer {
+  token: {{token_userA}}
+}
+
+body:json {
+  ["6943d2b6d164ad9fb00685a2"]
+}

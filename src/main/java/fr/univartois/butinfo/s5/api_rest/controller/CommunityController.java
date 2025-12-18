@@ -4,10 +4,14 @@ import fr.univartois.butinfo.s5.api_rest.dto.community.CommunityCreateDto;
 import fr.univartois.butinfo.s5.api_rest.dto.community.CommunityDetailDto;
 import fr.univartois.butinfo.s5.api_rest.dto.community.CommunitySummaryDto;
 import fr.univartois.butinfo.s5.api_rest.dto.community.CommunityUpdateDto;
+import fr.univartois.butinfo.s5.api_rest.dto.post.PostDto;
 import fr.univartois.butinfo.s5.api_rest.mapper.CommunityMapper;
+import fr.univartois.butinfo.s5.api_rest.mapper.PostMapper;
 import fr.univartois.butinfo.s5.api_rest.model.Community;
+import fr.univartois.butinfo.s5.api_rest.model.Post;
 import fr.univartois.butinfo.s5.api_rest.model.User;
 import fr.univartois.butinfo.s5.api_rest.service.CommunityService;
+import fr.univartois.butinfo.s5.api_rest.service.PostService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
@@ -28,10 +32,14 @@ public class CommunityController {
 
     private final CommunityService communityService;
     private final CommunityMapper communityMapper;
+    private final PostService postService;
+    private final PostMapper postMapper;
 
-    public CommunityController(CommunityService communityService, CommunityMapper communityMapper) {
+    public CommunityController(CommunityService communityService, CommunityMapper communityMapper, PostService postService, PostMapper postMapper) {
         this.communityService = communityService;
         this.communityMapper = communityMapper;
+        this.postService = postService;
+        this.postMapper = postMapper;
     }
 
     /**
@@ -78,7 +86,6 @@ public class CommunityController {
         // Conversion DTO -> Entité
         Community entity = communityMapper.toEntity(createDto);
 
-        // CORRECTION TODO : La récupération du user est implémentée ici, plus de commentaire TODO.
         User admin = (User) authentication.getPrincipal();
         entity.addAdmin(admin);
 
@@ -144,5 +151,14 @@ public class CommunityController {
         // 2. Suppression
         communityService.deleteCommunity(id);
         return ResponseEntity.noContent().build();
+    }
+
+    @GetMapping("/{id}/posts")
+    public ResponseEntity<List<PostDto>> getCommunityPosts(@PathVariable String id) {
+        List<Post> posts = postService.getPostsByCommunity(id); // postService n'est plus null !
+        List<PostDto> postDtos = posts.stream()
+                .map(postMapper::toDto)
+                .toList();
+        return ResponseEntity.ok(postDtos);
     }
 }

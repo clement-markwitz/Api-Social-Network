@@ -17,8 +17,8 @@ public interface TokenRepository extends MongoRepository<Token, String> {
 
     /**
      * Find a token by its token string.
-     * @param token
+     * @param tokenValue
      * @return
      */
-    Optional<Token> findByToken(String token);
+    Optional<Token> findByTokenValue(String tokenValue);
 }

@@ -2,9 +2,7 @@ package fr.univartois.butinfo.s5.api_rest.controller;
 
 import fr.univartois.butinfo.s5.api_rest.dto.block.BlockCreateDto;
 import fr.univartois.butinfo.s5.api_rest.dto.block.BlockUserDto;
-import fr.univartois.butinfo.s5.api_rest.dto.user.UserSummaryDto;
 import fr.univartois.butinfo.s5.api_rest.mapper.BlockMapper;
-import fr.univartois.butinfo.s5.api_rest.mapper.UserMapper;
 import fr.univartois.butinfo.s5.api_rest.model.Block;
 import fr.univartois.butinfo.s5.api_rest.model.User;
 import fr.univartois.butinfo.s5.api_rest.service.BlockService;
@@ -16,10 +14,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
-
-import java.time.LocalDateTime;
 import java.util.List;
-import java.util.stream.Collectors;
+
 
 /**
  * Controller for managing user blocks.
@@ -96,8 +92,7 @@ public class BlockController {
         List<Block> blocks = blockService.findBlocksByBlocker(blocker.getId());
 
         List<BlockUserDto> userSummaries = blocks.stream()
-                .map(blockMapper::toDto)
-                .collect(Collectors.toList());
+                .map(blockMapper::toDto).toList();
 
         return ResponseEntity.ok(userSummaries);
     }
