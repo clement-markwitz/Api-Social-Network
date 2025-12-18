@@ -1,6 +1,5 @@
 package fr.univartois.butinfo.s5.api_rest.controller;
 
-import fr.univartois.butinfo.s5.api_rest.dto.recommendation.CommunityRecommendationDto;
 import fr.univartois.butinfo.s5.api_rest.dto.recommendation.FriendRecommendationDto;
 import fr.univartois.butinfo.s5.api_rest.dto.recommendation.PageRecommendationDto;
 import fr.univartois.butinfo.s5.api_rest.dto.recommendation.PostRecommendationDto;
@@ -229,27 +228,67 @@ public class UserController {
         return users.stream().map(userMapper::toSummaryDto).toList();
     }
 
+    /**
+     * Retrieves friend recommendations for a specific user.
+     * <p>
+     * This endpoint calls the recommendation service to suggest users that the target user might know.
+     * </p>
+     *
+     * @param id The unique identifier of the user.
+     * @return A list of {@link FriendRecommendationDto} containing friend suggestions.
+     * @throws ResponseStatusException if the user is not found (404).
+     */
     @GetMapping("/{id}/recommendations")
+    @Operation(summary = "Get friend recommendations", description = "Retrieves a list of potential friends for the specified user.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Recommendations retrieved successfully"),
+            @ApiResponse(responseCode = "404", description = "User not found")
+    })
     public ResponseEntity<List<FriendRecommendationDto>> getUserRecommendations(@PathVariable String id) {
-        // Vérifier si l'utilisateur existe (optionnel, mais recommandé)
+        // Verify user existence (throws exception if not found)
         userService.getById(id);
 
         List<FriendRecommendationDto> recommendations = recommendationService.getFriendRecommendations(id);
         return ResponseEntity.ok(recommendations);
     }
-    @GetMapping("/{id}/recommendations/communities")
-    public ResponseEntity<List<CommunityRecommendationDto>> getCommunityRecommendations(@PathVariable String id) {
-        userService.getById(id);
-        return ResponseEntity.ok(recommendationService.getCommunityRecommendations(id));
-    }
 
+    /**
+     * Retrieves page recommendations for a specific user.
+     * <p>
+     * Suggests communities, businesses, or public pages based on the user's profile.
+     * </p>
+     *
+     * @param id The unique identifier of the user.
+     * @return A list of {@link PageRecommendationDto} containing page suggestions.
+     * @throws ResponseStatusException if the user is not found (404).
+     */
     @GetMapping("/{id}/recommendations/pages")
+    @Operation(summary = "Get page recommendations", description = "Retrieves a list of pages the user might be interested in.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Page recommendations retrieved successfully"),
+            @ApiResponse(responseCode = "404", description = "User not found")
+    })
     public ResponseEntity<List<PageRecommendationDto>> getPageRecommendations(@PathVariable String id) {
         userService.getById(id);
         return ResponseEntity.ok(recommendationService.getPageRecommendations(id));
     }
 
+    /**
+     * Retrieves post recommendations for a specific user.
+     * <p>
+     * Suggests content (posts) from across the platform that matches the user's interests.
+     * </p>
+     *
+     * @param id The unique identifier of the user.
+     * @return A list of {@link PostRecommendationDto} containing post suggestions.
+     * @throws ResponseStatusException if the user is not found (404).
+     */
     @GetMapping("/{id}/recommendations/posts")
+    @Operation(summary = "Get post recommendations", description = "Retrieves a list of posts tailored to the user's interests.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Post recommendations retrieved successfully"),
+            @ApiResponse(responseCode = "404", description = "User not found")
+    })
     public ResponseEntity<List<PostRecommendationDto>> getPostRecommendations(@PathVariable String id) {
         userService.getById(id);
         return ResponseEntity.ok(recommendationService.getPostRecommendations(id));

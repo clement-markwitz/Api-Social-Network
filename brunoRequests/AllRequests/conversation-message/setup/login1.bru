@@ -1,0 +1,28 @@
+meta {
+  name: login1
+  type: http
+  seq: 2
+}
+
+post {
+  url: http://localhost:8080/api/auth/login
+  body: json
+  auth: inherit
+}
+
+body:json {
+  {
+    "username": "bob",
+    "password": "password123"
+  }
+}
+
+script:post-response {
+  if (res.status === 200 || res.status === 201) {
+      bru.setEnvVar("token_userA", res.body.token);
+      bru.setEnvVar("id_userA", res.body.id);
+      console.log("User A configuré : " + res.body.token);
+  } else {
+      console.error("Échec du setup User A");
+  }
+}
