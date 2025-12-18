@@ -22,7 +22,7 @@ public class Token {
     private String id; // Changé en 'private'
 
     @Indexed(unique = true)
-    private String token;
+    private String tokenValue;
 
     @Builder.Default
     private String tokenType = "BEARER";

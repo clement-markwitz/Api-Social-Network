@@ -1,9 +1,5 @@
 package fr.univartois.butinfo.s5.api_rest.dto.post;
 
-import fr.univartois.butinfo.s5.api_rest.dto.community.CommunitySummaryDto;
-import fr.univartois.butinfo.s5.api_rest.dto.page.PageSummaryDto;
-import fr.univartois.butinfo.s5.api_rest.dto.post.MediaDto;
-import fr.univartois.butinfo.s5.api_rest.dto.post.PostStatsDto;
 import fr.univartois.butinfo.s5.api_rest.dto.user.UserSummaryDto;
 import fr.univartois.butinfo.s5.api_rest.model.PostType;
 import fr.univartois.butinfo.s5.api_rest.model.PostVisibility;

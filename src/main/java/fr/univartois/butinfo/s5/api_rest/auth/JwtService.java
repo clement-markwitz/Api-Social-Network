@@ -69,7 +69,7 @@ public class JwtService {
     public boolean isTokenValid(String token, UserDetails userDetails) {
         final String username = extractUsername(token);
 
-        boolean isTokenPresentInDb = tokenRepository.findByToken(token).isPresent();
+        boolean isTokenPresentInDb = tokenRepository.findByTokenValue(token).isPresent();
 
         return (username.equals(userDetails.getUsername())) && !isTokenExpired(token) && isTokenPresentInDb;
     }

@@ -44,7 +44,7 @@ public class LogoutService implements LogoutHandler {
         }
 
         jwt = authHeader.substring(7);
-        Optional<Token> token = tokenRepository.findByToken(jwt);
+        Optional<Token> token = tokenRepository.findByTokenValue(jwt);
 
         token.ifPresent(value -> tokenRepository.deleteById(value.getId()));
     }
