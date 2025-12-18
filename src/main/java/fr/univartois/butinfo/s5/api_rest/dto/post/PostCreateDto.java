@@ -6,7 +6,7 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
 /**
- * DTO (entrée) pour la création d'un nouveau Post.
+ * DTO (entry point) for creating a new post.
  */
 public record PostCreateDto(
         @NotBlank

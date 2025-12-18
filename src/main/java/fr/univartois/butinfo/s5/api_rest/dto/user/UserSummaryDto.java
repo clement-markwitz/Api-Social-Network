@@ -1,8 +1,8 @@
 package fr.univartois.butinfo.s5.api_rest.dto.user;
 
 /**
- * DTO (sortie) minimal pour afficher un utilisateur dans une liste
- * (ex: auteur d'un post, membre d'un groupe).
+ * DTO (output) providing a summary of user information for contexts
+ * (ex : messages, comments) where full user details are not required.
  */
 public record UserSummaryDto(
         String id,

@@ -8,13 +8,40 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
+/**
+ * Repository interface for managing Post entities in MongoDB.
+ */
 @Repository
 public interface PostRepository extends MongoRepository<Post, String> {
+    /**
+     * Find all posts authored by a specific user with pagination.
+     *
+     * @param authorId the ID of the author
+     * @param pageable pagination information
+     * @return a page of posts authored by the specified user
+     */
     Page<Post> findAllByAuthorId(String authorId, Pageable pageable);
-
+    /**
+     * Find all posts in a specific community with pagination.
+     *
+     * @param communityId the ID of the community
+     * @param pageable pagination information
+     * @return a page of posts in the specified community
+     */
     Page<Post> findAllByCommunityId(String communityId, Pageable pageable);
-
+    /**
+     * Find all posts on a specific page with pagination.
+     *
+     * @param pageId the ID of the page
+     * @param pageable pagination information
+     * @return a page of posts on the specified page
+     */
     Page<Post> findAllByPageId(String pageId, Pageable pageable);
-
+    /**
+     * Find all posts containing specific text (case insensitive).
+     *
+     * @param text the text to search for
+     * @return a list of posts containing the specified text
+     */
     List<Post> findAllByTextContainingIgnoreCase(String text);
 }

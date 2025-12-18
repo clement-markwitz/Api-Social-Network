@@ -17,6 +17,9 @@ import java.time.LocalDateTime;
 import java.util.Collection;
 import java.util.List;
 
+/**
+ * Represents a user in the social media application.
+ */
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -56,31 +59,50 @@ public class User implements UserDetails {
     @LastModifiedDate // Géré automatiquement si l'audit est activé
     private LocalDateTime updatedAt;
 
+    /**
+     * Returns the authorities granted to the user.
+     *
+     * @return a collection of granted authorities
+     */
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return List.of(new SimpleGrantedAuthority("ROLE_" + (role == null ? "USER" : role)));
     }
 
+    /**
+     * Returns the password used to authenticate the user.
+     *
+     * @return the password
+     */
     @Override
     public boolean isAccountNonExpired() {
         return true;
     }
-
+    /**
+     * Indicates whether the user's account is locked or unlocked.
+     *
+     * @return true if the account is not locked, false otherwise
+     */
     @Override
     public boolean isAccountNonLocked() {
         return !banned;
     }
-
+    /**
+     * Indicates whether the user's credentials (password) are expired or valid.
+     *
+     * @return true if the credentials are valid, false otherwise
+     */
     @Override
     public boolean isCredentialsNonExpired() {
         return true;
     }
-
+    /**
+     * Indicates whether the user is enabled or disabled.
+     *
+     * @return true if the user is enabled, false otherwise
+     */
     @Override
     public boolean isEnabled() {
         return true;
     }
-
-    // NOTE : J'ai supprimé tous les Getters, Setters et toString() manuels.
-    // L'annotation @Data de Lombok (ligne 19) s'en occupe déjà !
 }

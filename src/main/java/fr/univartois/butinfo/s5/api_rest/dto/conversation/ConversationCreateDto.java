@@ -5,7 +5,7 @@ import jakarta.validation.constraints.Size;
 import java.util.List;
 
 /**
- * DTO (entrée) pour la création d'une nouvelle conversation.
+ * DTO for creating a new conversation.
  */
 public record ConversationCreateDto(
         @NotEmpty(message = "Il doit y avoir au moins un autre membre")

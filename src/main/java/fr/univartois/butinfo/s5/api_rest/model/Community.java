@@ -15,6 +15,9 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Represent a community within the application.
+ */
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -31,15 +34,13 @@ public class Community {
     private String avatarUrl;
 
     /**
-     * Liste des ID des utilisateurs qui gèrent la communauté.
-     * (Standardisé à partir de votre champ 'admin' du JSON)
+     * List of administrators of the community.
      */
     @DBRef
     private List<User> admins;
 
     /**
-     * Nombre total de membres (dénormalisé).
-     * (Votre champ 'membersCount' du JSON)
+     * Number of members in the community.
      */
     private int memberCount;
 
@@ -51,7 +52,8 @@ public class Community {
     private LocalDateTime updatedAt;
 
     /**
-     * Ajoute un administrateur à la communauté de manière sécurisée.
+     * Add an administrator by initializing the list if necessary.
+     * @param user
      */
     public void addAdmin(User user) {
         if (this.admins == null) {
@@ -61,7 +63,8 @@ public class Community {
     }
 
     /**
-     * Supprime un administrateur en toute sécurité.
+     * Remove an administrator safely.
+     * @param user
      */
     public void removeAdmin(User user) {
         if (this.admins != null) {
@@ -70,7 +73,8 @@ public class Community {
     }
 
     /**
-     * Ajoute un topic en initialisant la liste si nécessaire.
+     * Add a topic by initializing the list if necessary.
+     * @param topic
      */
     public void addTopic(String topic) {
         if (this.topics == null) {
@@ -80,7 +84,8 @@ public class Community {
     }
 
     /**
-     * Supprime un topic en toute sécurité.
+     * Remove a topic safely.
+     * @param topic
      */
     public void removeTopic(String topic) {
         if (this.topics != null) {

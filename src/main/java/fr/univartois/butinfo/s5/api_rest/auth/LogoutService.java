@@ -8,15 +8,28 @@ import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 
+/**
+ * Service for handling user logout.
+ */
 @Service
 public class LogoutService implements LogoutHandler {
 
     private final TokenRepository tokenRepository;
 
+    /**
+     * Constructor for LogoutService.
+     * @param tokenRepository
+     */
     public LogoutService(TokenRepository tokenRepository) {
         this.tokenRepository = tokenRepository;
     }
 
+    /**
+     * Handle user logout by invalidating the JWT token.
+     * @param request
+     * @param response
+     * @param authentication
+     */
     @Override
     public void logout(
             HttpServletRequest request,

@@ -15,6 +15,11 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
 
+/**
+ * Controller for handling authentication-related endpoints.
+ * @author Your Name
+ * @version 1.0
+ */
 @RestController
 @RequestMapping("/api/auth")
 public class AuthenticationController {
@@ -29,23 +34,33 @@ public class AuthenticationController {
         this.userMapper = userMapper;
     }
 
+    /**
+     * Register a new user.
+     * @param dto
+     * @return
+     */
     @PostMapping("/register")
     @ResponseStatus(HttpStatus.CREATED)
-    @Operation(summary = "Créer un nouvel utilisateur", description = "Permet de créer un nouveau utilisateur avec les informations fournies.")
+    @Operation(summary = "Create a new user", description = "Creates a new user with the provided information.")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "201", description = "Utilisateur créé avec succès"),
-            @ApiResponse(responseCode = "400", description = "Données invalides fournies")
+            @ApiResponse(responseCode = "201", description = "User created successfully"),
+            @ApiResponse(responseCode = "400", description = "Invalid data provided")
     })
     public UserPrivateProfileDto register(@Valid @RequestBody UserCreateDto dto) {
         User registeredUser = authenticationService.register(dto);
         return userMapper.toPrivateProfileDto(registeredUser);
     }
 
+    /**
+     * Authenticate a user and return a JWT token.
+     * @param dto
+     * @return
+     */
     @PostMapping("/login")
-    @Operation(summary = "Authentifier un utilisateur", description = "Permet à un utilisateur de se connecter et de recevoir un token JWT.")
+    @Operation(summary = "Authenticate a user", description = "Allows a user to log in and receive a JWT token.")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Authentification réussie"),
-            @ApiResponse(responseCode = "401", description = "Échec de l'authentification")
+            @ApiResponse(responseCode = "200", description = "Authentication successful"),
+            @ApiResponse(responseCode = "401", description = "Authentication failed")
     })
     public ResponseEntity<Map<String, String>> authenticate(@RequestBody UserLoginDto dto) {
         User authenticatedUser = authenticationService.authenticate(dto);

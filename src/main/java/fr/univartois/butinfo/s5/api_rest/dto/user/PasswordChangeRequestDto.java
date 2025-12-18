@@ -5,7 +5,7 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 
 /**
- * DTO (entrée) pour la demande de changement de mot de passe.
+ * DTO (entry point) for changing a user's password.
  */
 public record PasswordChangeRequestDto(
     @NotBlank

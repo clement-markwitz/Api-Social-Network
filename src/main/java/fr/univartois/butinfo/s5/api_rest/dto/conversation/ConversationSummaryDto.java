@@ -3,8 +3,8 @@ package fr.univartois.butinfo.s5.api_rest.dto.conversation;
 import fr.univartois.butinfo.s5.api_rest.dto.message.MessageSummaryDto;
 
 /**
- * DTO (sortie) pour afficher une conversation dans la liste principale.
- * Il est enrichi avec les détails des membres et le dernier message.
+ * DTO (output) for summarizing a conversation.
+ * He is used in the conversation list of a user.
  */
 public record ConversationSummaryDto(
         String id,

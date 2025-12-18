@@ -68,7 +68,12 @@ public class MessageController {
      */
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    @Operation(summary = "Envoyer un message", description = "Envoie un nouveau message dans une conversation spécifiée.")
+    @Operation(summary = "Send a message", description = "Sends a new message in the specified conversation.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "201", description = "Message sent successfully"),
+            @ApiResponse(responseCode = "403", description = "Forbidden (Not a member of this conversation)"),
+            @ApiResponse(responseCode = "404", description = "Conversation or sender not found")
+    })
     public MessageDto send(
             @PathVariable String conversationId,
             @RequestBody @Valid MessageCreateDto dto,
@@ -101,10 +106,10 @@ public class MessageController {
      * @throws ResponseStatusException if the user is not a member of the conversation (403).
      */
     @GetMapping
-    @Operation(summary = "Récupérer les messages", description = "Récupère tous les messages d'une conversation spécifiée.")
+    @Operation(summary = "Get messages", description = "Retrieves all messages of a specified conversation.")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Messages récupérés avec succès"),
-            @ApiResponse(responseCode = "403", description = "Accès refusé (Vous n'êtes pas membre de cette conversation)")
+            @ApiResponse(responseCode = "200", description = "Messages retrieved successfully"),
+            @ApiResponse(responseCode = "403", description = "Access denied (You are not a member of this conversation)")
     })
     public List<MessageDto> getAll(
             @PathVariable String conversationId,
@@ -136,11 +141,11 @@ public class MessageController {
      */
     @DeleteMapping("/{messageId}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    @Operation(summary = "Supprimer un message", description = "Supprime un message spécifié d'une conversation.")
+    @Operation(summary = "Delete a message", description = "Deletes a specific message from a conversation.")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "204", description = "Message supprimé avec succès"),
-            @ApiResponse(responseCode = "400", description = "Le message ne fait pas partie de cette conversation"),
-            @ApiResponse(responseCode = "403", description = "Accès refusé (Vous ne pouvez supprimer que vos propres messages)")
+            @ApiResponse(responseCode = "204", description = "Message deleted successfully"),
+            @ApiResponse(responseCode = "400", description = "The message does not belong to this conversation"),
+            @ApiResponse(responseCode = "403", description = "Access denied (You can only delete your own messages)")
     })
     public void delete(
             @PathVariable String conversationId,

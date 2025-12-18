@@ -12,6 +12,10 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.time.LocalDateTime;
 
+/**
+ * Represent a subscription of a user to a page.
+ * Users can subscribe to pages to receive updates and content from them.
+ */
 @Data
 @NoArgsConstructor
 @AllArgsConstructor

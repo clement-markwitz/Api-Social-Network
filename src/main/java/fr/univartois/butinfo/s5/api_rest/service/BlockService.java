@@ -11,6 +11,9 @@ import org.springframework.web.server.ResponseStatusException;
 import java.time.LocalDateTime;
 import java.util.List;
 
+/**
+ * Service for managing user blocks.
+ */
 @Service
 public class BlockService {
 
@@ -21,7 +24,11 @@ public class BlockService {
     }
 
     /**
-     * Enregistre un blocage (reçoit une Entité complète).
+     * Create a new block between two users.
+     * @param block
+     * @param blocker
+     * @param blocked
+     * @return
      */
     public Block createBlock(Block block, User blocker, User blocked) {
 
@@ -40,7 +47,7 @@ public class BlockService {
     }
 
     /**
-     * Supprime un blocage.
+     * Delete a block between two users.
      */
     public void deleteBlock(String blockerId, String blockedId) {
         if (!blockRepository.existsByBlockerIdAndBlockedId(blockerId, blockedId)) {
@@ -50,17 +57,23 @@ public class BlockService {
     }
 
     /**
-     * Récupère les blocages (renvoie des Entités).
+     * Get all blocks initiated by a specific user.
      */
     public List<Block> findBlocksByBlocker(String blockerId) {
         return blockRepository.findAllByBlockerId(blockerId);
     }
 
+    /**
+     * Get a block by its ID.
+     */
     public Block getBlockById(String id) {
         return blockRepository.findById(id)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Blocage introuvable"));
     }
 
+    /**
+     * Get a block between two users.
+     */
     public Block getBlockByBlockerAndBlocked(String blockerId, String blockedId) {
         return blockRepository.findByBlockerIdAndBlockedId(blockerId, blockedId)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Blocage introuvable"));
