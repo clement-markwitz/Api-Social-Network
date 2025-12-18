@@ -1,6 +1,7 @@
 package fr.univartois.butinfo.s5.api_rest.controller;
 
 import fr.univartois.butinfo.s5.api_rest.dto.conversation.ConversationCreateDto;
+import fr.univartois.butinfo.s5.api_rest.dto.conversation.ConversationDto;
 import fr.univartois.butinfo.s5.api_rest.dto.conversation.ConversationSummaryDto;
 import fr.univartois.butinfo.s5.api_rest.mapper.ConversationMapper;
 import fr.univartois.butinfo.s5.api_rest.model.Conversation;
@@ -13,6 +14,7 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
@@ -68,20 +70,20 @@ public class ConversationController {
             @ApiResponse(responseCode = "201", description = "Conversation créée avec succès"),
             @ApiResponse(responseCode = "404", description = "Utilisateur initiateur ou membre non trouvé")
     })
-    public Conversation create(
+    public ResponseEntity<ConversationDto> create(
             @RequestBody @Valid ConversationCreateDto dto,
             Authentication authentication) {
 
+        User initiator = (User) authentication.getPrincipal();
         Conversation conversation = conversationMapper.toEntity(dto);
-        String currentUserId = getCurrentUserId(authentication);
-
-        // Utilisation du service pour récupérer l'initiateur (lève une exception si non trouvé)
-        User initiator = userService.getById(currentUserId);
         conversation.setInitiator(initiator);
 
         List<String> memberIds = new ArrayList<>(dto.memberIds());
-        if (!memberIds.contains(currentUserId)) {
-            memberIds.add(currentUserId);
+        if (!memberIds.contains(initiator.getId())) {
+            memberIds.add(initiator.getId());
+        }
+        if (memberIds.size() < 2) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
         }
 
         // Récupération via le service (boucle stream pour garantir que chaque ID existe via getById)
@@ -89,7 +91,9 @@ public class ConversationController {
                 .map(userService::getById)
                 .toList();
 
-        return conversationService.createConversation(conversation, members);
+        Conversation createdConversation = conversationService.createConversation(conversation, members);
+        ConversationDto createdConversationDto = conversationMapper.toDto(createdConversation);
+        return ResponseEntity.status(HttpStatus.CREATED).body(createdConversationDto);
     }
 
     /**
@@ -105,7 +109,8 @@ public class ConversationController {
             @ApiResponse(responseCode = "401", description = "Utilisateur non authentifié")
     })
     public List<ConversationSummaryDto> getAll(Authentication authentication) {
-        return conversationService.getMyConversations(getCurrentUserId(authentication));
+        User user = (User) authentication.getPrincipal();
+        return conversationService.getMyConversations(user.getId());
     }
 
     /**
@@ -142,17 +147,13 @@ public class ConversationController {
     public void join(
             @PathVariable String id,
             Authentication authentication) {
-        String currentUserId = getCurrentUserId(authentication);
+        User user = (User) authentication.getPrincipal();
         Conversation conversation = conversationService.findById(id);
-
         boolean alreadyMember = conversation.getMembers().stream()
-                .anyMatch(u -> u.getId().equals(currentUserId));
+                .anyMatch(u -> u.getId().equals(user.getId()));
         if (alreadyMember) {
             throw new ResponseStatusException(HttpStatus.CONFLICT, "You are already a member of this conversation");
         }
-
-        // Utilisation du UserService
-        User user = userService.getById(currentUserId);
 
         conversationService.joinConversation(conversation, user);
     }
@@ -174,16 +175,16 @@ public class ConversationController {
     public void leave(
             @PathVariable String id,
             Authentication authentication) {
-        String currentUserId = getCurrentUserId(authentication);
+        User user = (User) authentication.getPrincipal();
         Conversation conversation = conversationService.findById(id);
 
         boolean isMember = conversation.getMembers().stream()
-                .anyMatch(u -> u.getId().equals(currentUserId));
+                .anyMatch(u -> u.getId().equals(user.getId()));
         if (!isMember) {
             throw new ResponseStatusException(HttpStatus.FORBIDDEN, "You are not a member of this conversation");
         }
 
-        conversationService.leaveConversation(conversation, currentUserId);
+        conversationService.leaveConversation(conversation, user.getId());
     }
 
     /**
@@ -209,14 +210,13 @@ public class ConversationController {
             @PathVariable String id,
             @RequestBody List<String> userIdsToAdd,
             Authentication authentication) {
-        String currentUserId = getCurrentUserId(authentication);
+        User initiator = (User) authentication.getPrincipal();
         Conversation conversation = conversationService.findById(id);
 
-        if (!conversation.getInitiator().getId().equals(currentUserId)) {
+        if (!conversation.getInitiator().getId().equals(initiator.getId())) {
             throw new ResponseStatusException(HttpStatus.FORBIDDEN, "Only the initiator can add members");
         }
 
-        // Utilisation du UserService pour récupérer les entités User
         List<User> usersToAdd = userIdsToAdd.stream()
                 .map(userService::getById)
                 .toList();
@@ -248,14 +248,15 @@ public class ConversationController {
             @PathVariable String id,
             @PathVariable String memberId,
             Authentication authentication) {
-        String currentUserId = getCurrentUserId(authentication);
+
+        User initiator = (User) authentication.getPrincipal();
         Conversation conversation = conversationService.findById(id);
 
-        if (!conversation.getInitiator().getId().equals(currentUserId)) {
+        if (!conversation.getInitiator().getId().equals(initiator.getId())) {
             throw new ResponseStatusException(HttpStatus.FORBIDDEN, "Only the initiator can kick members");
         }
 
-        if (memberId.equals(currentUserId)) {
+        if (memberId.equals(initiator.getId())) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "You cannot kick yourself. Use 'leave' instead.");
         }
 
