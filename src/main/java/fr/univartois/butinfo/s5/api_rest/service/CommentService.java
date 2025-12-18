@@ -9,11 +9,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.time.LocalDateTime;
+import java.util.HashSet;
 import java.util.List;
 
-/**
- * Service class for managing comments.
- */
 @Service
 public class CommentService {
 
@@ -25,12 +23,6 @@ public class CommentService {
         this.postRepository = postRepository;
     }
 
-    /**
-     * Get all comments for a specific post.
-     *
-     * @param postId the ID of the post
-     * @return list of CommentDto
-     */
     public List<Comment> getCommentsByPostId(String postId) {
         if (!postRepository.existsById(postId)) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Post introuvable");
@@ -38,11 +30,6 @@ public class CommentService {
         return commentRepository.findAllByPostId(postId);
     }
 
-    /**
-     * Create a new comment for a specific post.
-     * @param postId   the ID of the post
-     * @return the created CommentDto
-     */
     public Comment createComment(String postId, Comment comment, User author) {
         if (!postRepository.existsById(postId)) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Post introuvable");
@@ -50,10 +37,31 @@ public class CommentService {
 
         comment.setPost(postRepository.findById(postId).orElseThrow());
         comment.setAuthor(author);
-        comment.setLikeCount(0);
+        // Initialisation de la liste des likes
+        comment.setLikedBy(new HashSet<>());
         comment.setCreatedAt(LocalDateTime.now());
         comment.setUpdatedAt(LocalDateTime.now());
 
         return commentRepository.save(comment);
+    }
+
+    /**
+     * Ajoute ou retire un like sur un commentaire.
+     */
+    public void toggleLikeComment(String commentId, String userId) {
+        Comment comment = commentRepository.findById(commentId)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Commentaire introuvable"));
+
+        if (comment.getLikedBy() == null) {
+            comment.setLikedBy(new HashSet<>());
+        }
+
+        if (comment.getLikedBy().contains(userId)) {
+            comment.getLikedBy().remove(userId); // Dé-like
+        } else {
+            comment.getLikedBy().add(userId); // Like
+        }
+
+        commentRepository.save(comment);
     }
 }

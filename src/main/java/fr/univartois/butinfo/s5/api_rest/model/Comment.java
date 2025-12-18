@@ -11,6 +11,8 @@ import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.time.LocalDateTime;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * Represent a comment on a post.
@@ -24,30 +26,35 @@ public class Comment {
     @Id
     private String id;
 
-    @Indexed // Index VITAL pour lister tous les commentaires d'un post
+    @Indexed
     @DBRef
     private Post post;
 
-    @Indexed // Index pour lister tous les commentaires d'un auteur
+    @Indexed
     @DBRef
     private User author;
 
     private String text;
 
-    /**
-     * For threaded comments: reference to the parent comment (if any).
-     */
     @Indexed
     private Comment parentComment;
 
     /**
-     * Number of likes for this comment.
+     * Liste des ID des utilisateurs qui ont liké ce commentaire.
+     * Utilisation d'un Set pour garantir l'unicité (pas de doublons).
      */
-    private int likeCount;
+    private Set<String> likedBy = new HashSet<>();
 
     @CreatedDate
     private LocalDateTime createdAt;
 
     @LastModifiedDate
-    private LocalDateTime updatedAt; // Utile si les commentaires sont éditables
+    private LocalDateTime updatedAt;
+
+    /**
+     * Méthode utilitaire pour obtenir le nombre de likes (utilisé par le front/DTO).
+     */
+    public int getLikeCount() {
+        return (likedBy == null) ? 0 : likedBy.size();
+    }
 }

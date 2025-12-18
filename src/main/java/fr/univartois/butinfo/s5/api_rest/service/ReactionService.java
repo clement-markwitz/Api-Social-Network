@@ -2,6 +2,7 @@ package fr.univartois.butinfo.s5.api_rest.service;
 
 import fr.univartois.butinfo.s5.api_rest.model.Post;
 import fr.univartois.butinfo.s5.api_rest.model.Reaction;
+import fr.univartois.butinfo.s5.api_rest.model.ReactionType;
 import fr.univartois.butinfo.s5.api_rest.model.User;
 import fr.univartois.butinfo.s5.api_rest.repository.PostRepository;
 import fr.univartois.butinfo.s5.api_rest.repository.ReactionRepository;
@@ -34,11 +35,10 @@ public class ReactionService {
         return reactionRepository.findAllByPostId(postId);
     }
 
+    // Ancienne méthode (gardée pour compatibilité si besoin, mais toggle est mieux)
     public Reaction createReaction(String postId, Reaction reaction, String userId) {
-
         Post post = postRepository.findById(postId)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Post introuvable"));
-
         User user = userRepository.findById(userId)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Utilisateur introuvable"));
 
@@ -50,15 +50,39 @@ public class ReactionService {
         reaction.setPost(post);
         reaction.setUser(user);
         reaction.setCreatedAt(LocalDateTime.now());
-
         return reactionRepository.save(reaction);
+    }
+
+    /**
+     * Nouvelle méthode Toggle : Like ou Dislike selon l'état actuel.
+     */
+    public void toggleReaction(String postId, String userId, ReactionType type) {
+        Post post = postRepository.findById(postId)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Post introuvable"));
+
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Utilisateur introuvable"));
+
+        Optional<Reaction> existingReaction = reactionRepository.findByPostIdAndUserId(postId, userId);
+
+        if (existingReaction.isPresent()) {
+            // Si la réaction existe déjà, on la supprime (toggle OFF)
+            reactionRepository.delete(existingReaction.get());
+        } else {
+            // Sinon, on la crée (toggle ON)
+            Reaction reaction = new Reaction();
+            reaction.setPost(post);
+            reaction.setUser(user);
+            reaction.setType(type != null ? type : ReactionType.LIKE);
+            reaction.setCreatedAt(LocalDateTime.now());
+            reactionRepository.save(reaction);
+        }
     }
 
     public void deleteReaction(String postId, String userId) {
         if(!postRepository.existsById(postId)) {
-              throw  new ResponseStatusException(HttpStatus.NOT_FOUND, "Post introuvable");
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Post introuvable");
         }
         reactionRepository.deleteByPostIdAndUserId(postId, userId);
-
     }
 }
