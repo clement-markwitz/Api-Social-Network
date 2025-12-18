@@ -22,7 +22,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@Document(collection = "communities")
+@Document(collection = "groups")
 public class Community {
 
     @Id
