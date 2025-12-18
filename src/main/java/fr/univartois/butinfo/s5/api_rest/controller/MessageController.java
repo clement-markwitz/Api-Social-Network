@@ -6,9 +6,9 @@ import fr.univartois.butinfo.s5.api_rest.mapper.MessageMapper;
 import fr.univartois.butinfo.s5.api_rest.model.Conversation;
 import fr.univartois.butinfo.s5.api_rest.model.Message;
 import fr.univartois.butinfo.s5.api_rest.model.User;
-import fr.univartois.butinfo.s5.api_rest.repository.UserRepository;
 import fr.univartois.butinfo.s5.api_rest.service.ConversationService;
 import fr.univartois.butinfo.s5.api_rest.service.MessageService;
+import fr.univartois.butinfo.s5.api_rest.service.UserService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
@@ -35,7 +35,7 @@ public class MessageController {
 
     private final ConversationService conversationService;
     private final MessageService messageService;
-    private final UserRepository userRepository;
+    private final UserService userService; // Remplacement de UserRepository
     private final MessageMapper messageMapper;
 
     /**
@@ -43,15 +43,15 @@ public class MessageController {
      *
      * @param authentication The Spring Security authentication object containing the user's principal.
      * @return The unique ID of the authenticated user.
-     * @throws ResponseStatusException if the user is not authenticated (401) or found in the database (401).
+     * @throws ResponseStatusException if the user is not authenticated (401).
      */
     private String getCurrentUserId(Authentication authentication) {
         if (authentication == null) {
             throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "User not authenticated");
         }
-        return userRepository.findByUsername(authentication.getName())
-                .map(User::getId)
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.UNAUTHORIZED, "User not found"));
+        // Utilisation du UserService pour récupérer l'utilisateur connecté via son username
+        User user = (User) userService.loadUserByUsername(authentication.getName());
+        return user.getId();
     }
 
     /**
@@ -82,8 +82,8 @@ public class MessageController {
             throw new ResponseStatusException(HttpStatus.FORBIDDEN, "Not a member of this conversation");
         }
 
-        User sender = userRepository.findById(senderId)
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Sender not found"));
+        // Utilisation du service pour récupérer l'entité User (lève une exception si non trouvée)
+        User sender = userService.getById(senderId);
 
         Message message = messageMapper.toEntity(dto);
         return messageService.sendMessage(conversation, message, sender);

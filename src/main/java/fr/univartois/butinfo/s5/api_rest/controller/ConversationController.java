@@ -5,8 +5,8 @@ import fr.univartois.butinfo.s5.api_rest.dto.conversation.ConversationSummaryDto
 import fr.univartois.butinfo.s5.api_rest.mapper.ConversationMapper;
 import fr.univartois.butinfo.s5.api_rest.model.Conversation;
 import fr.univartois.butinfo.s5.api_rest.model.User;
-import fr.univartois.butinfo.s5.api_rest.repository.UserRepository;
 import fr.univartois.butinfo.s5.api_rest.service.ConversationService;
+import fr.univartois.butinfo.s5.api_rest.service.UserService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
@@ -33,7 +33,7 @@ import java.util.List;
 public class ConversationController {
 
     private final ConversationService conversationService;
-    private final UserRepository userRepository;
+    private final UserService userService; // Remplacement de UserRepository par UserService
     private final ConversationMapper conversationMapper;
 
     /**
@@ -41,15 +41,16 @@ public class ConversationController {
      *
      * @param authentication The Spring Security authentication object containing the user's principal.
      * @return The unique ID of the authenticated user.
-     * @throws ResponseStatusException if the user is not authenticated (401) or found in the database (401).
+     * @throws ResponseStatusException if the user is not authenticated (401).
      */
     private String getCurrentUserId(Authentication authentication) {
         if (authentication == null) {
             throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "User not authenticated");
         }
-        return userRepository.findByUsername(authentication.getName())
-                .map(User::getId)
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.UNAUTHORIZED, "User not found"));
+        // On utilise le userService qui gère déjà l'exception si l'user n'est pas trouvé
+        // loadUserByUsername retourne un UserDetails, on le cast en User (notre modèle)
+        User user = (User) userService.loadUserByUsername(authentication.getName());
+        return user.getId();
     }
 
     /**
@@ -65,24 +66,29 @@ public class ConversationController {
     @Operation(summary = "Créer une conversertion", description = "Créer une nouvelle conversation avec des membres initiaux.")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "201", description = "Conversation créée avec succès"),
-            @ApiResponse(responseCode = "404", description = "Utilisateur initiateur non trouvé")
+            @ApiResponse(responseCode = "404", description = "Utilisateur initiateur ou membre non trouvé")
     })
     public Conversation create(
             @RequestBody @Valid ConversationCreateDto dto,
             Authentication authentication) {
 
         Conversation conversation = conversationMapper.toEntity(dto);
+        String currentUserId = getCurrentUserId(authentication);
 
-        User initiator = userRepository.findById(getCurrentUserId(authentication))
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Connected user not found"));
+        // Utilisation du service pour récupérer l'initiateur (lève une exception si non trouvé)
+        User initiator = userService.getById(currentUserId);
         conversation.setInitiator(initiator);
 
         List<String> memberIds = new ArrayList<>(dto.memberIds());
-        if (!memberIds.contains(getCurrentUserId(authentication))) {
-            memberIds.add(getCurrentUserId(authentication));
+        if (!memberIds.contains(currentUserId)) {
+            memberIds.add(currentUserId);
         }
 
-        List<User> members = userRepository.findAllById(memberIds);
+        // Récupération via le service (boucle stream pour garantir que chaque ID existe via getById)
+        List<User> members = memberIds.stream()
+                .map(userService::getById)
+                .toList();
+
         return conversationService.createConversation(conversation, members);
     }
 
@@ -145,8 +151,8 @@ public class ConversationController {
             throw new ResponseStatusException(HttpStatus.CONFLICT, "You are already a member of this conversation");
         }
 
-        User user = userRepository.findById(currentUserId)
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "User not found"));
+        // Utilisation du UserService
+        User user = userService.getById(currentUserId);
 
         conversationService.joinConversation(conversation, user);
     }
@@ -196,7 +202,8 @@ public class ConversationController {
     @Operation(summary = "Ajouter des membres à une conversation", description = "Permet à l'initiateur de la conversation d'ajouter des membres.")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Membres ajoutés avec succès"),
-            @ApiResponse(responseCode = "403", description = "Seul l'initiateur peut ajouter des membres")
+            @ApiResponse(responseCode = "403", description = "Seul l'initiateur peut ajouter des membres"),
+            @ApiResponse(responseCode = "404", description = "Un des utilisateurs à ajouter n'existe pas")
     })
     public void addMembers(
             @PathVariable String id,
@@ -209,7 +216,11 @@ public class ConversationController {
             throw new ResponseStatusException(HttpStatus.FORBIDDEN, "Only the initiator can add members");
         }
 
-        List<User> usersToAdd = userRepository.findAllById(userIdsToAdd);
+        // Utilisation du UserService pour récupérer les entités User
+        List<User> usersToAdd = userIdsToAdd.stream()
+                .map(userService::getById)
+                .toList();
+
         conversationService.addMembers(conversation, usersToAdd);
     }
 
