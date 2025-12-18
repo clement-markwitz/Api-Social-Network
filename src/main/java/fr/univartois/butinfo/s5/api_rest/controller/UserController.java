@@ -1,8 +1,13 @@
 package fr.univartois.butinfo.s5.api_rest.controller;
 
+import fr.univartois.butinfo.s5.api_rest.dto.recommendation.CommunityRecommendationDto;
+import fr.univartois.butinfo.s5.api_rest.dto.recommendation.FriendRecommendationDto;
+import fr.univartois.butinfo.s5.api_rest.dto.recommendation.PageRecommendationDto;
+import fr.univartois.butinfo.s5.api_rest.dto.recommendation.PostRecommendationDto;
 import fr.univartois.butinfo.s5.api_rest.dto.user.*;
 import fr.univartois.butinfo.s5.api_rest.mapper.UserMapper;
 import fr.univartois.butinfo.s5.api_rest.model.User;
+import fr.univartois.butinfo.s5.api_rest.service.RecommendationService;
 import fr.univartois.butinfo.s5.api_rest.service.UserService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -25,6 +30,7 @@ public class UserController {
 
     private final UserService userService;
     private final UserMapper userMapper;
+    private final RecommendationService recommendationService;
 
     /**
      * Constructor for UserController.
@@ -32,9 +38,10 @@ public class UserController {
      * @param userService the user service
      * @param userMapper the user mapper
      */
-    public UserController(UserService userService, UserMapper userMapper) {
+    public UserController(UserService userService, UserMapper userMapper, RecommendationService recommendationService) {
         this.userService = userService;
         this.userMapper = userMapper;
+        this.recommendationService = recommendationService;
     }
 
     /**
@@ -215,5 +222,31 @@ public class UserController {
         List<User> users = userService.searchUsers(query);
 
         return users.stream().map(userMapper::toSummaryDto).toList();
+    }
+
+    @GetMapping("/{id}/recommendations")
+    public ResponseEntity<List<FriendRecommendationDto>> getUserRecommendations(@PathVariable String id) {
+        // Vérifier si l'utilisateur existe (optionnel, mais recommandé)
+        userService.getById(id);
+
+        List<FriendRecommendationDto> recommendations = recommendationService.getFriendRecommendations(id);
+        return ResponseEntity.ok(recommendations);
+    }
+    @GetMapping("/{id}/recommendations/communities")
+    public ResponseEntity<List<CommunityRecommendationDto>> getCommunityRecommendations(@PathVariable String id) {
+        userService.getById(id);
+        return ResponseEntity.ok(recommendationService.getCommunityRecommendations(id));
+    }
+
+    @GetMapping("/{id}/recommendations/pages")
+    public ResponseEntity<List<PageRecommendationDto>> getPageRecommendations(@PathVariable String id) {
+        userService.getById(id);
+        return ResponseEntity.ok(recommendationService.getPageRecommendations(id));
+    }
+
+    @GetMapping("/{id}/recommendations/posts")
+    public ResponseEntity<List<PostRecommendationDto>> getPostRecommendations(@PathVariable String id) {
+        userService.getById(id);
+        return ResponseEntity.ok(recommendationService.getPostRecommendations(id));
     }
 }
