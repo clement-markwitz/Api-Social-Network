@@ -46,6 +46,9 @@ public interface PostRepository extends MongoRepository<Post, String> {
      */
     List<Post> findAllByTextContainingIgnoreCase(String text);
 
+    List<Post> findByCommunityId(String communityId);
+    List<Post> findByPageId(String pageId);
+
     /**
      * Count the number of posts created between the specified start and end dates.
      *

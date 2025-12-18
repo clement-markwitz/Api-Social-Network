@@ -32,9 +32,6 @@ public class PageService {
      * @throws ResponseStatusException if a page with the same name already exists
      */
     public PageDetailDto createPage(PageCreateDto dto, String userId) {
-        if (pageRepository.existsByName(dto.name())) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Une page avec ce nom existe déjà.");
-        }
         Page page = pageMapper.toEntity(dto, userId);
 
         Page savedPage = pageRepository.save(page);

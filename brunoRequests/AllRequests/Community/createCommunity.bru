@@ -1,0 +1,27 @@
+meta {
+  name: CreateCommunity
+  type: http
+  seq: 1
+}
+
+post {
+  url: http://localhost:8080/api/community
+  body: json
+  auth: bearer
+}
+
+auth:bearer {
+  token: eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJ0ZXN0YXV0aDJxcXFzZHFzZHMiLCJpYXQiOjE3NjYwNTIwNzEsImV4cCI6MTc2NjEzODQ3MX0.Pv-7WYHxuBOoGH_6dDec8W3oD35Tw_Ly6nAxTdMGe02Fc0SuvvHbaklE5KEw7NPy
+}
+
+body:json {
+  {
+    "name": "test",
+    "description": "TESTBRUNOOOOOOOOOOOOOOOOOOOOOOOOOO",
+    "avatarUrl": "https://mattermost.univ-artois.fr/s5a01/messages/6132e6b739738e8836f66ae7ef43cc4829b25a3b#",
+    "topics": [
+      "glace",
+      "food"
+    ]
+  }
+}

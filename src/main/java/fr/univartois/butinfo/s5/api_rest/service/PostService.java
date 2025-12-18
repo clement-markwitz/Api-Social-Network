@@ -60,4 +60,12 @@ public class PostService {
         }
         postRepository.delete(post);
     }
+
+    public List<Post> getPostsByCommunity(String communityId) {
+        return postRepository.findByCommunityId(communityId);
+    }
+
+    public List<Post> getPostsByPage(String pageId) {
+        return postRepository.findByPageId(pageId);
+    }
 }
