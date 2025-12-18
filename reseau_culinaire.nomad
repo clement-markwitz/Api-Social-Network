@@ -1,83 +1,73 @@
 job "reseau-culinaire" {
-  datacenters = ["dc1"]
+  datacenters = ["iutlens"]
   type        = "service"
 
-  group "database" {
+  group "reseau-stack" {
     count = 1
 
     network {
+      port "http" {
+        to = 8080
+      }
       port "db" {
-        static = 27017
+        to = 27017
       }
     }
 
     task "mongodb" {
-      driver = "docker"
+      driver = "podman"
 
       config {
         image = "mongo:6.0"
         ports = ["db"]
         volumes = [
-          "local/data:/data/db" # Persistance basique
+          "local/data:/data/db"
         ]
       }
 
       resources {
-        cpu    = 500 # 500 MHz
-        memory = 512 # 512MB
-      }
-
-      service {
-        name = "mongodb"
-        port = "db"
-
-        check {
-          name     = "alive"
-          type     = "tcp"
-          interval = "10s"
-          timeout  = "2s"
-        }
-      }
-    }
-  }
-
-  group "api" {
-    count = 1
-
-    network {
-      port "http" {
-        static = 8080
+        cpu    = 500
+        memory = 512
       }
     }
 
     task "api-rest" {
-      driver = "docker"
+      driver = "podman"
 
       config {
         image = "spring:latest"
+        image_pull_policy = "if-not-present"
 
         ports = ["http"]
       }
 
       env {
-        SPRING_DATA_MONGODB_URI = "mongodb://${attr.unique.network.ip-address}:27017/reseau_culinaire"
+        SPRING_DATA_MONGODB_URI = "mongodb://127.0.0.1:27017/reseau_culinaire"
       }
 
       resources {
         cpu    = 1000
         memory = 1024
       }
+    }
 
-      service {
-        name = "api-rest"
-        port = "http"
+    service {
+      name     = "reseau-culinaire-cornet"
+      port     = "http"
+      provider = "nomad"
 
-        check {
-          type     = "http"
-          path     = "/api/stats"
-          interval = "10s"
-          timeout  = "2s"
-        }
+      tags = [
+        "traefik.enable=true",
+        "traefik.http.routers.reseau-culinaire-cornet.entrypoints=http,https",
+        "traefik.http.routers.reseau-culinaire-cornet.tls=true",
+        "traefik.http.routers.reseau-culinaire-cornet.rule=Host(`reseau-culinaire-cornet.virtu.chez-wam.info`)",
+      ]
+
+      check {
+        type     = "http"
+        path     = "/api/stats"
+        interval = "10s"
+        timeout  = "2s"
       }
     }
   }
