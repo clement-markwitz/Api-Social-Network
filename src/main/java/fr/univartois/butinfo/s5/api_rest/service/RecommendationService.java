@@ -1,6 +1,5 @@
 package fr.univartois.butinfo.s5.api_rest.service;
 
-import fr.univartois.butinfo.s5.api_rest.dto.recommendation.CommunityRecommendationDto;
 import fr.univartois.butinfo.s5.api_rest.dto.recommendation.FriendRecommendationDto;
 import fr.univartois.butinfo.s5.api_rest.dto.recommendation.PageRecommendationDto;
 import fr.univartois.butinfo.s5.api_rest.dto.recommendation.PostRecommendationDto;
@@ -40,25 +39,6 @@ public class RecommendationService {
             return response.getBody();
         } catch (Exception e) {
             System.err.println("Erreur lors de l'appel au service de recommandation : " + e.getMessage());
-            return Collections.emptyList();
-        }
-    }
-
-    /**
-     * Récupère les recommandations de groupes (communities).
-     */
-    public List<CommunityRecommendationDto> getCommunityRecommendations(String userId) {
-        // Attention : l'endpoint Python s'appelle "/recommendations/groupes/"
-        String url = recommendationApiUrl + "/recommendations/groupes/" + userId;
-        try {
-            ResponseEntity<List<CommunityRecommendationDto>> response = restTemplate.exchange(
-                    url, HttpMethod.GET, null,
-                    new ParameterizedTypeReference<List<CommunityRecommendationDto>>() {
-                    }
-            );
-            return response.getBody();
-        } catch (Exception e) {
-            System.err.println("Erreur reco groupes : " + e.getMessage());
             return Collections.emptyList();
         }
     }

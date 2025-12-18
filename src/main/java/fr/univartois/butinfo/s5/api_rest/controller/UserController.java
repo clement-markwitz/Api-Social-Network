@@ -1,6 +1,5 @@
 package fr.univartois.butinfo.s5.api_rest.controller;
 
-import fr.univartois.butinfo.s5.api_rest.dto.recommendation.CommunityRecommendationDto;
 import fr.univartois.butinfo.s5.api_rest.dto.recommendation.FriendRecommendationDto;
 import fr.univartois.butinfo.s5.api_rest.dto.recommendation.PageRecommendationDto;
 import fr.univartois.butinfo.s5.api_rest.dto.recommendation.PostRecommendationDto;
@@ -231,11 +230,6 @@ public class UserController {
 
         List<FriendRecommendationDto> recommendations = recommendationService.getFriendRecommendations(id);
         return ResponseEntity.ok(recommendations);
-    }
-    @GetMapping("/{id}/recommendations/communities")
-    public ResponseEntity<List<CommunityRecommendationDto>> getCommunityRecommendations(@PathVariable String id) {
-        userService.getById(id);
-        return ResponseEntity.ok(recommendationService.getCommunityRecommendations(id));
     }
 
     @GetMapping("/{id}/recommendations/pages")
