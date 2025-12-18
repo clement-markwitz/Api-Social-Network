@@ -61,7 +61,7 @@ public class UserController {
      * Get a user's public profile by ID.
      *
      * @param id the user's ID
-     * @return UserPublicProfileDto
+     * @return ResponseEntity containing UserPublicProfileDto
      */
     @GetMapping("/{id}")
     @Operation(summary = "Get a user's public profile by ID", description = "Retrieves the public profile information of a user specified by their ID.")
@@ -69,9 +69,14 @@ public class UserController {
             @ApiResponse(responseCode = "200", description = "Public profile retrieved successfully"),
             @ApiResponse(responseCode = "404", description = "User not found")
     })
-    public UserPublicProfileDto getUser(@PathVariable String id) {
+    public ResponseEntity<UserPublicProfileDto> getUser(@PathVariable String id) {
         User user = userService.getById(id);
-        return userMapper.toPublicProfileDto(user);
+
+        if (user == null) {
+            return ResponseEntity.notFound().build();
+        }
+
+        return ResponseEntity.ok(userMapper.toPublicProfileDto(user));
     }
 
     /**
