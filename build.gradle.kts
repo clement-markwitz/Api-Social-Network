@@ -3,6 +3,7 @@ plugins {
 	id("org.springframework.boot") version "3.5.5"
 	id("io.spring.dependency-management") version "1.1.7"
     id("org.sonarqube") version "7.2.0.6526"
+    id("jacoco")
 }
 
 group = "fr.univartois.butinfo.s5"
@@ -38,6 +39,8 @@ dependencies {
 	implementation("org.mapstruct:mapstruct:1.6.3")
 	annotationProcessor("org.mapstruct:mapstruct-processor:1.6.3")
 
+    testImplementation("io.rest-assured:rest-assured:5.4.0")
+
 	// Authentification
 	implementation("org.springframework.boot:spring-boot-starter-security")
 	implementation("io.jsonwebtoken:jjwt-api:0.13.0")
@@ -51,4 +54,13 @@ dependencies {
 
 tasks.withType<Test> {
 	useJUnitPlatform()
+    finalizedBy("jacocoTestReport")
+}
+
+tasks.withType<JacocoReport> {
+    dependsOn(tasks.test)
+    reports {
+        xml.required.set(true)
+        html.required.set(true)
+    }
 }
