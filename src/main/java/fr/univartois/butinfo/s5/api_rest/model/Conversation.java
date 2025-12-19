@@ -28,7 +28,7 @@ public class Conversation {
     /**
      * List of users participating in the conversation.
      */
-    @Indexed // Index pour trouver les conversations d'un utilisateur
+    @Indexed
     @DBRef
     private List<User> members;
 

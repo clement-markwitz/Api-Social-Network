@@ -25,6 +25,12 @@ public class FollowService {
     private final FollowRepository followRepository;
     private final UserRepository userRepository;
 
+    /**
+     * Constructor for FollowService.
+     *
+     * @param followRepository the follow repository
+     * @param userRepository the user repository
+     */
     public FollowService(FollowRepository followRepository, UserRepository userRepository) {
         this.followRepository = followRepository;
         this.userRepository = userRepository;
@@ -41,7 +47,6 @@ public class FollowService {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "On ne peut pas se suivre soi-même.");
         }
 
-        // On récupère les VRAIS objets User car Follow utilise @DBRef
         User follower = getUserById(followerId);
         User following = getUserById(followingId);
 
@@ -70,7 +75,6 @@ public class FollowService {
         }
     }
 
-    // Retourne des User (pas de DTO)
     /**
      * Retrieves the list of users that a specific user is following.
      *
@@ -84,7 +88,6 @@ public class FollowService {
                 .toList();
     }
 
-    // Retourne des User (pas de DTO)
     /**
      * Retrieves the list of users who are following a specific user.
      *
@@ -98,7 +101,6 @@ public class FollowService {
                 .toList();
     }
 
-    // Retourne des User (Amis)
     /**
      * Retrieves the list of mutual friends for a specific user.
      *
@@ -108,12 +110,10 @@ public class FollowService {
     public List<User> getFriends(String userId) {
         User currentUser = getUserById(userId);
 
-        // 1. Qui est-ce que je suis ?
         List<User> myFollowings = followRepository.findAllByFollower(currentUser).stream()
                 .map(Follow::getFollowing)
                 .toList();
 
-        // 2. Parmi eux, qui me suit en retour ?
         return myFollowings.stream()
                 .filter(targetUser -> followRepository.findByFollowerAndFollowing(targetUser, currentUser).isPresent())
                 .toList();

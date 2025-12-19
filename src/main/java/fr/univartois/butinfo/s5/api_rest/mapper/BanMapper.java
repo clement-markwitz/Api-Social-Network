@@ -7,14 +7,12 @@ import fr.univartois.butinfo.s5.api_rest.model.Ban;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
-// On utilise UserMapper pour convertir User -> UserSummaryDto
 /**
  * Mapper for converting between Ban entities and their corresponding DTOs.
  */
 @Mapper(componentModel = "spring", uses = {UserMapper.class})
 public interface BanMapper {
 
-    // --- Vers Entity (Création) ---
     /**
      * Converts a BanCreateDto to a Ban entity.
      * Certain fields are ignored as they will be set by the controller/service.
@@ -23,8 +21,8 @@ public interface BanMapper {
      * @return the resulting Ban entity
      */
     @Mapping(target = "id", ignore = true)
-    @Mapping(target = "user", ignore = true)      // Sera défini par le Controller/Service (ID dans l'URL)
-    @Mapping(target = "moderator", ignore = true) // Sera défini par le Controller (Utilisateur connecté)
+    @Mapping(target = "user", ignore = true)
+    @Mapping(target = "moderator", ignore = true)
     @Mapping(target = "startAt", ignore = true)
     @Mapping(target = "endAt", ignore = true)
     @Mapping(target = "active", ignore = true)
@@ -32,8 +30,6 @@ public interface BanMapper {
     @Mapping(target = "updatedAt", ignore = true)
     Ban toEntity(BanCreateDto dto);
 
-    // --- Vers DTO Complet (Affichage Détail) ---
-    // MapStruct utilise automatiquement UserMapper.toSummaryDto pour convertir les champs User
     /**
      * Converts a Ban entity to a BanDto.
      *
@@ -44,7 +40,6 @@ public interface BanMapper {
     @Mapping(source = "moderator", target = "moderator")
     BanDto toDto(Ban ban);
 
-    // --- Vers DTO Résumé (Liste) ---
     /** MapStruct utilise automatiquement UserMapper.toSummaryDto pour convertir les champs User
      /**
      * Converts a Ban entity to a BanSummaryDto.

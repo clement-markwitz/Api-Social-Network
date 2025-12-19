@@ -12,15 +12,15 @@ public record PostCreateDto(
         @NotBlank
         String text,
 
-        MediaDto media, // Le client envoie les URLs des médias uploadés
+        MediaDto media, // The client can optionally provide media
 
         @NotNull
-        PostType type, // Le client doit spécifier le type
+        PostType type, // The client must specify the post type
 
         @NotNull
-        PostVisibility visibility, // Le client doit spécifier la visibilité
+        PostVisibility visibility, // The client must specify the post visibility
 
-        // Le post peut être lié à une Page OU une Communauté, ou aucun (post personnel)
+        // The post can be associated with either a page or a community
         String pageId,
         String communityId
 ) {

@@ -8,6 +8,6 @@ import jakarta.validation.constraints.NotNull;
  */
 public record ReactionCreateDto(
         @NotNull(message = "Un type de réaction est requis")
-        ReactionType type // L'utilisateur envoie le type de réaction (ex: LIKE)
+        ReactionType type // The user must specify the reaction type
 ) {
 }

@@ -37,13 +37,19 @@ public class BlockController {
     }
 
     /**
-     * Bloc a user.
+     * Block a user.
+     *
+     * @param userId ID of the user to block
+     * @param dto BlockCreateDto containing block details
+     * @param authentication Authentication object of the user performing the block
+     * @return ResponseEntity with Block
      */
     @PostMapping("/{userId}/blocks")
     @Operation(summary = "Block a user", description = "Blocks a user specified by their ID.")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "201", description = "User successfully blocked"),
-            @ApiResponse(responseCode = "404", description = "User not found")
+            @ApiResponse(responseCode = "404", description = "User not found"),
+            @ApiResponse(responseCode = "400", description = "User is already blocked")
     })
     public ResponseEntity<Block> blockUser(
             @PathVariable String userId,
@@ -61,6 +67,10 @@ public class BlockController {
 
     /**
      * Unblock a user.
+     *
+     * @param userId ID of the user to unblock
+     * @param authentication Authentication object of the user performing the unblock
+     * @return ResponseEntity with no content
      */
     @DeleteMapping("/{userId}/blocks")
     @Operation(summary = "Unblock a user", description = "Allows unblocking a user specified by their ID.")
@@ -78,7 +88,9 @@ public class BlockController {
 
     /**
      * Get the list of users blocked by the authenticated user.
-     * @return List of BlockUserDto
+     *
+     * @param authentication Authentication object of the authenticated user
+     * @return ResponseEntity with list of BlockUserDto
      */
     @GetMapping("/blocks")
     @Operation(summary = "List blocked users", description = "Retrieves the list of users that the authenticated user has blocked.")

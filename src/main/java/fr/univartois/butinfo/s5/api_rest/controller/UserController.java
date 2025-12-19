@@ -216,7 +216,8 @@ public class UserController {
     @GetMapping("/search")
     @Operation(summary = "Search user profiles", description = "Searches for user profiles using a search query, excluding users who blocked the requester.")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "User profiles retrieved successfully")
+            @ApiResponse(responseCode = "200", description = "User profiles retrieved successfully"),
+            @ApiResponse(responseCode = "401", description = "User not authenticated")
     })
     public List<UserSummaryDto> searchProfiles(@RequestParam("q") String query, Authentication authentication) {
         User currentUser = (User) authentication.getPrincipal();

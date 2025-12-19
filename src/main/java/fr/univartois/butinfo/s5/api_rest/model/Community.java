@@ -53,7 +53,7 @@ public class Community {
 
     /**
      * Add an administrator by initializing the list if necessary.
-     * @param user
+     * @param user the user to add as admin
      */
     public void addAdmin(User user) {
         if (this.admins == null) {
@@ -64,7 +64,7 @@ public class Community {
 
     /**
      * Remove an administrator safely.
-     * @param user
+     * @param user the user to remove from admins
      */
     public void removeAdmin(User user) {
         if (this.admins != null) {
@@ -74,7 +74,7 @@ public class Community {
 
     /**
      * Add a topic by initializing the list if necessary.
-     * @param topic
+     * @param topic the topic to add
      */
     public void addTopic(String topic) {
         if (this.topics == null) {
@@ -85,7 +85,7 @@ public class Community {
 
     /**
      * Remove a topic safely.
-     * @param topic
+     * @param topic the topic to remove
      */
     public void removeTopic(String topic) {
         if (this.topics != null) {

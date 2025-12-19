@@ -11,10 +11,10 @@ import java.util.List;
 public record MessageDto(
         String id,
         String conversationId,
-        UserSummaryDto sender, // Auteur du message (enrichi)
+        UserSummaryDto sender, // The author of the message
         String text,
         List<String> attachments,
         LocalDateTime createdAt,
-        List<ReadReceiptDto> readBy // Liste de qui l'a lu
+        List<ReadReceiptDto> readBy // List of users who have read the message
 ) {
 }

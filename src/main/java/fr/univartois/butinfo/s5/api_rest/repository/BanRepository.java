@@ -11,7 +11,6 @@ import java.util.Optional;
  */
 @Repository
 public interface BanRepository extends MongoRepository<Ban, String> {
-    // Find an active ban for a user
     /**
      * Finds an active ban for the specified user ID.
      *

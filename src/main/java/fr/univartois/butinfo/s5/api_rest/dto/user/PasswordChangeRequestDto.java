@@ -1,4 +1,3 @@
-// (Utilisé pour POST /api/me/change-password)
 package fr.univartois.butinfo.s5.api_rest.dto.user;
 
 import jakarta.validation.constraints.NotBlank;

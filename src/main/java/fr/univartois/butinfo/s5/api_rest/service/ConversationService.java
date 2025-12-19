@@ -29,6 +29,7 @@ public class ConversationService {
     private final ConversationRepository conversationRepository;
     private final MessageRepository messageRepository;
     private final ConversationMapper conversationMapper;
+    private final BlockService blockService;
 
     /**
      * Retrieves a conversation by its unique identifier.
@@ -53,6 +54,22 @@ public class ConversationService {
         conversation.setMembers(members);
         conversation.setCreatedAt(LocalDateTime.now());
         conversation.setUpdatedAt(LocalDateTime.now());
+
+        // Do not allow members who have blocked each other
+        for (User member : members) {
+            blockService.findBlocksByBlocker(member.getId()).stream()
+                    .filter(block -> members.stream()
+                            .anyMatch(m -> m.getId().equals(block.getBlocked().getId())))
+                    .forEach(block -> {
+                        conversation.getMembers().removeIf(m -> m.getId().equals(block.getBlocked().getId()));
+                    });
+            blockService.findBlocksByBlocked(member.getId()).stream()
+                    .filter(block -> members.stream()
+                            .anyMatch(m -> m.getId().equals(block.getBlocker().getId())))
+                    .forEach(block -> {
+                        conversation.getMembers().removeIf(m -> m.getId().equals(block.getBlocker().getId()));
+                    });
+        }
         return conversationRepository.save(conversation);
     }
 
@@ -120,6 +137,21 @@ public class ConversationService {
                 conversation.getMembers().add(userToAdd);
                 updated = true;
             }
+            // Do not add users who have blocked existing members
+            blockService.findBlocksByBlocker(userToAdd.getId()).stream()
+                    .filter(block -> conversation.getMembers().stream()
+                            .anyMatch(member -> member.getId().equals(block.getBlocked().getId())))
+                    .forEach(block -> {
+                        conversation.getMembers().removeIf(member -> member.getId().equals(block.getBlocked().getId()));
+                    });
+
+            // Do not add users who are blocked by existing members
+            blockService.findBlocksByBlocked(userToAdd.getId()).stream()
+                    .filter(block -> conversation.getMembers().stream()
+                            .anyMatch(member -> member.getId().equals(block.getBlocker().getId())))
+                    .forEach(block -> {
+                        conversation.getMembers().removeIf(member -> member.getId().equals(block.getBlocker().getId()));
+                    });
         }
 
         if (updated) {

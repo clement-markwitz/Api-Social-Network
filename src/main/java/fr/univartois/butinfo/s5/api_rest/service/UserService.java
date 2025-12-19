@@ -80,6 +80,12 @@ public class UserService implements UserDetailsService {
         return false;
     }
 
+    /**
+     * Update user.
+     *
+     * @param user the user
+     * @return the updated user
+     */
     public User updateUser(User user) {
         user.setUpdatedAt(LocalDateTime.now());
         return userRepository.save(user);

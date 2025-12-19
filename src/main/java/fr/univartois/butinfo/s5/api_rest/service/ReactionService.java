@@ -1,10 +1,7 @@
 package fr.univartois.butinfo.s5.api_rest.service;
 
 import fr.univartois.butinfo.s5.api_rest.model.*;
-import fr.univartois.butinfo.s5.api_rest.repository.CommentRepository;
-import fr.univartois.butinfo.s5.api_rest.repository.PostRepository;
-import fr.univartois.butinfo.s5.api_rest.repository.ReactionRepository;
-import fr.univartois.butinfo.s5.api_rest.repository.UserRepository;
+import fr.univartois.butinfo.s5.api_rest.repository.*;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
@@ -23,6 +20,7 @@ public class ReactionService {
     private final PostRepository postRepository;
     private final UserRepository userRepository;
     private final CommentRepository commentRepository;
+    private final PostStatsRepository postStatsRepository;
 
     /**
      * Constructor for ReactionService.
@@ -31,11 +29,16 @@ public class ReactionService {
      * @param postRepository   the post repository
      * @param userRepository  the user repository
      */
-    public ReactionService(ReactionRepository reactionRepository, PostRepository postRepository, UserRepository userRepository, CommentRepository commentRepository) {
+    public ReactionService(ReactionRepository reactionRepository,
+                           PostRepository postRepository,
+                           UserRepository userRepository,
+                           CommentRepository commentRepository,
+                           PostStatsRepository postStatsRepository) {
         this.reactionRepository = reactionRepository;
         this.postRepository = postRepository;
         this.userRepository = userRepository;
         this.commentRepository = commentRepository;
+        this.postStatsRepository = postStatsRepository;
     }
 
     /**
@@ -73,7 +76,11 @@ public class ReactionService {
         reaction.setPost(post);
         reaction.setUser(user);
         reaction.setCreatedAt(LocalDateTime.now());
-
+        PostStats stats = post.getStats();
+        stats.setReactions(stats.getReactions()+1);
+        postStatsRepository.save(stats);
+        post.setStats(stats);
+        postRepository.save(post);
         return reactionRepository.save(reaction);
     }
 
@@ -84,9 +91,13 @@ public class ReactionService {
      * @param userId the ID of the user whose reaction is to be deleted
      */
     public void deleteReaction(String postId, String userId) {
-        if(!postRepository.existsById(postId)) {
-              throw  new ResponseStatusException(HttpStatus.NOT_FOUND, "Post introuvable");
-        }
+        Post post = postRepository.findById(postId).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Post introuvable"));
+        PostStats stats = post.getStats();
+        stats.setReactions(Math.max(0, stats.getReactions()-1));
+        postStatsRepository.save(stats);
+        post.setStats(stats);
+        postRepository.save(post);
+
         reactionRepository.deleteByPostIdAndUserId(postId, userId);
 
     }

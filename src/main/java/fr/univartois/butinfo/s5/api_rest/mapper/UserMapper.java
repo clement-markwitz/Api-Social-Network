@@ -64,15 +64,15 @@ public interface UserMapper {
 
     /**
      * Converts a Profile entity to a ProfileDto.
-     * @param preferences
-     * @return
+     * @param preferences the Profile entity
+     * @return the ProfileDto
      */
     PreferencesDto toPreferencesDto(Preferences preferences);
 
     /**
      * Converts an Interests entity to an InterestsDto.
-     * @param interests
-     * @return
+     * @param interests the Interests entity
+     * @return the InterestsDto
      */
     InterestsDto toInterestsDto(Interests interests);
 

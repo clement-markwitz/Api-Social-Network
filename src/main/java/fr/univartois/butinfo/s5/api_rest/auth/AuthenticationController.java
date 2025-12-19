@@ -17,7 +17,7 @@ import java.util.Map;
 
 /**
  * Controller for handling authentication-related endpoints.
- * @author Your Name
+ * @author Cornet Benjamin
  * @version 1.0
  */
 @RestController
@@ -36,15 +36,18 @@ public class AuthenticationController {
 
     /**
      * Register a new user.
-     * @param dto
-     * @return
+     *
+     * @param dto UserCreateDto containing user registration information
+     * @return UserPrivateProfileDto of the newly created user
      */
     @PostMapping("/register")
     @ResponseStatus(HttpStatus.CREATED)
     @Operation(summary = "Create a new user", description = "Creates a new user with the provided information.")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "201", description = "User created successfully"),
-            @ApiResponse(responseCode = "400", description = "Invalid data provided")
+            @ApiResponse(responseCode = "400", description = "Invalid data provided"),
+            @ApiResponse(responseCode = "409", description = "User already exists"),
+            @ApiResponse(responseCode = "500", description = "Internal server error")
     })
     public UserPrivateProfileDto register(@Valid @RequestBody UserCreateDto dto) {
         User registeredUser = authenticationService.register(dto);
@@ -53,14 +56,16 @@ public class AuthenticationController {
 
     /**
      * Authenticate a user and return a JWT token.
-     * @param dto
-     * @return
+     *
+     * @param dto UserLoginDto containing user login information
+     * @return Map containing the JWT token
      */
     @PostMapping("/login")
     @Operation(summary = "Authenticate a user", description = "Allows a user to log in and receive a JWT token.")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Authentication successful"),
-            @ApiResponse(responseCode = "401", description = "Authentication failed")
+            @ApiResponse(responseCode = "401", description = "Authentication failed"),
+            @ApiResponse(responseCode = "500", description = "Internal server error")
     })
     public ResponseEntity<Map<String, String>> authenticate(@RequestBody UserLoginDto dto) {
         User authenticatedUser = authenticationService.authenticate(dto);

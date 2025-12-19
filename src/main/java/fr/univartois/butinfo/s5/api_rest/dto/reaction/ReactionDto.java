@@ -8,7 +8,7 @@ import fr.univartois.butinfo.s5.api_rest.model.ReactionType;
  */
 public record ReactionDto(
         String id,
-        UserSummaryDto user, // Enrichi avec le résumé de l'utilisateur
+        UserSummaryDto user,
         ReactionType type
 ) {
 }

@@ -12,7 +12,6 @@ import org.mapstruct.Mapping;
 @Mapper(componentModel = "spring", uses = {UserMapper.class})
 public interface BlockMapper {
 
-    // --- Vers Entity (Création) ---
     /**
      * Converts a BlockCreateDto to a Block entity.
      *
@@ -23,10 +22,9 @@ public interface BlockMapper {
     @Mapping(target = "blocker", ignore = true)
     @Mapping(target = "blocked", ignore = true)
     @Mapping(target = "createdAt", ignore = true)
-    @Mapping(target = "reason", source = "reason") // Explicite (optionnel si les noms sont identiques)
+    @Mapping(target = "reason", source = "reason")
     Block toEntity(BlockCreateDto dto);
 
-    // --- Vers DTO (Affichage) ---
     /**
      * Converts a Block entity to a BlockUserDto.
      *

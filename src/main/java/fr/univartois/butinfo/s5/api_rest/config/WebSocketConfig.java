@@ -15,7 +15,8 @@ public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
 
     /**
      * Configure the message broker.
-     * @param config
+     *
+     * @param config the MessageBrokerRegistry
      */
     @Override
     public void configureMessageBroker(MessageBrokerRegistry config) {
@@ -25,7 +26,8 @@ public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
 
     /**
      * Register STOMP endpoints.
-     * @param registry
+     *
+     * @param registry the StompEndpointRegistry
      */
     @Override
     public void registerStompEndpoints(StompEndpointRegistry registry) {

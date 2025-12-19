@@ -30,6 +30,16 @@ public class AuthenticationService {
     private final TokenRepository tokenRepository;
     private final JwtService jwtService;
 
+    /**
+     * Constructor for AuthenticationService.
+     *
+     * @param userRepository the user repository
+     * @param authenticationManager the authentication manager
+     * @param passwordEncoder the password encoder
+     * @param userMapper the user mapper
+     * @param tokenRepository the token repository
+     * @param jwtService the JWT service
+     */
     public AuthenticationService(UserRepository userRepository, AuthenticationManager authenticationManager, PasswordEncoder passwordEncoder, UserMapper userMapper, TokenRepository tokenRepository, JwtService jwtService) {
         this.userRepository = userRepository;
         this.authenticationManager = authenticationManager;
@@ -41,8 +51,9 @@ public class AuthenticationService {
 
     /**
      * Register a new user.
-     * @param request
-     * @return
+     *
+     * @param request the user creation request
+     * @return the registered user
      */
     public User register(UserCreateDto request) {
         if (userRepository.findByUsername(request.username()).isPresent()) {
@@ -66,8 +77,9 @@ public class AuthenticationService {
 
     /**
      * Authenticate a user and return a JWT token.
-     * @param request
-     * @return
+     *
+     * @param request the user login request
+     * @return the authenticated user
      */
     public User authenticate(UserLoginDto request) {
         authenticationManager.authenticate(
@@ -88,8 +100,9 @@ public class AuthenticationService {
 
     /**
      * Save a user token.
-     * @param user
-     * @param jwtToken
+     *
+     * @param user the user
+     * @param jwtToken the JWT token
      */
     private void saveUserToken(User user, String jwtToken) {
         var token = Token.builder()
@@ -104,7 +117,8 @@ public class AuthenticationService {
 
     /**
      * Revoke all user tokens.
-     * @param user
+     *
+     * @param user the user
      */
     private void revokeAllUserTokens(User user) {
         var validUserTokens = tokenRepository.findAllByUserIdAndExpiredFalseAndRevokedFalse(user.getId());

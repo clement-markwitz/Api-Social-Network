@@ -22,6 +22,10 @@ public class GlobalExceptionHandler {
 
     /**
      * Handle ResponseStatusException and convert it to ErrorDto.
+     *
+     * @param ex the ResponseStatusException
+     * @param request the HTTP servlet request
+     * @return the ResponseEntity containing ErrorDto
      */
     @ExceptionHandler(ResponseStatusException.class)
     public ResponseEntity<ErrorDto> handleResponseStatusException(ResponseStatusException ex, HttpServletRequest request) {
@@ -36,7 +40,11 @@ public class GlobalExceptionHandler {
     }
 
     /**
-     * Handle validation exceptions and convert them to ErrorDto.
+     * Handle MethodArgumentNotValidException and convert it to ErrorDto.
+     *
+     * @param ex the MethodArgumentNotValidException
+     * @param request the HTTP servlet request
+     * @return the ResponseEntity containing ErrorDto
      */
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<ErrorDto> handleValidationException(MethodArgumentNotValidException ex, HttpServletRequest request) {
@@ -57,6 +65,10 @@ public class GlobalExceptionHandler {
 
     /**
      * Handle ExpiredJwtException and convert it to ErrorDto.
+     *
+     * @param ex the ExpiredJwtException
+     * @param request the HTTP servlet request
+     * @return the ResponseEntity containing ErrorDto
      */
     @ExceptionHandler(ExpiredJwtException.class)
     public ResponseEntity<ErrorDto> handleExpiredJwtException(ExpiredJwtException ex, HttpServletRequest request) {
@@ -72,6 +84,10 @@ public class GlobalExceptionHandler {
 
     /**
      * Handle MalformedJwtException and convert it to ErrorDto.
+     *
+     * @param ex the MalformedJwtException
+     * @param request the HTTP servlet request
+     * @return the ResponseEntity containing ErrorDto
      */
     @ExceptionHandler(MalformedJwtException.class)
     public ResponseEntity<ErrorDto> handleMalformedJwtException(MalformedJwtException ex, HttpServletRequest request) {
@@ -87,6 +103,10 @@ public class GlobalExceptionHandler {
 
     /**
      * Handle SignatureException and convert it to ErrorDto.
+     *
+     * @param ex the SignatureException
+     * @param request the HTTP servlet request
+     * @return the ResponseEntity containing ErrorDto
      */
     @ExceptionHandler(SignatureException.class)
     public ResponseEntity<ErrorDto> handleSignatureException(SignatureException ex, HttpServletRequest request) {
@@ -102,6 +122,10 @@ public class GlobalExceptionHandler {
 
     /**
      * Handle all other exceptions and convert them to ErrorDto.
+     *
+     * @param ex the Exception
+     * @param request the HTTP servlet request
+     * @return the ResponseEntity containing ErrorDto
      */
     @ExceptionHandler(Exception.class)
     public ResponseEntity<ErrorDto> handleGlobalException(Exception ex, HttpServletRequest request) {
