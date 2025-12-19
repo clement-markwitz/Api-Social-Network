@@ -33,7 +33,7 @@ public class CommentService {
      */
     public List<Comment> getCommentsByPostId(String postId) {
         if (!postRepository.existsById(postId)) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Post introuvable");
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Post not found");
         }
         return commentRepository.findAllByPostId(postId);
     }
@@ -45,7 +45,7 @@ public class CommentService {
      */
     public Comment createComment(String postId, Comment comment, User author) {
         if (!postRepository.existsById(postId)) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Post introuvable");
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Post not found");
         }
 
         comment.setPost(postRepository.findById(postId).orElseThrow());

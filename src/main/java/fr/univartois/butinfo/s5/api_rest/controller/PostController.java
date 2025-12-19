@@ -21,10 +21,14 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import jakarta.validation.Valid;
+import org.springframework.data.crossstore.ChangeSetPersister;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
+
 import java.util.List;
 
 @RestController
@@ -115,7 +119,7 @@ public class PostController {
 
         Post existingPost = postService.getPostById(idPost);
         if (!existingPost.getAuthor().getId().equals(user.getId())) {
-            return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
+            throw new ResponseStatusException(HttpStatus.FORBIDDEN, "You are not the author of this post.");
         }
 
         postMapper.updatePostFromDto(updateDto, existingPost);
@@ -132,8 +136,8 @@ public class PostController {
         User user = (User) authentication.getPrincipal();
         Post existingPost = postService.getPostById(idPost);
 
-        if (!existingPost.getAuthor().getId().equals(user.getId())) {
-            return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
+        if (!existingPost.getAuthor().getId().equals(user.getId()) && !user.getRole().equals("ADMIN")) {
+            throw new ResponseStatusException(HttpStatus.FORBIDDEN, "You are not the author of this post or an admin.");
         }
 
         postService.deletePost(existingPost);
@@ -225,5 +229,35 @@ public class PostController {
 
         return ResponseEntity.status(HttpStatus.CREATED)
                 .body(commentMapper.toDto(savedComment));
+    }
+
+    /**
+     * Like or Unlike a comment.
+     *
+     * @param idComment ID of the comment to like or unlike
+     * @param authentication Authentication object containing the current user
+     * @return ResponseEntity with appropriate status code
+     */
+    @PostMapping("/comments/like/{idComment}")
+    @Operation(summary = "Like or Unlike a comment")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Comment liked/unliked successfully"),
+            @ApiResponse(responseCode = "400", description = "Bad request"),
+            @ApiResponse(responseCode = "403", description = "Access denied"),
+            @ApiResponse(responseCode = "500", description = "Internal server error")
+    })
+    public ResponseEntity<Void> likeComment(@PathVariable String idComment, Authentication authentication) {
+        User currentUser = (User) authentication.getPrincipal();
+
+        try {
+            reactionService.likeACommentOfAPost(idComment, currentUser.getId());
+            return ResponseEntity.ok().build();
+        } catch (AccessDeniedException e) {
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.badRequest().build();
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
     }
 }

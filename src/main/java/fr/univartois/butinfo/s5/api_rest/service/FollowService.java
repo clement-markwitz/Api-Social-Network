@@ -46,7 +46,7 @@ public class FollowService {
         User following = getUserById(followingId);
 
         if (followRepository.findByFollowerAndFollowing(follower, following).isPresent()) {
-            return; // Déjà suivi
+            throw new ResponseStatusException(HttpStatus.CONFLICT, "Follower ou Following existente.");
         }
 
         Follow newFollow = new Follow(null, follower, following, LocalDateTime.now());

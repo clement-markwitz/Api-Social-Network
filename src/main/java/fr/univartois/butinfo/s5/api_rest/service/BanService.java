@@ -1,8 +1,5 @@
 package fr.univartois.butinfo.s5.api_rest.service;
 
-import fr.univartois.butinfo.s5.api_rest.dto.ban.BanCreateDto;
-import fr.univartois.butinfo.s5.api_rest.dto.ban.BanDto;
-import fr.univartois.butinfo.s5.api_rest.mapper.BanMapper;
 import fr.univartois.butinfo.s5.api_rest.model.Ban;
 import fr.univartois.butinfo.s5.api_rest.model.User;
 import fr.univartois.butinfo.s5.api_rest.repository.BanRepository;
@@ -43,11 +40,10 @@ public class BanService {
      * @return
      */
     public Ban banUser(String targetUserId, Ban ban, User admin) {
-        // Verify if the user to be banned exists
+
         User targetUser = userRepository.findById(targetUserId)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Utilisateur introuvable"));
 
-        // Verify if the user is already banned
         if (banRepository.findByUserIdAndActiveTrue(targetUserId).isPresent()) {
             throw new ResponseStatusException(HttpStatus.CONFLICT, "L'utilisateur est déjà banni");
         }

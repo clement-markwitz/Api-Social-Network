@@ -1,0 +1,24 @@
+meta {
+  name: Création du compte n°2
+  type: http
+  seq: 5
+}
+
+post {
+  url: {{url}}/auth/register
+  body: json
+  auth: inherit
+}
+
+body:json {
+  {
+    "username": "{{username_compte_n2}}",
+    "email": "compte_n2@gmail.Com",
+    "password": "GrosSecret1234!",
+    "pseudo": "{{username_compte_n2}}"
+  }
+}
+
+script:post-response {
+  bru.setEnvVar("id_compte_2", res.body.id);
+}

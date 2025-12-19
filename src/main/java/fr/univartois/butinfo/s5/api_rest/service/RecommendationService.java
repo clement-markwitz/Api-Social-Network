@@ -3,6 +3,8 @@ package fr.univartois.butinfo.s5.api_rest.service;
 import fr.univartois.butinfo.s5.api_rest.dto.recommendation.FriendRecommendationDto;
 import fr.univartois.butinfo.s5.api_rest.dto.recommendation.PageRecommendationDto;
 import fr.univartois.butinfo.s5.api_rest.dto.recommendation.PostRecommendationDto;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
@@ -27,6 +29,8 @@ import java.util.List;
  */
 @Service
 public class RecommendationService {
+
+    private static final Logger logger = LoggerFactory.getLogger(RecommendationService.class);
 
     private final RestTemplate restTemplate;
 
@@ -61,7 +65,7 @@ public class RecommendationService {
             return response.getBody();
         } catch (Exception e) {
             // Log error to standard error output (ideally should use an SLF4J Logger)
-            System.err.println("Error calling recommendation service (Friends): " + e.getMessage());
+            logger.error("Error calling recommendation service (Friends): {}", e.getMessage());
             return Collections.emptyList();
         }
     }
@@ -83,7 +87,7 @@ public class RecommendationService {
             );
             return response.getBody();
         } catch (Exception e) {
-            System.err.println("Error calling recommendation service (Pages): " + e.getMessage());
+            logger.error("Error calling recommendation service (Pages): {}", e.getMessage());
             return Collections.emptyList();
         }
     }
@@ -106,7 +110,7 @@ public class RecommendationService {
             );
             return response.getBody();
         } catch (Exception e) {
-            System.err.println("Error calling recommendation service (Posts): " + e.getMessage());
+            logger.error("Error calling recommendation service (Posts): {}", e.getMessage());
             return Collections.emptyList();
         }
     }
