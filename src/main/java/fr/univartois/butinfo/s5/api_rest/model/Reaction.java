@@ -35,6 +35,10 @@ public class Reaction {
     @DBRef
     private User user;
 
+    @Indexed
+    @DBRef
+    private Comment comment;
+
     /**
      * The type of reaction (LIKE, HELPFUL, etc.).
      */
