@@ -39,23 +39,6 @@ public class ConversationController {
     private final ConversationMapper conversationMapper;
 
     /**
-     * Utility method to retrieve the ID of the currently authenticated user.
-     *
-     * @param authentication The Spring Security authentication object containing the user's principal.
-     * @return The unique ID of the authenticated user.
-     * @throws ResponseStatusException if the user is not authenticated (401).
-     */
-    private String getCurrentUserId(Authentication authentication) {
-        if (authentication == null) {
-            throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "User not authenticated");
-        }
-        // On utilise le userService qui gère déjà l'exception si l'user n'est pas trouvé
-        // loadUserByUsername retourne un UserDetails, on le cast en User (notre modèle)
-        User user = (User) userService.loadUserByUsername(authentication.getName());
-        return user.getId();
-    }
-
-    /**
      * Creates a new conversation.
      *
      * @param dto            The data transfer object containing the conversation name and initial member IDs.
