@@ -10,6 +10,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Media {
-    private String imageUrl;
+    private String image;
     private String videoUrl;
 }
