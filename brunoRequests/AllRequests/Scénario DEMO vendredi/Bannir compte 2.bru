@@ -1,0 +1,15 @@
+meta {
+  name: Bannir compte 2
+  type: http
+  seq: 23
+}
+
+post {
+  url: {{url}}/admin/users/{{compte_2_id}}/ban
+  body: none
+  auth: bearer
+}
+
+auth:bearer {
+  token: {{token_compte_admin}}
+}

@@ -1,0 +1,15 @@
+meta {
+  name: Chercher un post
+  type: http
+  seq: 6
+}
+
+get {
+  url: {{url}}/posts/search?query=Post test1 démo final
+  body: none
+  auth: none
+}
+
+params:query {
+  query: Post test1 démo final
+}

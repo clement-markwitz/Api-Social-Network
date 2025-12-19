@@ -1,0 +1,22 @@
+meta {
+  name: Commenter le post de compte 1
+  type: http
+  seq: 9
+}
+
+post {
+  url: {{url}}/posts/{{id_post_creer_compte_1}}/comments
+  body: json
+  auth: bearer
+}
+
+auth:bearer {
+  token: {{token_compte_n2}}
+}
+
+body:json {
+  {
+    "text": "Super post ! J'adore.",
+    "parentCommentId": null
+  }
+}

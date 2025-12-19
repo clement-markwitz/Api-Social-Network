@@ -1,0 +1,15 @@
+meta {
+  name: Logout compte admin
+  type: http
+  seq: 24
+}
+
+post {
+  url: {{url}}/auth/logout
+  body: none
+  auth: bearer
+}
+
+auth:bearer {
+  token: {{token_compte_admin}}
+}

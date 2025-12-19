@@ -1,0 +1,15 @@
+meta {
+  name: Voir mes recommendations posts
+  type: http
+  seq: 14
+}
+
+get {
+  url: {{url}}/users/recommendations/posts
+  body: none
+  auth: bearer
+}
+
+auth:bearer {
+  token: {{token_compte_n2}}
+}

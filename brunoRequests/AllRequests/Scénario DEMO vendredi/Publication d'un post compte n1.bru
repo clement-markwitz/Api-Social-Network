@@ -1,0 +1,33 @@
+meta {
+  name: Publication d'un post compte n1
+  type: http
+  seq: 3
+}
+
+post {
+  url: http://localhost:8080/api/posts
+  body: json
+  auth: bearer
+}
+
+auth:bearer {
+  token: {{token_compte_n1}}
+}
+
+body:json {
+  {
+    "text": "Post test1 démo final",
+    "type": "STATUS",
+    "visibility": "PUBLIC",
+    "media": {
+      "imageUrl": "https://via.placeholder.com/150",
+      "videoUrl": null
+    },
+    "pageId": null,
+    "communityId": null
+  }
+}
+
+script:post-response {
+  bru.setEnvVar("id_post_creer_compte_1", res.body.id)
+}

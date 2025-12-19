@@ -1,0 +1,18 @@
+meta {
+  name: Connexion compte 2 (banni)
+  type: http
+  seq: 25
+}
+
+post {
+  url: {{url}}/auth/login
+  body: json
+  auth: inherit
+}
+
+body:json {
+  {
+    "username": "{{username_compte_n2}}", 
+    "password": "GrosSecret1234!"
+  }
+}

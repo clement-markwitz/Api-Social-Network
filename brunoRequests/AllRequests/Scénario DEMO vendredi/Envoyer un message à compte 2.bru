@@ -1,0 +1,22 @@
+meta {
+  name: Envoyer un message à compte 2
+  type: http
+  seq: 21
+}
+
+post {
+  url: {{url}}/conversations/{{id_conv}}/messages
+  body: json
+  auth: bearer
+}
+
+auth:bearer {
+  token: {{token_compte_admin}}
+}
+
+body:json {
+  {
+    "text": "Jvais te ban",
+    "attachments": []
+  }
+}
