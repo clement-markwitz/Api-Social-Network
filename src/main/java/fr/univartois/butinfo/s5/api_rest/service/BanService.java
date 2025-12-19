@@ -43,11 +43,10 @@ public class BanService {
      * @return
      */
     public Ban banUser(String targetUserId, Ban ban, User admin) {
-        // Verify if the user to be banned exists
+
         User targetUser = userRepository.findById(targetUserId)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Utilisateur introuvable"));
 
-        // Verify if the user is already banned
         if (banRepository.findByUserIdAndActiveTrue(targetUserId).isPresent()) {
             throw new ResponseStatusException(HttpStatus.CONFLICT, "L'utilisateur est déjà banni");
         }

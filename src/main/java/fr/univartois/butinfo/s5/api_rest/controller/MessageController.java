@@ -35,24 +35,7 @@ public class MessageController {
 
     private final ConversationService conversationService;
     private final MessageService messageService;
-    private final UserService userService; // Remplacement de UserRepository
     private final MessageMapper messageMapper;
-
-    /**
-     * Utility method to retrieve the ID of the currently authenticated user.
-     *
-     * @param authentication The Spring Security authentication object containing the user's principal.
-     * @return The unique ID of the authenticated user.
-     * @throws ResponseStatusException if the user is not authenticated (401).
-     */
-    private String getCurrentUserId(Authentication authentication) {
-        if (authentication == null) {
-            throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "User not authenticated");
-        }
-        // Utilisation du UserService pour récupérer l'utilisateur connecté via son username
-        User user = (User) userService.loadUserByUsername(authentication.getName());
-        return user.getId();
-    }
 
     /**
      * Sends a new message to a specific conversation.
@@ -78,17 +61,15 @@ public class MessageController {
             @PathVariable String conversationId,
             @RequestBody @Valid MessageCreateDto dto,
             Authentication authentication) {
-        String senderId = getCurrentUserId(authentication);
+
+        User sender = (User) authentication.getPrincipal();
         Conversation conversation = conversationService.findById(conversationId);
 
         boolean isMember = conversation.getMembers().stream()
-                .anyMatch(u -> u.getId().equals(senderId));
+                .anyMatch(u -> u.getId().equals(sender.getId())); // Utilisation de sender.getId()
         if (!isMember) {
             throw new ResponseStatusException(HttpStatus.FORBIDDEN, "Not a member of this conversation");
         }
-
-        // Utilisation du service pour récupérer l'entité User (lève une exception si non trouvée)
-        User sender = userService.getById(senderId);
 
         Message message = messageMapper.toEntity(dto);
         return messageService.sendMessage(conversation, message, sender);
@@ -114,11 +95,12 @@ public class MessageController {
     public List<MessageDto> getAll(
             @PathVariable String conversationId,
             Authentication authentication) {
-        String senderId = getCurrentUserId(authentication);
+
+        User user = (User) authentication.getPrincipal();
         Conversation conversation = conversationService.findById(conversationId);
 
         boolean isMember = conversation.getMembers().stream()
-                .anyMatch(u -> u.getId().equals(senderId));
+                .anyMatch(u -> u.getId().equals(user.getId()));
         if (!isMember) throw new ResponseStatusException(HttpStatus.FORBIDDEN);
 
         return messageMapper.toDtoList(messageService.getMessages(conversation));
@@ -151,15 +133,15 @@ public class MessageController {
             @PathVariable String conversationId,
             @PathVariable String messageId,
             Authentication authentication) {
-        String currentUserId = getCurrentUserId(authentication);
 
+        User user = (User) authentication.getPrincipal();
         Message message = messageService.findById(messageId);
 
         if (!message.getConversation().getId().equals(conversationId)) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "This message does not belong to this conversation");
         }
 
-        if (!message.getSender().getId().equals(currentUserId)) {
+        if (!message.getSender().getId().equals(user.getId())) {
             throw new ResponseStatusException(HttpStatus.FORBIDDEN, "You can only delete your own messages");
         }
 

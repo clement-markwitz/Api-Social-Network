@@ -35,25 +35,8 @@ import java.util.List;
 public class ConversationController {
 
     private final ConversationService conversationService;
-    private final UserService userService; // Remplacement de UserRepository par UserService
+    private final UserService userService;
     private final ConversationMapper conversationMapper;
-
-    /**
-     * Utility method to retrieve the ID of the currently authenticated user.
-     *
-     * @param authentication The Spring Security authentication object containing the user's principal.
-     * @return The unique ID of the authenticated user.
-     * @throws ResponseStatusException if the user is not authenticated (401).
-     */
-    private String getCurrentUserId(Authentication authentication) {
-        if (authentication == null) {
-            throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "User not authenticated");
-        }
-        // On utilise le userService qui gère déjà l'exception si l'user n'est pas trouvé
-        // loadUserByUsername retourne un UserDetails, on le cast en User (notre modèle)
-        User user = (User) userService.loadUserByUsername(authentication.getName());
-        return user.getId();
-    }
 
     /**
      * Creates a new conversation.
@@ -83,10 +66,9 @@ public class ConversationController {
             memberIds.add(initiator.getId());
         }
         if (memberIds.size() < 2) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "A conversation must have at least 2 members");
         }
 
-        // Récupération via le service (boucle stream pour garantir que chaque ID existe via getById)
         List<User> members = memberIds.stream()
                 .map(userService::getById)
                 .toList();

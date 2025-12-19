@@ -14,6 +14,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
+
 import java.util.List;
 
 
@@ -52,8 +54,6 @@ public class BlockController {
         Block block = blockMapper.toEntity(createDto);
         User blocker = (User) authentication.getPrincipal();
         User blocked = userService.getById(userId);
-
-        // 4. Appel du Service
         Block createdBlock = blockService.createBlock(block, blocker, blocked);
 
         return ResponseEntity.status(HttpStatus.CREATED).body(createdBlock);
@@ -69,9 +69,8 @@ public class BlockController {
             @ApiResponse(responseCode = "404", description = "User not found or not blocked")
     })
     public ResponseEntity<Void> unblockUser(@PathVariable String userId, Authentication authentication) {
-        User blocker = (User) authentication.getPrincipal();
 
-        // Ici on passe juste les IDs car la suppression n'a pas besoin de l'objet User complet
+        User blocker = (User) authentication.getPrincipal();
         blockService.deleteBlock(blocker.getId(), userId);
 
         return ResponseEntity.noContent().build();
@@ -88,9 +87,9 @@ public class BlockController {
             @ApiResponse(responseCode = "401", description = "Unauthenticated")
     })
     public ResponseEntity<List<BlockUserDto>> getMyBlockedUsers(Authentication authentication) {
+
         User blocker = (User) authentication.getPrincipal();
         List<Block> blocks = blockService.findBlocksByBlocker(blocker.getId());
-
         List<BlockUserDto> userSummaries = blocks.stream()
                 .map(blockMapper::toDto).toList();
 
@@ -113,10 +112,10 @@ public class BlockController {
         User blocker = (User) authentication.getPrincipal();
         Block block = blockService.getBlockById(id);
         if (block == null) {
-            return ResponseEntity.notFound().build();
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Block not found");
         }
         if (!block.getBlocker().getId().equals(blocker.getId())) {
-            return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
+            throw new ResponseStatusException(HttpStatus.FORBIDDEN, "Access denied: This block does not belong to the user");
         }
         return ResponseEntity.ok(blockMapper.toDto(block));
     }
