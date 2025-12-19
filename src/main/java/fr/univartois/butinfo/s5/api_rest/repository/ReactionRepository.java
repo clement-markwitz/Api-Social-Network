@@ -29,5 +29,7 @@ public interface ReactionRepository extends MongoRepository<Reaction,String> {
      */
     Optional<Reaction> findByPostIdAndUserId(String postId, String userId);
 
+    Optional<Reaction> findByCommentIdAndUserId(String commentId, String userId);
+
     void deleteByPostIdAndUserId(String postId, String userId);
 }
