@@ -14,10 +14,15 @@ import org.springframework.web.server.ResponseStatusException;
 import java.security.SignatureException;
 import java.time.LocalDateTime;
 import java.util.stream.Collectors;
-
+/**
+ * Global exception handler for the REST API.
+ */
 @RestControllerAdvice
 public class GlobalExceptionHandler {
 
+    /**
+     * Handle ResponseStatusException and convert it to ErrorDto.
+     */
     @ExceptionHandler(ResponseStatusException.class)
     public ResponseEntity<ErrorDto> handleResponseStatusException(ResponseStatusException ex, HttpServletRequest request) {
         ErrorDto error = new ErrorDto(
@@ -30,6 +35,9 @@ public class GlobalExceptionHandler {
         return new ResponseEntity<>(error, ex.getStatusCode());
     }
 
+    /**
+     * Handle validation exceptions and convert them to ErrorDto.
+     */
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<ErrorDto> handleValidationException(MethodArgumentNotValidException ex, HttpServletRequest request) {
 
@@ -47,6 +55,9 @@ public class GlobalExceptionHandler {
         return ResponseEntity.badRequest().body(error);
     }
 
+    /**
+     * Handle ExpiredJwtException and convert it to ErrorDto.
+     */
     @ExceptionHandler(ExpiredJwtException.class)
     public ResponseEntity<ErrorDto> handleExpiredJwtException(ExpiredJwtException ex, HttpServletRequest request) {
         ErrorDto error = new ErrorDto(
@@ -59,6 +70,9 @@ public class GlobalExceptionHandler {
         return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(error);
     }
 
+    /**
+     * Handle MalformedJwtException and convert it to ErrorDto.
+     */
     @ExceptionHandler(MalformedJwtException.class)
     public ResponseEntity<ErrorDto> handleMalformedJwtException(MalformedJwtException ex, HttpServletRequest request) {
         ErrorDto error = new ErrorDto(
@@ -71,6 +85,9 @@ public class GlobalExceptionHandler {
         return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(error);
     }
 
+    /**
+     * Handle SignatureException and convert it to ErrorDto.
+     */
     @ExceptionHandler(SignatureException.class)
     public ResponseEntity<ErrorDto> handleSignatureException(SignatureException ex, HttpServletRequest request) {
         ErrorDto error = new ErrorDto(
@@ -83,6 +100,9 @@ public class GlobalExceptionHandler {
         return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(error);
     }
 
+    /**
+     * Handle all other exceptions and convert them to ErrorDto.
+     */
     @ExceptionHandler(Exception.class)
     public ResponseEntity<ErrorDto> handleGlobalException(Exception ex, HttpServletRequest request) {
         ErrorDto error = new ErrorDto(
