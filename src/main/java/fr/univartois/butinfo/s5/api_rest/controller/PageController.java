@@ -131,4 +131,19 @@ public class PageController {
                 .toList();
         return ResponseEntity.ok(postDtos);
     }
+
+    @PostMapping("/{id}/follow")
+    public ResponseEntity<Void> followPage(@PathVariable String id, Authentication authentication) {
+        User user = (User) authentication.getPrincipal();
+        pageService.followPage(id, user);
+        return ResponseEntity.ok().build();
+    }
+
+    @DeleteMapping("/{id}/follow")
+    public ResponseEntity<Void> unfollowPage(@PathVariable String id, Authentication authentication) {
+        User user = (User) authentication.getPrincipal();
+        pageService.unfollowPage(id, user);
+        return ResponseEntity.ok().build();
+    }
+
 }
