@@ -6,10 +6,18 @@ meta {
 
 post {
   url: {{url}}/admin/users/{{compte_2_id}}/ban
-  body: none
+  body: json
   auth: bearer
 }
 
 auth:bearer {
   token: {{token_compte_admin}}
+}
+
+body:json {
+  {
+    "userId": "{{compte_2_id}}",
+    "reason": "Insultes répétées dans les commentaires",
+    "durationDays": 7
+  }
 }

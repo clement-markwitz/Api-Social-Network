@@ -5,9 +5,13 @@ meta {
 }
 
 get {
-  url: {{url}}/users/recommendations/posts
+  url: {{url}}/users/:id/recommendations/posts
   body: none
   auth: bearer
+}
+
+params:path {
+  id: {{id_compte_2}}
 }
 
 auth:bearer {
