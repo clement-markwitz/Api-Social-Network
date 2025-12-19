@@ -1,6 +1,7 @@
 package fr.univartois.butinfo.s5.api_rest.service;
 
 import fr.univartois.butinfo.s5.api_rest.model.User;
+import fr.univartois.butinfo.s5.api_rest.repository.BlockRepository;
 import fr.univartois.butinfo.s5.api_rest.repository.UserRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -19,12 +20,14 @@ import java.util.List;
 public class UserService implements UserDetailsService {
 
     private final UserRepository userRepository;
+    private final BlockRepository blockRepository;
 
     /**
      * Constructor for UserService.
      * @param userRepository userRepository
      */
-    public UserService(UserRepository userRepository) {
+    public UserService(UserRepository userRepository, BlockRepository blockRepository) {
+        this.blockRepository = blockRepository;
         this.userRepository = userRepository;
     }
 
@@ -95,15 +98,21 @@ public class UserService implements UserDetailsService {
     }
 
     /**
-     * Search users by pseudo.
+     * Search users by pseudo, excluding those who blocked the current user.
      *
      * @param query search query
-     * @return List of users matching the query
+     * @param currentUserId ID of the user performing the search
+     * @return List of users matching the query and accessible
      */
-    public List<User> searchUsers(String query) {
+    public List<User> searchUsers(String query, String currentUserId) {
+        List<User> foundUsers;
         if (query == null || query.isBlank()) {
-            return getAll();
+            foundUsers = getAll();
+        } else {
+            foundUsers = userRepository.findByProfilePseudoContainingIgnoreCase(query);
         }
-        return userRepository.findByProfilePseudoContainingIgnoreCase(query);
+        return foundUsers.stream()
+                .filter(u -> !blockRepository.existsByBlockerIdAndBlockedId(u.getId(), currentUserId))
+                .toList();
     }
 }
