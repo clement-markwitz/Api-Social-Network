@@ -142,6 +142,16 @@ public class CommunityController {
         return ResponseEntity.noContent().build();
     }
 
+    /**
+     * Get posts of a community.
+     * @param id Community ID
+     * @return
+     */
+    @Operation(summary = "Get posts of a community", description = "Retrieves all posts associated with a specific community.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Posts retrieved successfully"),
+            @ApiResponse(responseCode = "404", description = "Community not found")
+    })
     @GetMapping("/{id}/posts")
     public ResponseEntity<List<PostDto>> getCommunityPosts(@PathVariable String id) {
         List<Post> posts = postService.getPostsByCommunity(id);
@@ -151,6 +161,16 @@ public class CommunityController {
         return ResponseEntity.ok(postDtos);
     }
 
+    /**
+     * Follow a community.
+     * @param id Community ID
+     * @return
+     */
+    @Operation(summary = "Follow a community", description = "Allows the authenticated user to follow a specific community.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "201", description = "Successfully followed the community"),
+            @ApiResponse(responseCode = "404", description = "Community not found")
+    })
     @PostMapping("/{id}/follow")
     public ResponseEntity<Void> followCommunity(@PathVariable String id, Authentication authentication) {
         Community community = communityService.getById(id);
@@ -160,6 +180,16 @@ public class CommunityController {
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
+    /**
+     * Unfollow a community.
+     * @param id Community ID
+     * @return
+     */
+    @Operation(summary = "Unfollow a community", description = "Allows the authenticated user to unfollow a specific community.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "204", description = "Successfully unfollowed the community"),
+            @ApiResponse(responseCode = "404", description = "Community not found")
+    })
     @DeleteMapping("/{id}/unfollow")
     public ResponseEntity<Void> unfollowCommunity(@PathVariable String id, Authentication authentication) {
         Community community = communityService.getById(id);
