@@ -8,7 +8,7 @@ import fr.univartois.butinfo.s5.api_rest.dto.message.MessageSummaryDto;
  */
 public record ConversationSummaryDto(
         String id,
-        String name, // Nom du groupe, ou nom du destinataire (si 1-to-1)
-        MessageSummaryDto lastMessage // Dernier message de la conversation
+        String name, // The name of the conversation
+        MessageSummaryDto lastMessage // The last message sent in the conversation
 ) {
 }

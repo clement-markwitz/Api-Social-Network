@@ -27,6 +27,13 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
     private final UserDetailsService userDetailsService;
     private final HandlerExceptionResolver handlerExceptionResolver;
 
+    /**
+     * Constructor for JwtAuthenticationFilter.
+     *
+     * @param jwtService the JWT service
+     * @param userDetailsService the user details service
+     * @param handlerExceptionResolver the handler exception resolver
+     */
     public JwtAuthenticationFilter(JwtService jwtService, UserDetailsService userDetailsService,
     @Qualifier("handlerExceptionResolver") HandlerExceptionResolver handlerExceptionResolver) {
         this.jwtService = jwtService;
@@ -36,11 +43,12 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
     /**
      * Filter the incoming request for JWT authentication.
-     * @param request
-     * @param response
-     * @param filterChain
-     * @throws ServletException
-     * @throws IOException
+     *
+     * @param request the HTTP servlet request
+     * @param response the HTTP servlet response
+     * @param filterChain the filter chain
+     * @throws ServletException the servlet exception
+     * @throws IOException the IO exception
      */
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {

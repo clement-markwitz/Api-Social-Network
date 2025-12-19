@@ -40,8 +40,6 @@ public class User implements UserDetails {
 
     private String role;
 
-    // Objets embarqués
-    // On dit à SonarQube d'ignorer l'erreur de sérialisation ici pour ne pas casser la DB MongoDB
     @SuppressWarnings("java:S1948")
     private Profile profile;
 
@@ -53,10 +51,10 @@ public class User implements UserDetails {
 
     private boolean banned;
 
-    @CreatedDate // Géré automatiquement si l'audit est activé
+    @CreatedDate
     private LocalDateTime createdAt;
 
-    @LastModifiedDate // Géré automatiquement si l'audit est activé
+    @LastModifiedDate
     private LocalDateTime updatedAt;
 
     /**

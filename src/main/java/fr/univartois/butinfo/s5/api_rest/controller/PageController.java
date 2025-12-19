@@ -50,7 +50,8 @@ public class PageController {
     @GetMapping
     @Operation(summary = "List all pages", description = "Retrieves a paginated list of all pages in summary format.")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Pages list retrieved successfully")
+            @ApiResponse(responseCode = "200", description = "Pages list retrieved successfully"),
+            @ApiResponse(responseCode = "400", description = "Invalid pagination parameters")
     })
     public Page<PageSummaryDto> getAllPages(@PageableDefault(size = 20) Pageable pageable) {
         return pageService.getAllPages(pageable);
@@ -83,7 +84,9 @@ public class PageController {
     @ResponseStatus(HttpStatus.CREATED)
     @Operation(summary = "Create a new page", description = "Creates a new page.")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "201", description = "Page created successfully")
+            @ApiResponse(responseCode = "201", description = "Page created successfully"),
+            @ApiResponse(responseCode = "400", description = "Invalid data provided"),
+            @ApiResponse(responseCode = "500", description = "Internal server error")
     })
     public PageDetailDto createPage(@RequestBody @Valid PageCreateDto pageCreateDto, Authentication authentication) {
         User user = (User) authentication.getPrincipal();
@@ -101,7 +104,9 @@ public class PageController {
     @Operation(summary = "Update a page", description = "Updates an existing page.")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Page updated successfully"),
-            @ApiResponse(responseCode = "404", description = "Page not found")
+            @ApiResponse(responseCode = "404", description = "Page not found"),
+            @ApiResponse(responseCode = "400", description = "Invalid data provided"),
+            @ApiResponse(responseCode = "500", description = "Internal server error")
     })
     public PageDetailDto updatePage(@PathVariable String id, @RequestBody @Valid PageUpdateDto pageUpdateDto) {
         return pageService.updatePage(id, pageUpdateDto);
@@ -143,10 +148,17 @@ public class PageController {
         return ResponseEntity.ok(postDtos);
     }
 
+    /**
+     * Follow a page.
+     *
+     * @param id the ID of the page to follow
+     * @param authentication the authentication object
+     * @return ResponseEntity with status OK
+     */
     @Operation(summary = "Follow a page", description = "Allows the authenticated user to follow a specific page.")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Successfully followed the page"),
-            @ApiResponse(responseCode = "404", description = "Page not found")
+            @ApiResponse(responseCode = "404", description = "Page not found"),
     })
     @PostMapping("/{id}/follow")
     public ResponseEntity<Void> followPage(@PathVariable String id, Authentication authentication) {
@@ -155,6 +167,13 @@ public class PageController {
         return ResponseEntity.ok().build();
     }
 
+    /**
+     * Unfollow a page.
+     *
+     * @param id the ID of the page to unfollow
+     * @param authentication the authentication object
+     * @return ResponseEntity with status OK
+     */
     @Operation(summary = "Unfollow a page", description = "Allows the authenticated user to unfollow a specific page.")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Successfully unfollowed the page"),

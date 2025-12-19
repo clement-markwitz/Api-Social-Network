@@ -71,7 +71,8 @@ public class StatsController {
     @GetMapping
     @Operation(summary = "Get global statistics", description = "Retrieve global statistics with optional date range.")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Global statistics retrieved successfully")
+            @ApiResponse(responseCode = "200", description = "Global statistics retrieved successfully"),
+            @ApiResponse(responseCode = "400", description = "Invalid date format")
     })
     public ResponseEntity<StatsDto> getGlobalStats(
             @Parameter(description = "Start date (YYYY-MM-DD)") @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate startDate,
@@ -98,7 +99,8 @@ public class StatsController {
     @GetMapping("/users")
     @Operation(summary = "Get user statistics")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "User statistics retrieved successfully")
+            @ApiResponse(responseCode = "200", description = "User statistics retrieved successfully"),
+            @ApiResponse(responseCode = "400", description = "Invalid date format")
     })
     public ResponseEntity<StatsDtoUser> getUserStats(
             @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate startDate,
@@ -117,6 +119,10 @@ public class StatsController {
      */
     @GetMapping("/posts")
     @Operation(summary = "Get post statistics")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Post statistics retrieved successfully"),
+            @ApiResponse(responseCode = "400", description = "Invalid date format")
+    })
     public ResponseEntity<StatsDtoPost> getPostStats(
             @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate startDate,
             @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate endDate) {

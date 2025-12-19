@@ -14,7 +14,6 @@ import java.util.Optional;
 @Repository
 public interface FollowRepository extends MongoRepository<Follow, String> {
 
-    // On cherche maintenant avec des objets User
     /**
      * Find a follow relationship by follower and following users.
      *

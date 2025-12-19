@@ -19,7 +19,6 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 @Document(collection = "follows")
-// Index unique pour empêcher un utilisateur de suivre 2x la même personne
 @CompoundIndex(name = "follower_following_unique_idx", def = "{'followerId': 1, 'followingId': 1}", unique = true)
 public class Follow {
 
@@ -30,7 +29,7 @@ public class Follow {
      * ID of the user who FOLLOWS.
      * Manual reference to the 'users' collection.
      */
-    @Indexed // Indexe pour la requête : "Qui est-ce que je suis ?"
+    @Indexed
     @DBRef
     private User follower;
 
@@ -38,7 +37,7 @@ public class Follow {
      * ID of the user being FOLLOWED.
      * Manual reference to the 'users' collection.
      */
-    @Indexed // Indexe pour la requête : "Qui me suit ?"
+    @Indexed
     @DBRef
     private User following;
 

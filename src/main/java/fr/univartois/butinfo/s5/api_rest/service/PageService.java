@@ -8,7 +8,6 @@ import fr.univartois.butinfo.s5.api_rest.repository.PageRepository;
 import fr.univartois.butinfo.s5.api_rest.repository.PageSubscriptionRepository;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
-import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 import java.time.LocalDateTime;
@@ -25,6 +24,13 @@ public class PageService {
     private final PageSubscriptionRepository pageSubscriptionRepository;
     private final PageMapper pageMapper;
 
+    /**
+     * Constructor for PageService.
+     *
+     * @param pageRepository the page repository
+     * @param pageMapper    the page mapper
+     * @param pageSubscriptionRepository the page subscription repository
+     */
     public PageService(PageRepository pageRepository, PageMapper pageMapper, PageSubscriptionRepository pageSubscriptionRepository) {
         this.pageRepository = pageRepository;
         this.pageSubscriptionRepository = pageSubscriptionRepository;
@@ -101,6 +107,12 @@ public class PageService {
         pageRepository.deleteById(id);
     }
 
+    /**
+     * Follow a page.
+     *
+     * @param pageId the ID of the page to follow
+     * @param user the user who wants to follow the page
+     */
     public void followPage(String pageId, User user) {
         Page page = findPageEntityById(pageId);
         if (pageSubscriptionRepository.existsByUserAndPage(user, page)) {
@@ -115,6 +127,12 @@ public class PageService {
         pageRepository.save(page);
     }
 
+    /**
+     * Unfollow a page.
+     *
+     * @param pageId the ID of the page to unfollow
+     * @param user the user who wants to unfollow the page
+     */
     public void unfollowPage(String pageId, User user) {
         Page page = findPageEntityById(pageId);
         PageSubscription subscription = pageSubscriptionRepository.findByUserAndPage(user, page)
@@ -124,6 +142,12 @@ public class PageService {
         pageRepository.save(page);
     }
 
+    /**
+     * Finds a Page entity by its ID.
+     *
+     * @param id the ID of the page
+     * @return the Page entity
+     */
     private Page findPageEntityById(String id) {
         return pageRepository.findById(id)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, PAGE_NOT_FOUND));

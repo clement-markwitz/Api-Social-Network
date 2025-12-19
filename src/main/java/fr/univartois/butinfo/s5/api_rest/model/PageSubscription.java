@@ -28,11 +28,11 @@ public class PageSubscription {
 
     @Indexed
     @DBRef
-    private User user; // L'utilisateur qui s'abonne
+    private User user;
 
     @Indexed
     @DBRef
-    private Page page; // La page à laquelle il s'abonne
+    private Page page;
 
     @CreatedDate
     private LocalDateTime createdAt;

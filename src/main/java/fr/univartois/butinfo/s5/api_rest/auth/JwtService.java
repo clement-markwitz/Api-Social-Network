@@ -29,7 +29,8 @@ public class JwtService {
 
     /**
      * Constructor for JwtService.
-     * @param tokenRepository
+     *
+     * @param tokenRepository the token repository
      */
     public JwtService(TokenRepository tokenRepository) {
         this.tokenRepository = tokenRepository;
@@ -37,8 +38,9 @@ public class JwtService {
 
     /**
      * Generate a JWT token for the given user details.
-     * @param userDetails
-     * @return
+     *
+     * @param userDetails the user details
+     * @return the generated JWT token
      */
     public String generateToken(UserDetails userDetails) {
         return generateToken(Map.of(), userDetails);
@@ -46,9 +48,10 @@ public class JwtService {
 
     /**
      * Generate a JWT token with extra claims for the given user details.
-     * @param extraClaims
-     * @param userDetails
-     * @return
+     *
+     * @param extraClaims the extra claims to include in the token
+     * @param userDetails the user details
+     * @return the generated JWT token
      */
     public String generateToken(Map<String, Object> extraClaims, UserDetails userDetails) {
         return Jwts.builder()
@@ -62,9 +65,10 @@ public class JwtService {
 
     /**
      * Validate the given JWT token against the user details.
-     * @param token
-     * @param userDetails
-     * @return
+     *
+     * @param token the JWT token
+     * @param userDetails the user details
+     * @return the validity of the token
      */
     public boolean isTokenValid(String token, UserDetails userDetails) {
         final String username = extractUsername(token);
@@ -76,8 +80,9 @@ public class JwtService {
 
     /**
      * Check if the given JWT token is expired.
-     * @param token
-     * @return
+     *
+     * @param token the JWT token
+     * @return the expiration status of the token
      */
     private boolean isTokenExpired(String token) {
         return extractExpiration(token).before(new Date());
@@ -85,8 +90,9 @@ public class JwtService {
 
     /**
      * Extract the expiration date from the given JWT token.
-     * @param token
-     * @return
+     *
+     * @param token the JWT token
+     * @return the expiration date
      */
     private Date extractExpiration(String token) {
         return extractClaim(token, Claims::getExpiration);
@@ -94,8 +100,9 @@ public class JwtService {
 
     /**
      * Extract the username from the given JWT token.
-     * @param token
-     * @return
+     *
+     * @param token the token
+     * @return the username
      */
     public String extractUsername(String token) {
         return extractClaim(token, Claims::getSubject);
@@ -103,10 +110,11 @@ public class JwtService {
 
     /**
      * Extract a specific claim from the given JWT token.
-     * @param token
-     * @param claimsResolver
-     * @param <T>
-     * @return
+     *
+     * @param token the JWT token
+     * @param claimsResolver function to resolve the claim
+     * @param <T> the type of the claim
+     * @return the extracted claim
      */
     public <T> T extractClaim(String token, Function<Claims, T> claimsResolver) {
         final Claims claims = extractAllClaims(token);
@@ -115,8 +123,9 @@ public class JwtService {
 
     /**
      * Extract all claims from the given JWT token.
-     * @param token
-     * @return
+     *
+     * @param token the JWT token
+     * @return the claims
      */
     private Claims extractAllClaims(String token) {
         return Jwts.parser()
@@ -128,7 +137,8 @@ public class JwtService {
 
     /**
      * Get the signing key for JWT.
-     * @return
+     *
+     * @return the secret key
      */
     private SecretKey getSignInKey() {
         byte[] keyBytes = Decoders.BASE64.decode(secretKey);

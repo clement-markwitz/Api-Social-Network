@@ -46,7 +46,20 @@ public interface PostRepository extends MongoRepository<Post, String> {
      */
     List<Post> findAllByTextContainingIgnoreCase(String text);
 
+    /**
+     * Find posts by community ID.
+     *
+     * @param communityId the ID of the community
+     * @return a list of posts in the specified community
+     */
     List<Post> findByCommunityId(String communityId);
+
+    /**
+     * Find posts by page ID.
+     *
+     * @param pageId the ID of the page
+     * @return a list of posts on the specified page
+     */
     List<Post> findByPageId(String pageId);
 
     /**

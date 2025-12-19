@@ -15,12 +15,11 @@ import org.mapstruct.Mapping;
 @Mapper(componentModel = "spring", uses = {MessageMapper.class})
 public interface ConversationMapper {
 
-    // --- Vers Entity ---
 
     /**
      * Convert a ConversationCreateDto to a Conversation entity.
-     * @param dto
-     * @return
+     * @param dto the ConversationCreateDto
+     * @return the Conversation entity
      */
     @Mapping(target = "id", ignore = true)
     @Mapping(target = "initiator", ignore = true) // Géré par le service
@@ -30,13 +29,12 @@ public interface ConversationMapper {
     @Mapping(target = "updatedAt", ignore = true)
     Conversation toEntity(ConversationCreateDto dto);
 
-    // --- Vers DTO ---
     /**
      * Convert a Conversation entity to a ConversationSummaryDto.
-     * @param conversation
-     * @param lastMessage
-     * @param currentUserId
-     * @return
+     * @param conversation the Conversation entity
+     * @param lastMessage the last Message in the conversation
+     * @param currentUserId the ID of the current user (for context)
+     * @return the ConversationSummaryDto
      */
     @Mapping(source = "conversation.id", target = "id")
     @Mapping(source = "conversation.name", target = "name")
@@ -45,8 +43,8 @@ public interface ConversationMapper {
 
     /**
      * Convert a Conversation entity to a ConversationDto.
-     * @param conversation
-     * @return
+     * @param conversation the Conversation entity
+     * @return the ConversationDto
      */
     ConversationDto toDto(Conversation conversation);
 }

@@ -10,7 +10,6 @@ import java.util.Optional;
  * Repository interface for managing Reaction entities in MongoDB.
  */
 public interface ReactionRepository extends MongoRepository<Reaction,String> {
-    // On recupere toutes les reactions d'un post
     /**
      * Retrieves all reactions associated with a specific post ID.
      *
@@ -19,7 +18,6 @@ public interface ReactionRepository extends MongoRepository<Reaction,String> {
      */
     List<Reaction> findAllByPostId(String postId);
 
-    // Pour verifier si un utilisateur a deja reagi a un post
     /**
      * Finds a reaction by post ID and user ID.
      *
@@ -29,7 +27,20 @@ public interface ReactionRepository extends MongoRepository<Reaction,String> {
      */
     Optional<Reaction> findByPostIdAndUserId(String postId, String userId);
 
+    /**
+     * Finds a reaction by comment ID and user ID.
+     *
+     * @param commentId the ID of the comment
+     * @param userId the ID of the user
+     * @return the Optional containing the Reaction if found, or empty if not found
+     */
     Optional<Reaction> findByCommentIdAndUserId(String commentId, String userId);
 
+    /**
+     * Deletes a reaction by post ID and user ID.
+     *
+     * @param postId the ID of the post
+     * @param userId the ID of the user
+     */
     void deleteByPostIdAndUserId(String postId, String userId);
 }

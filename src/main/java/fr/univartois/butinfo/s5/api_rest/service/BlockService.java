@@ -7,7 +7,6 @@ import fr.univartois.butinfo.s5.api_rest.repository.BlockRepository;
 import fr.univartois.butinfo.s5.api_rest.repository.ConversationRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.time.LocalDateTime;
@@ -29,10 +28,10 @@ public class BlockService {
 
     /**
      * Create a new block between two users.
-     * @param block
-     * @param blocker
-     * @param blocked
-     * @return
+     * @param block the block entity
+     * @param blocker the user who is blocking
+     * @param blocked the user being blocked
+     * @return the created block
      */
     public Block createBlock(Block block, User blocker, User blocked) {
 
@@ -60,6 +59,9 @@ public class BlockService {
 
     /**
      * Delete a block between two users.
+     *
+     * @param blockerId the ID of the user who initiated the block
+     * @param blockedId the ID of the user being blocked
      */
     public void deleteBlock(String blockerId, String blockedId) {
         if (!blockRepository.existsByBlockerIdAndBlockedId(blockerId, blockedId)) {
@@ -69,7 +71,10 @@ public class BlockService {
     }
 
     /**
-     * Get all blocks initiated by a specific user.
+     * Find all blocks initiated by a specific user.
+     *
+     * @param blockerId the ID of the user who initiated the blocks
+     * @return a list of blocks
      */
     public List<Block> findBlocksByBlocker(String blockerId) {
         return blockRepository.findAllByBlockerId(blockerId);
@@ -84,6 +89,9 @@ public class BlockService {
 
     /**
      * Get a block by its ID.
+     *
+     * @param id the ID of the block
+     * @return the block
      */
     public Block getBlockById(String id) {
         return blockRepository.findById(id)
@@ -91,7 +99,11 @@ public class BlockService {
     }
 
     /**
-     * Get a block between two users.
+     * Get a block by blocker and blocked user IDs.
+     *
+     * @param blockerId the ID of the user who initiated the block
+     * @param blockedId the ID of the user being blocked
+     * @return the block
      */
     public Block getBlockByBlockerAndBlocked(String blockerId, String blockedId) {
         return blockRepository.findByBlockerIdAndBlockedId(blockerId, blockedId)

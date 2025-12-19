@@ -21,7 +21,6 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import jakarta.validation.Valid;
-import org.springframework.data.crossstore.ChangeSetPersister;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.AccessDeniedException;
@@ -46,8 +45,17 @@ public class PostController {
     private final CommentMapper commentMapper;
     private final ReactionMapper reactionMapper;
 
-    public PostController(PostService postService, ReactionService reactionService, CommentService commentService,
-                          PostMapper postMapper, CommentMapper commentMapper, ReactionMapper reactionMapper) {
+    /**
+     * Constructor for PostController.
+     *
+     * @param postService the post service
+     * @param reactionService the reaction service
+     * @param commentService the comment service
+     * @param postMapper the post mapper
+     * @param commentMapper the comment mapper
+     * @param reactionMapper the reaction mapper
+     */
+    public PostController(PostService postService, ReactionService reactionService, CommentService commentService, PostMapper postMapper, CommentMapper commentMapper, ReactionMapper reactionMapper) {
         this.postService = postService;
         this.reactionService = reactionService;
         this.commentService = commentService;
@@ -66,7 +74,8 @@ public class PostController {
     @Operation(summary = "Create a new post", description = "Allows an authenticated user to create a new post.")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "201", description = "Post created successfully"),
-            @ApiResponse(responseCode = "400", description = "Invalid post creation data")
+            @ApiResponse(responseCode = "400", description = "Invalid post creation data"),
+            @ApiResponse(responseCode = "401", description = "Unauthorized: User not authenticated")
     })
     @PostMapping
     public ResponseEntity<PostDto> createPost(
@@ -122,7 +131,8 @@ public class PostController {
     @GetMapping("/search")
     @Operation(summary = "Search posts", description = "Searches for posts based on a query string. If the query is empty, returns all posts.")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Posts retrieved successfully")
+            @ApiResponse(responseCode = "200", description = "Posts retrieved successfully"),
+            @ApiResponse(responseCode = "400", description = "Invalid search query")
     })
     public ResponseEntity<List<PostDto>> searchPosts(@RequestParam("query") String query) {
         List<Post> posts;
@@ -197,8 +207,6 @@ public class PostController {
         return ResponseEntity.noContent().build();
     }
 
-    // Methode pour les reaction d'un post
-
     /**
      * Get reactions of a post.
      *
@@ -230,7 +238,8 @@ public class PostController {
     @ApiResponses(value = {
             @ApiResponse(responseCode = "201", description = "Reaction added successfully"),
             @ApiResponse(responseCode = "400", description = "Invalid reaction creation data"),
-            @ApiResponse(responseCode = "404", description = "Post not found")
+            @ApiResponse(responseCode = "404", description = "Post not found"),
+            @ApiResponse(responseCode = "409", description = "Conflict: User has already reacted to this post")
     })
     public ResponseEntity<ReactionDto> addReaction(
             @PathVariable String idPost,
@@ -267,8 +276,6 @@ public class PostController {
         return ResponseEntity.noContent().build();
     }
 
-    // Methode pour les commentaires d'un post
-
     /**
      * Get comments of a post.
      *
@@ -279,7 +286,7 @@ public class PostController {
     @Operation(summary = "List comments of a post", description = "Récupère la liste des commentaires associés à un post spécifié par son ID.")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "List of comments retrieved successfully"),
-            @ApiResponse(responseCode = "404", description = "Post not found")
+            @ApiResponse(responseCode = "404", description = "Post not found"),
     })
     public  ResponseEntity<List<CommentDto>> getComments(@PathVariable String idPost) {
         List<Comment> comments = commentService.getCommentsByPostId(idPost);
@@ -303,7 +310,8 @@ public class PostController {
     @ApiResponses(value = {
             @ApiResponse(responseCode = "201", description = "Comment added successfully"),
             @ApiResponse(responseCode = "400", description = "Invalid comment creation data"),
-            @ApiResponse(responseCode = "404", description = "Post not found")
+            @ApiResponse(responseCode = "404", description = "Post not found"),
+            @ApiResponse(responseCode = "401", description = "Unauthorized: User not authenticated")
     })
     public ResponseEntity<CommentDto> addComment(
             @PathVariable String idPost,

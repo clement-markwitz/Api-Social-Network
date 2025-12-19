@@ -9,7 +9,7 @@ import java.time.LocalDateTime;
  */
 public record BlockUserDto(
         String id,
-        UserSummaryDto blockedUser, // La personne qui est bloquée
+        UserSummaryDto blockedUser, // The user who has been blocked
         String reason,
         LocalDateTime createdAt
 ) {

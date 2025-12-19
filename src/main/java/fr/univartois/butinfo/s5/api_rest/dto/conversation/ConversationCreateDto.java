@@ -8,7 +8,7 @@ import java.util.List;
  * DTO for creating a new conversation.
  */
 public record ConversationCreateDto(
-        @NotEmpty(message = "Il doit y avoir au moins un autre membre")
+        @NotEmpty(message = "There must be at least one member in the conversation")
         List<String> memberIds,
 
         @Size(max = 100)

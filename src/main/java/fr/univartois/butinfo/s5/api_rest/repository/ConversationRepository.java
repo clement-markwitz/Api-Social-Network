@@ -13,7 +13,7 @@ import java.util.Optional;
  */
 @Repository
 public interface ConversationRepository extends MongoRepository<Conversation, String> {
-
+    
     /**
      * Find conversations by member ID.
      *

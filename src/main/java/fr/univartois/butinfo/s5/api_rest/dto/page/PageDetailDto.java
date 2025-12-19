@@ -12,7 +12,7 @@ public record PageDetailDto(
         String name,
         String description,
         String avatarUrl,
-        List<String> adminIds, // Enrichi
+        List<String> adminIds,
         int followerCount,
         List<String> topics,
         LocalDateTime createdAt

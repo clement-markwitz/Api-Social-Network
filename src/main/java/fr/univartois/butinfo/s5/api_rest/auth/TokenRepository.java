@@ -10,15 +10,17 @@ import java.util.Optional;
 public interface TokenRepository extends MongoRepository<Token, String> {
     /**
      * Find all valid tokens for a given user ID.
-     * @param userId
-     * @return
+     *
+     * @param userId the user ID
+     * @return a list of valid tokens
      */
     List<Token> findAllByUserIdAndExpiredFalseAndRevokedFalse(String userId);
 
     /**
      * Find a token by its token string.
-     * @param tokenValue
-     * @return
+     *
+     * @param tokenValue the token string
+     * @return an Optional containing the Token if found, or empty if not found
      */
     Optional<Token> findByTokenValue(String tokenValue);
 }

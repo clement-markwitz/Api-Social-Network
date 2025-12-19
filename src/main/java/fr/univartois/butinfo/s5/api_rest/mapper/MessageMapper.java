@@ -18,64 +18,58 @@ import java.util.List;
 @Mapper(componentModel = "spring", uses = {UserMapper.class})
 public interface MessageMapper {
 
-    // --- Vers Entity (Création) ---
 
     /**
      * Convert MessageCreateDto to Message entity.
-     * @param dto
-     * @return
+     * @param dto the MessageCreateDto
+     * @return the Message entity
      */
     @Mapping(target = "id", ignore = true)
-    @Mapping(target = "conversation", ignore = true) // Géré par le service
-    @Mapping(target = "sender", ignore = true)       // Géré par le service
+    @Mapping(target = "conversation", ignore = true)
+    @Mapping(target = "sender", ignore = true)
     @Mapping(target = "createdAt", ignore = true)
     @Mapping(target = "readBy", ignore = true)
     Message toEntity(MessageCreateDto dto);
 
-    // --- Vers DTO Complet (Chat) ---
-    // MapStruct utilise UserMapper pour convertir message.sender (User) -> sender (UserSummaryDto)
     /**
      * Convert Message entity to MessageDto.
-     * @param message
-     * @return
+     * @param message the Message entity
+     * @return the MessageDto
      */
     @Mapping(source = "conversation.id", target = "conversationId")
     MessageDto toDto(Message message);
 
     /**
      * Convert list of Message entities to list of MessageDto.
-     * @param messages
-     * @return
+     * @param messages the list of Message entities
+     * @return the list of MessageDto
      */
     List<MessageDto> toDtoList(List<Message> messages);
 
-    // --- Vers DTO Résumé (Liste Conversations) ---
     /**
      * Convert Message entity to MessageSummaryDto.
-     * @param message
+     * @param message the Message entity
      * @param currentUserId ID of the current user to determine read status
-     * @return
+     * @return the MessageSummaryDto
      */
     @Mapping(target = "text", source = "message.text")
     @Mapping(target = "createdAt", source = "message.createdAt")
     @Mapping(target = "isRead", expression = "java(isReadByCurrentUser(message, currentUserId))")
     MessageSummaryDto toSummaryDto(Message message, @Context String currentUserId);
 
-    // --- ReadReceipt ---
     /**
      * Convert ReadReceipt entity to ReadReceiptDto.
-     * @param readReceipt
-     * @return
+     * @param readReceipt the ReadReceipt entity
+     * @return the ReadReceiptDto
      */
     @Mapping(source = "user", target = "user")
     ReadReceiptDto toReadReceiptDto(ReadReceipt readReceipt);
 
-    // Helper pour calculer 'isRead'
     /**
      * Determine if the message has been read by the current user.
-     * @param message
-     * @param currentUserId
-     * @return
+     * @param message the Message entity
+     * @param currentUserId the ID of the current user
+     * @return the read status
      */
     default boolean isReadByCurrentUser(Message message, String currentUserId) {
         if (message == null || message.getReadBy() == null) return false;

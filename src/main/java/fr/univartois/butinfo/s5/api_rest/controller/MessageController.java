@@ -8,7 +8,6 @@ import fr.univartois.butinfo.s5.api_rest.model.Message;
 import fr.univartois.butinfo.s5.api_rest.model.User;
 import fr.univartois.butinfo.s5.api_rest.service.ConversationService;
 import fr.univartois.butinfo.s5.api_rest.service.MessageService;
-import fr.univartois.butinfo.s5.api_rest.service.UserService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
@@ -66,7 +65,7 @@ public class MessageController {
         Conversation conversation = conversationService.findById(conversationId);
 
         boolean isMember = conversation.getMembers().stream()
-                .anyMatch(u -> u.getId().equals(sender.getId())); // Utilisation de sender.getId()
+                .anyMatch(u -> u.getId().equals(sender.getId()));
         if (!isMember) {
             throw new ResponseStatusException(HttpStatus.FORBIDDEN, "Not a member of this conversation");
         }
@@ -127,7 +126,8 @@ public class MessageController {
     @ApiResponses(value = {
             @ApiResponse(responseCode = "204", description = "Message deleted successfully"),
             @ApiResponse(responseCode = "400", description = "The message does not belong to this conversation"),
-            @ApiResponse(responseCode = "403", description = "Access denied (You can only delete your own messages)")
+            @ApiResponse(responseCode = "403", description = "Access denied (You can only delete your own messages)"),
+            @ApiResponse(responseCode = "404", description = "Message not found")
     })
     public void delete(
             @PathVariable String conversationId,
