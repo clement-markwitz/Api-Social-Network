@@ -1,0 +1,20 @@
+meta {
+  name: Voir les stats
+  type: http
+  seq: 20
+}
+
+get {
+  url: {{url}}/stats
+  body: none
+  auth: bearer
+}
+
+params:query {
+  ~startDate: 2025-01-01
+  ~endDate: 2025-02-01
+}
+
+auth:bearer {
+  token: {{token_compte_admin}}
+}
