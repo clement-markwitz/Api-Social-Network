@@ -1,9 +1,12 @@
 package fr.univartois.butinfo.s5.api_rest.service;
 
 import fr.univartois.butinfo.s5.api_rest.model.Comment;
+import fr.univartois.butinfo.s5.api_rest.model.Post;
+import fr.univartois.butinfo.s5.api_rest.model.PostStats;
 import fr.univartois.butinfo.s5.api_rest.model.User;
 import fr.univartois.butinfo.s5.api_rest.repository.CommentRepository;
 import fr.univartois.butinfo.s5.api_rest.repository.PostRepository;
+import fr.univartois.butinfo.s5.api_rest.repository.PostStatsRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
@@ -19,10 +22,14 @@ public class CommentService {
 
     private final CommentRepository commentRepository;
     private final PostRepository postRepository;
+    private final PostStatsRepository postStatsRepository;
 
-    public CommentService(CommentRepository commentRepository, PostRepository postRepository) {
+    public CommentService(CommentRepository commentRepository,
+                          PostRepository postRepository,
+                          PostStatsRepository postStatsRepository) {
         this.commentRepository = commentRepository;
         this.postRepository = postRepository;
+        this.postStatsRepository = postStatsRepository;
     }
 
     /**
@@ -44,15 +51,20 @@ public class CommentService {
      * @return the created CommentDto
      */
     public Comment createComment(String postId, Comment comment, User author) {
-        if (!postRepository.existsById(postId)) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Post not found");
-        }
 
-        comment.setPost(postRepository.findById(postId).orElseThrow());
+        Post post = postRepository.findById(postId).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Post not found"));
+
+        comment.setPost(post);
         comment.setAuthor(author);
         comment.setLikeCount(0);
         comment.setCreatedAt(LocalDateTime.now());
         comment.setUpdatedAt(LocalDateTime.now());
+
+        PostStats stats = post.getStats();
+        stats.setComments(stats.getComments() + 1);
+        postStatsRepository.save(stats);
+        post.setStats(stats);
+        postRepository.save(post);
 
         return commentRepository.save(comment);
     }

@@ -177,6 +177,7 @@ public class CommunityController {
         User user = (User) authentication.getPrincipal();
         communityService.addMemberToCommunity(id, user);
         community.setMemberCount(community.getMemberCount() + 1);
+        communityService.updateCommunity(community);
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
@@ -196,6 +197,7 @@ public class CommunityController {
         User user = (User) authentication.getPrincipal();
         communityService.removeMemberFromCommunity(id, user.getId());
         community.setMemberCount(community.getMemberCount() - 1);
+        communityService.updateCommunity(community);
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
 }
