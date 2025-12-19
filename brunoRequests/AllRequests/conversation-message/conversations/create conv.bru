@@ -1,0 +1,15 @@
+meta {
+  name: create conv
+  type: http
+  seq: 5
+}
+
+get {
+  url: http://localhost:8080/api/conversations
+  body: none
+  auth: bearer
+}
+
+auth:bearer {
+  token: eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJyb2JlcnQuZHVjaG1vbCIsImlhdCI6MTc2NjE1ODU0OCwiZXhwIjoxNzY2MjQ0OTQ4fQ.A392zVGEBxwuyp9sdmh6WnbR4bG0N6qytknjTw-e4ob_Hc5jGm8iOKw7lKbETI-_
+}
