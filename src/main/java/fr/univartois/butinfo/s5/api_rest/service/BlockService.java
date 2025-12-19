@@ -1,8 +1,10 @@
 package fr.univartois.butinfo.s5.api_rest.service;
 
 import fr.univartois.butinfo.s5.api_rest.model.Block;
+import fr.univartois.butinfo.s5.api_rest.model.Conversation;
 import fr.univartois.butinfo.s5.api_rest.model.User;
 import fr.univartois.butinfo.s5.api_rest.repository.BlockRepository;
+import fr.univartois.butinfo.s5.api_rest.repository.ConversationRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -18,8 +20,10 @@ import java.util.List;
 public class BlockService {
 
     private final BlockRepository blockRepository;
+    private final ConversationRepository conversationRepository;
 
-    public BlockService(BlockRepository blockRepository) {
+    public BlockService(BlockRepository blockRepository, ConversationRepository conversationRepository) {
+        this.conversationRepository = conversationRepository;
         this.blockRepository = blockRepository;
     }
 
@@ -43,6 +47,14 @@ public class BlockService {
         block.setBlocked(blocked);
         block.setCreatedAt(LocalDateTime.now());
 
+        Conversation conversation = conversationRepository
+                .findByMembersIdsContainsAll(List.of(blocker.getId(), blocked.getId()))
+                .orElse(null);
+
+        if (conversation != null) {
+            conversationRepository.delete(conversation);
+        }
+
         return blockRepository.save(block);
     }
 
@@ -61,6 +73,13 @@ public class BlockService {
      */
     public List<Block> findBlocksByBlocker(String blockerId) {
         return blockRepository.findAllByBlockerId(blockerId);
+    }
+
+    /**
+     * Get all blocks received by a specific user.
+     */
+    public List<Block> findBlocksByBlocked(String blockedId) {
+        return blockRepository.findAllByBlockedId(blockedId);
     }
 
     /**

@@ -21,6 +21,13 @@ public interface BlockRepository extends MongoRepository<Block, String> {
     List<Block> findAllByBlockerId(String blockerId);
 
     /**
+     * Get all blocks received by a specific user.
+     * @param blockedId
+     * @return
+     */
+    List<Block> findAllByBlockedId(String blockedId);
+
+    /**
      * Test if a block exists between two users.
      * @param blockerId
      * @param blockedId
