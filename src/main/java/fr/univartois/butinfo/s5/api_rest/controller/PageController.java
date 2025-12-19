@@ -123,6 +123,17 @@ public class PageController {
         pageService.deletePage(id);
     }
 
+    /**
+     * Get all posts associated with a specific page.
+     *
+     * @param id the ID of the page
+     * @return a list of PostDto
+     */
+    @Operation(summary = "Get posts of a page", description = "Retrieves all posts associated with a specific page.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Posts retrieved successfully"),
+            @ApiResponse(responseCode = "404", description = "Page not found")
+    })
     @GetMapping("/{id}/posts")
     public ResponseEntity<List<PostDto>> getPagePosts(@PathVariable String id) {
         List<Post> posts = postService.getPostsByPage(id);
@@ -132,6 +143,11 @@ public class PageController {
         return ResponseEntity.ok(postDtos);
     }
 
+    @Operation(summary = "Follow a page", description = "Allows the authenticated user to follow a specific page.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Successfully followed the page"),
+            @ApiResponse(responseCode = "404", description = "Page not found")
+    })
     @PostMapping("/{id}/follow")
     public ResponseEntity<Void> followPage(@PathVariable String id, Authentication authentication) {
         User user = (User) authentication.getPrincipal();
@@ -139,6 +155,11 @@ public class PageController {
         return ResponseEntity.ok().build();
     }
 
+    @Operation(summary = "Unfollow a page", description = "Allows the authenticated user to unfollow a specific page.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Successfully unfollowed the page"),
+            @ApiResponse(responseCode = "404", description = "Page not found")
+    })
     @DeleteMapping("/{id}/follow")
     public ResponseEntity<Void> unfollowPage(@PathVariable String id, Authentication authentication) {
         User user = (User) authentication.getPrincipal();
