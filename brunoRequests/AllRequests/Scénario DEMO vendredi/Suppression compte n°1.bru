@@ -1,0 +1,19 @@
+meta {
+  name: Suppression compte n°1
+  type: http
+  seq: 18
+}
+
+delete {
+  url: {{url}}/users/:id
+  body: none
+  auth: bearer
+}
+
+params:path {
+  id: {{id_compte_n1}}
+}
+
+auth:bearer {
+  token: {{token_compte_n1}}
+}
