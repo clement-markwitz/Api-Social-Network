@@ -1,0 +1,26 @@
+meta {
+  name: Création d'une conversation entre compte2 et admin
+  type: http
+  seq: 1
+}
+
+post {
+  url: {{url}}/conversations
+  body: json
+  auth: bearer
+}
+
+auth:bearer {
+  token: {{token_compte_admin}}
+}
+
+body:json {
+  {
+    "name": "Projet Secret",
+    "memberIds": ["{{id_compte_2}}"]
+  }
+}
+
+script:post-response {
+  bru.setEnvVar("id_conv", res.body.id);
+}
