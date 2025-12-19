@@ -1,0 +1,15 @@
+meta {
+  name: Consulter mon profil
+  type: http
+  seq: 12
+}
+
+get {
+  url: {{url}}/users/me
+  body: none
+  auth: bearer
+}
+
+auth:bearer {
+  token: {{token_compte_n2}}
+}
