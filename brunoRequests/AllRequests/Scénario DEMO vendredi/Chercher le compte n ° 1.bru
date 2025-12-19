@@ -1,0 +1,15 @@
+meta {
+  name: Chercher le compte n ° 1
+  type: http
+  seq: 10
+}
+
+get {
+  url: {{url}}/users/search?q=compte_n1
+  body: none
+  auth: none
+}
+
+params:query {
+  q: compte_n1
+}

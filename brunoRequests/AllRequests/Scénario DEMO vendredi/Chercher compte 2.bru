@@ -1,0 +1,19 @@
+meta {
+  name: Chercher compte 2
+  type: http
+  seq: 22
+}
+
+get {
+  url: {{url}}/users/search?q=compte_n2
+  body: none
+  auth: inherit
+}
+
+params:query {
+  q: compte_n2
+}
+
+script:post-response {
+  bru.setEnvVar("compte_2_id", res.body[0].id);
+}
