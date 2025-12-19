@@ -23,7 +23,7 @@ import java.util.List;
  * Controller for managing user blocks.
  */
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/users/")
 public class BlockController {
 
     private final BlockService blockService;
@@ -39,7 +39,7 @@ public class BlockController {
     /**
      * Bloc a user.
      */
-    @PostMapping("/{userId}")
+    @PostMapping("/{userId}/blocks")
     @Operation(summary = "Block a user", description = "Blocks a user specified by their ID.")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "201", description = "User successfully blocked"),
@@ -62,7 +62,7 @@ public class BlockController {
     /**
      * Unblock a user.
      */
-    @DeleteMapping("/{userId}")
+    @DeleteMapping("/{userId}/blocks")
     @Operation(summary = "Unblock a user", description = "Allows unblocking a user specified by their ID.")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "204", description = "User successfully unblocked"),
@@ -80,7 +80,7 @@ public class BlockController {
      * Get the list of users blocked by the authenticated user.
      * @return List of BlockUserDto
      */
-    @GetMapping("/users/blocks")
+    @GetMapping("/blocks")
     @Operation(summary = "List blocked users", description = "Retrieves the list of users that the authenticated user has blocked.")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "List retrieved successfully"),
@@ -101,7 +101,7 @@ public class BlockController {
      * @param id Block ID
      * @return BlockUserDto
      */
-    @GetMapping("/users/{id}/blocks")
+    @GetMapping("/{id}/blocks")
     @Operation(summary = "Get a block by ID", description = "Retrieves details of a specific block by its ID.")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Block retrieved successfully"),

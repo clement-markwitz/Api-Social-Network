@@ -214,14 +214,13 @@ public class UserController {
      * @return List of UserSummaryDto matching the query
      */
     @GetMapping("/search")
-    @Operation(summary = "Search user profiles", description = "Searches for user profiles using a search query.")
+    @Operation(summary = "Search user profiles", description = "Searches for user profiles using a search query, excluding users who blocked the requester.")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "User profiles retrieved successfully")
     })
-    public List<UserSummaryDto> searchProfiles(@RequestParam("q") String query) {
-
-        List<User> users = userService.searchUsers(query);
-
+    public List<UserSummaryDto> searchProfiles(@RequestParam("q") String query, Authentication authentication) {
+        User currentUser = (User) authentication.getPrincipal();
+        List<User> users = userService.searchUsers(query, currentUser.getId());
         return users.stream().map(userMapper::toSummaryDto).toList();
     }
 
