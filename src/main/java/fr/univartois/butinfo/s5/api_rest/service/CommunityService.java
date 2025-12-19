@@ -26,13 +26,9 @@ public class CommunityService {
      * @param community
      * @param user
      */
-    public void checkAdminRights(Community community, User user) {
-        boolean isAdmin = community.getAdmins() != null && community.getAdmins().stream()
+    public boolean isCommunityAdmin(Community community, User user) {
+        return community.getAdmins() != null && community.getAdmins().stream()
                 .anyMatch(admin -> admin.getId().equals(user.getId()));
-
-        if (!isAdmin) {
-            throw new ResponseStatusException(HttpStatus.FORBIDDEN, "Vous devez être administrateur de cette communauté pour effectuer cette action.");
-        }
     }
 
     /**
@@ -49,7 +45,8 @@ public class CommunityService {
      * @return
      */
     public Community getById(String id) {
-        return communityRepository.findById(id).orElse(null);
+        return communityRepository.findById(id).orElseThrow(() ->
+                new ResponseStatusException(HttpStatus.NOT_FOUND, "Community not found"));
     }
 
     /**
@@ -75,12 +72,11 @@ public class CommunityService {
      * @param id
      * @return
      */
-    public boolean deleteCommunity(String id) {
+    public void deleteCommunity(String id) {
         if (!communityRepository.existsById(id)) {
-            return false;
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Community not found");
         }
         communityRepository.deleteById(id);
-        return true;
     }
 
 }

@@ -20,6 +20,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 
@@ -68,9 +69,6 @@ public class CommunityController {
     })
     public ResponseEntity<CommunityDetailDto> getCommunity(@PathVariable String id) {
         Community community = communityService.getById(id);
-        if (community == null) {
-            return ResponseEntity.notFound().build();
-        }
         return ResponseEntity.ok(communityMapper.toDetailDto(community));
     }
 
@@ -83,16 +81,12 @@ public class CommunityController {
             @ApiResponse(responseCode = "201", description = "Community created successfully")
     })
     public ResponseEntity<CommunityDetailDto> createCommunity(@Valid @RequestBody CommunityCreateDto createDto, Authentication authentication) {
-        // Conversion DTO -> Entité
-        Community entity = communityMapper.toEntity(createDto);
 
+        Community entity = communityMapper.toEntity(createDto);
         User admin = (User) authentication.getPrincipal();
         entity.addAdmin(admin);
-
-        // Sauvegarde via le Service
         Community savedCommunity = communityService.createCommunity(entity);
 
-        // Conversion Entité -> DTO Détail pour la réponse
         return ResponseEntity.status(HttpStatus.CREATED)
                 .body(communityMapper.toDetailDto(savedCommunity));
     }
@@ -113,15 +107,11 @@ public class CommunityController {
             Authentication authentication) {
 
         Community existingCommunity = communityService.getById(id);
-        if (existingCommunity == null) {
-            return ResponseEntity.notFound().build();
-        }
-
-        // 1. Vérification des droits
         User currentUser = (User) authentication.getPrincipal();
-        communityService.checkAdminRights(existingCommunity, currentUser);
-
-        // 2. Mise à jour
+        boolean isAdmin = communityService.isCommunityAdmin(existingCommunity, currentUser);
+        if (!isAdmin) {
+            throw new ResponseStatusException(HttpStatus.FORBIDDEN, "You are not an admin of this community");
+        }
         communityMapper.updateEntityFromDto(updateDto, existingCommunity);
         Community updatedCommunity = communityService.updateCommunity(existingCommunity);
 
@@ -139,23 +129,21 @@ public class CommunityController {
             @ApiResponse(responseCode = "404", description = "Community not found")
     })
     public ResponseEntity<Void> deleteCommunity(@PathVariable String id, Authentication authentication) {
+
         Community existingCommunity = communityService.getById(id);
-        if (existingCommunity == null) {
-            return ResponseEntity.notFound().build();
-        }
-
-        // 1. Vérification des droits
         User currentUser = (User) authentication.getPrincipal();
-        communityService.checkAdminRights(existingCommunity, currentUser);
-
-        // 2. Suppression
+        boolean isAdmin = communityService.isCommunityAdmin(existingCommunity, currentUser);
+        if (!isAdmin) {
+            throw new ResponseStatusException(HttpStatus.FORBIDDEN, "You are not an admin of this community");
+        }
         communityService.deleteCommunity(id);
+
         return ResponseEntity.noContent().build();
     }
 
     @GetMapping("/{id}/posts")
     public ResponseEntity<List<PostDto>> getCommunityPosts(@PathVariable String id) {
-        List<Post> posts = postService.getPostsByCommunity(id); // postService n'est plus null !
+        List<Post> posts = postService.getPostsByCommunity(id);
         List<PostDto> postDtos = posts.stream()
                 .map(postMapper::toDto)
                 .toList();

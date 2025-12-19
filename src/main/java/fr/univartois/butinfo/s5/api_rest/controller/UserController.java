@@ -79,7 +79,7 @@ public class UserController {
         User user = userService.getById(id);
 
         if (user == null) {
-            return ResponseEntity.notFound().build();
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "User not found");
         }
 
         return ResponseEntity.ok(userMapper.toPublicProfileDto(user));
@@ -115,12 +115,15 @@ public class UserController {
             @ApiResponse(responseCode = "403", description = "Insufficient rights to delete this user"),
             @ApiResponse(responseCode = "404", description = "User not found")
     })
-    public Boolean deleteUser(@PathVariable String id, Authentication authentication) {
+    public void deleteUser(@PathVariable String id, Authentication authentication) {
         User currentUser = (User) authentication.getPrincipal();
 
         userService.checkUserRights(id, currentUser);
 
-        return userService.delete(id);
+        boolean isDeleted = userService.delete(id);
+        if (!isDeleted) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "User not found");
+        }
     }
 
     /**
@@ -139,11 +142,8 @@ public class UserController {
             @ApiResponse(responseCode = "404", description = "User not found")
     })
     public ResponseEntity<UserPublicProfileDto> updateProfile(@PathVariable String id, @Valid @RequestBody ProfileUpdateDto updateDto, Authentication authentication) {
-        User existingUser = userService.getById(id);
-        if (existingUser == null) {
-            return ResponseEntity.notFound().build();
-        }
 
+        User existingUser = userService.getById(id);
         User currentUser = (User) authentication.getPrincipal();
         userService.checkUserRights(existingUser.getId(), currentUser);
 
@@ -170,12 +170,10 @@ public class UserController {
             @ApiResponse(responseCode = "404", description = "User not found")
     })
     public ResponseEntity<PreferencesDto> updatePreferences(@PathVariable String id, @RequestBody PreferencesUpdateDto updateDto, Authentication authentication) {
-        User existingUser = userService.getById(id);
-        if (existingUser == null) return ResponseEntity.notFound().build();
 
+        User existingUser = userService.getById(id);
         User currentUser = (User) authentication.getPrincipal();
         userService.checkUserRights(existingUser.getId(), currentUser);
-
         userMapper.updatePreferencesFromDto(updateDto, existingUser.getPrefs());
         User updatedUser = userService.updateUser(existingUser);
 
@@ -198,12 +196,10 @@ public class UserController {
             @ApiResponse(responseCode = "404", description = "User not found")
     })
     public ResponseEntity<InterestsDto> updateInterests(@PathVariable String id, @RequestBody InterestsUpdateDto updateDto, Authentication authentication) {
-        User existingUser = userService.getById(id);
-        if (existingUser == null) return ResponseEntity.notFound().build();
 
+        User existingUser = userService.getById(id);
         User currentUser = (User) authentication.getPrincipal();
         userService.checkUserRights(existingUser.getId(), currentUser);
-
         userMapper.updateInterestsFromDto(updateDto, existingUser.getInterests());
         User updatedUser = userService.updateUser(existingUser);
 
@@ -223,6 +219,7 @@ public class UserController {
             @ApiResponse(responseCode = "200", description = "User profiles retrieved successfully")
     })
     public List<UserSummaryDto> searchProfiles(@RequestParam("q") String query) {
+
         List<User> users = userService.searchUsers(query);
 
         return users.stream().map(userMapper::toSummaryDto).toList();
@@ -245,10 +242,10 @@ public class UserController {
             @ApiResponse(responseCode = "404", description = "User not found")
     })
     public ResponseEntity<List<FriendRecommendationDto>> getUserRecommendations(@PathVariable String id) {
-        // Verify user existence (throws exception if not found)
-        userService.getById(id);
 
+        userService.getById(id);
         List<FriendRecommendationDto> recommendations = recommendationService.getFriendRecommendations(id);
+
         return ResponseEntity.ok(recommendations);
     }
 

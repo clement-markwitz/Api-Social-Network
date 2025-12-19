@@ -25,6 +25,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
+
 import java.util.List;
 
 @RestController
@@ -115,7 +117,7 @@ public class PostController {
 
         Post existingPost = postService.getPostById(idPost);
         if (!existingPost.getAuthor().getId().equals(user.getId())) {
-            return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
+            throw new ResponseStatusException(HttpStatus.FORBIDDEN, "You are not the author of this post.");
         }
 
         postMapper.updatePostFromDto(updateDto, existingPost);
@@ -132,8 +134,8 @@ public class PostController {
         User user = (User) authentication.getPrincipal();
         Post existingPost = postService.getPostById(idPost);
 
-        if (!existingPost.getAuthor().getId().equals(user.getId())) {
-            return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
+        if (!existingPost.getAuthor().getId().equals(user.getId()) && !user.getRole().equals("ADMIN")) {
+            throw new ResponseStatusException(HttpStatus.FORBIDDEN, "You are not the author of this post or an admin.");
         }
 
         postService.deletePost(existingPost);
