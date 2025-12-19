@@ -1,12 +1,15 @@
 package fr.univartois.butinfo.s5.api_rest.service;
 
 import fr.univartois.butinfo.s5.api_rest.model.Community;
+import fr.univartois.butinfo.s5.api_rest.model.CommunityMembership;
 import fr.univartois.butinfo.s5.api_rest.model.User;
+import fr.univartois.butinfo.s5.api_rest.repository.CommunityMembershipRepository;
 import fr.univartois.butinfo.s5.api_rest.repository.CommunityRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 /**
@@ -16,9 +19,11 @@ import java.util.List;
 public class CommunityService {
 
     private final CommunityRepository communityRepository;
+    private final CommunityMembershipRepository communityMembershipRepository;
 
-    public CommunityService(CommunityRepository communityRepository) {
+    public CommunityService(CommunityRepository communityRepository, CommunityMembershipRepository communityMembershipRepository) {
         this.communityRepository = communityRepository;
+        this.communityMembershipRepository = communityMembershipRepository;
     }
 
     /**
@@ -79,4 +84,25 @@ public class CommunityService {
         communityRepository.deleteById(id);
     }
 
+    /**
+     * 2. Implémentation de l'abonnement (Follow)
+     */
+    public void addMemberToCommunity(String communityId, User user) {
+
+        Community community = getById(communityId);
+        if (communityMembershipRepository.existsByUserIdAndCommunityId(user.getId(), communityId)) {
+            throw new ResponseStatusException(HttpStatus.CONFLICT, "Vous suivez déjà cette communauté.");
+        }
+
+        CommunityMembership membership = new CommunityMembership();
+        membership.setCommunity(community);
+        membership.setUser(user);
+        membership.setCreatedAt(LocalDateTime.now());
+
+        communityMembershipRepository.save(membership);
+    }
+
+    public void removeMemberFromCommunity(String communityId, String userid) {
+        communityMembershipRepository.deleteByUserIdAndCommunityId(userid, communityId);
+    }
 }
