@@ -7,7 +7,7 @@ import jakarta.validation.constraints.Size;
  * DTO (entry point) for creating a new comment.
  */
 public record CommentCreateDto(
-        @NotBlank(message = "Le commentaire ne peut pas être vide")
+        @NotBlank(message = "The comment text must not be blank")
         @Size(max = 2000)
         String text,
 

@@ -115,7 +115,6 @@ public class MessageService {
                 "messageId", message.getId()
         );
 
-        // Broadcast the delete event
         messagingTemplate.convertAndSend("/topic/conversation/" + conversationId, deleteEvent);
     }
 }

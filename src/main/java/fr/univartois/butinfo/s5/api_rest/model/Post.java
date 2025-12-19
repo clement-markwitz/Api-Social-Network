@@ -28,7 +28,7 @@ public class Post {
 
     @Indexed
     @DBRef
-    private User author; // Référence à 'User'
+    private User author;
 
     /**
      * The post is it on a page?
@@ -36,7 +36,7 @@ public class Post {
      */
     @Indexed
     @DBRef
-    private Page page; // Null si ce n'est pas un post de page
+    private Page page;
 
     /**
      * The post is it in a community?
@@ -44,7 +44,7 @@ public class Post {
      */
     @Indexed
     @DBRef
-    private Community community; // Null si ce n'est pas un post de communauté
+    private Community community;
 
     private PostType type;
 

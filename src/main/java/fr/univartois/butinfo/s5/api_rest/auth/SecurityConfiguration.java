@@ -12,7 +12,7 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
-import org.springframework.security.web.authentication.logout.LogoutHandler; // Import important
+import org.springframework.security.web.authentication.logout.LogoutHandler;
 
 /**
  * Configuration class for security settings.
@@ -24,8 +24,15 @@ public class SecurityConfiguration {
 
     private final JwtAuthenticationFilter jwtAuthFilter;
     private final AuthenticationProvider authenticationProvider;
-    private final LogoutHandler logoutHandler; // Injection du LogoutService
+    private final LogoutHandler logoutHandler;
 
+    /**
+     * Constructor for SecurityConfiguration.
+     *
+     * @param jwtAuthFilter the JWT authentication filter
+     * @param authenticationProvider the authentication provider
+     * @param logoutHandler the logout handler
+     */
     public SecurityConfiguration(JwtAuthenticationFilter jwtAuthFilter, AuthenticationProvider authenticationProvider, LogoutHandler logoutHandler) {
         this.jwtAuthFilter = jwtAuthFilter;
         this.authenticationProvider = authenticationProvider;
@@ -34,9 +41,10 @@ public class SecurityConfiguration {
 
     /**
      * Configure the security filter chain.
-     * @param http
-     * @return
-     * @throws Exception
+     *
+     * @param http the HttpSecurity object
+     * @return the configured SecurityFilterChain
+     * @throws Exception the exception
      */
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {

@@ -21,7 +21,6 @@ import java.util.List;
 @Mapper(componentModel = "spring")
 public interface CommunityMapper {
 
-    // --- Entrée (Input) ---
     /**
      * Convertit un DTO de création en Entité.
      */
@@ -32,7 +31,6 @@ public interface CommunityMapper {
      */
     void updateEntityFromDto(CommunityUpdateDto dto, @MappingTarget Community entity);
 
-    // --- Sortie (Output) ---
 
     /**
      * Convertit une Entité en DTO résumé.

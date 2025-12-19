@@ -9,7 +9,7 @@ import java.util.List;
  * Repository interface for managing Comment entities in MongoDB.
  */
 public interface CommentRepository extends MongoRepository<Comment, String> {
-    // On recupere tous les commentaires d'un post
+
     /**
      * Find all comments associated with a specific post ID.
      *

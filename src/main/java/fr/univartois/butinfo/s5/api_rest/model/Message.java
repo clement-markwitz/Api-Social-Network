@@ -28,7 +28,7 @@ public class Message {
      * ID of the conversation this message belongs to.
      *  It's your "conversationId".
      */
-    @Indexed // Index pour récupérer les messages d'une conversation
+    @Indexed
     @DBRef
     private Conversation conversation;
 
@@ -36,7 +36,7 @@ public class Message {
      * ID of the user who sent the message.
      * It's your "senderId".
      */
-    @Indexed // Utile pour indexer les messages d'un expéditeur
+    @Indexed
     @DBRef
     private User sender;
 
@@ -53,6 +53,6 @@ public class Message {
     /**
      * List of read receipts indicating which users have read the message.
      */
-    @Indexed // Pour rechercher rapidement qui a lu le message
+    @Indexed
     private List<ReadReceipt> readBy;
 }

@@ -8,7 +8,7 @@ import java.util.List;
  * DTO (entry) for creating a new page.
  */
 public record PageCreateDto(
-        @NotBlank(message = "Le nom ne peut pas être vide")
+        @NotBlank(message = "The page name must not be blank")
         @Size(min = 3, max = 100)
         String name,
 

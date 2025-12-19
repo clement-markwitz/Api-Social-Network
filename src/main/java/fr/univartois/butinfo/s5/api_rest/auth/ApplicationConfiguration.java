@@ -24,9 +24,10 @@ public class ApplicationConfiguration {
 
     /**
      * Get the authentication manager bean.
-     * @param config
-     * @return
-     * @throws Exception
+     *
+     * @param config the authentication configuration
+     * @return  the authentication manager
+     * @throws Exception if an error occurs
      */
     @Bean
     public AuthenticationManager authenticationManager(AuthenticationConfiguration config) throws Exception {
@@ -35,7 +36,8 @@ public class ApplicationConfiguration {
 
     /**
      * Get the authentication provider bean.
-     * @return
+     *
+     * @return the authentication provider
      */
     @Bean
     AuthenticationProvider authenticationProvider() {
@@ -46,7 +48,8 @@ public class ApplicationConfiguration {
 
     /**
      * Get the user details service bean.
-     * @return
+     *
+     * @return the user details service
      */
     @Bean
     UserDetailsService userDetailsService() {
@@ -55,7 +58,7 @@ public class ApplicationConfiguration {
 
     /**
      * Get the password encoder bean.
-     * @return
+     * @return the password encoder
      */
     @Bean
     BCryptPasswordEncoder passwordEncoder() {
