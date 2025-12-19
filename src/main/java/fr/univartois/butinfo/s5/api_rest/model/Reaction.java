@@ -19,19 +19,17 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 @Document(collection = "reactions")
-// Index unique : empêche un utilisateur de donner 2x la MÊME réaction au MÊME post.
-// Il peut "liker" ET "trouver utile" si les types sont différents.
 @CompoundIndex(name = "idx_reaction_unique", def = "{'post': 1, 'user': 1, 'type': 1}", unique = true)
 public class Reaction {
 
     @Id
     private String id;
 
-    @Indexed // Index pour trouver toutes les réactions d'un post
+    @Indexed
     @DBRef
     private Post post;
 
-    @Indexed // Index pour trouver toutes les réactions d'un user
+    @Indexed
     @DBRef
     private User user;
 

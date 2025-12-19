@@ -27,11 +27,11 @@ public class CommunityMembership {
 
     @Indexed
     @DBRef
-    private User user; // L'utilisateur qui rejoint
+    private User user;
 
     @Indexed
     @DBRef
-    private Community community; // La communauté qu'il rejoint
+    private Community community;
 
     @CreatedDate
     private LocalDateTime createdAt;

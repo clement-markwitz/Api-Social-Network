@@ -18,7 +18,7 @@ public class LogoutService implements LogoutHandler {
 
     /**
      * Constructor for LogoutService.
-     * @param tokenRepository
+     * @param tokenRepository the token repository
      */
     public LogoutService(TokenRepository tokenRepository) {
         this.tokenRepository = tokenRepository;
@@ -26,9 +26,10 @@ public class LogoutService implements LogoutHandler {
 
     /**
      * Handle user logout by invalidating the JWT token.
-     * @param request
-     * @param response
-     * @param authentication
+     *
+     * @param request the HTTP servlet request
+     * @param response the HTTP servlet response
+     * @param authentication the authentication object
      */
     @Override
     public void logout(

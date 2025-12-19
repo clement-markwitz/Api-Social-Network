@@ -10,6 +10,6 @@ public record MessageCreateDto(
         @NotBlank
         String text,
 
-        List<String> attachments // Optionnel: liste d'URLs d'images/fichiers
+        List<String> attachments // Optional list of attachment URLs
 ) {
 }

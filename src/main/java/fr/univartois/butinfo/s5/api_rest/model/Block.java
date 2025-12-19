@@ -20,9 +20,6 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 @Document(collection = "block")
-// Index composé pour la requête la plus fréquente :
-// "Est-ce que l'utilisateur A (blockerId) a bloqué l'utilisateur B (blockedId) ?"
-// L'unicité (unique = true) empêche de créer plusieurs fois le même blocage.
 @CompoundIndex(name = "blocker_blocked_unique_idx", def = "{'blocker': 1, 'blocked': 1}", unique = true)
 public class Block {
 
@@ -33,7 +30,7 @@ public class Block {
      * ID of the user who is blocking.
      * Reference to the 'users' collection.
      */
-    @Indexed // Index simple pour "Qui ai-je bloqué ?"
+    @Indexed
     @DBRef
     private User blocker;
 
@@ -41,12 +38,12 @@ public class Block {
      * ID of the user who is being blocked.
      * Reference to the 'users' collection.
      */
-    @Indexed // Index simple pour "Qui m'a bloqué ?"
+    @Indexed
     @DBRef
     private User blocked;
 
-    private String reason; // Optionnel
+    private String reason;
 
     @CreatedDate
-    private LocalDateTime createdAt; // Date de création du blocage
+    private LocalDateTime createdAt;
 }

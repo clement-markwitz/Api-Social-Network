@@ -22,7 +22,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 @Document(collection = "bans")
-@CompoundIndex(name = "user_active_idx", def = "{'userId': 1, 'active': 1}") // Index composé pour les requêtes courantes
+@CompoundIndex(name = "user_active_idx", def = "{'userId': 1, 'active': 1}")
 public class Ban {
 
     @Id
@@ -32,7 +32,7 @@ public class Ban {
      * ID from the banned user.
      * Ref to the 'users' collection.
      */
-    @Indexed // Important d'indexer ce champ pour les recherches !
+    @Indexed
     @DBRef
     private User user;
 
@@ -40,7 +40,7 @@ public class Ban {
      * ID from the moderator who issued the ban.
      * Ref to the 'users' collection.
      */
-    @Indexed // Utile pour rechercher tous les bans d'un modérateur
+    @Indexed
     @DBRef
     private User moderator;
 

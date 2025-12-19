@@ -10,7 +10,7 @@ public record BanCreateDto(
         @NotBlank
         String reason,
 
-        @Positive(message = "La durée doit être un nombre positif de jours")
-        int durationDays // ex: 30. Mettre 0 ou -1 pour permanent.
+        @Positive(message = "The duration must be a positive number of days")
+        int durationDays // ex : 7 for a week
 ) {
 }

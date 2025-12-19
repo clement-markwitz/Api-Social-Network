@@ -19,6 +19,12 @@ public class BanService {
     private final BanRepository banRepository;
     private final UserRepository userRepository;
 
+    /**
+     * Constructor for BanService.
+     *
+     * @param banRepository the ban repository
+     * @param userRepository the user repository
+     */
     public BanService(BanRepository banRepository, UserRepository userRepository) {
         this.banRepository = banRepository;
         this.userRepository = userRepository;
@@ -26,7 +32,7 @@ public class BanService {
 
     /**
      * Get all bans.
-     * @return
+     * @return list of all bans
      */
     public List<Ban> getAllBans() {
         return banRepository.findAll();
@@ -34,10 +40,11 @@ public class BanService {
 
     /**
      * Ban a user.
-     * @param targetUserId
-     * @param ban
-     * @param admin
-     * @return
+     *
+     * @param targetUserId the ID of the user to be banned
+     * @param ban the ban details
+     * @param admin the admin performing the ban
+     * @return the created ban
      */
     public Ban banUser(String targetUserId, Ban ban, User admin) {
 
@@ -67,7 +74,8 @@ public class BanService {
 
     /**
      * Unban a user.
-     * @param targetUserId
+     *
+     * @param targetUserId the ID of the user to be unbanned
      */
     public void unbanUser(String targetUserId) {
         Ban activeBan = banRepository.findByUserIdAndActiveTrue(targetUserId)

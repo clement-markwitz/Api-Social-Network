@@ -11,7 +11,6 @@ import java.util.List;
  */
 @Repository
 public interface ConversationRepository extends MongoRepository<Conversation, String> {
-    // Trouve les conversations où la liste 'members' contient un User ayant cet ID
     /**
      * Find conversations by member ID.
      *

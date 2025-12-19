@@ -5,7 +5,6 @@ import fr.univartois.butinfo.s5.api_rest.dto.community.CommunityDetailDto;
 import fr.univartois.butinfo.s5.api_rest.dto.community.CommunitySummaryDto;
 import fr.univartois.butinfo.s5.api_rest.dto.community.CommunityUpdateDto;
 import fr.univartois.butinfo.s5.api_rest.dto.post.PostDto;
-import fr.univartois.butinfo.s5.api_rest.dto.user.UserSummaryDto;
 import fr.univartois.butinfo.s5.api_rest.mapper.CommunityMapper;
 import fr.univartois.butinfo.s5.api_rest.mapper.PostMapper;
 import fr.univartois.butinfo.s5.api_rest.model.Community;
@@ -37,6 +36,14 @@ public class CommunityController {
     private final PostService postService;
     private final PostMapper postMapper;
 
+    /**
+     * Constructor for CommunityController.
+     *
+     * @param communityService the community service
+     * @param communityMapper the community mapper
+     * @param postService the post service
+     * @param postMapper the post mapper
+     */
     public CommunityController(CommunityService communityService, CommunityMapper communityMapper, PostService postService, PostMapper postMapper) {
         this.communityService = communityService;
         this.communityMapper = communityMapper;
@@ -45,7 +52,9 @@ public class CommunityController {
     }
 
     /**
-     * List all the communities (Summary Format).
+     * Get all communities.
+     *
+     * @return List of CommunitySummaryDto
      */
     @GetMapping
     @Operation(summary = "List all communities", description = "Retrieves a list of all communities in summary format.")
@@ -60,7 +69,10 @@ public class CommunityController {
     }
 
     /**
-     * Retrieve a community by ID.
+     * Get a community by ID.
+     *
+     * @param id Community ID
+     * @return CommunityDetailDto
      */
     @GetMapping("/{id}")
     @Operation(summary = "Get a community by ID", description = "Retrieves details of a community specified by its ID.")
@@ -75,11 +87,16 @@ public class CommunityController {
 
     /**
      * Create a new community.
+     *
+     * @param createDto CommunityCreateDto
+     * @param authentication Authentication
+     * @return ResponseEntity with CommunityDetailDto
      */
     @PostMapping
     @Operation(summary = "Create a new community", description = "Creates a new community.")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "201", description = "Community created successfully")
+            @ApiResponse(responseCode = "201", description = "Community created successfully"),
+            @ApiResponse(responseCode = "400", description = "Invalid community data")
     })
     public ResponseEntity<CommunityDetailDto> createCommunity(@Valid @RequestBody CommunityCreateDto createDto, Authentication authentication) {
 
@@ -93,14 +110,20 @@ public class CommunityController {
     }
 
     /**
-     * Update an existing community.
+     * Update a community.
+     *
+     * @param id Community ID
+     * @param updateDto CommunityUpdateDto
+     * @param authentication Authentication
+     * @return ResponseEntity with CommunityDetailDto
      */
     @PutMapping("/{id}")
     @Operation(summary = "Update a community", description = "Updates a community specified by its ID.")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Community updated successfully"),
             @ApiResponse(responseCode = "403", description = "Access denied (You are not an admin of this community)"),
-            @ApiResponse(responseCode = "404", description = "Community not found")
+            @ApiResponse(responseCode = "404", description = "Community not found"),
+            @ApiResponse(responseCode = "400", description = "Invalid community data")
     })
     public ResponseEntity<CommunityDetailDto> updateCommunity(
             @PathVariable String id,
@@ -121,6 +144,10 @@ public class CommunityController {
 
     /**
      * Delete a community.
+     *
+     * @param id Community ID
+     * @param authentication Authentication
+     * @return ResponseEntity with no content
      */
     @DeleteMapping("/{id}")
     @Operation(summary = "Delete a community", description = "Deletes a community specified by its ID.")
@@ -144,8 +171,9 @@ public class CommunityController {
 
     /**
      * Get posts of a community.
+     *
      * @param id Community ID
-     * @return
+     * @return List of PostDto
      */
     @Operation(summary = "Get posts of a community", description = "Retrieves all posts associated with a specific community.")
     @ApiResponses(value = {

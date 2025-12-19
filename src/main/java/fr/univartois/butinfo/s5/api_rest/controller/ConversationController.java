@@ -52,7 +52,8 @@ public class ConversationController {
     @ApiResponses(value = {
             @ApiResponse(responseCode = "201", description = "Conversation created successfully"),
             @ApiResponse(responseCode = "400", description = "Invalid conversation data provided"),
-            @ApiResponse(responseCode = "404", description = "One or more users not found")
+            @ApiResponse(responseCode = "404", description = "One or more users not found"),
+            @ApiResponse(responseCode = "500", description = "Internal server error")
     })
     public ResponseEntity<ConversationDto> create(
             @RequestBody @Valid ConversationCreateDto dto,
@@ -89,7 +90,8 @@ public class ConversationController {
     @Operation(summary = "List my conversations", description = "Retrieves all conversations where the authenticated user is a member.")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "List of conversations retrieved successfully"),
-            @ApiResponse(responseCode = "401", description = "Unauthenticated")
+            @ApiResponse(responseCode = "401", description = "Unauthenticated"),
+            @ApiResponse(responseCode = "500", description = "Internal server error")
     })
     public List<ConversationSummaryDto> getAll(Authentication authentication) {
         User user = (User) authentication.getPrincipal();

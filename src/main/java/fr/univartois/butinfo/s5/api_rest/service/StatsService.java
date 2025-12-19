@@ -37,10 +37,7 @@ public class StatsService {
         this.messageRepository = messageRepository;
     }
 
-    @Operation(summary = "Get statistics about users, posts, communities, and messages")
-    @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Statistics retrieved successfully")
-    })
+
     /**
      * Count users created between start and end dates.
      *
@@ -55,10 +52,6 @@ public class StatsService {
         return userRepository.count();
     }
 
-    @Operation(summary = "Get statistics about users, posts, communities, and messages")
-    @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Statistics retrieved successfully")
-    })
     /**
      * Count posts created between start and end dates.
      *
@@ -73,10 +66,6 @@ public class StatsService {
         return postRepository.count();
     }
 
-    @Operation(summary = "Get statistics about users, posts, communities, and messages")
-    @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Statistics retrieved successfully")
-    })
     /**
      * Count communities created between start and end dates.
      *
@@ -91,10 +80,6 @@ public class StatsService {
         return communityRepository.count();
     }
 
-    @Operation(summary = "Get statistics about users, posts, communities, and messages")
-    @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Statistics retrieved successfully")
-    })
     /**
      * Count messages created between start and end dates.
      *

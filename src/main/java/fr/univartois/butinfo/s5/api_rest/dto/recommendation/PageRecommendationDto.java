@@ -3,6 +3,9 @@ package fr.univartois.butinfo.s5.api_rest.dto.recommendation;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 
+/**
+ * DTO for page recommendation results.
+ */
 @Data
 public class PageRecommendationDto {
     @JsonProperty("pageId")

@@ -19,7 +19,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 public class Token {
 
     @Id
-    private String id; // Changé en 'private'
+    private String id;
 
     @Indexed(unique = true)
     private String tokenValue;

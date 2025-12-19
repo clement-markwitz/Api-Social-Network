@@ -28,8 +28,8 @@ public class CommunityService {
 
     /**
      * Verify if the user has admin rights in the community.
-     * @param community
-     * @param user
+     * @param community the community
+     * @param user the user
      */
     public boolean isCommunityAdmin(Community community, User user) {
         return community.getAdmins() != null && community.getAdmins().stream()
@@ -38,7 +38,8 @@ public class CommunityService {
 
     /**
      * Get all communities.
-     * @return
+     *
+     * @return list of all communities
      */
     public List<Community> getAll() {
         return communityRepository.findAll();
@@ -46,8 +47,8 @@ public class CommunityService {
 
     /**
      * Get a community by its ID.
-     * @param id
-     * @return
+     * @param id the community ID
+     * @return the community
      */
     public Community getById(String id) {
         return communityRepository.findById(id).orElseThrow(() ->
@@ -56,8 +57,8 @@ public class CommunityService {
 
     /**
      * Create a new community.
-     * @param community
-     * @return
+     * @param community the community
+     * @return the created community
      */
     public Community createCommunity(Community community) {
         return communityRepository.save(community);
@@ -65,8 +66,8 @@ public class CommunityService {
 
     /**
      * Update an existing community.
-     * @param community
-     * @return
+     * @param community the community
+     * @return the updated community
      */
     public Community updateCommunity(Community community) {
         return communityRepository.save(community);
@@ -74,8 +75,7 @@ public class CommunityService {
 
     /**
      * Delete a community by its ID.
-     * @param id
-     * @return
+     * @param id the community ID
      */
     public void deleteCommunity(String id) {
         if (!communityRepository.existsById(id)) {
@@ -85,7 +85,10 @@ public class CommunityService {
     }
 
     /**
-     * 2. Implémentation de l'abonnement (Follow)
+     * Add a member to a community.
+     *
+     * @param communityId the community ID
+     * @param user the user to be added
      */
     public void addMemberToCommunity(String communityId, User user) {
 
@@ -102,6 +105,12 @@ public class CommunityService {
         communityMembershipRepository.save(membership);
     }
 
+    /**
+     * Remove a member from a community.
+     *
+     * @param communityId the community ID
+     * @param userid the user ID to be removed
+     */
     public void removeMemberFromCommunity(String communityId, String userid) {
         communityMembershipRepository.deleteByUserIdAndCommunityId(userid, communityId);
     }

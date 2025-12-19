@@ -60,7 +60,6 @@ public interface PageMapper {
     default List<String> mapUsersToIds(List<User> admins) {
         if (admins == null) return Collections.emptyList();
 
-        // CORRECTION SONAR : Utilisation de .toList() directement
         return admins.stream()
                 .map(User::getId)
                 .toList();

@@ -9,7 +9,9 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-
+/**
+ * Configuration class for initializing data.
+ */
 @Configuration
 @RequiredArgsConstructor
 public class DataInitializer {
@@ -17,6 +19,11 @@ public class DataInitializer {
     private final AuthenticationService authenticationService;
     private final UserRepository userRepository;
 
+    /**
+     * Initialize the admin user if not present.
+     *
+     * @return a CommandLineRunner that initializes the admin user
+     */
     @Bean
     public CommandLineRunner initAdmin() {
         return args -> {

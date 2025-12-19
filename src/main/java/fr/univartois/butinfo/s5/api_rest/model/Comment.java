@@ -24,11 +24,11 @@ public class Comment {
     @Id
     private String id;
 
-    @Indexed // Index VITAL pour lister tous les commentaires d'un post
+    @Indexed
     @DBRef
     private Post post;
 
-    @Indexed // Index pour lister tous les commentaires d'un auteur
+    @Indexed
     @DBRef
     private User author;
 
@@ -49,5 +49,5 @@ public class Comment {
     private LocalDateTime createdAt;
 
     @LastModifiedDate
-    private LocalDateTime updatedAt; // Utile si les commentaires sont éditables
+    private LocalDateTime updatedAt;
 }

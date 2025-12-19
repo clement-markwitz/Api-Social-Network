@@ -12,7 +12,7 @@ public enum ConversationStatus {
     PENDING_INVITE,
 
     /**
-     * A user has a pending request to join the group.
+     * Conversation has been archived by all members.
      */
     ARCHIVED
 }

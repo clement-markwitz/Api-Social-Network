@@ -7,7 +7,7 @@ import jakarta.validation.constraints.NotBlank;
  */
 public record UserLoginDto(
         @NotBlank(message = "Le nom d'utilisateur ne peut pas être vide")
-        String username, // Ou email, selon votre logique de connexion
+        String username,
 
         @NotBlank(message = "Le mot de passe ne peut pas être vide")
         String password

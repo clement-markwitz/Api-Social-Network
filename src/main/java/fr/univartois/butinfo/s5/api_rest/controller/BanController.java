@@ -36,6 +36,7 @@ public class BanController {
 
     /**
      * Get a list of all bans.
+     *
      * @return List of BanSummaryDto
      */
     @GetMapping("/bans")
@@ -52,6 +53,7 @@ public class BanController {
 
     /**
      * Ban a user.
+     *
      * @param idUser ID of the user to ban
      * @param dto BanCreateDto containing ban details
      * @param authentication Authentication object of the admin performing the ban
@@ -77,6 +79,7 @@ public class BanController {
 
     /**
      * Unban a user.
+     *
      * @param idUser ID of the user to unban
      * @return ResponseEntity with success message
      */

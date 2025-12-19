@@ -13,7 +13,6 @@ import java.util.Optional;
  */
 @Repository
 public interface MessageRepository extends MongoRepository<Message, String> {
-    // Trouve les messages via l'ID de la conversation imbriquée
     /**
      * Finds all messages associated with a specific conversation ID, ordered by creation date in ascending order.
      *
@@ -22,7 +21,6 @@ public interface MessageRepository extends MongoRepository<Message, String> {
      */
     List<Message> findByConversation_IdOrderByCreatedAtAsc(String conversationId);
 
-    // Récupère le dernier message (pour l'aperçu)
     /**
      * Finds the most recent message associated with a specific conversation ID.
      *

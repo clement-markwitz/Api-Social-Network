@@ -10,7 +10,7 @@ import java.time.LocalDateTime;
  */
 public record PostDto(
         String id,
-        UserSummaryDto author, // Enrichi
+        UserSummaryDto author,
         String text,
         MediaDto media,
         PostStatsDto stats,
@@ -19,7 +19,7 @@ public record PostDto(
         LocalDateTime createdAt,
         LocalDateTime updatedAt,
 
-        // Le post peut être lié à une Page OU une Communauté
+        // The post can be associated with either a page or a community
         String pageId,
         String communityId
 ) {
