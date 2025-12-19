@@ -47,13 +47,13 @@ public class SecurityConfiguration {
                         .requestMatchers(HttpMethod.GET, "/api/pages/**").permitAll()
                         .requestMatchers(HttpMethod.GET, "/api/posts/**").permitAll()
                         .requestMatchers(HttpMethod.GET, "/api/users/**").permitAll()
-                        .requestMatchers(HttpMethod.GET, "/api/stats/**").permitAll()
                         .requestMatchers(
                                 "/v3/api-docs/**",
                                 "/swagger-ui/**",
                                 "/swagger-ui.html"
                         ).permitAll()
                         .requestMatchers("/ws/**").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/api/stats/**").hasRole("ADMIN")
                         .requestMatchers("/api/users/ban/**").hasRole("ADMIN")
 
                         .anyRequest().authenticated()
