@@ -1,0 +1,21 @@
+meta {
+  name: Bloquer l'utilisateur n°1
+  type: http
+  seq: 11
+}
+
+post {
+  url: {{url}}/{{id_compte_n1}}
+  body: json
+  auth: bearer
+}
+
+auth:bearer {
+  token: {{token_compte_n2}}
+}
+
+body:json {
+  {
+    "reason" : "JSP"
+  }
+}
