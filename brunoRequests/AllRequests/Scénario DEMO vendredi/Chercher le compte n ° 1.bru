@@ -7,9 +7,13 @@ meta {
 get {
   url: {{url}}/users/search?q=compte_n1
   body: none
-  auth: none
+  auth: bearer
 }
 
 params:query {
   q: compte_n1
+}
+
+auth:bearer {
+  token: {{token_compte_n2}}
 }
