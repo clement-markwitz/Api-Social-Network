@@ -1,0 +1,15 @@
+meta {
+  name: unfollowPages
+  type: http
+  seq: 8
+}
+
+delete {
+  url: http://localhost:8080/api/pages/69411ef56e49a2111667cb3a/follow
+  body: none
+  auth: bearer
+}
+
+auth:bearer {
+  token: eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJzaW1vbnJhZHVyZyIsImlhdCI6MTc2NjEzNTk3MywiZXhwIjoxNzY2MjIyMzczfQ.QJA-Jw4fDDpJ0gX5ujW4iy_aVr5DbG7aL9gqBI3KbKeoaoMGL4n_lWojDMGlr_xq
+}
