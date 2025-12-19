@@ -1,0 +1,15 @@
+meta {
+  name: user1 -> user2
+  type: http
+  seq: 4
+}
+
+post {
+  url: {{url}}/follows/{{id_compte_2}}
+  body: none
+  auth: bearer
+}
+
+auth:bearer {
+  token: {{token_compte_n1}}
+}
