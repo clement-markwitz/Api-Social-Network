@@ -7,11 +7,15 @@ meta {
 get {
   url: {{url}}/users/search?q=compte_n2
   body: none
-  auth: inherit
+  auth: bearer
 }
 
 params:query {
   q: compte_n2
+}
+
+auth:bearer {
+  token: {{token_compte_admin}}
 }
 
 script:post-response {
