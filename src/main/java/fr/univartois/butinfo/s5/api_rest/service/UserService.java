@@ -70,7 +70,7 @@ public class UserService implements UserDetailsService {
      * @return boolean
      */
     public boolean delete(String id) {
-        if (!userRepository.existsById(id)) {
+        if (userRepository.existsById(id)) {
             userRepository.deleteById(id);
             return true;
         }

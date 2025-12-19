@@ -2,9 +2,13 @@ package fr.univartois.butinfo.s5.api_rest.service;
 import fr.univartois.butinfo.s5.api_rest.dto.page.*;
 import fr.univartois.butinfo.s5.api_rest.mapper.PageMapper;
 import fr.univartois.butinfo.s5.api_rest.model.Page;
+import fr.univartois.butinfo.s5.api_rest.model.PageSubscription;
+import fr.univartois.butinfo.s5.api_rest.model.User;
 import fr.univartois.butinfo.s5.api_rest.repository.PageRepository;
+import fr.univartois.butinfo.s5.api_rest.repository.PageSubscriptionRepository;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 import java.time.LocalDateTime;
@@ -15,11 +19,15 @@ import java.time.LocalDateTime;
 @Service
 public class PageService {
 
+    private static final String PAGE_NOT_FOUND = "Page introuvable";
+
     private final PageRepository pageRepository;
+    private final PageSubscriptionRepository pageSubscriptionRepository;
     private final PageMapper pageMapper;
 
-    public PageService(PageRepository pageRepository, PageMapper pageMapper) {
+    public PageService(PageRepository pageRepository, PageMapper pageMapper, PageSubscriptionRepository pageSubscriptionRepository) {
         this.pageRepository = pageRepository;
+        this.pageSubscriptionRepository = pageSubscriptionRepository;
         this.pageMapper = pageMapper;
     }
 
@@ -58,7 +66,7 @@ public class PageService {
      */
     public PageDetailDto getPageById(String id) {
         Page page = pageRepository.findById(id)
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Page introuvable"));
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, PAGE_NOT_FOUND));
         return pageMapper.toDetailDto(page);
     }
     /**
@@ -71,7 +79,7 @@ public class PageService {
      */
     public PageDetailDto updatePage(String id, PageUpdateDto dto) {
         Page page = pageRepository.findById(id)
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Page introuvable"));
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, PAGE_NOT_FOUND));
         if (dto.description() != null) page.setDescription(dto.description());
         if (dto.topics() != null) page.setTopics(dto.topics());
 
@@ -88,8 +96,37 @@ public class PageService {
      */
     public void deletePage(String id) {
         if (!pageRepository.existsById(id)) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Page introuvable");
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, PAGE_NOT_FOUND);
         }
         pageRepository.deleteById(id);
     }
+
+    public void followPage(String pageId, User user) {
+        Page page = findPageEntityById(pageId);
+        if (pageSubscriptionRepository.existsByUserAndPage(user, page)) {
+            throw new ResponseStatusException(HttpStatus.CONFLICT, "Vous suivez déjà cette page.");
+        }
+        PageSubscription subscription = new PageSubscription();
+        subscription.setUser(user);
+        subscription.setPage(page);
+        subscription.setCreatedAt(LocalDateTime.now());
+        pageSubscriptionRepository.save(subscription);
+        page.setFollowerCount(page.getFollowerCount() + 1);
+        pageRepository.save(page);
+    }
+
+    public void unfollowPage(String pageId, User user) {
+        Page page = findPageEntityById(pageId);
+        PageSubscription subscription = pageSubscriptionRepository.findByUserAndPage(user, page)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Vous ne suivez pas cette page."));
+        pageSubscriptionRepository.delete(subscription);
+        page.setFollowerCount(Math.max(0, page.getFollowerCount() - 1));
+        pageRepository.save(page);
+    }
+
+    private Page findPageEntityById(String id) {
+        return pageRepository.findById(id)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, PAGE_NOT_FOUND));
+    }
+
 }

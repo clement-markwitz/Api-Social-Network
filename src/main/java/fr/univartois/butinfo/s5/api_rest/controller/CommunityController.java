@@ -5,6 +5,7 @@ import fr.univartois.butinfo.s5.api_rest.dto.community.CommunityDetailDto;
 import fr.univartois.butinfo.s5.api_rest.dto.community.CommunitySummaryDto;
 import fr.univartois.butinfo.s5.api_rest.dto.community.CommunityUpdateDto;
 import fr.univartois.butinfo.s5.api_rest.dto.post.PostDto;
+import fr.univartois.butinfo.s5.api_rest.dto.user.UserSummaryDto;
 import fr.univartois.butinfo.s5.api_rest.mapper.CommunityMapper;
 import fr.univartois.butinfo.s5.api_rest.mapper.PostMapper;
 import fr.univartois.butinfo.s5.api_rest.model.Community;
@@ -148,5 +149,23 @@ public class CommunityController {
                 .map(postMapper::toDto)
                 .toList();
         return ResponseEntity.ok(postDtos);
+    }
+
+    @PostMapping("/{id}/follow")
+    public ResponseEntity<Void> followCommunity(@PathVariable String id, Authentication authentication) {
+        Community community = communityService.getById(id);
+        User user = (User) authentication.getPrincipal();
+        communityService.addMemberToCommunity(id, user);
+        community.setMemberCount(community.getMemberCount() + 1);
+        return ResponseEntity.status(HttpStatus.CREATED).build();
+    }
+
+    @DeleteMapping("/{id}/unfollow")
+    public ResponseEntity<Void> unfollowCommunity(@PathVariable String id, Authentication authentication) {
+        Community community = communityService.getById(id);
+        User user = (User) authentication.getPrincipal();
+        communityService.removeMemberFromCommunity(id, user.getId());
+        community.setMemberCount(community.getMemberCount() - 1);
+        return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
 }

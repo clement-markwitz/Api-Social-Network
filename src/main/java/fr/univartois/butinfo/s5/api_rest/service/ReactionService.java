@@ -102,7 +102,6 @@ public class ReactionService {
 
         Comment comment = commentRepository.findById(commentId).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Commentaire introuvable"));
 
-        System.out.println("test2");
 
         Optional<Reaction> existingReaction = reactionRepository.findByCommentIdAndUserId(commentId, userId);
 
@@ -111,7 +110,6 @@ public class ReactionService {
             return;
         }
 
-        System.out.println("test");
 
         Reaction reaction = new Reaction();
         reaction.setComment(comment);
