@@ -6,10 +6,7 @@ import fr.univartois.butinfo.s5.api_rest.dto.community.CommunitySummaryDto;
 import fr.univartois.butinfo.s5.api_rest.dto.community.CommunityUpdateDto;
 import fr.univartois.butinfo.s5.api_rest.model.Community;
 import fr.univartois.butinfo.s5.api_rest.model.User;
-import org.mapstruct.Mapper;
-import org.mapstruct.Mapping;
-import org.mapstruct.MappingTarget;
-import org.mapstruct.Named;
+import org.mapstruct.*;
 
 import java.util.Collections;
 import java.util.List;
@@ -18,7 +15,7 @@ import java.util.List;
  * Mapper pour les communautés.
  * Utilise MapStruct pour la conversion entre entités et DTOs.
  */
-@Mapper(componentModel = "spring")
+@Mapper(componentModel = "spring", nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
 public interface CommunityMapper {
 
     /**
