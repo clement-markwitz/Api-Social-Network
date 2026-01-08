@@ -65,10 +65,11 @@ services:
   watcher:
     image: python:3.9-slim
     container_name: sync_watcher
-    working_dir: /app
     volumes:
       - ./:/app
-    command: sh -c "if [ -f requirements.txt ]; then pip install --no-cache-dir -r requirements.txt; fi && python -u ./utils/watcher/sync_watcher.py"
+      - watcher-data:/data
+    working_dir: /app
+    command: sh -c "if [ -f requirements.txt ]; then pip install --no-cache-dir -r requirements.txt; fi && python -u /app/utils/watcher/sync_watcher.py"
     environment:
       - MONGO_URI=mongodb://mongo:27017
       - DB_NAME=reseau_culinaire

@@ -1,6 +1,26 @@
 {
   "users": [
     {
+      "_id": { "$oid": "5b6f040941bb4a13a5da05e1" },
+      "username": "robert duchmol",
+      "email": "robertduchmol@gmail.com",
+      "password": "$2y$10$9ttJU6t9dfMmg1fYsYFZ0OzhslQ0.oex2xvZtuqRDC5dICLSdSGHW",
+      "role": "ADMIN",
+      "profile": {
+        "pseudo": "Super Admin",
+        "bio": "Compte administrateur suprême",
+        "avatarUrl": null,
+        "location": "Paris",
+        "languages": ["fr"]
+      },
+      "prefs": { "diets": [], "allergies": [], "dislikedIngredients": [] },
+      "interests": { "cuisines": [], "techniques": [] },
+      "createdAt": { "$date": "2025-01-01T10:00:00Z" },
+      "updatedAt": { "$date": "2025-01-01T10:00:00Z" },
+      "banned": false
+    },
+    {
+
       "_id": {
         "$oid": "9a6f040941dd4a93a5da05e1"
       },
