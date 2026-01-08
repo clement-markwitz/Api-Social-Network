@@ -8,6 +8,7 @@ import fr.univartois.butinfo.s5.api_rest.dto.user.UserSummaryDto;
 public record BanSummaryDto(
         String id,
         UserSummaryDto bannedUser,
+        String reason,
         int durationDays,
         boolean active
 ) {

@@ -3159,7 +3159,7 @@
       "authorId": {
         "$oid": "00c8adc33f834973b0eeae29"
       },
-      "type": "status",
+      "type": "STATUS",
       "text": "Astuce levain 🥖",
       "pageId": null,
       "groupId": null,
@@ -3167,7 +3167,7 @@
         "imageUrl": "/uploads/posts/0.jpg",
         "videoUrl": null
       },
-      "visibility": "public",
+      "visibility": "PUBLIC",
       "stats": {
         "reactions": 0,
         "comments": 2
@@ -3186,7 +3186,7 @@
       "authorId": {
         "$oid": "7134e496cdc44d7b97a9402d"
       },
-      "type": "status",
+      "type": "STATUS",
       "text": "Astuce levain 🥖",
       "pageId": null,
       "groupId": {
@@ -3196,7 +3196,7 @@
         "imageUrl": "/uploads/posts/1.jpg",
         "videoUrl": null
       },
-      "visibility": "followers",
+      "visibility": "FOLLOWERS",
       "stats": {
         "reactions": 2,
         "comments": 4
@@ -3215,7 +3215,7 @@
       "authorId": {
         "$oid": "2eb13e9b44e84d7b878cd579"
       },
-      "type": "status",
+      "type": "STATUS",
       "text": "Nouvelle recette de ramen 🍜",
       "pageId": null,
       "groupId": null,
@@ -3223,7 +3223,7 @@
         "imageUrl": "/uploads/posts/2.jpg",
         "videoUrl": null
       },
-      "visibility": "followers",
+      "visibility": "FOLLOWERS",
       "stats": {
         "reactions": 1,
         "comments": 0
@@ -3242,7 +3242,7 @@
       "authorId": {
         "$oid": "24406568762d433194528e40"
       },
-      "type": "status",
+      "type": "STATUS",
       "text": "Astuce levain 🥖",
       "pageId": null,
       "groupId": null,
@@ -3250,7 +3250,7 @@
         "imageUrl": "/uploads/posts/3.jpg",
         "videoUrl": null
       },
-      "visibility": "followers",
+      "visibility": "FOLLOWERS",
       "stats": {
         "reactions": 1,
         "comments": 0
@@ -3269,7 +3269,7 @@
       "authorId": {
         "$oid": "75930977970141868dcd66d2"
       },
-      "type": "recipe",
+      "type": "RECIPE",
       "text": "Carbonara authentique 🇮🇹",
       "pageId": null,
       "groupId": null,
@@ -3277,7 +3277,7 @@
         "imageUrl": null,
         "videoUrl": null
       },
-      "visibility": "public",
+      "visibility": "PUBLIC",
       "stats": {
         "reactions": 3,
         "comments": 1
@@ -3296,7 +3296,7 @@
       "authorId": {
         "$oid": "f4faaefa525a450a9a2cefec"
       },
-      "type": "status",
+      "type": "STATUS",
       "text": "Astuce levain 🥖",
       "pageId": null,
       "groupId": null,
@@ -3304,7 +3304,7 @@
         "imageUrl": null,
         "videoUrl": null
       },
-      "visibility": "public",
+      "visibility": "PUBLIC",
       "stats": {
         "reactions": 1,
         "comments": 0
@@ -3323,7 +3323,7 @@
       "authorId": {
         "$oid": "026b3d4726e04342ae76689d"
       },
-      "type": "status",
+      "type": "STATUS",
       "text": "Brioche moelleuse maison 🍞",
       "pageId": null,
       "groupId": {
@@ -3333,7 +3333,7 @@
         "imageUrl": null,
         "videoUrl": null
       },
-      "visibility": "public",
+      "visibility": "PUBLIC",
       "stats": {
         "reactions": 3,
         "comments": 1
@@ -3352,7 +3352,7 @@
       "authorId": {
         "$oid": "3816e0fe0fb5425b8c1c66b5"
       },
-      "type": "status",
+      "type": "STATUS",
       "text": "Burger smash double cheese 🍔",
       "pageId": null,
       "groupId": null,
@@ -3360,7 +3360,7 @@
         "imageUrl": null,
         "videoUrl": null
       },
-      "visibility": "followers",
+      "visibility": "FOLLOWERS",
       "stats": {
         "reactions": 5,
         "comments": 0
@@ -3379,7 +3379,7 @@
       "authorId": {
         "$oid": "7e2d6fa937444b448e9d7557"
       },
-      "type": "status",
+      "type": "STATUS",
       "text": "Burger smash double cheese 🍔",
       "pageId": null,
       "groupId": null,
@@ -3387,7 +3387,7 @@
         "imageUrl": "/uploads/posts/8.jpg",
         "videoUrl": null
       },
-      "visibility": "followers",
+      "visibility": "FOLLOWERS",
       "stats": {
         "reactions": 3,
         "comments": 1
@@ -3406,7 +3406,7 @@
       "authorId": {
         "$oid": "7e2d6fa937444b448e9d7557"
       },
-      "type": "recipe",
+      "type": "RECIPE",
       "text": "Tarte citron meringuée 🍋",
       "pageId": {
         "$oid": "df0e507048f24874bb34ad17"
@@ -3416,7 +3416,7 @@
         "imageUrl": null,
         "videoUrl": null
       },
-      "visibility": "followers",
+      "visibility": "FOLLOWERS",
       "stats": {
         "reactions": 0,
         "comments": 2
@@ -3435,7 +3435,7 @@
       "authorId": {
         "$oid": "01c1b12fc46a4ce9a539f78f"
       },
-      "type": "recipe",
+      "type": "RECIPE",
       "text": "Tagine marocain 👌",
       "pageId": null,
       "groupId": null,
@@ -3443,7 +3443,7 @@
         "imageUrl": "/uploads/posts/10.jpg",
         "videoUrl": null
       },
-      "visibility": "followers",
+      "visibility": "FOLLOWERS",
       "stats": {
         "reactions": 1,
         "comments": 3
@@ -3462,7 +3462,7 @@
       "authorId": {
         "$oid": "1a4a5f6eb2b24dc29bf93616"
       },
-      "type": "recipe",
+      "type": "RECIPE",
       "text": "Nouvelle recette de ramen 🍜",
       "pageId": {
         "$oid": "202c066b782f4a2a9a056ace"
@@ -3474,7 +3474,7 @@
         "imageUrl": "/uploads/posts/11.jpg",
         "videoUrl": null
       },
-      "visibility": "followers",
+      "visibility": "FOLLOWERS",
       "stats": {
         "reactions": 4,
         "comments": 1
@@ -3493,7 +3493,7 @@
       "authorId": {
         "$oid": "32fa6abaa66e4e41821fe54f"
       },
-      "type": "recipe",
+      "type": "RECIPE",
       "text": "Brioche moelleuse maison 🍞",
       "pageId": null,
       "groupId": null,
@@ -3501,7 +3501,7 @@
         "imageUrl": "/uploads/posts/12.jpg",
         "videoUrl": null
       },
-      "visibility": "followers",
+      "visibility": "FOLLOWERS",
       "stats": {
         "reactions": 3,
         "comments": 0
@@ -3520,7 +3520,7 @@
       "authorId": {
         "$oid": "7d00eb053bdc4ad3924edd8a"
       },
-      "type": "recipe",
+      "type": "RECIPE",
       "text": "Tagine marocain 👌",
       "pageId": null,
       "groupId": null,
@@ -3528,7 +3528,7 @@
         "imageUrl": null,
         "videoUrl": null
       },
-      "visibility": "public",
+      "visibility": "PUBLIC",
       "stats": {
         "reactions": 1,
         "comments": 0
@@ -3547,7 +3547,7 @@
       "authorId": {
         "$oid": "7134e496cdc44d7b97a9402d"
       },
-      "type": "recipe",
+      "type": "RECIPE",
       "text": "Carbonara authentique 🇮🇹",
       "pageId": null,
       "groupId": null,
@@ -3555,7 +3555,7 @@
         "imageUrl": null,
         "videoUrl": null
       },
-      "visibility": "followers",
+      "visibility": "FOLLOWERS",
       "stats": {
         "reactions": 1,
         "comments": 3
@@ -3574,7 +3574,7 @@
       "authorId": {
         "$oid": "9b7825da3f4d41028306f526"
       },
-      "type": "recipe",
+      "type": "RECIPE",
       "text": "Tarte citron meringuée 🍋",
       "pageId": null,
       "groupId": null,
@@ -3582,7 +3582,7 @@
         "imageUrl": null,
         "videoUrl": null
       },
-      "visibility": "followers",
+      "visibility": "FOLLOWERS",
       "stats": {
         "reactions": 4,
         "comments": 2
@@ -3601,7 +3601,7 @@
       "authorId": {
         "$oid": "75930977970141868dcd66d2"
       },
-      "type": "status",
+      "type": "STATUS",
       "text": "Brioche moelleuse maison 🍞",
       "pageId": null,
       "groupId": null,
@@ -3609,7 +3609,7 @@
         "imageUrl": "/uploads/posts/16.jpg",
         "videoUrl": null
       },
-      "visibility": "public",
+      "visibility": "PUBLIC",
       "stats": {
         "reactions": 3,
         "comments": 3
@@ -3628,7 +3628,7 @@
       "authorId": {
         "$oid": "026b3d4726e04342ae76689d"
       },
-      "type": "status",
+      "type": "STATUS",
       "text": "Nouvelle recette de ramen 🍜",
       "pageId": null,
       "groupId": {
@@ -3638,7 +3638,7 @@
         "imageUrl": "/uploads/posts/17.jpg",
         "videoUrl": null
       },
-      "visibility": "followers",
+      "visibility": "FOLLOWERS",
       "stats": {
         "reactions": 0,
         "comments": 0
@@ -3657,7 +3657,7 @@
       "authorId": {
         "$oid": "14b2f125f4b04314b53af5df"
       },
-      "type": "recipe",
+      "type": "RECIPE",
       "text": "BBQ du dimanche 🔥",
       "pageId": null,
       "groupId": null,
@@ -3665,7 +3665,7 @@
         "imageUrl": "/uploads/posts/18.jpg",
         "videoUrl": null
       },
-      "visibility": "followers",
+      "visibility": "FOLLOWERS",
       "stats": {
         "reactions": 3,
         "comments": 1
@@ -3684,7 +3684,7 @@
       "authorId": {
         "$oid": "46bfb37102d34b7f80eeaa4c"
       },
-      "type": "recipe",
+      "type": "RECIPE",
       "text": "Tarte citron meringuée 🍋",
       "pageId": null,
       "groupId": {
@@ -3694,7 +3694,7 @@
         "imageUrl": "/uploads/posts/19.jpg",
         "videoUrl": null
       },
-      "visibility": "public",
+      "visibility": "PUBLIC",
       "stats": {
         "reactions": 1,
         "comments": 3
@@ -3713,7 +3713,7 @@
       "authorId": {
         "$oid": "b903b4e3163c492baec3347f"
       },
-      "type": "status",
+      "type": "STATUS",
       "text": "Burger smash double cheese 🍔",
       "pageId": null,
       "groupId": null,
@@ -3721,7 +3721,7 @@
         "imageUrl": "/uploads/posts/20.jpg",
         "videoUrl": null
       },
-      "visibility": "public",
+      "visibility": "PUBLIC",
       "stats": {
         "reactions": 4,
         "comments": 1
@@ -3740,7 +3740,7 @@
       "authorId": {
         "$oid": "f59e334506a449e7a56661c8"
       },
-      "type": "recipe",
+      "type": "RECIPE",
       "text": "Carbonara authentique 🇮🇹",
       "pageId": null,
       "groupId": {
@@ -3750,7 +3750,7 @@
         "imageUrl": "/uploads/posts/21.jpg",
         "videoUrl": null
       },
-      "visibility": "public",
+      "visibility": "PUBLIC",
       "stats": {
         "reactions": 1,
         "comments": 1
@@ -3769,7 +3769,7 @@
       "authorId": {
         "$oid": "97e92ce36d594a90a9a04a36"
       },
-      "type": "status",
+      "type": "STATUS",
       "text": "Crêpes au sarrasin bretonnes 🥞",
       "pageId": null,
       "groupId": null,
@@ -3777,7 +3777,7 @@
         "imageUrl": "/uploads/posts/22.jpg",
         "videoUrl": null
       },
-      "visibility": "followers",
+      "visibility": "FOLLOWERS",
       "stats": {
         "reactions": 4,
         "comments": 3
@@ -3796,7 +3796,7 @@
       "authorId": {
         "$oid": "b708f5480a4846fb874da84a"
       },
-      "type": "recipe",
+      "type": "RECIPE",
       "text": "Brioche moelleuse maison 🍞",
       "pageId": null,
       "groupId": {
@@ -3806,7 +3806,7 @@
         "imageUrl": "/uploads/posts/23.jpg",
         "videoUrl": null
       },
-      "visibility": "followers",
+      "visibility": "FOLLOWERS",
       "stats": {
         "reactions": 2,
         "comments": 1
@@ -3825,7 +3825,7 @@
       "authorId": {
         "$oid": "53016b9e064e4e84a45fef5a"
       },
-      "type": "recipe",
+      "type": "RECIPE",
       "text": "Crêpes au sarrasin bretonnes 🥞",
       "pageId": null,
       "groupId": null,
@@ -3833,7 +3833,7 @@
         "imageUrl": null,
         "videoUrl": null
       },
-      "visibility": "followers",
+      "visibility": "FOLLOWERS",
       "stats": {
         "reactions": 0,
         "comments": 1
@@ -3852,7 +3852,7 @@
       "authorId": {
         "$oid": "37798ba3ec7749b2bbfae0cf"
       },
-      "type": "status",
+      "type": "STATUS",
       "text": "Astuce levain 🥖",
       "pageId": null,
       "groupId": null,
@@ -3860,7 +3860,7 @@
         "imageUrl": null,
         "videoUrl": null
       },
-      "visibility": "public",
+      "visibility": "PUBLIC",
       "stats": {
         "reactions": 3,
         "comments": 0
@@ -3879,7 +3879,7 @@
       "authorId": {
         "$oid": "a1c37576660d41649d044992"
       },
-      "type": "recipe",
+      "type": "RECIPE",
       "text": "Astuce levain 🥖",
       "pageId": null,
       "groupId": null,
@@ -3887,7 +3887,7 @@
         "imageUrl": null,
         "videoUrl": null
       },
-      "visibility": "public",
+      "visibility": "PUBLIC",
       "stats": {
         "reactions": 1,
         "comments": 2
@@ -3906,7 +3906,7 @@
       "authorId": {
         "$oid": "7e2d6fa937444b448e9d7557"
       },
-      "type": "status",
+      "type": "STATUS",
       "text": "Tagine marocain 👌",
       "pageId": null,
       "groupId": null,
@@ -3914,7 +3914,7 @@
         "imageUrl": "/uploads/posts/27.jpg",
         "videoUrl": null
       },
-      "visibility": "public",
+      "visibility": "PUBLIC",
       "stats": {
         "reactions": 3,
         "comments": 2
@@ -3933,7 +3933,7 @@
       "authorId": {
         "$oid": "a1c37576660d41649d044992"
       },
-      "type": "recipe",
+      "type": "RECIPE",
       "text": "Burger smash double cheese 🍔",
       "pageId": {
         "$oid": "3d43f650f75e4c509c96f795"
@@ -3943,7 +3943,7 @@
         "imageUrl": "/uploads/posts/28.jpg",
         "videoUrl": null
       },
-      "visibility": "public",
+      "visibility": "PUBLIC",
       "stats": {
         "reactions": 3,
         "comments": 0
@@ -3962,7 +3962,7 @@
       "authorId": {
         "$oid": "7d00eb053bdc4ad3924edd8a"
       },
-      "type": "status",
+      "type": "STATUS",
       "text": "Astuce levain 🥖",
       "pageId": {
         "$oid": "1b5680c6a1564fd6a6695d69"
@@ -3972,7 +3972,7 @@
         "imageUrl": null,
         "videoUrl": null
       },
-      "visibility": "followers",
+      "visibility": "FOLLOWERS",
       "stats": {
         "reactions": 1,
         "comments": 0
@@ -3991,7 +3991,7 @@
       "authorId": {
         "$oid": "1eb7b1bd3afb4aa8b79b1dde"
       },
-      "type": "recipe",
+      "type": "RECIPE",
       "text": "Burger smash double cheese 🍔",
       "pageId": null,
       "groupId": null,
@@ -3999,7 +3999,7 @@
         "imageUrl": "/uploads/posts/30.jpg",
         "videoUrl": null
       },
-      "visibility": "public",
+      "visibility": "PUBLIC",
       "stats": {
         "reactions": 2,
         "comments": 1
@@ -4018,7 +4018,7 @@
       "authorId": {
         "$oid": "7cc94e9ac29a4101a02466aa"
       },
-      "type": "recipe",
+      "type": "RECIPE",
       "text": "Nouvelle recette de ramen 🍜",
       "pageId": null,
       "groupId": null,
@@ -4026,7 +4026,7 @@
         "imageUrl": "/uploads/posts/31.jpg",
         "videoUrl": null
       },
-      "visibility": "followers",
+      "visibility": "FOLLOWERS",
       "stats": {
         "reactions": 1,
         "comments": 0
@@ -4045,7 +4045,7 @@
       "authorId": {
         "$oid": "cbe05a19be3b4d6f801bc53b"
       },
-      "type": "status",
+      "type": "STATUS",
       "text": "BBQ du dimanche 🔥",
       "pageId": null,
       "groupId": null,
@@ -4053,7 +4053,7 @@
         "imageUrl": "/uploads/posts/32.jpg",
         "videoUrl": null
       },
-      "visibility": "public",
+      "visibility": "PUBLIC",
       "stats": {
         "reactions": 1,
         "comments": 1
@@ -4072,7 +4072,7 @@
       "authorId": {
         "$oid": "f59e334506a449e7a56661c8"
       },
-      "type": "recipe",
+      "type": "RECIPE",
       "text": "Tarte citron meringuée 🍋",
       "pageId": null,
       "groupId": null,
@@ -4080,7 +4080,7 @@
         "imageUrl": "/uploads/posts/33.jpg",
         "videoUrl": null
       },
-      "visibility": "followers",
+      "visibility": "FOLLOWERS",
       "stats": {
         "reactions": 2,
         "comments": 1
@@ -4099,7 +4099,7 @@
       "authorId": {
         "$oid": "c4b3f501ee10475c8319a88f"
       },
-      "type": "recipe",
+      "type": "RECIPE",
       "text": "Burger smash double cheese 🍔",
       "pageId": null,
       "groupId": null,
@@ -4107,7 +4107,7 @@
         "imageUrl": null,
         "videoUrl": null
       },
-      "visibility": "public",
+      "visibility": "PUBLIC",
       "stats": {
         "reactions": 4,
         "comments": 1
@@ -4126,7 +4126,7 @@
       "authorId": {
         "$oid": "09ff2e11d2734f23828d38ff"
       },
-      "type": "status",
+      "type": "STATUS",
       "text": "Crêpes au sarrasin bretonnes 🥞",
       "pageId": {
         "$oid": "a03fdcad2e4a4555bbb17bb5"
@@ -4138,7 +4138,7 @@
         "imageUrl": null,
         "videoUrl": null
       },
-      "visibility": "followers",
+      "visibility": "FOLLOWERS",
       "stats": {
         "reactions": 1,
         "comments": 1
@@ -4157,7 +4157,7 @@
       "authorId": {
         "$oid": "0988240d0e6847d2abf384fb"
       },
-      "type": "status",
+      "type": "STATUS",
       "text": "Carbonara authentique 🇮🇹",
       "pageId": null,
       "groupId": null,
@@ -4165,7 +4165,7 @@
         "imageUrl": "/uploads/posts/36.jpg",
         "videoUrl": null
       },
-      "visibility": "public",
+      "visibility": "PUBLIC",
       "stats": {
         "reactions": 0,
         "comments": 1
@@ -4184,7 +4184,7 @@
       "authorId": {
         "$oid": "9a6f040941dd4a93a5da05e1"
       },
-      "type": "status",
+      "type": "STATUS",
       "text": "Burger smash double cheese 🍔",
       "pageId": null,
       "groupId": null,
@@ -4192,7 +4192,7 @@
         "imageUrl": "/uploads/posts/37.jpg",
         "videoUrl": null
       },
-      "visibility": "public",
+      "visibility": "PUBLIC",
       "stats": {
         "reactions": 3,
         "comments": 1
@@ -4211,7 +4211,7 @@
       "authorId": {
         "$oid": "00c8adc33f834973b0eeae29"
       },
-      "type": "status",
+      "type": "STATUS",
       "text": "Tagine marocain 👌",
       "pageId": {
         "$oid": "8c60a34c77c049d0a6668901"
@@ -4221,7 +4221,7 @@
         "imageUrl": null,
         "videoUrl": null
       },
-      "visibility": "followers",
+      "visibility": "FOLLOWERS",
       "stats": {
         "reactions": 3,
         "comments": 1
@@ -4240,7 +4240,7 @@
       "authorId": {
         "$oid": "4e75068c4d344fa5a0711804"
       },
-      "type": "recipe",
+      "type": "RECIPE",
       "text": "Café latte parfait ☕",
       "pageId": null,
       "groupId": null,
@@ -4248,7 +4248,7 @@
         "imageUrl": "/uploads/posts/39.jpg",
         "videoUrl": null
       },
-      "visibility": "public",
+      "visibility": "PUBLIC",
       "stats": {
         "reactions": 2,
         "comments": 1
@@ -4267,7 +4267,7 @@
       "authorId": {
         "$oid": "ff17a05d7fcc4f1aa1c9f626"
       },
-      "type": "recipe",
+      "type": "RECIPE",
       "text": "Tagine marocain 👌",
       "pageId": null,
       "groupId": null,
@@ -4275,7 +4275,7 @@
         "imageUrl": "/uploads/posts/40.jpg",
         "videoUrl": null
       },
-      "visibility": "public",
+      "visibility": "PUBLIC",
       "stats": {
         "reactions": 3,
         "comments": 1
@@ -4294,7 +4294,7 @@
       "authorId": {
         "$oid": "f59e334506a449e7a56661c8"
       },
-      "type": "status",
+      "type": "STATUS",
       "text": "Nouvelle recette de ramen 🍜",
       "pageId": null,
       "groupId": null,
@@ -4302,7 +4302,7 @@
         "imageUrl": "/uploads/posts/41.jpg",
         "videoUrl": null
       },
-      "visibility": "followers",
+      "visibility": "FOLLOWERS",
       "stats": {
         "reactions": 3,
         "comments": 0
@@ -4321,7 +4321,7 @@
       "authorId": {
         "$oid": "41ab5ef5c0eb4ab6b390e01f"
       },
-      "type": "status",
+      "type": "STATUS",
       "text": "Crêpes au sarrasin bretonnes 🥞",
       "pageId": null,
       "groupId": null,
@@ -4329,7 +4329,7 @@
         "imageUrl": "/uploads/posts/42.jpg",
         "videoUrl": null
       },
-      "visibility": "public",
+      "visibility": "PUBLIC",
       "stats": {
         "reactions": 0,
         "comments": 0
@@ -4348,7 +4348,7 @@
       "authorId": {
         "$oid": "2e759a0ae9364ec082113afc"
       },
-      "type": "status",
+      "type": "STATUS",
       "text": "Carbonara authentique 🇮🇹",
       "pageId": {
         "$oid": "202c066b782f4a2a9a056ace"
@@ -4358,7 +4358,7 @@
         "imageUrl": null,
         "videoUrl": null
       },
-      "visibility": "followers",
+      "visibility": "FOLLOWERS",
       "stats": {
         "reactions": 0,
         "comments": 2
@@ -4377,7 +4377,7 @@
       "authorId": {
         "$oid": "7d00eb053bdc4ad3924edd8a"
       },
-      "type": "status",
+      "type": "STATUS",
       "text": "Tagine marocain 👌",
       "pageId": {
         "$oid": "0abd602b72ef4564a94dafc2"
@@ -4387,7 +4387,7 @@
         "imageUrl": "/uploads/posts/44.jpg",
         "videoUrl": null
       },
-      "visibility": "public",
+      "visibility": "PUBLIC",
       "stats": {
         "reactions": 2,
         "comments": 0
@@ -4406,7 +4406,7 @@
       "authorId": {
         "$oid": "cfd83e665b134c7297240625"
       },
-      "type": "status",
+      "type": "STATUS",
       "text": "Tagine marocain 👌",
       "pageId": null,
       "groupId": null,
@@ -4414,7 +4414,7 @@
         "imageUrl": "/uploads/posts/45.jpg",
         "videoUrl": null
       },
-      "visibility": "public",
+      "visibility": "PUBLIC",
       "stats": {
         "reactions": 7,
         "comments": 0
@@ -4433,7 +4433,7 @@
       "authorId": {
         "$oid": "16a47e7998a34f32bd88d747"
       },
-      "type": "recipe",
+      "type": "RECIPE",
       "text": "Tarte citron meringuée 🍋",
       "pageId": null,
       "groupId": null,
@@ -4441,7 +4441,7 @@
         "imageUrl": null,
         "videoUrl": null
       },
-      "visibility": "followers",
+      "visibility": "FOLLOWERS",
       "stats": {
         "reactions": 5,
         "comments": 0
@@ -4460,7 +4460,7 @@
       "authorId": {
         "$oid": "277b83705ccc42f1bfd9a1e6"
       },
-      "type": "status",
+      "type": "STATUS",
       "text": "Café latte parfait ☕",
       "pageId": null,
       "groupId": {
@@ -4470,7 +4470,7 @@
         "imageUrl": null,
         "videoUrl": null
       },
-      "visibility": "public",
+      "visibility": "PUBLIC",
       "stats": {
         "reactions": 1,
         "comments": 1
@@ -4489,7 +4489,7 @@
       "authorId": {
         "$oid": "a14688743a574d4dba6f0288"
       },
-      "type": "status",
+      "type": "STATUS",
       "text": "Astuce levain 🥖",
       "pageId": null,
       "groupId": {
@@ -4499,7 +4499,7 @@
         "imageUrl": null,
         "videoUrl": null
       },
-      "visibility": "followers",
+      "visibility": "FOLLOWERS",
       "stats": {
         "reactions": 4,
         "comments": 3
@@ -4518,7 +4518,7 @@
       "authorId": {
         "$oid": "9b7825da3f4d41028306f526"
       },
-      "type": "status",
+      "type": "STATUS",
       "text": "Tagine marocain 👌",
       "pageId": {
         "$oid": "2e90b99fef2e4a2e9df57a55"
@@ -4528,7 +4528,7 @@
         "imageUrl": null,
         "videoUrl": null
       },
-      "visibility": "followers",
+      "visibility": "FOLLOWERS",
       "stats": {
         "reactions": 3,
         "comments": 0
@@ -4547,7 +4547,7 @@
       "authorId": {
         "$oid": "ff17a05d7fcc4f1aa1c9f626"
       },
-      "type": "recipe",
+      "type": "RECIPE",
       "text": "BBQ du dimanche 🔥",
       "pageId": null,
       "groupId": {
@@ -4557,7 +4557,7 @@
         "imageUrl": "/uploads/posts/50.jpg",
         "videoUrl": null
       },
-      "visibility": "public",
+      "visibility": "PUBLIC",
       "stats": {
         "reactions": 1,
         "comments": 1
@@ -4576,7 +4576,7 @@
       "authorId": {
         "$oid": "684528d8ee5346e8aa44723d"
       },
-      "type": "recipe",
+      "type": "RECIPE",
       "text": "Tagine marocain 👌",
       "pageId": null,
       "groupId": null,
@@ -4584,7 +4584,7 @@
         "imageUrl": null,
         "videoUrl": null
       },
-      "visibility": "public",
+      "visibility": "PUBLIC",
       "stats": {
         "reactions": 2,
         "comments": 0
@@ -4603,7 +4603,7 @@
       "authorId": {
         "$oid": "f4faaefa525a450a9a2cefec"
       },
-      "type": "status",
+      "type": "STATUS",
       "text": "Tarte citron meringuée 🍋",
       "pageId": null,
       "groupId": {
@@ -4613,7 +4613,7 @@
         "imageUrl": null,
         "videoUrl": null
       },
-      "visibility": "followers",
+      "visibility": "FOLLOWERS",
       "stats": {
         "reactions": 3,
         "comments": 2
@@ -4632,7 +4632,7 @@
       "authorId": {
         "$oid": "46bfb37102d34b7f80eeaa4c"
       },
-      "type": "recipe",
+      "type": "RECIPE",
       "text": "Burger smash double cheese 🍔",
       "pageId": null,
       "groupId": {
@@ -4642,7 +4642,7 @@
         "imageUrl": "/uploads/posts/53.jpg",
         "videoUrl": null
       },
-      "visibility": "followers",
+      "visibility": "FOLLOWERS",
       "stats": {
         "reactions": 0,
         "comments": 1
@@ -4661,7 +4661,7 @@
       "authorId": {
         "$oid": "cfd83e665b134c7297240625"
       },
-      "type": "status",
+      "type": "STATUS",
       "text": "Astuce levain 🥖",
       "pageId": null,
       "groupId": null,
@@ -4669,7 +4669,7 @@
         "imageUrl": null,
         "videoUrl": null
       },
-      "visibility": "followers",
+      "visibility": "FOLLOWERS",
       "stats": {
         "reactions": 2,
         "comments": 1
@@ -4688,7 +4688,7 @@
       "authorId": {
         "$oid": "026b3d4726e04342ae76689d"
       },
-      "type": "status",
+      "type": "STATUS",
       "text": "Brioche moelleuse maison 🍞",
       "pageId": null,
       "groupId": {
@@ -4698,7 +4698,7 @@
         "imageUrl": "/uploads/posts/55.jpg",
         "videoUrl": null
       },
-      "visibility": "followers",
+      "visibility": "FOLLOWERS",
       "stats": {
         "reactions": 0,
         "comments": 1
@@ -4717,7 +4717,7 @@
       "authorId": {
         "$oid": "41ab5ef5c0eb4ab6b390e01f"
       },
-      "type": "status",
+      "type": "STATUS",
       "text": "Crêpes au sarrasin bretonnes 🥞",
       "pageId": null,
       "groupId": null,
@@ -4725,7 +4725,7 @@
         "imageUrl": null,
         "videoUrl": null
       },
-      "visibility": "followers",
+      "visibility": "FOLLOWERS",
       "stats": {
         "reactions": 2,
         "comments": 1
@@ -4744,7 +4744,7 @@
       "authorId": {
         "$oid": "41cfa33594b64362a9d2191e"
       },
-      "type": "recipe",
+      "type": "RECIPE",
       "text": "Tagine marocain 👌",
       "pageId": null,
       "groupId": {
@@ -4754,7 +4754,7 @@
         "imageUrl": null,
         "videoUrl": null
       },
-      "visibility": "public",
+      "visibility": "PUBLIC",
       "stats": {
         "reactions": 2,
         "comments": 0
@@ -4773,7 +4773,7 @@
       "authorId": {
         "$oid": "09ff2e11d2734f23828d38ff"
       },
-      "type": "status",
+      "type": "STATUS",
       "text": "Astuce levain 🥖",
       "pageId": null,
       "groupId": null,
@@ -4781,7 +4781,7 @@
         "imageUrl": null,
         "videoUrl": null
       },
-      "visibility": "public",
+      "visibility": "PUBLIC",
       "stats": {
         "reactions": 1,
         "comments": 1
@@ -4800,7 +4800,7 @@
       "authorId": {
         "$oid": "038b08ec168a44e4bd3989b6"
       },
-      "type": "status",
+      "type": "STATUS",
       "text": "Crêpes au sarrasin bretonnes 🥞",
       "pageId": {
         "$oid": "8c60a34c77c049d0a6668901"
@@ -4810,7 +4810,7 @@
         "imageUrl": null,
         "videoUrl": null
       },
-      "visibility": "followers",
+      "visibility": "FOLLOWERS",
       "stats": {
         "reactions": 2,
         "comments": 0
@@ -4829,7 +4829,7 @@
       "authorId": {
         "$oid": "01c1b12fc46a4ce9a539f78f"
       },
-      "type": "recipe",
+      "type": "RECIPE",
       "text": "Carbonara authentique 🇮🇹",
       "pageId": null,
       "groupId": {
@@ -4839,7 +4839,7 @@
         "imageUrl": "/uploads/posts/60.jpg",
         "videoUrl": null
       },
-      "visibility": "public",
+      "visibility": "PUBLIC",
       "stats": {
         "reactions": 1,
         "comments": 0
@@ -4858,7 +4858,7 @@
       "authorId": {
         "$oid": "7cc94e9ac29a4101a02466aa"
       },
-      "type": "status",
+      "type": "STATUS",
       "text": "Café latte parfait ☕",
       "pageId": null,
       "groupId": {
@@ -4868,7 +4868,7 @@
         "imageUrl": "/uploads/posts/61.jpg",
         "videoUrl": null
       },
-      "visibility": "followers",
+      "visibility": "FOLLOWERS",
       "stats": {
         "reactions": 3,
         "comments": 3
@@ -4887,7 +4887,7 @@
       "authorId": {
         "$oid": "f4faaefa525a450a9a2cefec"
       },
-      "type": "status",
+      "type": "STATUS",
       "text": "Crêpes au sarrasin bretonnes 🥞",
       "pageId": null,
       "groupId": {
@@ -4897,7 +4897,7 @@
         "imageUrl": "/uploads/posts/62.jpg",
         "videoUrl": null
       },
-      "visibility": "followers",
+      "visibility": "FOLLOWERS",
       "stats": {
         "reactions": 3,
         "comments": 0
@@ -4916,7 +4916,7 @@
       "authorId": {
         "$oid": "cfd83e665b134c7297240625"
       },
-      "type": "recipe",
+      "type": "RECIPE",
       "text": "Tarte citron meringuée 🍋",
       "pageId": null,
       "groupId": null,
@@ -4924,7 +4924,7 @@
         "imageUrl": "/uploads/posts/63.jpg",
         "videoUrl": null
       },
-      "visibility": "followers",
+      "visibility": "FOLLOWERS",
       "stats": {
         "reactions": 3,
         "comments": 1
@@ -4943,7 +4943,7 @@
       "authorId": {
         "$oid": "9c50f425a2c04de8915de080"
       },
-      "type": "status",
+      "type": "STATUS",
       "text": "BBQ du dimanche 🔥",
       "pageId": {
         "$oid": "df0e507048f24874bb34ad17"
@@ -4955,7 +4955,7 @@
         "imageUrl": "/uploads/posts/64.jpg",
         "videoUrl": null
       },
-      "visibility": "followers",
+      "visibility": "FOLLOWERS",
       "stats": {
         "reactions": 1,
         "comments": 0
@@ -4974,7 +4974,7 @@
       "authorId": {
         "$oid": "b903b4e3163c492baec3347f"
       },
-      "type": "status",
+      "type": "STATUS",
       "text": "Tarte citron meringuée 🍋",
       "pageId": null,
       "groupId": null,
@@ -4982,7 +4982,7 @@
         "imageUrl": null,
         "videoUrl": null
       },
-      "visibility": "followers",
+      "visibility": "FOLLOWERS",
       "stats": {
         "reactions": 1,
         "comments": 0
@@ -5001,7 +5001,7 @@
       "authorId": {
         "$oid": "7d00eb053bdc4ad3924edd8a"
       },
-      "type": "status",
+      "type": "STATUS",
       "text": "BBQ du dimanche 🔥",
       "pageId": null,
       "groupId": null,
@@ -5009,7 +5009,7 @@
         "imageUrl": null,
         "videoUrl": null
       },
-      "visibility": "followers",
+      "visibility": "FOLLOWERS",
       "stats": {
         "reactions": 1,
         "comments": 1
@@ -5028,7 +5028,7 @@
       "authorId": {
         "$oid": "28c4d96b3c8648f996986085"
       },
-      "type": "recipe",
+      "type": "RECIPE",
       "text": "Crêpes au sarrasin bretonnes 🥞",
       "pageId": null,
       "groupId": null,
@@ -5036,7 +5036,7 @@
         "imageUrl": null,
         "videoUrl": null
       },
-      "visibility": "followers",
+      "visibility": "FOLLOWERS",
       "stats": {
         "reactions": 3,
         "comments": 0
@@ -5055,7 +5055,7 @@
       "authorId": {
         "$oid": "c194ef11ad3c427cb8af77f4"
       },
-      "type": "status",
+      "type": "STATUS",
       "text": "Tarte citron meringuée 🍋",
       "pageId": null,
       "groupId": null,
@@ -5063,7 +5063,7 @@
         "imageUrl": "/uploads/posts/68.jpg",
         "videoUrl": null
       },
-      "visibility": "followers",
+      "visibility": "FOLLOWERS",
       "stats": {
         "reactions": 3,
         "comments": 0
@@ -5082,7 +5082,7 @@
       "authorId": {
         "$oid": "7134e496cdc44d7b97a9402d"
       },
-      "type": "status",
+      "type": "STATUS",
       "text": "Tagine marocain 👌",
       "pageId": null,
       "groupId": null,
@@ -5090,7 +5090,7 @@
         "imageUrl": null,
         "videoUrl": null
       },
-      "visibility": "public",
+      "visibility": "PUBLIC",
       "stats": {
         "reactions": 3,
         "comments": 1
@@ -5109,7 +5109,7 @@
       "authorId": {
         "$oid": "7134e496cdc44d7b97a9402d"
       },
-      "type": "recipe",
+      "type": "RECIPE",
       "text": "Tarte citron meringuée 🍋",
       "pageId": null,
       "groupId": null,
@@ -5117,7 +5117,7 @@
         "imageUrl": "/uploads/posts/70.jpg",
         "videoUrl": null
       },
-      "visibility": "followers",
+      "visibility": "FOLLOWERS",
       "stats": {
         "reactions": 4,
         "comments": 0
@@ -5136,7 +5136,7 @@
       "authorId": {
         "$oid": "09ff2e11d2734f23828d38ff"
       },
-      "type": "status",
+      "type": "STATUS",
       "text": "Nouvelle recette de ramen 🍜",
       "pageId": null,
       "groupId": {
@@ -5146,7 +5146,7 @@
         "imageUrl": null,
         "videoUrl": null
       },
-      "visibility": "followers",
+      "visibility": "FOLLOWERS",
       "stats": {
         "reactions": 2,
         "comments": 0
@@ -5165,7 +5165,7 @@
       "authorId": {
         "$oid": "a14688743a574d4dba6f0288"
       },
-      "type": "recipe",
+      "type": "RECIPE",
       "text": "BBQ du dimanche 🔥",
       "pageId": {
         "$oid": "202c066b782f4a2a9a056ace"
@@ -5175,7 +5175,7 @@
         "imageUrl": "/uploads/posts/72.jpg",
         "videoUrl": null
       },
-      "visibility": "followers",
+      "visibility": "FOLLOWERS",
       "stats": {
         "reactions": 1,
         "comments": 0
@@ -5194,7 +5194,7 @@
       "authorId": {
         "$oid": "3816e0fe0fb5425b8c1c66b5"
       },
-      "type": "status",
+      "type": "STATUS",
       "text": "Café latte parfait ☕",
       "pageId": null,
       "groupId": null,
@@ -5202,7 +5202,7 @@
         "imageUrl": null,
         "videoUrl": null
       },
-      "visibility": "followers",
+      "visibility": "FOLLOWERS",
       "stats": {
         "reactions": 2,
         "comments": 1
@@ -5221,7 +5221,7 @@
       "authorId": {
         "$oid": "41ab5ef5c0eb4ab6b390e01f"
       },
-      "type": "recipe",
+      "type": "RECIPE",
       "text": "BBQ du dimanche 🔥",
       "pageId": null,
       "groupId": null,
@@ -5229,7 +5229,7 @@
         "imageUrl": null,
         "videoUrl": null
       },
-      "visibility": "followers",
+      "visibility": "FOLLOWERS",
       "stats": {
         "reactions": 2,
         "comments": 0
@@ -5248,7 +5248,7 @@
       "authorId": {
         "$oid": "16a47e7998a34f32bd88d747"
       },
-      "type": "recipe",
+      "type": "RECIPE",
       "text": "Burger smash double cheese 🍔",
       "pageId": null,
       "groupId": null,
@@ -5256,7 +5256,7 @@
         "imageUrl": null,
         "videoUrl": null
       },
-      "visibility": "public",
+      "visibility": "PUBLIC",
       "stats": {
         "reactions": 3,
         "comments": 0
@@ -5275,7 +5275,7 @@
       "authorId": {
         "$oid": "3816e0fe0fb5425b8c1c66b5"
       },
-      "type": "status",
+      "type": "STATUS",
       "text": "Tagine marocain 👌",
       "pageId": null,
       "groupId": null,
@@ -5283,7 +5283,7 @@
         "imageUrl": "/uploads/posts/76.jpg",
         "videoUrl": null
       },
-      "visibility": "public",
+      "visibility": "PUBLIC",
       "stats": {
         "reactions": 0,
         "comments": 0
@@ -5302,7 +5302,7 @@
       "authorId": {
         "$oid": "647af72fb026405ea67855d5"
       },
-      "type": "recipe",
+      "type": "RECIPE",
       "text": "BBQ du dimanche 🔥",
       "pageId": null,
       "groupId": {
@@ -5312,7 +5312,7 @@
         "imageUrl": "/uploads/posts/77.jpg",
         "videoUrl": null
       },
-      "visibility": "public",
+      "visibility": "PUBLIC",
       "stats": {
         "reactions": 0,
         "comments": 2
@@ -5331,7 +5331,7 @@
       "authorId": {
         "$oid": "9bdec5c8c4e64fd2814a01ea"
       },
-      "type": "recipe",
+      "type": "RECIPE",
       "text": "Nouvelle recette de ramen 🍜",
       "pageId": null,
       "groupId": {
@@ -5341,7 +5341,7 @@
         "imageUrl": null,
         "videoUrl": null
       },
-      "visibility": "public",
+      "visibility": "PUBLIC",
       "stats": {
         "reactions": 0,
         "comments": 7
@@ -5360,7 +5360,7 @@
       "authorId": {
         "$oid": "684528d8ee5346e8aa44723d"
       },
-      "type": "recipe",
+      "type": "RECIPE",
       "text": "Tagine marocain 👌",
       "pageId": null,
       "groupId": {
@@ -5370,7 +5370,7 @@
         "imageUrl": null,
         "videoUrl": null
       },
-      "visibility": "followers",
+      "visibility": "FOLLOWERS",
       "stats": {
         "reactions": 1,
         "comments": 0
@@ -5389,7 +5389,7 @@
       "authorId": {
         "$oid": "0988240d0e6847d2abf384fb"
       },
-      "type": "status",
+      "type": "STATUS",
       "text": "Brioche moelleuse maison 🍞",
       "pageId": null,
       "groupId": {
@@ -5399,7 +5399,7 @@
         "imageUrl": "/uploads/posts/80.jpg",
         "videoUrl": null
       },
-      "visibility": "public",
+      "visibility": "PUBLIC",
       "stats": {
         "reactions": 2,
         "comments": 2
@@ -5418,7 +5418,7 @@
       "authorId": {
         "$oid": "16a47e7998a34f32bd88d747"
       },
-      "type": "status",
+      "type": "STATUS",
       "text": "Burger smash double cheese 🍔",
       "pageId": null,
       "groupId": null,
@@ -5426,7 +5426,7 @@
         "imageUrl": "/uploads/posts/81.jpg",
         "videoUrl": null
       },
-      "visibility": "followers",
+      "visibility": "FOLLOWERS",
       "stats": {
         "reactions": 1,
         "comments": 1
@@ -5445,7 +5445,7 @@
       "authorId": {
         "$oid": "36625fc5031a4cc78374eaf8"
       },
-      "type": "recipe",
+      "type": "RECIPE",
       "text": "Crêpes au sarrasin bretonnes 🥞",
       "pageId": null,
       "groupId": {
@@ -5455,7 +5455,7 @@
         "imageUrl": null,
         "videoUrl": null
       },
-      "visibility": "public",
+      "visibility": "PUBLIC",
       "stats": {
         "reactions": 1,
         "comments": 0
@@ -5474,7 +5474,7 @@
       "authorId": {
         "$oid": "7cc94e9ac29a4101a02466aa"
       },
-      "type": "status",
+      "type": "STATUS",
       "text": "Tarte citron meringuée 🍋",
       "pageId": null,
       "groupId": null,
@@ -5482,7 +5482,7 @@
         "imageUrl": "/uploads/posts/83.jpg",
         "videoUrl": null
       },
-      "visibility": "public",
+      "visibility": "PUBLIC",
       "stats": {
         "reactions": 1,
         "comments": 1
@@ -5501,7 +5501,7 @@
       "authorId": {
         "$oid": "277b83705ccc42f1bfd9a1e6"
       },
-      "type": "recipe",
+      "type": "RECIPE",
       "text": "Nouvelle recette de ramen 🍜",
       "pageId": null,
       "groupId": null,
@@ -5509,7 +5509,7 @@
         "imageUrl": "/uploads/posts/84.jpg",
         "videoUrl": null
       },
-      "visibility": "public",
+      "visibility": "PUBLIC",
       "stats": {
         "reactions": 3,
         "comments": 2
@@ -5528,7 +5528,7 @@
       "authorId": {
         "$oid": "1eb7b1bd3afb4aa8b79b1dde"
       },
-      "type": "status",
+      "type": "STATUS",
       "text": "Carbonara authentique 🇮🇹",
       "pageId": null,
       "groupId": null,
@@ -5536,7 +5536,7 @@
         "imageUrl": "/uploads/posts/85.jpg",
         "videoUrl": null
       },
-      "visibility": "followers",
+      "visibility": "FOLLOWERS",
       "stats": {
         "reactions": 0,
         "comments": 3
@@ -5555,7 +5555,7 @@
       "authorId": {
         "$oid": "b708f5480a4846fb874da84a"
       },
-      "type": "status",
+      "type": "STATUS",
       "text": "Nouvelle recette de ramen 🍜",
       "pageId": null,
       "groupId": null,
@@ -5563,7 +5563,7 @@
         "imageUrl": "/uploads/posts/86.jpg",
         "videoUrl": null
       },
-      "visibility": "public",
+      "visibility": "PUBLIC",
       "stats": {
         "reactions": 1,
         "comments": 2
@@ -5582,7 +5582,7 @@
       "authorId": {
         "$oid": "4e75068c4d344fa5a0711804"
       },
-      "type": "status",
+      "type": "STATUS",
       "text": "Brioche moelleuse maison 🍞",
       "pageId": null,
       "groupId": null,
@@ -5590,7 +5590,7 @@
         "imageUrl": "/uploads/posts/87.jpg",
         "videoUrl": null
       },
-      "visibility": "public",
+      "visibility": "PUBLIC",
       "stats": {
         "reactions": 0,
         "comments": 0
@@ -5609,7 +5609,7 @@
       "authorId": {
         "$oid": "647af72fb026405ea67855d5"
       },
-      "type": "status",
+      "type": "STATUS",
       "text": "Tagine marocain 👌",
       "pageId": null,
       "groupId": null,
@@ -5617,7 +5617,7 @@
         "imageUrl": null,
         "videoUrl": null
       },
-      "visibility": "followers",
+      "visibility": "FOLLOWERS",
       "stats": {
         "reactions": 1,
         "comments": 1
@@ -5636,7 +5636,7 @@
       "authorId": {
         "$oid": "684528d8ee5346e8aa44723d"
       },
-      "type": "recipe",
+      "type": "RECIPE",
       "text": "Crêpes au sarrasin bretonnes 🥞",
       "pageId": null,
       "groupId": null,
@@ -5644,7 +5644,7 @@
         "imageUrl": "/uploads/posts/89.jpg",
         "videoUrl": null
       },
-      "visibility": "followers",
+      "visibility": "FOLLOWERS",
       "stats": {
         "reactions": 1,
         "comments": 1
@@ -5663,7 +5663,7 @@
       "authorId": {
         "$oid": "c4b3f501ee10475c8319a88f"
       },
-      "type": "recipe",
+      "type": "RECIPE",
       "text": "Café latte parfait ☕",
       "pageId": {
         "$oid": "94f2cbdec11a4fd9b6288214"
@@ -5675,7 +5675,7 @@
         "imageUrl": null,
         "videoUrl": null
       },
-      "visibility": "followers",
+      "visibility": "FOLLOWERS",
       "stats": {
         "reactions": 2,
         "comments": 2
@@ -5694,7 +5694,7 @@
       "authorId": {
         "$oid": "37798ba3ec7749b2bbfae0cf"
       },
-      "type": "status",
+      "type": "STATUS",
       "text": "Carbonara authentique 🇮🇹",
       "pageId": null,
       "groupId": {
@@ -5704,7 +5704,7 @@
         "imageUrl": "/uploads/posts/91.jpg",
         "videoUrl": null
       },
-      "visibility": "public",
+      "visibility": "PUBLIC",
       "stats": {
         "reactions": 0,
         "comments": 0
@@ -5723,7 +5723,7 @@
       "authorId": {
         "$oid": "684528d8ee5346e8aa44723d"
       },
-      "type": "recipe",
+      "type": "RECIPE",
       "text": "Burger smash double cheese 🍔",
       "pageId": null,
       "groupId": null,
@@ -5731,7 +5731,7 @@
         "imageUrl": null,
         "videoUrl": null
       },
-      "visibility": "followers",
+      "visibility": "FOLLOWERS",
       "stats": {
         "reactions": 1,
         "comments": 0
@@ -5750,7 +5750,7 @@
       "authorId": {
         "$oid": "21915e4882444b0b93122535"
       },
-      "type": "recipe",
+      "type": "RECIPE",
       "text": "Burger smash double cheese 🍔",
       "pageId": {
         "$oid": "1b5680c6a1564fd6a6695d69"
@@ -5760,7 +5760,7 @@
         "imageUrl": "/uploads/posts/93.jpg",
         "videoUrl": null
       },
-      "visibility": "followers",
+      "visibility": "FOLLOWERS",
       "stats": {
         "reactions": 2,
         "comments": 1
@@ -5779,7 +5779,7 @@
       "authorId": {
         "$oid": "746aece10cb94d2db6d84aae"
       },
-      "type": "status",
+      "type": "STATUS",
       "text": "Carbonara authentique 🇮🇹",
       "pageId": null,
       "groupId": null,
@@ -5787,7 +5787,7 @@
         "imageUrl": "/uploads/posts/94.jpg",
         "videoUrl": null
       },
-      "visibility": "public",
+      "visibility": "PUBLIC",
       "stats": {
         "reactions": 2,
         "comments": 1
@@ -5806,7 +5806,7 @@
       "authorId": {
         "$oid": "7134e496cdc44d7b97a9402d"
       },
-      "type": "recipe",
+      "type": "RECIPE",
       "text": "Café latte parfait ☕",
       "pageId": {
         "$oid": "cd680ec5e73649bbbbbab043"
@@ -5818,7 +5818,7 @@
         "imageUrl": "/uploads/posts/95.jpg",
         "videoUrl": null
       },
-      "visibility": "followers",
+      "visibility": "FOLLOWERS",
       "stats": {
         "reactions": 0,
         "comments": 0
@@ -5837,7 +5837,7 @@
       "authorId": {
         "$oid": "64d711d839814d79852659e6"
       },
-      "type": "status",
+      "type": "STATUS",
       "text": "Tarte citron meringuée 🍋",
       "pageId": null,
       "groupId": null,
@@ -5845,7 +5845,7 @@
         "imageUrl": null,
         "videoUrl": null
       },
-      "visibility": "followers",
+      "visibility": "FOLLOWERS",
       "stats": {
         "reactions": 2,
         "comments": 0
@@ -5864,7 +5864,7 @@
       "authorId": {
         "$oid": "7d00eb053bdc4ad3924edd8a"
       },
-      "type": "recipe",
+      "type": "RECIPE",
       "text": "Astuce levain 🥖",
       "pageId": null,
       "groupId": null,
@@ -5872,7 +5872,7 @@
         "imageUrl": null,
         "videoUrl": null
       },
-      "visibility": "followers",
+      "visibility": "FOLLOWERS",
       "stats": {
         "reactions": 1,
         "comments": 1
@@ -5891,7 +5891,7 @@
       "authorId": {
         "$oid": "02c695b7faec4a7fb63ad353"
       },
-      "type": "status",
+      "type": "STATUS",
       "text": "Tarte citron meringuée 🍋",
       "pageId": null,
       "groupId": null,
@@ -5899,7 +5899,7 @@
         "imageUrl": null,
         "videoUrl": null
       },
-      "visibility": "public",
+      "visibility": "PUBLIC",
       "stats": {
         "reactions": 2,
         "comments": 0
@@ -5918,7 +5918,7 @@
       "authorId": {
         "$oid": "2e759a0ae9364ec082113afc"
       },
-      "type": "recipe",
+      "type": "RECIPE",
       "text": "Crêpes au sarrasin bretonnes 🥞",
       "pageId": null,
       "groupId": {
@@ -5928,7 +5928,7 @@
         "imageUrl": "/uploads/posts/99.jpg",
         "videoUrl": null
       },
-      "visibility": "public",
+      "visibility": "PUBLIC",
       "stats": {
         "reactions": 4,
         "comments": 1
@@ -5947,7 +5947,7 @@
       "authorId": {
         "$oid": "9bdec5c8c4e64fd2814a01ea"
       },
-      "type": "status",
+      "type": "STATUS",
       "text": "Brioche moelleuse maison 🍞",
       "pageId": null,
       "groupId": null,
@@ -5955,7 +5955,7 @@
         "imageUrl": null,
         "videoUrl": null
       },
-      "visibility": "public",
+      "visibility": "PUBLIC",
       "stats": {
         "reactions": 0,
         "comments": 0
@@ -5974,7 +5974,7 @@
       "authorId": {
         "$oid": "a1c37576660d41649d044992"
       },
-      "type": "status",
+      "type": "STATUS",
       "text": "Burger smash double cheese 🍔",
       "pageId": null,
       "groupId": null,
@@ -5982,7 +5982,7 @@
         "imageUrl": "/uploads/posts/101.jpg",
         "videoUrl": null
       },
-      "visibility": "followers",
+      "visibility": "FOLLOWERS",
       "stats": {
         "reactions": 4,
         "comments": 0
@@ -6001,7 +6001,7 @@
       "authorId": {
         "$oid": "c4b3f501ee10475c8319a88f"
       },
-      "type": "recipe",
+      "type": "RECIPE",
       "text": "Tarte citron meringuée 🍋",
       "pageId": {
         "$oid": "8c60a34c77c049d0a6668901"
@@ -6013,7 +6013,7 @@
         "imageUrl": null,
         "videoUrl": null
       },
-      "visibility": "followers",
+      "visibility": "FOLLOWERS",
       "stats": {
         "reactions": 2,
         "comments": 2
@@ -6032,7 +6032,7 @@
       "authorId": {
         "$oid": "9b7825da3f4d41028306f526"
       },
-      "type": "recipe",
+      "type": "RECIPE",
       "text": "Astuce levain 🥖",
       "pageId": null,
       "groupId": null,
@@ -6040,7 +6040,7 @@
         "imageUrl": "/uploads/posts/103.jpg",
         "videoUrl": null
       },
-      "visibility": "followers",
+      "visibility": "FOLLOWERS",
       "stats": {
         "reactions": 3,
         "comments": 2
@@ -6059,7 +6059,7 @@
       "authorId": {
         "$oid": "f4faaefa525a450a9a2cefec"
       },
-      "type": "recipe",
+      "type": "RECIPE",
       "text": "BBQ du dimanche 🔥",
       "pageId": null,
       "groupId": null,
@@ -6067,7 +6067,7 @@
         "imageUrl": "/uploads/posts/104.jpg",
         "videoUrl": null
       },
-      "visibility": "followers",
+      "visibility": "FOLLOWERS",
       "stats": {
         "reactions": 3,
         "comments": 1
@@ -6086,7 +6086,7 @@
       "authorId": {
         "$oid": "a14688743a574d4dba6f0288"
       },
-      "type": "recipe",
+      "type": "RECIPE",
       "text": "Brioche moelleuse maison 🍞",
       "pageId": {
         "$oid": "94f2cbdec11a4fd9b6288214"
@@ -6096,7 +6096,7 @@
         "imageUrl": null,
         "videoUrl": null
       },
-      "visibility": "public",
+      "visibility": "PUBLIC",
       "stats": {
         "reactions": 2,
         "comments": 2
@@ -6115,7 +6115,7 @@
       "authorId": {
         "$oid": "7cc94e9ac29a4101a02466aa"
       },
-      "type": "recipe",
+      "type": "RECIPE",
       "text": "Burger smash double cheese 🍔",
       "pageId": null,
       "groupId": {
@@ -6125,7 +6125,7 @@
         "imageUrl": null,
         "videoUrl": null
       },
-      "visibility": "followers",
+      "visibility": "FOLLOWERS",
       "stats": {
         "reactions": 2,
         "comments": 3
@@ -6144,7 +6144,7 @@
       "authorId": {
         "$oid": "7e2d6fa937444b448e9d7557"
       },
-      "type": "recipe",
+      "type": "RECIPE",
       "text": "Café latte parfait ☕",
       "pageId": null,
       "groupId": null,
@@ -6152,7 +6152,7 @@
         "imageUrl": null,
         "videoUrl": null
       },
-      "visibility": "followers",
+      "visibility": "FOLLOWERS",
       "stats": {
         "reactions": 2,
         "comments": 1
@@ -6171,7 +6171,7 @@
       "authorId": {
         "$oid": "41ab5ef5c0eb4ab6b390e01f"
       },
-      "type": "recipe",
+      "type": "RECIPE",
       "text": "Tarte citron meringuée 🍋",
       "pageId": null,
       "groupId": null,
@@ -6179,7 +6179,7 @@
         "imageUrl": "/uploads/posts/108.jpg",
         "videoUrl": null
       },
-      "visibility": "public",
+      "visibility": "PUBLIC",
       "stats": {
         "reactions": 1,
         "comments": 0
@@ -6198,7 +6198,7 @@
       "authorId": {
         "$oid": "2eb13e9b44e84d7b878cd579"
       },
-      "type": "recipe",
+      "type": "RECIPE",
       "text": "Nouvelle recette de ramen 🍜",
       "pageId": {
         "$oid": "df0e507048f24874bb34ad17"
@@ -6208,7 +6208,7 @@
         "imageUrl": null,
         "videoUrl": null
       },
-      "visibility": "public",
+      "visibility": "PUBLIC",
       "stats": {
         "reactions": 1,
         "comments": 2
@@ -6227,7 +6227,7 @@
       "authorId": {
         "$oid": "7d00eb053bdc4ad3924edd8a"
       },
-      "type": "status",
+      "type": "STATUS",
       "text": "Burger smash double cheese 🍔",
       "pageId": null,
       "groupId": null,
@@ -6235,7 +6235,7 @@
         "imageUrl": "/uploads/posts/110.jpg",
         "videoUrl": null
       },
-      "visibility": "followers",
+      "visibility": "FOLLOWERS",
       "stats": {
         "reactions": 1,
         "comments": 0
@@ -6254,7 +6254,7 @@
       "authorId": {
         "$oid": "41cfa33594b64362a9d2191e"
       },
-      "type": "status",
+      "type": "STATUS",
       "text": "Brioche moelleuse maison 🍞",
       "pageId": null,
       "groupId": null,
@@ -6262,7 +6262,7 @@
         "imageUrl": null,
         "videoUrl": null
       },
-      "visibility": "followers",
+      "visibility": "FOLLOWERS",
       "stats": {
         "reactions": 1,
         "comments": 0
@@ -6281,7 +6281,7 @@
       "authorId": {
         "$oid": "428820f6977f4f1287b0e2de"
       },
-      "type": "status",
+      "type": "STATUS",
       "text": "Nouvelle recette de ramen 🍜",
       "pageId": {
         "$oid": "cd680ec5e73649bbbbbab043"
@@ -6293,7 +6293,7 @@
         "imageUrl": "/uploads/posts/112.jpg",
         "videoUrl": null
       },
-      "visibility": "followers",
+      "visibility": "FOLLOWERS",
       "stats": {
         "reactions": 4,
         "comments": 3
@@ -6312,7 +6312,7 @@
       "authorId": {
         "$oid": "16a47e7998a34f32bd88d747"
       },
-      "type": "recipe",
+      "type": "RECIPE",
       "text": "BBQ du dimanche 🔥",
       "pageId": null,
       "groupId": null,
@@ -6320,7 +6320,7 @@
         "imageUrl": null,
         "videoUrl": null
       },
-      "visibility": "public",
+      "visibility": "PUBLIC",
       "stats": {
         "reactions": 4,
         "comments": 0
@@ -6339,7 +6339,7 @@
       "authorId": {
         "$oid": "cfd83e665b134c7297240625"
       },
-      "type": "recipe",
+      "type": "RECIPE",
       "text": "Tagine marocain 👌",
       "pageId": null,
       "groupId": null,
@@ -6347,7 +6347,7 @@
         "imageUrl": null,
         "videoUrl": null
       },
-      "visibility": "followers",
+      "visibility": "FOLLOWERS",
       "stats": {
         "reactions": 3,
         "comments": 0
@@ -6366,7 +6366,7 @@
       "authorId": {
         "$oid": "0671102e1ae34e47b7444103"
       },
-      "type": "recipe",
+      "type": "RECIPE",
       "text": "Café latte parfait ☕",
       "pageId": null,
       "groupId": null,
@@ -6374,7 +6374,7 @@
         "imageUrl": null,
         "videoUrl": null
       },
-      "visibility": "followers",
+      "visibility": "FOLLOWERS",
       "stats": {
         "reactions": 0,
         "comments": 1
@@ -6393,7 +6393,7 @@
       "authorId": {
         "$oid": "b88d5a8b44f140d387b4dd8a"
       },
-      "type": "status",
+      "type": "STATUS",
       "text": "Crêpes au sarrasin bretonnes 🥞",
       "pageId": null,
       "groupId": {
@@ -6403,7 +6403,7 @@
         "imageUrl": null,
         "videoUrl": null
       },
-      "visibility": "public",
+      "visibility": "PUBLIC",
       "stats": {
         "reactions": 3,
         "comments": 1
@@ -6422,7 +6422,7 @@
       "authorId": {
         "$oid": "7134e496cdc44d7b97a9402d"
       },
-      "type": "recipe",
+      "type": "RECIPE",
       "text": "Tagine marocain 👌",
       "pageId": null,
       "groupId": null,
@@ -6430,7 +6430,7 @@
         "imageUrl": "/uploads/posts/117.jpg",
         "videoUrl": null
       },
-      "visibility": "followers",
+      "visibility": "FOLLOWERS",
       "stats": {
         "reactions": 3,
         "comments": 3
@@ -6449,7 +6449,7 @@
       "authorId": {
         "$oid": "14b2f125f4b04314b53af5df"
       },
-      "type": "status",
+      "type": "STATUS",
       "text": "Astuce levain 🥖",
       "pageId": null,
       "groupId": null,
@@ -6457,7 +6457,7 @@
         "imageUrl": "/uploads/posts/118.jpg",
         "videoUrl": null
       },
-      "visibility": "public",
+      "visibility": "PUBLIC",
       "stats": {
         "reactions": 1,
         "comments": 0
@@ -6476,7 +6476,7 @@
       "authorId": {
         "$oid": "32fa6abaa66e4e41821fe54f"
       },
-      "type": "status",
+      "type": "STATUS",
       "text": "Nouvelle recette de ramen 🍜",
       "pageId": null,
       "groupId": {
@@ -6486,7 +6486,7 @@
         "imageUrl": null,
         "videoUrl": null
       },
-      "visibility": "followers",
+      "visibility": "FOLLOWERS",
       "stats": {
         "reactions": 2,
         "comments": 0
@@ -6505,7 +6505,7 @@
       "authorId": {
         "$oid": "b88d5a8b44f140d387b4dd8a"
       },
-      "type": "recipe",
+      "type": "RECIPE",
       "text": "BBQ du dimanche 🔥",
       "pageId": null,
       "groupId": null,
@@ -6513,7 +6513,7 @@
         "imageUrl": null,
         "videoUrl": null
       },
-      "visibility": "followers",
+      "visibility": "FOLLOWERS",
       "stats": {
         "reactions": 2,
         "comments": 0
@@ -6532,7 +6532,7 @@
       "authorId": {
         "$oid": "b88d5a8b44f140d387b4dd8a"
       },
-      "type": "status",
+      "type": "STATUS",
       "text": "BBQ du dimanche 🔥",
       "pageId": null,
       "groupId": null,
@@ -6540,7 +6540,7 @@
         "imageUrl": "/uploads/posts/121.jpg",
         "videoUrl": null
       },
-      "visibility": "followers",
+      "visibility": "FOLLOWERS",
       "stats": {
         "reactions": 3,
         "comments": 0
@@ -6559,7 +6559,7 @@
       "authorId": {
         "$oid": "746aece10cb94d2db6d84aae"
       },
-      "type": "status",
+      "type": "STATUS",
       "text": "BBQ du dimanche 🔥",
       "pageId": null,
       "groupId": null,
@@ -6567,7 +6567,7 @@
         "imageUrl": null,
         "videoUrl": null
       },
-      "visibility": "public",
+      "visibility": "PUBLIC",
       "stats": {
         "reactions": 1,
         "comments": 1
@@ -6586,7 +6586,7 @@
       "authorId": {
         "$oid": "c20a2a6a94be492e9304b73b"
       },
-      "type": "status",
+      "type": "STATUS",
       "text": "Brioche moelleuse maison 🍞",
       "pageId": null,
       "groupId": {
@@ -6596,7 +6596,7 @@
         "imageUrl": null,
         "videoUrl": null
       },
-      "visibility": "public",
+      "visibility": "PUBLIC",
       "stats": {
         "reactions": 2,
         "comments": 0
@@ -6615,7 +6615,7 @@
       "authorId": {
         "$oid": "0671102e1ae34e47b7444103"
       },
-      "type": "status",
+      "type": "STATUS",
       "text": "BBQ du dimanche 🔥",
       "pageId": null,
       "groupId": null,
@@ -6623,7 +6623,7 @@
         "imageUrl": "/uploads/posts/124.jpg",
         "videoUrl": null
       },
-      "visibility": "followers",
+      "visibility": "FOLLOWERS",
       "stats": {
         "reactions": 3,
         "comments": 0
@@ -6642,7 +6642,7 @@
       "authorId": {
         "$oid": "21915e4882444b0b93122535"
       },
-      "type": "recipe",
+      "type": "RECIPE",
       "text": "Carbonara authentique 🇮🇹",
       "pageId": {
         "$oid": "c79d0108687c42b6a535703b"
@@ -6652,7 +6652,7 @@
         "imageUrl": "/uploads/posts/125.jpg",
         "videoUrl": null
       },
-      "visibility": "public",
+      "visibility": "PUBLIC",
       "stats": {
         "reactions": 1,
         "comments": 0
@@ -6671,7 +6671,7 @@
       "authorId": {
         "$oid": "00c8adc33f834973b0eeae29"
       },
-      "type": "recipe",
+      "type": "RECIPE",
       "text": "Burger smash double cheese 🍔",
       "pageId": null,
       "groupId": {
@@ -6681,7 +6681,7 @@
         "imageUrl": null,
         "videoUrl": null
       },
-      "visibility": "public",
+      "visibility": "PUBLIC",
       "stats": {
         "reactions": 4,
         "comments": 0
@@ -6700,7 +6700,7 @@
       "authorId": {
         "$oid": "2eb13e9b44e84d7b878cd579"
       },
-      "type": "recipe",
+      "type": "RECIPE",
       "text": "Astuce levain 🥖",
       "pageId": null,
       "groupId": null,
@@ -6708,7 +6708,7 @@
         "imageUrl": "/uploads/posts/127.jpg",
         "videoUrl": null
       },
-      "visibility": "public",
+      "visibility": "PUBLIC",
       "stats": {
         "reactions": 0,
         "comments": 1
@@ -6727,7 +6727,7 @@
       "authorId": {
         "$oid": "09ff2e11d2734f23828d38ff"
       },
-      "type": "recipe",
+      "type": "RECIPE",
       "text": "Tarte citron meringuée 🍋",
       "pageId": null,
       "groupId": null,
@@ -6735,7 +6735,7 @@
         "imageUrl": null,
         "videoUrl": null
       },
-      "visibility": "followers",
+      "visibility": "FOLLOWERS",
       "stats": {
         "reactions": 2,
         "comments": 0
@@ -6754,7 +6754,7 @@
       "authorId": {
         "$oid": "24406568762d433194528e40"
       },
-      "type": "status",
+      "type": "STATUS",
       "text": "Tarte citron meringuée 🍋",
       "pageId": null,
       "groupId": null,
@@ -6762,7 +6762,7 @@
         "imageUrl": "/uploads/posts/129.jpg",
         "videoUrl": null
       },
-      "visibility": "followers",
+      "visibility": "FOLLOWERS",
       "stats": {
         "reactions": 3,
         "comments": 0
@@ -6781,7 +6781,7 @@
       "authorId": {
         "$oid": "f7b26e93056b4735a741f397"
       },
-      "type": "recipe",
+      "type": "RECIPE",
       "text": "Brioche moelleuse maison 🍞",
       "pageId": {
         "$oid": "8c60a34c77c049d0a6668901"
@@ -6791,7 +6791,7 @@
         "imageUrl": "/uploads/posts/130.jpg",
         "videoUrl": null
       },
-      "visibility": "public",
+      "visibility": "PUBLIC",
       "stats": {
         "reactions": 6,
         "comments": 1
@@ -6810,7 +6810,7 @@
       "authorId": {
         "$oid": "9a8c89bb5ed443a78ba6662e"
       },
-      "type": "status",
+      "type": "STATUS",
       "text": "Tarte citron meringuée 🍋",
       "pageId": null,
       "groupId": null,
@@ -6818,7 +6818,7 @@
         "imageUrl": null,
         "videoUrl": null
       },
-      "visibility": "followers",
+      "visibility": "FOLLOWERS",
       "stats": {
         "reactions": 2,
         "comments": 3
@@ -6837,7 +6837,7 @@
       "authorId": {
         "$oid": "79a3b9d3af5041de8a20c902"
       },
-      "type": "recipe",
+      "type": "RECIPE",
       "text": "Astuce levain 🥖",
       "pageId": {
         "$oid": "a03fdcad2e4a4555bbb17bb5"
@@ -6849,7 +6849,7 @@
         "imageUrl": "/uploads/posts/132.jpg",
         "videoUrl": null
       },
-      "visibility": "public",
+      "visibility": "PUBLIC",
       "stats": {
         "reactions": 1,
         "comments": 1
@@ -6868,7 +6868,7 @@
       "authorId": {
         "$oid": "2e759a0ae9364ec082113afc"
       },
-      "type": "recipe",
+      "type": "RECIPE",
       "text": "BBQ du dimanche 🔥",
       "pageId": null,
       "groupId": null,
@@ -6876,7 +6876,7 @@
         "imageUrl": null,
         "videoUrl": null
       },
-      "visibility": "public",
+      "visibility": "PUBLIC",
       "stats": {
         "reactions": 0,
         "comments": 0
@@ -6895,7 +6895,7 @@
       "authorId": {
         "$oid": "7cc94e9ac29a4101a02466aa"
       },
-      "type": "status",
+      "type": "STATUS",
       "text": "BBQ du dimanche 🔥",
       "pageId": null,
       "groupId": null,
@@ -6903,7 +6903,7 @@
         "imageUrl": "/uploads/posts/134.jpg",
         "videoUrl": null
       },
-      "visibility": "public",
+      "visibility": "PUBLIC",
       "stats": {
         "reactions": 2,
         "comments": 1
@@ -6922,7 +6922,7 @@
       "authorId": {
         "$oid": "c20a2a6a94be492e9304b73b"
       },
-      "type": "recipe",
+      "type": "RECIPE",
       "text": "Brioche moelleuse maison 🍞",
       "pageId": null,
       "groupId": null,
@@ -6930,7 +6930,7 @@
         "imageUrl": "/uploads/posts/135.jpg",
         "videoUrl": null
       },
-      "visibility": "followers",
+      "visibility": "FOLLOWERS",
       "stats": {
         "reactions": 3,
         "comments": 1
@@ -6949,7 +6949,7 @@
       "authorId": {
         "$oid": "41ab5ef5c0eb4ab6b390e01f"
       },
-      "type": "status",
+      "type": "STATUS",
       "text": "Brioche moelleuse maison 🍞",
       "pageId": null,
       "groupId": null,
@@ -6957,7 +6957,7 @@
         "imageUrl": null,
         "videoUrl": null
       },
-      "visibility": "public",
+      "visibility": "PUBLIC",
       "stats": {
         "reactions": 3,
         "comments": 1
@@ -6976,7 +6976,7 @@
       "authorId": {
         "$oid": "7d00eb053bdc4ad3924edd8a"
       },
-      "type": "status",
+      "type": "STATUS",
       "text": "Café latte parfait ☕",
       "pageId": null,
       "groupId": null,
@@ -6984,7 +6984,7 @@
         "imageUrl": "/uploads/posts/137.jpg",
         "videoUrl": null
       },
-      "visibility": "public",
+      "visibility": "PUBLIC",
       "stats": {
         "reactions": 1,
         "comments": 1
@@ -7003,7 +7003,7 @@
       "authorId": {
         "$oid": "ba3312219d7d443cafa6b05b"
       },
-      "type": "status",
+      "type": "STATUS",
       "text": "Carbonara authentique 🇮🇹",
       "pageId": null,
       "groupId": null,
@@ -7011,7 +7011,7 @@
         "imageUrl": null,
         "videoUrl": null
       },
-      "visibility": "public",
+      "visibility": "PUBLIC",
       "stats": {
         "reactions": 2,
         "comments": 1
@@ -7030,7 +7030,7 @@
       "authorId": {
         "$oid": "cfd4359b15d94e09ab9cea32"
       },
-      "type": "status",
+      "type": "STATUS",
       "text": "BBQ du dimanche 🔥",
       "pageId": null,
       "groupId": {
@@ -7040,7 +7040,7 @@
         "imageUrl": null,
         "videoUrl": null
       },
-      "visibility": "public",
+      "visibility": "PUBLIC",
       "stats": {
         "reactions": 1,
         "comments": 0
@@ -7059,7 +7059,7 @@
       "authorId": {
         "$oid": "36625fc5031a4cc78374eaf8"
       },
-      "type": "recipe",
+      "type": "RECIPE",
       "text": "Brioche moelleuse maison 🍞",
       "pageId": null,
       "groupId": null,
@@ -7067,7 +7067,7 @@
         "imageUrl": null,
         "videoUrl": null
       },
-      "visibility": "public",
+      "visibility": "PUBLIC",
       "stats": {
         "reactions": 3,
         "comments": 0
@@ -7086,7 +7086,7 @@
       "authorId": {
         "$oid": "01c1b12fc46a4ce9a539f78f"
       },
-      "type": "recipe",
+      "type": "RECIPE",
       "text": "Brioche moelleuse maison 🍞",
       "pageId": null,
       "groupId": null,
@@ -7094,7 +7094,7 @@
         "imageUrl": "/uploads/posts/141.jpg",
         "videoUrl": null
       },
-      "visibility": "followers",
+      "visibility": "FOLLOWERS",
       "stats": {
         "reactions": 2,
         "comments": 2
@@ -7113,7 +7113,7 @@
       "authorId": {
         "$oid": "f4faaefa525a450a9a2cefec"
       },
-      "type": "recipe",
+      "type": "RECIPE",
       "text": "Brioche moelleuse maison 🍞",
       "pageId": null,
       "groupId": {
@@ -7123,7 +7123,7 @@
         "imageUrl": "/uploads/posts/142.jpg",
         "videoUrl": null
       },
-      "visibility": "followers",
+      "visibility": "FOLLOWERS",
       "stats": {
         "reactions": 1,
         "comments": 2
@@ -7142,7 +7142,7 @@
       "authorId": {
         "$oid": "efcb960f8e764143b81aa311"
       },
-      "type": "recipe",
+      "type": "RECIPE",
       "text": "Burger smash double cheese 🍔",
       "pageId": null,
       "groupId": null,
@@ -7150,7 +7150,7 @@
         "imageUrl": "/uploads/posts/143.jpg",
         "videoUrl": null
       },
-      "visibility": "public",
+      "visibility": "PUBLIC",
       "stats": {
         "reactions": 1,
         "comments": 0
@@ -7169,7 +7169,7 @@
       "authorId": {
         "$oid": "b9b6041aab6d412a835a1d61"
       },
-      "type": "status",
+      "type": "STATUS",
       "text": "Tagine marocain 👌",
       "pageId": null,
       "groupId": {
@@ -7179,7 +7179,7 @@
         "imageUrl": null,
         "videoUrl": null
       },
-      "visibility": "public",
+      "visibility": "PUBLIC",
       "stats": {
         "reactions": 2,
         "comments": 0
@@ -7198,7 +7198,7 @@
       "authorId": {
         "$oid": "1a4a5f6eb2b24dc29bf93616"
       },
-      "type": "recipe",
+      "type": "RECIPE",
       "text": "Tagine marocain 👌",
       "pageId": null,
       "groupId": {
@@ -7208,7 +7208,7 @@
         "imageUrl": null,
         "videoUrl": null
       },
-      "visibility": "public",
+      "visibility": "PUBLIC",
       "stats": {
         "reactions": 2,
         "comments": 1
@@ -7227,7 +7227,7 @@
       "authorId": {
         "$oid": "24406568762d433194528e40"
       },
-      "type": "recipe",
+      "type": "RECIPE",
       "text": "Crêpes au sarrasin bretonnes 🥞",
       "pageId": null,
       "groupId": null,
@@ -7235,7 +7235,7 @@
         "imageUrl": null,
         "videoUrl": null
       },
-      "visibility": "public",
+      "visibility": "PUBLIC",
       "stats": {
         "reactions": 3,
         "comments": 2
@@ -7254,7 +7254,7 @@
       "authorId": {
         "$oid": "a1c37576660d41649d044992"
       },
-      "type": "recipe",
+      "type": "RECIPE",
       "text": "Burger smash double cheese 🍔",
       "pageId": null,
       "groupId": null,
@@ -7262,7 +7262,7 @@
         "imageUrl": null,
         "videoUrl": null
       },
-      "visibility": "public",
+      "visibility": "PUBLIC",
       "stats": {
         "reactions": 4,
         "comments": 0
@@ -7281,7 +7281,7 @@
       "authorId": {
         "$oid": "a1c37576660d41649d044992"
       },
-      "type": "recipe",
+      "type": "RECIPE",
       "text": "BBQ du dimanche 🔥",
       "pageId": null,
       "groupId": null,
@@ -7289,7 +7289,7 @@
         "imageUrl": null,
         "videoUrl": null
       },
-      "visibility": "public",
+      "visibility": "PUBLIC",
       "stats": {
         "reactions": 6,
         "comments": 0
@@ -7308,7 +7308,7 @@
       "authorId": {
         "$oid": "b903b4e3163c492baec3347f"
       },
-      "type": "recipe",
+      "type": "RECIPE",
       "text": "Nouvelle recette de ramen 🍜",
       "pageId": null,
       "groupId": null,
@@ -7316,7 +7316,7 @@
         "imageUrl": "/uploads/posts/149.jpg",
         "videoUrl": null
       },
-      "visibility": "followers",
+      "visibility": "FOLLOWERS",
       "stats": {
         "reactions": 1,
         "comments": 0
@@ -7335,7 +7335,7 @@
       "authorId": {
         "$oid": "75930977970141868dcd66d2"
       },
-      "type": "recipe",
+      "type": "RECIPE",
       "text": "Astuce levain 🥖",
       "pageId": null,
       "groupId": {
@@ -7345,7 +7345,7 @@
         "imageUrl": "/uploads/posts/150.jpg",
         "videoUrl": null
       },
-      "visibility": "followers",
+      "visibility": "FOLLOWERS",
       "stats": {
         "reactions": 0,
         "comments": 1
@@ -7364,7 +7364,7 @@
       "authorId": {
         "$oid": "cfd4359b15d94e09ab9cea32"
       },
-      "type": "recipe",
+      "type": "RECIPE",
       "text": "Brioche moelleuse maison 🍞",
       "pageId": null,
       "groupId": {
@@ -7374,7 +7374,7 @@
         "imageUrl": "/uploads/posts/151.jpg",
         "videoUrl": null
       },
-      "visibility": "public",
+      "visibility": "PUBLIC",
       "stats": {
         "reactions": 2,
         "comments": 0
@@ -7393,7 +7393,7 @@
       "authorId": {
         "$oid": "97e92ce36d594a90a9a04a36"
       },
-      "type": "recipe",
+      "type": "RECIPE",
       "text": "Tagine marocain 👌",
       "pageId": null,
       "groupId": null,
@@ -7401,7 +7401,7 @@
         "imageUrl": null,
         "videoUrl": null
       },
-      "visibility": "public",
+      "visibility": "PUBLIC",
       "stats": {
         "reactions": 5,
         "comments": 3
@@ -7420,7 +7420,7 @@
       "authorId": {
         "$oid": "4e75068c4d344fa5a0711804"
       },
-      "type": "recipe",
+      "type": "RECIPE",
       "text": "Carbonara authentique 🇮🇹",
       "pageId": {
         "$oid": "c79d0108687c42b6a535703b"
@@ -7432,7 +7432,7 @@
         "imageUrl": null,
         "videoUrl": null
       },
-      "visibility": "public",
+      "visibility": "PUBLIC",
       "stats": {
         "reactions": 2,
         "comments": 1
@@ -7451,7 +7451,7 @@
       "authorId": {
         "$oid": "f7b26e93056b4735a741f397"
       },
-      "type": "recipe",
+      "type": "RECIPE",
       "text": "Café latte parfait ☕",
       "pageId": null,
       "groupId": null,
@@ -7459,7 +7459,7 @@
         "imageUrl": "/uploads/posts/154.jpg",
         "videoUrl": null
       },
-      "visibility": "public",
+      "visibility": "PUBLIC",
       "stats": {
         "reactions": 2,
         "comments": 2
@@ -7478,7 +7478,7 @@
       "authorId": {
         "$oid": "684528d8ee5346e8aa44723d"
       },
-      "type": "status",
+      "type": "STATUS",
       "text": "Burger smash double cheese 🍔",
       "pageId": null,
       "groupId": null,
@@ -7486,7 +7486,7 @@
         "imageUrl": null,
         "videoUrl": null
       },
-      "visibility": "followers",
+      "visibility": "FOLLOWERS",
       "stats": {
         "reactions": 3,
         "comments": 0
@@ -7505,7 +7505,7 @@
       "authorId": {
         "$oid": "b0101b848831435d861bbd01"
       },
-      "type": "recipe",
+      "type": "RECIPE",
       "text": "Carbonara authentique 🇮🇹",
       "pageId": null,
       "groupId": null,
@@ -7513,7 +7513,7 @@
         "imageUrl": null,
         "videoUrl": null
       },
-      "visibility": "followers",
+      "visibility": "FOLLOWERS",
       "stats": {
         "reactions": 2,
         "comments": 1
@@ -7532,7 +7532,7 @@
       "authorId": {
         "$oid": "cfd83e665b134c7297240625"
       },
-      "type": "status",
+      "type": "STATUS",
       "text": "Brioche moelleuse maison 🍞",
       "pageId": null,
       "groupId": null,
@@ -7540,7 +7540,7 @@
         "imageUrl": null,
         "videoUrl": null
       },
-      "visibility": "public",
+      "visibility": "PUBLIC",
       "stats": {
         "reactions": 2,
         "comments": 1
@@ -7559,7 +7559,7 @@
       "authorId": {
         "$oid": "038b08ec168a44e4bd3989b6"
       },
-      "type": "status",
+      "type": "STATUS",
       "text": "Tarte citron meringuée 🍋",
       "pageId": {
         "$oid": "94f2cbdec11a4fd9b6288214"
@@ -7569,7 +7569,7 @@
         "imageUrl": "/uploads/posts/158.jpg",
         "videoUrl": null
       },
-      "visibility": "followers",
+      "visibility": "FOLLOWERS",
       "stats": {
         "reactions": 0,
         "comments": 1
@@ -7588,7 +7588,7 @@
       "authorId": {
         "$oid": "5d642cdcc56d4db4b70a00eb"
       },
-      "type": "recipe",
+      "type": "RECIPE",
       "text": "Café latte parfait ☕",
       "pageId": null,
       "groupId": {
@@ -7598,7 +7598,7 @@
         "imageUrl": "/uploads/posts/159.jpg",
         "videoUrl": null
       },
-      "visibility": "followers",
+      "visibility": "FOLLOWERS",
       "stats": {
         "reactions": 2,
         "comments": 1
@@ -7617,7 +7617,7 @@
       "authorId": {
         "$oid": "2e759a0ae9364ec082113afc"
       },
-      "type": "recipe",
+      "type": "RECIPE",
       "text": "Tarte citron meringuée 🍋",
       "pageId": null,
       "groupId": null,
@@ -7625,7 +7625,7 @@
         "imageUrl": null,
         "videoUrl": null
       },
-      "visibility": "followers",
+      "visibility": "FOLLOWERS",
       "stats": {
         "reactions": 2,
         "comments": 2
@@ -7644,7 +7644,7 @@
       "authorId": {
         "$oid": "277b83705ccc42f1bfd9a1e6"
       },
-      "type": "recipe",
+      "type": "RECIPE",
       "text": "Astuce levain 🥖",
       "pageId": {
         "$oid": "8c60a34c77c049d0a6668901"
@@ -7654,7 +7654,7 @@
         "imageUrl": "/uploads/posts/161.jpg",
         "videoUrl": null
       },
-      "visibility": "public",
+      "visibility": "PUBLIC",
       "stats": {
         "reactions": 0,
         "comments": 2
@@ -7673,7 +7673,7 @@
       "authorId": {
         "$oid": "b0101b848831435d861bbd01"
       },
-      "type": "status",
+      "type": "STATUS",
       "text": "Tarte citron meringuée 🍋",
       "pageId": null,
       "groupId": null,
@@ -7681,7 +7681,7 @@
         "imageUrl": "/uploads/posts/162.jpg",
         "videoUrl": null
       },
-      "visibility": "public",
+      "visibility": "PUBLIC",
       "stats": {
         "reactions": 2,
         "comments": 3
@@ -7700,7 +7700,7 @@
       "authorId": {
         "$oid": "684528d8ee5346e8aa44723d"
       },
-      "type": "recipe",
+      "type": "RECIPE",
       "text": "Café latte parfait ☕",
       "pageId": null,
       "groupId": null,
@@ -7708,7 +7708,7 @@
         "imageUrl": "/uploads/posts/163.jpg",
         "videoUrl": null
       },
-      "visibility": "followers",
+      "visibility": "FOLLOWERS",
       "stats": {
         "reactions": 1,
         "comments": 1
@@ -7727,7 +7727,7 @@
       "authorId": {
         "$oid": "00c8adc33f834973b0eeae29"
       },
-      "type": "status",
+      "type": "STATUS",
       "text": "Nouvelle recette de ramen 🍜",
       "pageId": {
         "$oid": "1b5680c6a1564fd6a6695d69"
@@ -7737,7 +7737,7 @@
         "imageUrl": null,
         "videoUrl": null
       },
-      "visibility": "followers",
+      "visibility": "FOLLOWERS",
       "stats": {
         "reactions": 1,
         "comments": 0
@@ -7756,7 +7756,7 @@
       "authorId": {
         "$oid": "ff17a05d7fcc4f1aa1c9f626"
       },
-      "type": "status",
+      "type": "STATUS",
       "text": "Café latte parfait ☕",
       "pageId": null,
       "groupId": null,
@@ -7764,7 +7764,7 @@
         "imageUrl": null,
         "videoUrl": null
       },
-      "visibility": "followers",
+      "visibility": "FOLLOWERS",
       "stats": {
         "reactions": 5,
         "comments": 2
@@ -7783,7 +7783,7 @@
       "authorId": {
         "$oid": "41ab5ef5c0eb4ab6b390e01f"
       },
-      "type": "recipe",
+      "type": "RECIPE",
       "text": "Tarte citron meringuée 🍋",
       "pageId": null,
       "groupId": {
@@ -7793,7 +7793,7 @@
         "imageUrl": null,
         "videoUrl": null
       },
-      "visibility": "followers",
+      "visibility": "FOLLOWERS",
       "stats": {
         "reactions": 1,
         "comments": 0
@@ -7812,7 +7812,7 @@
       "authorId": {
         "$oid": "428820f6977f4f1287b0e2de"
       },
-      "type": "recipe",
+      "type": "RECIPE",
       "text": "Café latte parfait ☕",
       "pageId": null,
       "groupId": null,
@@ -7820,7 +7820,7 @@
         "imageUrl": null,
         "videoUrl": null
       },
-      "visibility": "public",
+      "visibility": "PUBLIC",
       "stats": {
         "reactions": 3,
         "comments": 1
@@ -7839,7 +7839,7 @@
       "authorId": {
         "$oid": "24406568762d433194528e40"
       },
-      "type": "status",
+      "type": "STATUS",
       "text": "Nouvelle recette de ramen 🍜",
       "pageId": null,
       "groupId": null,
@@ -7847,7 +7847,7 @@
         "imageUrl": "/uploads/posts/168.jpg",
         "videoUrl": null
       },
-      "visibility": "public",
+      "visibility": "PUBLIC",
       "stats": {
         "reactions": 3,
         "comments": 1
@@ -7866,7 +7866,7 @@
       "authorId": {
         "$oid": "00c8adc33f834973b0eeae29"
       },
-      "type": "status",
+      "type": "STATUS",
       "text": "Burger smash double cheese 🍔",
       "pageId": null,
       "groupId": null,
@@ -7874,7 +7874,7 @@
         "imageUrl": "/uploads/posts/169.jpg",
         "videoUrl": null
       },
-      "visibility": "followers",
+      "visibility": "FOLLOWERS",
       "stats": {
         "reactions": 1,
         "comments": 3
@@ -7893,7 +7893,7 @@
       "authorId": {
         "$oid": "c20a2a6a94be492e9304b73b"
       },
-      "type": "recipe",
+      "type": "RECIPE",
       "text": "Burger smash double cheese 🍔",
       "pageId": {
         "$oid": "94f2cbdec11a4fd9b6288214"
@@ -7903,7 +7903,7 @@
         "imageUrl": "/uploads/posts/170.jpg",
         "videoUrl": null
       },
-      "visibility": "followers",
+      "visibility": "FOLLOWERS",
       "stats": {
         "reactions": 4,
         "comments": 1
@@ -7922,7 +7922,7 @@
       "authorId": {
         "$oid": "0671102e1ae34e47b7444103"
       },
-      "type": "status",
+      "type": "STATUS",
       "text": "Tagine marocain 👌",
       "pageId": null,
       "groupId": {
@@ -7932,7 +7932,7 @@
         "imageUrl": "/uploads/posts/171.jpg",
         "videoUrl": null
       },
-      "visibility": "public",
+      "visibility": "PUBLIC",
       "stats": {
         "reactions": 3,
         "comments": 2
@@ -7951,7 +7951,7 @@
       "authorId": {
         "$oid": "c20a2a6a94be492e9304b73b"
       },
-      "type": "recipe",
+      "type": "RECIPE",
       "text": "Crêpes au sarrasin bretonnes 🥞",
       "pageId": null,
       "groupId": {
@@ -7961,7 +7961,7 @@
         "imageUrl": "/uploads/posts/172.jpg",
         "videoUrl": null
       },
-      "visibility": "followers",
+      "visibility": "FOLLOWERS",
       "stats": {
         "reactions": 2,
         "comments": 1
@@ -7980,7 +7980,7 @@
       "authorId": {
         "$oid": "36625fc5031a4cc78374eaf8"
       },
-      "type": "recipe",
+      "type": "RECIPE",
       "text": "Astuce levain 🥖",
       "pageId": {
         "$oid": "cf3d4048001c4138bd414edd"
@@ -7990,7 +7990,7 @@
         "imageUrl": null,
         "videoUrl": null
       },
-      "visibility": "followers",
+      "visibility": "FOLLOWERS",
       "stats": {
         "reactions": 3,
         "comments": 1
@@ -8009,7 +8009,7 @@
       "authorId": {
         "$oid": "01c1b12fc46a4ce9a539f78f"
       },
-      "type": "status",
+      "type": "STATUS",
       "text": "Burger smash double cheese 🍔",
       "pageId": null,
       "groupId": null,
@@ -8017,7 +8017,7 @@
         "imageUrl": null,
         "videoUrl": null
       },
-      "visibility": "public",
+      "visibility": "PUBLIC",
       "stats": {
         "reactions": 3,
         "comments": 0
@@ -8036,7 +8036,7 @@
       "authorId": {
         "$oid": "09ff2e11d2734f23828d38ff"
       },
-      "type": "recipe",
+      "type": "RECIPE",
       "text": "Astuce levain 🥖",
       "pageId": null,
       "groupId": null,
@@ -8044,7 +8044,7 @@
         "imageUrl": "/uploads/posts/175.jpg",
         "videoUrl": null
       },
-      "visibility": "public",
+      "visibility": "PUBLIC",
       "stats": {
         "reactions": 0,
         "comments": 0
@@ -8063,7 +8063,7 @@
       "authorId": {
         "$oid": "b0101b848831435d861bbd01"
       },
-      "type": "recipe",
+      "type": "RECIPE",
       "text": "Carbonara authentique 🇮🇹",
       "pageId": null,
       "groupId": null,
@@ -8071,7 +8071,7 @@
         "imageUrl": "/uploads/posts/176.jpg",
         "videoUrl": null
       },
-      "visibility": "public",
+      "visibility": "PUBLIC",
       "stats": {
         "reactions": 4,
         "comments": 1
@@ -8090,7 +8090,7 @@
       "authorId": {
         "$oid": "4e75068c4d344fa5a0711804"
       },
-      "type": "recipe",
+      "type": "RECIPE",
       "text": "BBQ du dimanche 🔥",
       "pageId": {
         "$oid": "11ce11d32a03410a8b830e80"
@@ -8100,7 +8100,7 @@
         "imageUrl": "/uploads/posts/177.jpg",
         "videoUrl": null
       },
-      "visibility": "followers",
+      "visibility": "FOLLOWERS",
       "stats": {
         "reactions": 3,
         "comments": 0
@@ -8119,7 +8119,7 @@
       "authorId": {
         "$oid": "9b7825da3f4d41028306f526"
       },
-      "type": "recipe",
+      "type": "RECIPE",
       "text": "BBQ du dimanche 🔥",
       "pageId": null,
       "groupId": {
@@ -8129,7 +8129,7 @@
         "imageUrl": null,
         "videoUrl": null
       },
-      "visibility": "public",
+      "visibility": "PUBLIC",
       "stats": {
         "reactions": 1,
         "comments": 1
@@ -8148,7 +8148,7 @@
       "authorId": {
         "$oid": "c4b3f501ee10475c8319a88f"
       },
-      "type": "recipe",
+      "type": "RECIPE",
       "text": "Carbonara authentique 🇮🇹",
       "pageId": {
         "$oid": "202c066b782f4a2a9a056ace"
@@ -8158,7 +8158,7 @@
         "imageUrl": "/uploads/posts/179.jpg",
         "videoUrl": null
       },
-      "visibility": "public",
+      "visibility": "PUBLIC",
       "stats": {
         "reactions": 1,
         "comments": 1
@@ -8177,7 +8177,7 @@
       "authorId": {
         "$oid": "684528d8ee5346e8aa44723d"
       },
-      "type": "recipe",
+      "type": "RECIPE",
       "text": "Tagine marocain 👌",
       "pageId": null,
       "groupId": {
@@ -8187,7 +8187,7 @@
         "imageUrl": null,
         "videoUrl": null
       },
-      "visibility": "followers",
+      "visibility": "FOLLOWERS",
       "stats": {
         "reactions": 0,
         "comments": 1
@@ -8206,7 +8206,7 @@
       "authorId": {
         "$oid": "ba3312219d7d443cafa6b05b"
       },
-      "type": "recipe",
+      "type": "RECIPE",
       "text": "BBQ du dimanche 🔥",
       "pageId": null,
       "groupId": null,
@@ -8214,7 +8214,7 @@
         "imageUrl": null,
         "videoUrl": null
       },
-      "visibility": "public",
+      "visibility": "PUBLIC",
       "stats": {
         "reactions": 0,
         "comments": 2
@@ -8233,7 +8233,7 @@
       "authorId": {
         "$oid": "41cfa33594b64362a9d2191e"
       },
-      "type": "recipe",
+      "type": "RECIPE",
       "text": "BBQ du dimanche 🔥",
       "pageId": null,
       "groupId": null,
@@ -8241,7 +8241,7 @@
         "imageUrl": "/uploads/posts/182.jpg",
         "videoUrl": null
       },
-      "visibility": "followers",
+      "visibility": "FOLLOWERS",
       "stats": {
         "reactions": 1,
         "comments": 2
@@ -8260,7 +8260,7 @@
       "authorId": {
         "$oid": "79a3b9d3af5041de8a20c902"
       },
-      "type": "status",
+      "type": "STATUS",
       "text": "Café latte parfait ☕",
       "pageId": {
         "$oid": "0abd602b72ef4564a94dafc2"
@@ -8270,7 +8270,7 @@
         "imageUrl": "/uploads/posts/183.jpg",
         "videoUrl": null
       },
-      "visibility": "public",
+      "visibility": "PUBLIC",
       "stats": {
         "reactions": 1,
         "comments": 0
@@ -8289,7 +8289,7 @@
       "authorId": {
         "$oid": "cfd4359b15d94e09ab9cea32"
       },
-      "type": "status",
+      "type": "STATUS",
       "text": "BBQ du dimanche 🔥",
       "pageId": null,
       "groupId": {
@@ -8299,7 +8299,7 @@
         "imageUrl": null,
         "videoUrl": null
       },
-      "visibility": "public",
+      "visibility": "PUBLIC",
       "stats": {
         "reactions": 2,
         "comments": 1
@@ -8318,7 +8318,7 @@
       "authorId": {
         "$oid": "9a8c89bb5ed443a78ba6662e"
       },
-      "type": "recipe",
+      "type": "RECIPE",
       "text": "Crêpes au sarrasin bretonnes 🥞",
       "pageId": null,
       "groupId": {
@@ -8328,7 +8328,7 @@
         "imageUrl": null,
         "videoUrl": null
       },
-      "visibility": "public",
+      "visibility": "PUBLIC",
       "stats": {
         "reactions": 7,
         "comments": 2
@@ -8347,7 +8347,7 @@
       "authorId": {
         "$oid": "684528d8ee5346e8aa44723d"
       },
-      "type": "status",
+      "type": "STATUS",
       "text": "Nouvelle recette de ramen 🍜",
       "pageId": null,
       "groupId": null,
@@ -8355,7 +8355,7 @@
         "imageUrl": "/uploads/posts/186.jpg",
         "videoUrl": null
       },
-      "visibility": "followers",
+      "visibility": "FOLLOWERS",
       "stats": {
         "reactions": 5,
         "comments": 1
@@ -8374,7 +8374,7 @@
       "authorId": {
         "$oid": "f8016941bc6c43a880dd6ca2"
       },
-      "type": "recipe",
+      "type": "RECIPE",
       "text": "Brioche moelleuse maison 🍞",
       "pageId": null,
       "groupId": {
@@ -8384,7 +8384,7 @@
         "imageUrl": "/uploads/posts/187.jpg",
         "videoUrl": null
       },
-      "visibility": "public",
+      "visibility": "PUBLIC",
       "stats": {
         "reactions": 0,
         "comments": 1
@@ -8403,7 +8403,7 @@
       "authorId": {
         "$oid": "ba3312219d7d443cafa6b05b"
       },
-      "type": "status",
+      "type": "STATUS",
       "text": "Tagine marocain 👌",
       "pageId": null,
       "groupId": null,
@@ -8411,7 +8411,7 @@
         "imageUrl": null,
         "videoUrl": null
       },
-      "visibility": "followers",
+      "visibility": "FOLLOWERS",
       "stats": {
         "reactions": 0,
         "comments": 0
@@ -8430,7 +8430,7 @@
       "authorId": {
         "$oid": "9c50f425a2c04de8915de080"
       },
-      "type": "status",
+      "type": "STATUS",
       "text": "Tagine marocain 👌",
       "pageId": null,
       "groupId": {
@@ -8440,7 +8440,7 @@
         "imageUrl": null,
         "videoUrl": null
       },
-      "visibility": "followers",
+      "visibility": "FOLLOWERS",
       "stats": {
         "reactions": 1,
         "comments": 1
@@ -8459,7 +8459,7 @@
       "authorId": {
         "$oid": "b0101b848831435d861bbd01"
       },
-      "type": "status",
+      "type": "STATUS",
       "text": "Café latte parfait ☕",
       "pageId": null,
       "groupId": null,
@@ -8467,7 +8467,7 @@
         "imageUrl": null,
         "videoUrl": null
       },
-      "visibility": "public",
+      "visibility": "PUBLIC",
       "stats": {
         "reactions": 0,
         "comments": 0
@@ -8486,7 +8486,7 @@
       "authorId": {
         "$oid": "79a3b9d3af5041de8a20c902"
       },
-      "type": "status",
+      "type": "STATUS",
       "text": "Burger smash double cheese 🍔",
       "pageId": null,
       "groupId": null,
@@ -8494,7 +8494,7 @@
         "imageUrl": "/uploads/posts/191.jpg",
         "videoUrl": null
       },
-      "visibility": "followers",
+      "visibility": "FOLLOWERS",
       "stats": {
         "reactions": 0,
         "comments": 0
@@ -8513,7 +8513,7 @@
       "authorId": {
         "$oid": "a59bc57d0bb74fb8a044fc5c"
       },
-      "type": "recipe",
+      "type": "RECIPE",
       "text": "Tarte citron meringuée 🍋",
       "pageId": null,
       "groupId": null,
@@ -8521,7 +8521,7 @@
         "imageUrl": "/uploads/posts/192.jpg",
         "videoUrl": null
       },
-      "visibility": "followers",
+      "visibility": "FOLLOWERS",
       "stats": {
         "reactions": 3,
         "comments": 0
@@ -8540,7 +8540,7 @@
       "authorId": {
         "$oid": "75930977970141868dcd66d2"
       },
-      "type": "status",
+      "type": "STATUS",
       "text": "Tarte citron meringuée 🍋",
       "pageId": {
         "$oid": "0abd602b72ef4564a94dafc2"
@@ -8550,7 +8550,7 @@
         "imageUrl": "/uploads/posts/193.jpg",
         "videoUrl": null
       },
-      "visibility": "public",
+      "visibility": "PUBLIC",
       "stats": {
         "reactions": 1,
         "comments": 0
@@ -8569,7 +8569,7 @@
       "authorId": {
         "$oid": "b903b4e3163c492baec3347f"
       },
-      "type": "status",
+      "type": "STATUS",
       "text": "Brioche moelleuse maison 🍞",
       "pageId": null,
       "groupId": null,
@@ -8577,7 +8577,7 @@
         "imageUrl": null,
         "videoUrl": null
       },
-      "visibility": "public",
+      "visibility": "PUBLIC",
       "stats": {
         "reactions": 1,
         "comments": 0
@@ -8596,7 +8596,7 @@
       "authorId": {
         "$oid": "277b83705ccc42f1bfd9a1e6"
       },
-      "type": "recipe",
+      "type": "RECIPE",
       "text": "Brioche moelleuse maison 🍞",
       "pageId": null,
       "groupId": null,
@@ -8604,7 +8604,7 @@
         "imageUrl": null,
         "videoUrl": null
       },
-      "visibility": "public",
+      "visibility": "PUBLIC",
       "stats": {
         "reactions": 3,
         "comments": 0
@@ -8623,7 +8623,7 @@
       "authorId": {
         "$oid": "b88d5a8b44f140d387b4dd8a"
       },
-      "type": "status",
+      "type": "STATUS",
       "text": "BBQ du dimanche 🔥",
       "pageId": null,
       "groupId": null,
@@ -8631,7 +8631,7 @@
         "imageUrl": null,
         "videoUrl": null
       },
-      "visibility": "followers",
+      "visibility": "FOLLOWERS",
       "stats": {
         "reactions": 0,
         "comments": 1
@@ -8650,7 +8650,7 @@
       "authorId": {
         "$oid": "b9b6041aab6d412a835a1d61"
       },
-      "type": "recipe",
+      "type": "RECIPE",
       "text": "Carbonara authentique 🇮🇹",
       "pageId": null,
       "groupId": {
@@ -8660,7 +8660,7 @@
         "imageUrl": null,
         "videoUrl": null
       },
-      "visibility": "public",
+      "visibility": "PUBLIC",
       "stats": {
         "reactions": 0,
         "comments": 2
@@ -8679,7 +8679,7 @@
       "authorId": {
         "$oid": "1a4a5f6eb2b24dc29bf93616"
       },
-      "type": "recipe",
+      "type": "RECIPE",
       "text": "Nouvelle recette de ramen 🍜",
       "pageId": null,
       "groupId": null,
@@ -8687,7 +8687,7 @@
         "imageUrl": "/uploads/posts/198.jpg",
         "videoUrl": null
       },
-      "visibility": "followers",
+      "visibility": "FOLLOWERS",
       "stats": {
         "reactions": 3,
         "comments": 2
@@ -8706,7 +8706,7 @@
       "authorId": {
         "$oid": "24406568762d433194528e40"
       },
-      "type": "status",
+      "type": "STATUS",
       "text": "Burger smash double cheese 🍔",
       "pageId": null,
       "groupId": {
@@ -8716,7 +8716,7 @@
         "imageUrl": "/uploads/posts/199.jpg",
         "videoUrl": null
       },
-      "visibility": "public",
+      "visibility": "PUBLIC",
       "stats": {
         "reactions": 0,
         "comments": 2
@@ -8735,7 +8735,7 @@
       "authorId": {
         "$oid": "28c4d96b3c8648f996986085"
       },
-      "type": "recipe",
+      "type": "RECIPE",
       "text": "Crêpes au sarrasin bretonnes 🥞",
       "pageId": null,
       "groupId": null,
@@ -8743,7 +8743,7 @@
         "imageUrl": "/uploads/posts/200.jpg",
         "videoUrl": null
       },
-      "visibility": "followers",
+      "visibility": "FOLLOWERS",
       "stats": {
         "reactions": 0,
         "comments": 2
@@ -8762,7 +8762,7 @@
       "authorId": {
         "$oid": "cfd4359b15d94e09ab9cea32"
       },
-      "type": "recipe",
+      "type": "RECIPE",
       "text": "Tarte citron meringuée 🍋",
       "pageId": null,
       "groupId": null,
@@ -8770,7 +8770,7 @@
         "imageUrl": null,
         "videoUrl": null
       },
-      "visibility": "followers",
+      "visibility": "FOLLOWERS",
       "stats": {
         "reactions": 3,
         "comments": 0
@@ -8789,7 +8789,7 @@
       "authorId": {
         "$oid": "0988240d0e6847d2abf384fb"
       },
-      "type": "status",
+      "type": "STATUS",
       "text": "Nouvelle recette de ramen 🍜",
       "pageId": null,
       "groupId": null,
@@ -8797,7 +8797,7 @@
         "imageUrl": "/uploads/posts/202.jpg",
         "videoUrl": null
       },
-      "visibility": "followers",
+      "visibility": "FOLLOWERS",
       "stats": {
         "reactions": 1,
         "comments": 1
@@ -8816,7 +8816,7 @@
       "authorId": {
         "$oid": "7134e496cdc44d7b97a9402d"
       },
-      "type": "status",
+      "type": "STATUS",
       "text": "Carbonara authentique 🇮🇹",
       "pageId": null,
       "groupId": null,
@@ -8824,7 +8824,7 @@
         "imageUrl": null,
         "videoUrl": null
       },
-      "visibility": "public",
+      "visibility": "PUBLIC",
       "stats": {
         "reactions": 3,
         "comments": 1
@@ -8843,7 +8843,7 @@
       "authorId": {
         "$oid": "f59e334506a449e7a56661c8"
       },
-      "type": "status",
+      "type": "STATUS",
       "text": "Carbonara authentique 🇮🇹",
       "pageId": null,
       "groupId": null,
@@ -8851,7 +8851,7 @@
         "imageUrl": "/uploads/posts/204.jpg",
         "videoUrl": null
       },
-      "visibility": "followers",
+      "visibility": "FOLLOWERS",
       "stats": {
         "reactions": 1,
         "comments": 2
@@ -8870,7 +8870,7 @@
       "authorId": {
         "$oid": "21a1e93fe8a840c6860d9842"
       },
-      "type": "recipe",
+      "type": "RECIPE",
       "text": "Tagine marocain 👌",
       "pageId": null,
       "groupId": null,
@@ -8878,7 +8878,7 @@
         "imageUrl": "/uploads/posts/205.jpg",
         "videoUrl": null
       },
-      "visibility": "followers",
+      "visibility": "FOLLOWERS",
       "stats": {
         "reactions": 1,
         "comments": 4
@@ -8897,7 +8897,7 @@
       "authorId": {
         "$oid": "97e92ce36d594a90a9a04a36"
       },
-      "type": "status",
+      "type": "STATUS",
       "text": "Crêpes au sarrasin bretonnes 🥞",
       "pageId": null,
       "groupId": null,
@@ -8905,7 +8905,7 @@
         "imageUrl": "/uploads/posts/206.jpg",
         "videoUrl": null
       },
-      "visibility": "followers",
+      "visibility": "FOLLOWERS",
       "stats": {
         "reactions": 4,
         "comments": 3
@@ -8924,7 +8924,7 @@
       "authorId": {
         "$oid": "9c50f425a2c04de8915de080"
       },
-      "type": "recipe",
+      "type": "RECIPE",
       "text": "Nouvelle recette de ramen 🍜",
       "pageId": null,
       "groupId": null,
@@ -8932,7 +8932,7 @@
         "imageUrl": null,
         "videoUrl": null
       },
-      "visibility": "public",
+      "visibility": "PUBLIC",
       "stats": {
         "reactions": 5,
         "comments": 1
@@ -8951,7 +8951,7 @@
       "authorId": {
         "$oid": "cfd4359b15d94e09ab9cea32"
       },
-      "type": "recipe",
+      "type": "RECIPE",
       "text": "Crêpes au sarrasin bretonnes 🥞",
       "pageId": null,
       "groupId": null,
@@ -8959,7 +8959,7 @@
         "imageUrl": "/uploads/posts/208.jpg",
         "videoUrl": null
       },
-      "visibility": "followers",
+      "visibility": "FOLLOWERS",
       "stats": {
         "reactions": 1,
         "comments": 0
@@ -8978,7 +8978,7 @@
       "authorId": {
         "$oid": "f8016941bc6c43a880dd6ca2"
       },
-      "type": "recipe",
+      "type": "RECIPE",
       "text": "Astuce levain 🥖",
       "pageId": null,
       "groupId": null,
@@ -8986,7 +8986,7 @@
         "imageUrl": null,
         "videoUrl": null
       },
-      "visibility": "followers",
+      "visibility": "FOLLOWERS",
       "stats": {
         "reactions": 3,
         "comments": 1
@@ -9005,7 +9005,7 @@
       "authorId": {
         "$oid": "c4b3f501ee10475c8319a88f"
       },
-      "type": "recipe",
+      "type": "RECIPE",
       "text": "Café latte parfait ☕",
       "pageId": null,
       "groupId": null,
@@ -9013,7 +9013,7 @@
         "imageUrl": null,
         "videoUrl": null
       },
-      "visibility": "public",
+      "visibility": "PUBLIC",
       "stats": {
         "reactions": 5,
         "comments": 0
@@ -9032,7 +9032,7 @@
       "authorId": {
         "$oid": "9a6f040941dd4a93a5da05e1"
       },
-      "type": "status",
+      "type": "STATUS",
       "text": "Astuce levain 🥖",
       "pageId": null,
       "groupId": null,
@@ -9040,7 +9040,7 @@
         "imageUrl": null,
         "videoUrl": null
       },
-      "visibility": "public",
+      "visibility": "PUBLIC",
       "stats": {
         "reactions": 0,
         "comments": 0
@@ -9059,7 +9059,7 @@
       "authorId": {
         "$oid": "21915e4882444b0b93122535"
       },
-      "type": "recipe",
+      "type": "RECIPE",
       "text": "BBQ du dimanche 🔥",
       "pageId": null,
       "groupId": null,
@@ -9067,7 +9067,7 @@
         "imageUrl": "/uploads/posts/212.jpg",
         "videoUrl": null
       },
-      "visibility": "public",
+      "visibility": "PUBLIC",
       "stats": {
         "reactions": 2,
         "comments": 0
@@ -9086,7 +9086,7 @@
       "authorId": {
         "$oid": "cfd4359b15d94e09ab9cea32"
       },
-      "type": "recipe",
+      "type": "RECIPE",
       "text": "Tarte citron meringuée 🍋",
       "pageId": null,
       "groupId": null,
@@ -9094,7 +9094,7 @@
         "imageUrl": "/uploads/posts/213.jpg",
         "videoUrl": null
       },
-      "visibility": "public",
+      "visibility": "PUBLIC",
       "stats": {
         "reactions": 1,
         "comments": 1
@@ -9113,7 +9113,7 @@
       "authorId": {
         "$oid": "64d711d839814d79852659e6"
       },
-      "type": "recipe",
+      "type": "RECIPE",
       "text": "BBQ du dimanche 🔥",
       "pageId": null,
       "groupId": null,
@@ -9121,7 +9121,7 @@
         "imageUrl": null,
         "videoUrl": null
       },
-      "visibility": "public",
+      "visibility": "PUBLIC",
       "stats": {
         "reactions": 2,
         "comments": 0
@@ -9140,7 +9140,7 @@
       "authorId": {
         "$oid": "7134e496cdc44d7b97a9402d"
       },
-      "type": "recipe",
+      "type": "RECIPE",
       "text": "Crêpes au sarrasin bretonnes 🥞",
       "pageId": {
         "$oid": "5f45976a9cab48dcb4b9a9f4"
@@ -9152,7 +9152,7 @@
         "imageUrl": "/uploads/posts/215.jpg",
         "videoUrl": null
       },
-      "visibility": "public",
+      "visibility": "PUBLIC",
       "stats": {
         "reactions": 2,
         "comments": 0
@@ -9171,7 +9171,7 @@
       "authorId": {
         "$oid": "14b2f125f4b04314b53af5df"
       },
-      "type": "recipe",
+      "type": "RECIPE",
       "text": "Tagine marocain 👌",
       "pageId": null,
       "groupId": null,
@@ -9179,7 +9179,7 @@
         "imageUrl": "/uploads/posts/216.jpg",
         "videoUrl": null
       },
-      "visibility": "followers",
+      "visibility": "FOLLOWERS",
       "stats": {
         "reactions": 2,
         "comments": 0
@@ -9198,7 +9198,7 @@
       "authorId": {
         "$oid": "f4faaefa525a450a9a2cefec"
       },
-      "type": "recipe",
+      "type": "RECIPE",
       "text": "BBQ du dimanche 🔥",
       "pageId": null,
       "groupId": null,
@@ -9206,7 +9206,7 @@
         "imageUrl": null,
         "videoUrl": null
       },
-      "visibility": "public",
+      "visibility": "PUBLIC",
       "stats": {
         "reactions": 2,
         "comments": 1
@@ -9225,7 +9225,7 @@
       "authorId": {
         "$oid": "9bdec5c8c4e64fd2814a01ea"
       },
-      "type": "recipe",
+      "type": "RECIPE",
       "text": "Brioche moelleuse maison 🍞",
       "pageId": null,
       "groupId": null,
@@ -9233,7 +9233,7 @@
         "imageUrl": "/uploads/posts/218.jpg",
         "videoUrl": null
       },
-      "visibility": "followers",
+      "visibility": "FOLLOWERS",
       "stats": {
         "reactions": 3,
         "comments": 1
@@ -9252,7 +9252,7 @@
       "authorId": {
         "$oid": "16a47e7998a34f32bd88d747"
       },
-      "type": "status",
+      "type": "STATUS",
       "text": "Tagine marocain 👌",
       "pageId": null,
       "groupId": null,
@@ -9260,7 +9260,7 @@
         "imageUrl": null,
         "videoUrl": null
       },
-      "visibility": "public",
+      "visibility": "PUBLIC",
       "stats": {
         "reactions": 5,
         "comments": 0
@@ -9279,7 +9279,7 @@
       "authorId": {
         "$oid": "026b3d4726e04342ae76689d"
       },
-      "type": "status",
+      "type": "STATUS",
       "text": "Astuce levain 🥖",
       "pageId": null,
       "groupId": null,
@@ -9287,7 +9287,7 @@
         "imageUrl": null,
         "videoUrl": null
       },
-      "visibility": "followers",
+      "visibility": "FOLLOWERS",
       "stats": {
         "reactions": 2,
         "comments": 0
@@ -9306,7 +9306,7 @@
       "authorId": {
         "$oid": "b0101b848831435d861bbd01"
       },
-      "type": "status",
+      "type": "STATUS",
       "text": "Brioche moelleuse maison 🍞",
       "pageId": null,
       "groupId": null,
@@ -9314,7 +9314,7 @@
         "imageUrl": null,
         "videoUrl": null
       },
-      "visibility": "followers",
+      "visibility": "FOLLOWERS",
       "stats": {
         "reactions": 3,
         "comments": 0
@@ -9333,7 +9333,7 @@
       "authorId": {
         "$oid": "b903b4e3163c492baec3347f"
       },
-      "type": "status",
+      "type": "STATUS",
       "text": "Brioche moelleuse maison 🍞",
       "pageId": null,
       "groupId": {
@@ -9343,7 +9343,7 @@
         "imageUrl": null,
         "videoUrl": null
       },
-      "visibility": "followers",
+      "visibility": "FOLLOWERS",
       "stats": {
         "reactions": 1,
         "comments": 1
@@ -9362,7 +9362,7 @@
       "authorId": {
         "$oid": "428820f6977f4f1287b0e2de"
       },
-      "type": "recipe",
+      "type": "RECIPE",
       "text": "Carbonara authentique 🇮🇹",
       "pageId": null,
       "groupId": null,
@@ -9370,7 +9370,7 @@
         "imageUrl": null,
         "videoUrl": null
       },
-      "visibility": "public",
+      "visibility": "PUBLIC",
       "stats": {
         "reactions": 2,
         "comments": 2
@@ -9389,7 +9389,7 @@
       "authorId": {
         "$oid": "f8016941bc6c43a880dd6ca2"
       },
-      "type": "status",
+      "type": "STATUS",
       "text": "Brioche moelleuse maison 🍞",
       "pageId": null,
       "groupId": null,
@@ -9397,7 +9397,7 @@
         "imageUrl": null,
         "videoUrl": null
       },
-      "visibility": "public",
+      "visibility": "PUBLIC",
       "stats": {
         "reactions": 5,
         "comments": 1
@@ -9416,7 +9416,7 @@
       "authorId": {
         "$oid": "0988240d0e6847d2abf384fb"
       },
-      "type": "recipe",
+      "type": "RECIPE",
       "text": "Nouvelle recette de ramen 🍜",
       "pageId": {
         "$oid": "8c60a34c77c049d0a6668901"
@@ -9426,7 +9426,7 @@
         "imageUrl": null,
         "videoUrl": null
       },
-      "visibility": "followers",
+      "visibility": "FOLLOWERS",
       "stats": {
         "reactions": 2,
         "comments": 2
@@ -9445,7 +9445,7 @@
       "authorId": {
         "$oid": "f4faaefa525a450a9a2cefec"
       },
-      "type": "recipe",
+      "type": "RECIPE",
       "text": "Crêpes au sarrasin bretonnes 🥞",
       "pageId": null,
       "groupId": null,
@@ -9453,7 +9453,7 @@
         "imageUrl": null,
         "videoUrl": null
       },
-      "visibility": "followers",
+      "visibility": "FOLLOWERS",
       "stats": {
         "reactions": 2,
         "comments": 3
@@ -9472,7 +9472,7 @@
       "authorId": {
         "$oid": "b9188193043e4825b5a79d92"
       },
-      "type": "recipe",
+      "type": "RECIPE",
       "text": "Burger smash double cheese 🍔",
       "pageId": null,
       "groupId": null,
@@ -9480,7 +9480,7 @@
         "imageUrl": "/uploads/posts/227.jpg",
         "videoUrl": null
       },
-      "visibility": "public",
+      "visibility": "PUBLIC",
       "stats": {
         "reactions": 2,
         "comments": 0
@@ -9499,7 +9499,7 @@
       "authorId": {
         "$oid": "0988240d0e6847d2abf384fb"
       },
-      "type": "recipe",
+      "type": "RECIPE",
       "text": "Nouvelle recette de ramen 🍜",
       "pageId": null,
       "groupId": {
@@ -9509,7 +9509,7 @@
         "imageUrl": "/uploads/posts/228.jpg",
         "videoUrl": null
       },
-      "visibility": "followers",
+      "visibility": "FOLLOWERS",
       "stats": {
         "reactions": 2,
         "comments": 1
@@ -9528,7 +9528,7 @@
       "authorId": {
         "$oid": "a1c37576660d41649d044992"
       },
-      "type": "status",
+      "type": "STATUS",
       "text": "Crêpes au sarrasin bretonnes 🥞",
       "pageId": {
         "$oid": "1b5680c6a1564fd6a6695d69"
@@ -9538,7 +9538,7 @@
         "imageUrl": null,
         "videoUrl": null
       },
-      "visibility": "followers",
+      "visibility": "FOLLOWERS",
       "stats": {
         "reactions": 4,
         "comments": 4
@@ -9557,7 +9557,7 @@
       "authorId": {
         "$oid": "b9188193043e4825b5a79d92"
       },
-      "type": "recipe",
+      "type": "RECIPE",
       "text": "Tarte citron meringuée 🍋",
       "pageId": null,
       "groupId": {
@@ -9567,7 +9567,7 @@
         "imageUrl": "/uploads/posts/230.jpg",
         "videoUrl": null
       },
-      "visibility": "followers",
+      "visibility": "FOLLOWERS",
       "stats": {
         "reactions": 1,
         "comments": 0
@@ -9586,7 +9586,7 @@
       "authorId": {
         "$oid": "a59bc57d0bb74fb8a044fc5c"
       },
-      "type": "status",
+      "type": "STATUS",
       "text": "Astuce levain 🥖",
       "pageId": {
         "$oid": "a03fdcad2e4a4555bbb17bb5"
@@ -9598,7 +9598,7 @@
         "imageUrl": null,
         "videoUrl": null
       },
-      "visibility": "public",
+      "visibility": "PUBLIC",
       "stats": {
         "reactions": 3,
         "comments": 1
@@ -9617,7 +9617,7 @@
       "authorId": {
         "$oid": "97e92ce36d594a90a9a04a36"
       },
-      "type": "status",
+      "type": "STATUS",
       "text": "Astuce levain 🥖",
       "pageId": {
         "$oid": "1b5680c6a1564fd6a6695d69"
@@ -9627,7 +9627,7 @@
         "imageUrl": null,
         "videoUrl": null
       },
-      "visibility": "public",
+      "visibility": "PUBLIC",
       "stats": {
         "reactions": 3,
         "comments": 0
@@ -9646,7 +9646,7 @@
       "authorId": {
         "$oid": "c20a2a6a94be492e9304b73b"
       },
-      "type": "status",
+      "type": "STATUS",
       "text": "Carbonara authentique 🇮🇹",
       "pageId": null,
       "groupId": null,
@@ -9654,7 +9654,7 @@
         "imageUrl": null,
         "videoUrl": null
       },
-      "visibility": "followers",
+      "visibility": "FOLLOWERS",
       "stats": {
         "reactions": 3,
         "comments": 1
@@ -9673,7 +9673,7 @@
       "authorId": {
         "$oid": "14b2f125f4b04314b53af5df"
       },
-      "type": "recipe",
+      "type": "RECIPE",
       "text": "Crêpes au sarrasin bretonnes 🥞",
       "pageId": null,
       "groupId": null,
@@ -9681,7 +9681,7 @@
         "imageUrl": null,
         "videoUrl": null
       },
-      "visibility": "public",
+      "visibility": "PUBLIC",
       "stats": {
         "reactions": 2,
         "comments": 1
@@ -9700,7 +9700,7 @@
       "authorId": {
         "$oid": "4e75068c4d344fa5a0711804"
       },
-      "type": "status",
+      "type": "STATUS",
       "text": "Tagine marocain 👌",
       "pageId": null,
       "groupId": {
@@ -9710,7 +9710,7 @@
         "imageUrl": "/uploads/posts/235.jpg",
         "videoUrl": null
       },
-      "visibility": "public",
+      "visibility": "PUBLIC",
       "stats": {
         "reactions": 2,
         "comments": 1
@@ -9729,7 +9729,7 @@
       "authorId": {
         "$oid": "b88d5a8b44f140d387b4dd8a"
       },
-      "type": "status",
+      "type": "STATUS",
       "text": "Tarte citron meringuée 🍋",
       "pageId": null,
       "groupId": null,
@@ -9737,7 +9737,7 @@
         "imageUrl": "/uploads/posts/236.jpg",
         "videoUrl": null
       },
-      "visibility": "followers",
+      "visibility": "FOLLOWERS",
       "stats": {
         "reactions": 3,
         "comments": 1
@@ -9756,7 +9756,7 @@
       "authorId": {
         "$oid": "2eb13e9b44e84d7b878cd579"
       },
-      "type": "status",
+      "type": "STATUS",
       "text": "Crêpes au sarrasin bretonnes 🥞",
       "pageId": null,
       "groupId": null,
@@ -9764,7 +9764,7 @@
         "imageUrl": null,
         "videoUrl": null
       },
-      "visibility": "public",
+      "visibility": "PUBLIC",
       "stats": {
         "reactions": 1,
         "comments": 1
@@ -9783,7 +9783,7 @@
       "authorId": {
         "$oid": "633b4f7b04cb4913aa91bdd1"
       },
-      "type": "status",
+      "type": "STATUS",
       "text": "Tarte citron meringuée 🍋",
       "pageId": null,
       "groupId": null,
@@ -9791,7 +9791,7 @@
         "imageUrl": null,
         "videoUrl": null
       },
-      "visibility": "followers",
+      "visibility": "FOLLOWERS",
       "stats": {
         "reactions": 2,
         "comments": 3
@@ -9810,7 +9810,7 @@
       "authorId": {
         "$oid": "7d00eb053bdc4ad3924edd8a"
       },
-      "type": "status",
+      "type": "STATUS",
       "text": "Burger smash double cheese 🍔",
       "pageId": null,
       "groupId": {
@@ -9820,7 +9820,7 @@
         "imageUrl": null,
         "videoUrl": null
       },
-      "visibility": "followers",
+      "visibility": "FOLLOWERS",
       "stats": {
         "reactions": 4,
         "comments": 2
@@ -9839,7 +9839,7 @@
       "authorId": {
         "$oid": "32fa6abaa66e4e41821fe54f"
       },
-      "type": "status",
+      "type": "STATUS",
       "text": "Tagine marocain 👌",
       "pageId": null,
       "groupId": null,
@@ -9847,7 +9847,7 @@
         "imageUrl": "/uploads/posts/240.jpg",
         "videoUrl": null
       },
-      "visibility": "public",
+      "visibility": "PUBLIC",
       "stats": {
         "reactions": 1,
         "comments": 3
@@ -9866,7 +9866,7 @@
       "authorId": {
         "$oid": "02c695b7faec4a7fb63ad353"
       },
-      "type": "status",
+      "type": "STATUS",
       "text": "Carbonara authentique 🇮🇹",
       "pageId": null,
       "groupId": {
@@ -9876,7 +9876,7 @@
         "imageUrl": "/uploads/posts/241.jpg",
         "videoUrl": null
       },
-      "visibility": "public",
+      "visibility": "PUBLIC",
       "stats": {
         "reactions": 1,
         "comments": 1
@@ -9895,7 +9895,7 @@
       "authorId": {
         "$oid": "b9188193043e4825b5a79d92"
       },
-      "type": "status",
+      "type": "STATUS",
       "text": "BBQ du dimanche 🔥",
       "pageId": null,
       "groupId": null,
@@ -9903,7 +9903,7 @@
         "imageUrl": "/uploads/posts/242.jpg",
         "videoUrl": null
       },
-      "visibility": "public",
+      "visibility": "PUBLIC",
       "stats": {
         "reactions": 0,
         "comments": 0
@@ -9922,7 +9922,7 @@
       "authorId": {
         "$oid": "37798ba3ec7749b2bbfae0cf"
       },
-      "type": "recipe",
+      "type": "RECIPE",
       "text": "Café latte parfait ☕",
       "pageId": null,
       "groupId": null,
@@ -9930,7 +9930,7 @@
         "imageUrl": null,
         "videoUrl": null
       },
-      "visibility": "public",
+      "visibility": "PUBLIC",
       "stats": {
         "reactions": 3,
         "comments": 0
@@ -9949,7 +9949,7 @@
       "authorId": {
         "$oid": "16a47e7998a34f32bd88d747"
       },
-      "type": "recipe",
+      "type": "RECIPE",
       "text": "Nouvelle recette de ramen 🍜",
       "pageId": {
         "$oid": "3d43f650f75e4c509c96f795"
@@ -9959,7 +9959,7 @@
         "imageUrl": "/uploads/posts/244.jpg",
         "videoUrl": null
       },
-      "visibility": "public",
+      "visibility": "PUBLIC",
       "stats": {
         "reactions": 1,
         "comments": 0
@@ -9978,7 +9978,7 @@
       "authorId": {
         "$oid": "5d642cdcc56d4db4b70a00eb"
       },
-      "type": "status",
+      "type": "STATUS",
       "text": "Brioche moelleuse maison 🍞",
       "pageId": null,
       "groupId": null,
@@ -9986,7 +9986,7 @@
         "imageUrl": null,
         "videoUrl": null
       },
-      "visibility": "followers",
+      "visibility": "FOLLOWERS",
       "stats": {
         "reactions": 5,
         "comments": 2
@@ -10005,7 +10005,7 @@
       "authorId": {
         "$oid": "64d711d839814d79852659e6"
       },
-      "type": "status",
+      "type": "STATUS",
       "text": "Tagine marocain 👌",
       "pageId": null,
       "groupId": null,
@@ -10013,7 +10013,7 @@
         "imageUrl": null,
         "videoUrl": null
       },
-      "visibility": "public",
+      "visibility": "PUBLIC",
       "stats": {
         "reactions": 3,
         "comments": 2
@@ -10032,7 +10032,7 @@
       "authorId": {
         "$oid": "ba3312219d7d443cafa6b05b"
       },
-      "type": "recipe",
+      "type": "RECIPE",
       "text": "Crêpes au sarrasin bretonnes 🥞",
       "pageId": null,
       "groupId": null,
@@ -10040,7 +10040,7 @@
         "imageUrl": "/uploads/posts/247.jpg",
         "videoUrl": null
       },
-      "visibility": "public",
+      "visibility": "PUBLIC",
       "stats": {
         "reactions": 2,
         "comments": 0
@@ -10059,7 +10059,7 @@
       "authorId": {
         "$oid": "c20a2a6a94be492e9304b73b"
       },
-      "type": "status",
+      "type": "STATUS",
       "text": "Café latte parfait ☕",
       "pageId": null,
       "groupId": null,
@@ -10067,7 +10067,7 @@
         "imageUrl": "/uploads/posts/248.jpg",
         "videoUrl": null
       },
-      "visibility": "followers",
+      "visibility": "FOLLOWERS",
       "stats": {
         "reactions": 1,
         "comments": 0
@@ -10086,7 +10086,7 @@
       "authorId": {
         "$oid": "7134e496cdc44d7b97a9402d"
       },
-      "type": "recipe",
+      "type": "RECIPE",
       "text": "Burger smash double cheese 🍔",
       "pageId": null,
       "groupId": {
@@ -10096,7 +10096,7 @@
         "imageUrl": "/uploads/posts/249.jpg",
         "videoUrl": null
       },
-      "visibility": "public",
+      "visibility": "PUBLIC",
       "stats": {
         "reactions": 1,
         "comments": 2
@@ -10115,7 +10115,7 @@
       "authorId": {
         "$oid": "1a4a5f6eb2b24dc29bf93616"
       },
-      "type": "recipe",
+      "type": "RECIPE",
       "text": "Café latte parfait ☕",
       "pageId": null,
       "groupId": null,
@@ -10123,7 +10123,7 @@
         "imageUrl": "/uploads/posts/250.jpg",
         "videoUrl": null
       },
-      "visibility": "public",
+      "visibility": "PUBLIC",
       "stats": {
         "reactions": 3,
         "comments": 0
@@ -10142,7 +10142,7 @@
       "authorId": {
         "$oid": "41ab5ef5c0eb4ab6b390e01f"
       },
-      "type": "recipe",
+      "type": "RECIPE",
       "text": "Astuce levain 🥖",
       "pageId": null,
       "groupId": {
@@ -10152,7 +10152,7 @@
         "imageUrl": "/uploads/posts/251.jpg",
         "videoUrl": null
       },
-      "visibility": "public",
+      "visibility": "PUBLIC",
       "stats": {
         "reactions": 1,
         "comments": 0
@@ -10171,7 +10171,7 @@
       "authorId": {
         "$oid": "9bdec5c8c4e64fd2814a01ea"
       },
-      "type": "status",
+      "type": "STATUS",
       "text": "Carbonara authentique 🇮🇹",
       "pageId": null,
       "groupId": {
@@ -10181,7 +10181,7 @@
         "imageUrl": null,
         "videoUrl": null
       },
-      "visibility": "followers",
+      "visibility": "FOLLOWERS",
       "stats": {
         "reactions": 1,
         "comments": 0
@@ -10200,7 +10200,7 @@
       "authorId": {
         "$oid": "a59bc57d0bb74fb8a044fc5c"
       },
-      "type": "recipe",
+      "type": "RECIPE",
       "text": "Burger smash double cheese 🍔",
       "pageId": null,
       "groupId": null,
@@ -10208,7 +10208,7 @@
         "imageUrl": null,
         "videoUrl": null
       },
-      "visibility": "followers",
+      "visibility": "FOLLOWERS",
       "stats": {
         "reactions": 3,
         "comments": 0
@@ -10227,7 +10227,7 @@
       "authorId": {
         "$oid": "97e92ce36d594a90a9a04a36"
       },
-      "type": "status",
+      "type": "STATUS",
       "text": "Café latte parfait ☕",
       "pageId": null,
       "groupId": null,
@@ -10235,7 +10235,7 @@
         "imageUrl": "/uploads/posts/254.jpg",
         "videoUrl": null
       },
-      "visibility": "followers",
+      "visibility": "FOLLOWERS",
       "stats": {
         "reactions": 2,
         "comments": 2
@@ -10254,7 +10254,7 @@
       "authorId": {
         "$oid": "c20a2a6a94be492e9304b73b"
       },
-      "type": "status",
+      "type": "STATUS",
       "text": "Nouvelle recette de ramen 🍜",
       "pageId": null,
       "groupId": {
@@ -10264,7 +10264,7 @@
         "imageUrl": "/uploads/posts/255.jpg",
         "videoUrl": null
       },
-      "visibility": "public",
+      "visibility": "PUBLIC",
       "stats": {
         "reactions": 0,
         "comments": 0
@@ -10283,7 +10283,7 @@
       "authorId": {
         "$oid": "41cfa33594b64362a9d2191e"
       },
-      "type": "recipe",
+      "type": "RECIPE",
       "text": "Nouvelle recette de ramen 🍜",
       "pageId": null,
       "groupId": null,
@@ -10291,7 +10291,7 @@
         "imageUrl": "/uploads/posts/256.jpg",
         "videoUrl": null
       },
-      "visibility": "followers",
+      "visibility": "FOLLOWERS",
       "stats": {
         "reactions": 4,
         "comments": 2
@@ -10310,7 +10310,7 @@
       "authorId": {
         "$oid": "d9e511663b994d6789f39a93"
       },
-      "type": "recipe",
+      "type": "RECIPE",
       "text": "Tarte citron meringuée 🍋",
       "pageId": {
         "$oid": "cd680ec5e73649bbbbbab043"
@@ -10320,7 +10320,7 @@
         "imageUrl": "/uploads/posts/257.jpg",
         "videoUrl": null
       },
-      "visibility": "followers",
+      "visibility": "FOLLOWERS",
       "stats": {
         "reactions": 1,
         "comments": 3
@@ -10339,7 +10339,7 @@
       "authorId": {
         "$oid": "a14688743a574d4dba6f0288"
       },
-      "type": "recipe",
+      "type": "RECIPE",
       "text": "BBQ du dimanche 🔥",
       "pageId": null,
       "groupId": null,
@@ -10347,7 +10347,7 @@
         "imageUrl": "/uploads/posts/258.jpg",
         "videoUrl": null
       },
-      "visibility": "public",
+      "visibility": "PUBLIC",
       "stats": {
         "reactions": 1,
         "comments": 1
@@ -10366,7 +10366,7 @@
       "authorId": {
         "$oid": "37798ba3ec7749b2bbfae0cf"
       },
-      "type": "recipe",
+      "type": "RECIPE",
       "text": "Astuce levain 🥖",
       "pageId": null,
       "groupId": null,
@@ -10374,7 +10374,7 @@
         "imageUrl": null,
         "videoUrl": null
       },
-      "visibility": "public",
+      "visibility": "PUBLIC",
       "stats": {
         "reactions": 3,
         "comments": 1
@@ -10393,7 +10393,7 @@
       "authorId": {
         "$oid": "f4faaefa525a450a9a2cefec"
       },
-      "type": "recipe",
+      "type": "RECIPE",
       "text": "BBQ du dimanche 🔥",
       "pageId": null,
       "groupId": null,
@@ -10401,7 +10401,7 @@
         "imageUrl": "/uploads/posts/260.jpg",
         "videoUrl": null
       },
-      "visibility": "public",
+      "visibility": "PUBLIC",
       "stats": {
         "reactions": 3,
         "comments": 0
@@ -10420,7 +10420,7 @@
       "authorId": {
         "$oid": "d9e511663b994d6789f39a93"
       },
-      "type": "status",
+      "type": "STATUS",
       "text": "Nouvelle recette de ramen 🍜",
       "pageId": null,
       "groupId": null,
@@ -10428,7 +10428,7 @@
         "imageUrl": "/uploads/posts/261.jpg",
         "videoUrl": null
       },
-      "visibility": "public",
+      "visibility": "PUBLIC",
       "stats": {
         "reactions": 2,
         "comments": 2
@@ -10447,7 +10447,7 @@
       "authorId": {
         "$oid": "3816e0fe0fb5425b8c1c66b5"
       },
-      "type": "status",
+      "type": "STATUS",
       "text": "Tarte citron meringuée 🍋",
       "pageId": null,
       "groupId": null,
@@ -10455,7 +10455,7 @@
         "imageUrl": "/uploads/posts/262.jpg",
         "videoUrl": null
       },
-      "visibility": "public",
+      "visibility": "PUBLIC",
       "stats": {
         "reactions": 2,
         "comments": 2
@@ -10474,7 +10474,7 @@
       "authorId": {
         "$oid": "ba3312219d7d443cafa6b05b"
       },
-      "type": "status",
+      "type": "STATUS",
       "text": "Carbonara authentique 🇮🇹",
       "pageId": null,
       "groupId": {
@@ -10484,7 +10484,7 @@
         "imageUrl": null,
         "videoUrl": null
       },
-      "visibility": "public",
+      "visibility": "PUBLIC",
       "stats": {
         "reactions": 1,
         "comments": 1
@@ -10503,7 +10503,7 @@
       "authorId": {
         "$oid": "c20a2a6a94be492e9304b73b"
       },
-      "type": "recipe",
+      "type": "RECIPE",
       "text": "Astuce levain 🥖",
       "pageId": {
         "$oid": "c79d0108687c42b6a535703b"
@@ -10513,7 +10513,7 @@
         "imageUrl": null,
         "videoUrl": null
       },
-      "visibility": "followers",
+      "visibility": "FOLLOWERS",
       "stats": {
         "reactions": 4,
         "comments": 0
@@ -10532,7 +10532,7 @@
       "authorId": {
         "$oid": "0988240d0e6847d2abf384fb"
       },
-      "type": "recipe",
+      "type": "RECIPE",
       "text": "Tagine marocain 👌",
       "pageId": null,
       "groupId": null,
@@ -10540,7 +10540,7 @@
         "imageUrl": "/uploads/posts/265.jpg",
         "videoUrl": null
       },
-      "visibility": "public",
+      "visibility": "PUBLIC",
       "stats": {
         "reactions": 1,
         "comments": 1
@@ -10559,7 +10559,7 @@
       "authorId": {
         "$oid": "7cc94e9ac29a4101a02466aa"
       },
-      "type": "status",
+      "type": "STATUS",
       "text": "Nouvelle recette de ramen 🍜",
       "pageId": null,
       "groupId": null,
@@ -10567,7 +10567,7 @@
         "imageUrl": null,
         "videoUrl": null
       },
-      "visibility": "public",
+      "visibility": "PUBLIC",
       "stats": {
         "reactions": 3,
         "comments": 4
@@ -10586,7 +10586,7 @@
       "authorId": {
         "$oid": "7cc94e9ac29a4101a02466aa"
       },
-      "type": "recipe",
+      "type": "RECIPE",
       "text": "Brioche moelleuse maison 🍞",
       "pageId": null,
       "groupId": null,
@@ -10594,7 +10594,7 @@
         "imageUrl": "/uploads/posts/267.jpg",
         "videoUrl": null
       },
-      "visibility": "public",
+      "visibility": "PUBLIC",
       "stats": {
         "reactions": 1,
         "comments": 2
@@ -10613,7 +10613,7 @@
       "authorId": {
         "$oid": "b903b4e3163c492baec3347f"
       },
-      "type": "status",
+      "type": "STATUS",
       "text": "Café latte parfait ☕",
       "pageId": null,
       "groupId": {
@@ -10623,7 +10623,7 @@
         "imageUrl": "/uploads/posts/268.jpg",
         "videoUrl": null
       },
-      "visibility": "followers",
+      "visibility": "FOLLOWERS",
       "stats": {
         "reactions": 2,
         "comments": 0
@@ -10642,7 +10642,7 @@
       "authorId": {
         "$oid": "277b83705ccc42f1bfd9a1e6"
       },
-      "type": "status",
+      "type": "STATUS",
       "text": "Brioche moelleuse maison 🍞",
       "pageId": null,
       "groupId": null,
@@ -10650,7 +10650,7 @@
         "imageUrl": "/uploads/posts/269.jpg",
         "videoUrl": null
       },
-      "visibility": "public",
+      "visibility": "PUBLIC",
       "stats": {
         "reactions": 2,
         "comments": 1
@@ -10669,7 +10669,7 @@
       "authorId": {
         "$oid": "97e92ce36d594a90a9a04a36"
       },
-      "type": "status",
+      "type": "STATUS",
       "text": "Brioche moelleuse maison 🍞",
       "pageId": null,
       "groupId": null,
@@ -10677,7 +10677,7 @@
         "imageUrl": "/uploads/posts/270.jpg",
         "videoUrl": null
       },
-      "visibility": "public",
+      "visibility": "PUBLIC",
       "stats": {
         "reactions": 3,
         "comments": 0
@@ -10696,7 +10696,7 @@
       "authorId": {
         "$oid": "97e92ce36d594a90a9a04a36"
       },
-      "type": "status",
+      "type": "STATUS",
       "text": "Burger smash double cheese 🍔",
       "pageId": null,
       "groupId": {
@@ -10706,7 +10706,7 @@
         "imageUrl": "/uploads/posts/271.jpg",
         "videoUrl": null
       },
-      "visibility": "followers",
+      "visibility": "FOLLOWERS",
       "stats": {
         "reactions": 1,
         "comments": 4
@@ -10725,7 +10725,7 @@
       "authorId": {
         "$oid": "026b3d4726e04342ae76689d"
       },
-      "type": "status",
+      "type": "STATUS",
       "text": "Café latte parfait ☕",
       "pageId": null,
       "groupId": null,
@@ -10733,7 +10733,7 @@
         "imageUrl": "/uploads/posts/272.jpg",
         "videoUrl": null
       },
-      "visibility": "followers",
+      "visibility": "FOLLOWERS",
       "stats": {
         "reactions": 1,
         "comments": 2
@@ -10752,7 +10752,7 @@
       "authorId": {
         "$oid": "7d00eb053bdc4ad3924edd8a"
       },
-      "type": "status",
+      "type": "STATUS",
       "text": "BBQ du dimanche 🔥",
       "pageId": null,
       "groupId": null,
@@ -10760,7 +10760,7 @@
         "imageUrl": null,
         "videoUrl": null
       },
-      "visibility": "public",
+      "visibility": "PUBLIC",
       "stats": {
         "reactions": 4,
         "comments": 0
@@ -10779,7 +10779,7 @@
       "authorId": {
         "$oid": "b903b4e3163c492baec3347f"
       },
-      "type": "status",
+      "type": "STATUS",
       "text": "Astuce levain 🥖",
       "pageId": null,
       "groupId": null,
@@ -10787,7 +10787,7 @@
         "imageUrl": null,
         "videoUrl": null
       },
-      "visibility": "followers",
+      "visibility": "FOLLOWERS",
       "stats": {
         "reactions": 1,
         "comments": 0
@@ -10806,7 +10806,7 @@
       "authorId": {
         "$oid": "7134e496cdc44d7b97a9402d"
       },
-      "type": "recipe",
+      "type": "RECIPE",
       "text": "Carbonara authentique 🇮🇹",
       "pageId": null,
       "groupId": {
@@ -10816,7 +10816,7 @@
         "imageUrl": null,
         "videoUrl": null
       },
-      "visibility": "followers",
+      "visibility": "FOLLOWERS",
       "stats": {
         "reactions": 0,
         "comments": 0
@@ -10835,7 +10835,7 @@
       "authorId": {
         "$oid": "f59e334506a449e7a56661c8"
       },
-      "type": "recipe",
+      "type": "RECIPE",
       "text": "Nouvelle recette de ramen 🍜",
       "pageId": null,
       "groupId": null,
@@ -10843,7 +10843,7 @@
         "imageUrl": "/uploads/posts/276.jpg",
         "videoUrl": null
       },
-      "visibility": "public",
+      "visibility": "PUBLIC",
       "stats": {
         "reactions": 1,
         "comments": 3
@@ -10862,7 +10862,7 @@
       "authorId": {
         "$oid": "a59bc57d0bb74fb8a044fc5c"
       },
-      "type": "recipe",
+      "type": "RECIPE",
       "text": "Brioche moelleuse maison 🍞",
       "pageId": {
         "$oid": "c79d0108687c42b6a535703b"
@@ -10872,7 +10872,7 @@
         "imageUrl": "/uploads/posts/277.jpg",
         "videoUrl": null
       },
-      "visibility": "public",
+      "visibility": "PUBLIC",
       "stats": {
         "reactions": 1,
         "comments": 1
@@ -10891,7 +10891,7 @@
       "authorId": {
         "$oid": "a14688743a574d4dba6f0288"
       },
-      "type": "recipe",
+      "type": "RECIPE",
       "text": "Café latte parfait ☕",
       "pageId": null,
       "groupId": {
@@ -10901,7 +10901,7 @@
         "imageUrl": null,
         "videoUrl": null
       },
-      "visibility": "followers",
+      "visibility": "FOLLOWERS",
       "stats": {
         "reactions": 3,
         "comments": 0
@@ -10920,7 +10920,7 @@
       "authorId": {
         "$oid": "ba3312219d7d443cafa6b05b"
       },
-      "type": "status",
+      "type": "STATUS",
       "text": "BBQ du dimanche 🔥",
       "pageId": {
         "$oid": "8c60a34c77c049d0a6668901"
@@ -10930,7 +10930,7 @@
         "imageUrl": "/uploads/posts/279.jpg",
         "videoUrl": null
       },
-      "visibility": "followers",
+      "visibility": "FOLLOWERS",
       "stats": {
         "reactions": 5,
         "comments": 0
@@ -10949,7 +10949,7 @@
       "authorId": {
         "$oid": "32fa6abaa66e4e41821fe54f"
       },
-      "type": "status",
+      "type": "STATUS",
       "text": "Nouvelle recette de ramen 🍜",
       "pageId": null,
       "groupId": null,
@@ -10957,7 +10957,7 @@
         "imageUrl": null,
         "videoUrl": null
       },
-      "visibility": "followers",
+      "visibility": "FOLLOWERS",
       "stats": {
         "reactions": 4,
         "comments": 1
@@ -10976,7 +10976,7 @@
       "authorId": {
         "$oid": "cfd4359b15d94e09ab9cea32"
       },
-      "type": "status",
+      "type": "STATUS",
       "text": "Nouvelle recette de ramen 🍜",
       "pageId": null,
       "groupId": null,
@@ -10984,7 +10984,7 @@
         "imageUrl": null,
         "videoUrl": null
       },
-      "visibility": "followers",
+      "visibility": "FOLLOWERS",
       "stats": {
         "reactions": 3,
         "comments": 0
@@ -11003,7 +11003,7 @@
       "authorId": {
         "$oid": "9c50f425a2c04de8915de080"
       },
-      "type": "recipe",
+      "type": "RECIPE",
       "text": "Crêpes au sarrasin bretonnes 🥞",
       "pageId": null,
       "groupId": null,
@@ -11011,7 +11011,7 @@
         "imageUrl": null,
         "videoUrl": null
       },
-      "visibility": "public",
+      "visibility": "PUBLIC",
       "stats": {
         "reactions": 4,
         "comments": 1
@@ -11030,7 +11030,7 @@
       "authorId": {
         "$oid": "038b08ec168a44e4bd3989b6"
       },
-      "type": "status",
+      "type": "STATUS",
       "text": "Brioche moelleuse maison 🍞",
       "pageId": null,
       "groupId": {
@@ -11040,7 +11040,7 @@
         "imageUrl": "/uploads/posts/283.jpg",
         "videoUrl": null
       },
-      "visibility": "public",
+      "visibility": "PUBLIC",
       "stats": {
         "reactions": 1,
         "comments": 0
@@ -11059,7 +11059,7 @@
       "authorId": {
         "$oid": "a1c37576660d41649d044992"
       },
-      "type": "status",
+      "type": "STATUS",
       "text": "Carbonara authentique 🇮🇹",
       "pageId": null,
       "groupId": {
@@ -11069,7 +11069,7 @@
         "imageUrl": "/uploads/posts/284.jpg",
         "videoUrl": null
       },
-      "visibility": "followers",
+      "visibility": "FOLLOWERS",
       "stats": {
         "reactions": 2,
         "comments": 0
@@ -11088,7 +11088,7 @@
       "authorId": {
         "$oid": "2eb13e9b44e84d7b878cd579"
       },
-      "type": "status",
+      "type": "STATUS",
       "text": "Crêpes au sarrasin bretonnes 🥞",
       "pageId": null,
       "groupId": null,
@@ -11096,7 +11096,7 @@
         "imageUrl": null,
         "videoUrl": null
       },
-      "visibility": "followers",
+      "visibility": "FOLLOWERS",
       "stats": {
         "reactions": 0,
         "comments": 0
@@ -11115,7 +11115,7 @@
       "authorId": {
         "$oid": "2e759a0ae9364ec082113afc"
       },
-      "type": "status",
+      "type": "STATUS",
       "text": "Tagine marocain 👌",
       "pageId": {
         "$oid": "3d43f650f75e4c509c96f795"
@@ -11125,7 +11125,7 @@
         "imageUrl": "/uploads/posts/286.jpg",
         "videoUrl": null
       },
-      "visibility": "followers",
+      "visibility": "FOLLOWERS",
       "stats": {
         "reactions": 3,
         "comments": 1
@@ -11144,7 +11144,7 @@
       "authorId": {
         "$oid": "09ff2e11d2734f23828d38ff"
       },
-      "type": "status",
+      "type": "STATUS",
       "text": "Tagine marocain 👌",
       "pageId": null,
       "groupId": {
@@ -11154,7 +11154,7 @@
         "imageUrl": null,
         "videoUrl": null
       },
-      "visibility": "public",
+      "visibility": "PUBLIC",
       "stats": {
         "reactions": 1,
         "comments": 0
@@ -11173,7 +11173,7 @@
       "authorId": {
         "$oid": "038b08ec168a44e4bd3989b6"
       },
-      "type": "status",
+      "type": "STATUS",
       "text": "BBQ du dimanche 🔥",
       "pageId": null,
       "groupId": null,
@@ -11181,7 +11181,7 @@
         "imageUrl": null,
         "videoUrl": null
       },
-      "visibility": "followers",
+      "visibility": "FOLLOWERS",
       "stats": {
         "reactions": 3,
         "comments": 2
@@ -11200,7 +11200,7 @@
       "authorId": {
         "$oid": "01c1b12fc46a4ce9a539f78f"
       },
-      "type": "recipe",
+      "type": "RECIPE",
       "text": "Crêpes au sarrasin bretonnes 🥞",
       "pageId": {
         "$oid": "2e90b99fef2e4a2e9df57a55"
@@ -11212,7 +11212,7 @@
         "imageUrl": null,
         "videoUrl": null
       },
-      "visibility": "followers",
+      "visibility": "FOLLOWERS",
       "stats": {
         "reactions": 1,
         "comments": 3
@@ -11231,7 +11231,7 @@
       "authorId": {
         "$oid": "14b2f125f4b04314b53af5df"
       },
-      "type": "status",
+      "type": "STATUS",
       "text": "Crêpes au sarrasin bretonnes 🥞",
       "pageId": {
         "$oid": "3d43f650f75e4c509c96f795"
@@ -11243,7 +11243,7 @@
         "imageUrl": null,
         "videoUrl": null
       },
-      "visibility": "public",
+      "visibility": "PUBLIC",
       "stats": {
         "reactions": 2,
         "comments": 1
@@ -11262,7 +11262,7 @@
       "authorId": {
         "$oid": "9a8c89bb5ed443a78ba6662e"
       },
-      "type": "recipe",
+      "type": "RECIPE",
       "text": "Carbonara authentique 🇮🇹",
       "pageId": null,
       "groupId": null,
@@ -11270,7 +11270,7 @@
         "imageUrl": "/uploads/posts/291.jpg",
         "videoUrl": null
       },
-      "visibility": "followers",
+      "visibility": "FOLLOWERS",
       "stats": {
         "reactions": 2,
         "comments": 2
@@ -11289,7 +11289,7 @@
       "authorId": {
         "$oid": "5d642cdcc56d4db4b70a00eb"
       },
-      "type": "recipe",
+      "type": "RECIPE",
       "text": "Nouvelle recette de ramen 🍜",
       "pageId": null,
       "groupId": null,
@@ -11297,7 +11297,7 @@
         "imageUrl": null,
         "videoUrl": null
       },
-      "visibility": "public",
+      "visibility": "PUBLIC",
       "stats": {
         "reactions": 1,
         "comments": 2
@@ -11316,7 +11316,7 @@
       "authorId": {
         "$oid": "038b08ec168a44e4bd3989b6"
       },
-      "type": "recipe",
+      "type": "RECIPE",
       "text": "Crêpes au sarrasin bretonnes 🥞",
       "pageId": null,
       "groupId": null,
@@ -11324,7 +11324,7 @@
         "imageUrl": "/uploads/posts/293.jpg",
         "videoUrl": null
       },
-      "visibility": "followers",
+      "visibility": "FOLLOWERS",
       "stats": {
         "reactions": 0,
         "comments": 2
@@ -11343,7 +11343,7 @@
       "authorId": {
         "$oid": "a14688743a574d4dba6f0288"
       },
-      "type": "status",
+      "type": "STATUS",
       "text": "Astuce levain 🥖",
       "pageId": null,
       "groupId": null,
@@ -11351,7 +11351,7 @@
         "imageUrl": "/uploads/posts/294.jpg",
         "videoUrl": null
       },
-      "visibility": "public",
+      "visibility": "PUBLIC",
       "stats": {
         "reactions": 0,
         "comments": 3
@@ -11370,7 +11370,7 @@
       "authorId": {
         "$oid": "684528d8ee5346e8aa44723d"
       },
-      "type": "recipe",
+      "type": "RECIPE",
       "text": "Astuce levain 🥖",
       "pageId": {
         "$oid": "df0e507048f24874bb34ad17"
@@ -11380,7 +11380,7 @@
         "imageUrl": "/uploads/posts/295.jpg",
         "videoUrl": null
       },
-      "visibility": "public",
+      "visibility": "PUBLIC",
       "stats": {
         "reactions": 4,
         "comments": 1
@@ -11399,7 +11399,7 @@
       "authorId": {
         "$oid": "9b7825da3f4d41028306f526"
       },
-      "type": "recipe",
+      "type": "RECIPE",
       "text": "Nouvelle recette de ramen 🍜",
       "pageId": null,
       "groupId": null,
@@ -11407,7 +11407,7 @@
         "imageUrl": null,
         "videoUrl": null
       },
-      "visibility": "followers",
+      "visibility": "FOLLOWERS",
       "stats": {
         "reactions": 1,
         "comments": 2
@@ -11426,7 +11426,7 @@
       "authorId": {
         "$oid": "79a3b9d3af5041de8a20c902"
       },
-      "type": "status",
+      "type": "STATUS",
       "text": "Tarte citron meringuée 🍋",
       "pageId": null,
       "groupId": null,
@@ -11434,7 +11434,7 @@
         "imageUrl": "/uploads/posts/297.jpg",
         "videoUrl": null
       },
-      "visibility": "followers",
+      "visibility": "FOLLOWERS",
       "stats": {
         "reactions": 2,
         "comments": 2
@@ -11453,7 +11453,7 @@
       "authorId": {
         "$oid": "9c50f425a2c04de8915de080"
       },
-      "type": "status",
+      "type": "STATUS",
       "text": "Burger smash double cheese 🍔",
       "pageId": null,
       "groupId": {
@@ -11463,7 +11463,7 @@
         "imageUrl": "/uploads/posts/298.jpg",
         "videoUrl": null
       },
-      "visibility": "followers",
+      "visibility": "FOLLOWERS",
       "stats": {
         "reactions": 2,
         "comments": 1
@@ -11482,7 +11482,7 @@
       "authorId": {
         "$oid": "09ff2e11d2734f23828d38ff"
       },
-      "type": "recipe",
+      "type": "RECIPE",
       "text": "Crêpes au sarrasin bretonnes 🥞",
       "pageId": null,
       "groupId": null,
@@ -11490,7 +11490,7 @@
         "imageUrl": "/uploads/posts/299.jpg",
         "videoUrl": null
       },
-      "visibility": "followers",
+      "visibility": "FOLLOWERS",
       "stats": {
         "reactions": 1,
         "comments": 2
