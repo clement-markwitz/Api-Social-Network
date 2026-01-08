@@ -1,22 +1,15 @@
 meta {
-  name: Ban User
+  name: get all bans
   type: http
-  seq: 1
+  seq: 3
 }
 
-post {
-  url: http://192.168.1.36:8080/api/admin/users/696005b115394b7953d5b303/ban
-  body: json
+get {
+  url: http://192.168.1.36:8080/api/admin/bans
+  body: none
   auth: bearer
 }
 
 auth:bearer {
   token: eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJyb2JlcnQgZHVjaG1vbCIsImlhdCI6MTc2NzkwMDQ1MSwiZXhwIjoxNzY3OTg2ODUxfQ.IGrX90OtBlrrk8LLXUCYUoQ4FzLAxO-3rQyioBAgE_V8F--AoEB9PJrPyNE5CZng
-}
-
-body:json {
-  {
-    "reason": "Insultes répétées dans les commentaires",
-    "durationDays": 7
-  }
 }
