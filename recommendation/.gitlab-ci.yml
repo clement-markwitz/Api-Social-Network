@@ -1,0 +1,42 @@
+default:
+  tags:
+    - virtuav
+
+stages:
+  - build
+  - deploy
+
+variables:
+  URL_REGISTRE_IMAGE: "reg.chez-wam.info"
+  NEXUS_USER: "ociuser"
+  NEXUS_PASSWD: "ocipasswd"
+  FLASK_RECO_BACK: "${CI_PROJECT_DIR}/"
+  HTTP_PROXY: "http://proxy.univ-lille.fr:3128"
+  HTTPS_PROXY: "http://proxy.univ-lille.fr:3128"
+  NO_PROXY: "localhost,127.0.0.1,.univ-lille.fr"
+
+build_flask_reco_back:
+  stage: build
+  image:
+    name: gcr.io/kaniko-project/executor:v1.18.0-debug
+    entrypoint: [ "" ]
+  script:
+    - mkdir -p /kaniko/.docker
+    - echo "{\"auths\":{\"${URL_REGISTRE_IMAGE}\":{\"auth\":\"$(printf "%s:%s" "${NEXUS_USER}" "${NEXUS_PASSWD}" | base64 | tr -d '\n')\"}}}" > /kaniko/.docker/config.json
+    # Construction et push de l’image Flask
+    - >-
+      /kaniko/executor
+      --context "${FLASK_RECO_BACK}"
+      --dockerfile "${FLASK_RECO_BACK}/Dockerfile"
+      --destination "${URL_REGISTRE_IMAGE}/flask-reco-back:latest"
+      --build-arg HTTP_PROXY="${HTTP_PROXY}"
+      --build-arg HTTPS_PROXY="${HTTPS_PROXY}"
+      --build-arg NO_PROXY="${NO_PROXY}"
+
+deploy_nomad:
+  stage: deploy
+  image: reg.chez-wam.info/nomad:prof-2.2
+  script:
+    - export NOMAD_ADDR=https://nomad.virtu.chez-wam.info/
+    - export NOMAD_TOKEN="70f3d061-da6e-1e89-1496-259dbe1705be"
+    - nomad run recommandation.nomad
