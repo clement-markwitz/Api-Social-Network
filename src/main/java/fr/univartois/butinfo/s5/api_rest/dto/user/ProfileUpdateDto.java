@@ -16,6 +16,8 @@ public record ProfileUpdateDto(
         @Size(max = 100)
         String location,
 
+        String avatarUrl,
+
         List<String> languages
 ) {
 }

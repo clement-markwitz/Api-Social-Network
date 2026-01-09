@@ -1,6 +1,7 @@
 package fr.univartois.butinfo.s5.api_rest.repository;
 
 import fr.univartois.butinfo.s5.api_rest.model.User;
+import org.springframework.data.mongodb.repository.Aggregation;
 import org.springframework.data.mongodb.repository.MongoRepository;
 
 import java.time.LocalDateTime;
@@ -35,4 +36,15 @@ public interface UserRepository extends MongoRepository<User, String> {
      * @return the count of users created in the specified date range
      */
     long countByCreatedAtBetween(LocalDateTime start, LocalDateTime end);
+
+    /**
+     * Retrieve a list of random users.
+     *
+     * @return a list of random User entities
+     */
+    @Aggregation(pipeline = {
+            "{ '$match': { '_id': { '$ne': ?1 } } }", // 1. On exclut l'utilisateur qui fait la demande
+            "{ '$sample': { 'size': ?0 } }"           // 2. On prend 'count' documents au hasard
+    })
+    List<User> findRandomUsers(int count, String excludedUserId);
 }

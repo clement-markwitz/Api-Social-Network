@@ -21,15 +21,17 @@ public class CommunityService {
     private final CommunityRepository communityRepository;
     private final CommunityMembershipRepository communityMembershipRepository;
 
-    public CommunityService(CommunityRepository communityRepository, CommunityMembershipRepository communityMembershipRepository) {
+    public CommunityService(CommunityRepository communityRepository,
+            CommunityMembershipRepository communityMembershipRepository) {
         this.communityRepository = communityRepository;
         this.communityMembershipRepository = communityMembershipRepository;
     }
 
     /**
      * Verify if the user has admin rights in the community.
+     * 
      * @param community the community
-     * @param user the user
+     * @param user      the user
      */
     public boolean isCommunityAdmin(Community community, User user) {
         return community.getAdmins() != null && community.getAdmins().stream()
@@ -47,16 +49,18 @@ public class CommunityService {
 
     /**
      * Get a community by its ID.
+     * 
      * @param id the community ID
      * @return the community
      */
     public Community getById(String id) {
-        return communityRepository.findById(id).orElseThrow(() ->
-                new ResponseStatusException(HttpStatus.NOT_FOUND, "Community not found"));
+        return communityRepository.findById(id)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Community not found"));
     }
 
     /**
      * Create a new community.
+     * 
      * @param community the community
      * @return the created community
      */
@@ -66,6 +70,7 @@ public class CommunityService {
 
     /**
      * Update an existing community.
+     * 
      * @param community the community
      * @return the updated community
      */
@@ -75,6 +80,7 @@ public class CommunityService {
 
     /**
      * Delete a community by its ID.
+     * 
      * @param id the community ID
      */
     public void deleteCommunity(String id) {
@@ -88,7 +94,7 @@ public class CommunityService {
      * Add a member to a community.
      *
      * @param communityId the community ID
-     * @param user the user to be added
+     * @param user        the user to be added
      */
     public void addMemberToCommunity(String communityId, User user) {
 
@@ -109,9 +115,21 @@ public class CommunityService {
      * Remove a member from a community.
      *
      * @param communityId the community ID
-     * @param userid the user ID to be removed
+     * @param userid      the user ID to be removed
      */
     public void removeMemberFromCommunity(String communityId, String userid) {
         communityMembershipRepository.deleteByUserIdAndCommunityId(userid, communityId);
+    }
+
+    /**
+     * Get all members of a community.
+     *
+     * @param communityId the community ID
+     * @return list of users who are members of the community
+     */
+    public List<User> getMembersByCommunityId(String communityId) {
+        return communityMembershipRepository.findAllByCommunityId(communityId).stream()
+                .map(CommunityMembership::getUser)
+                .toList();
     }
 }

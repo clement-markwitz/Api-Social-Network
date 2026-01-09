@@ -3,6 +3,7 @@ package fr.univartois.butinfo.s5.api_rest.repository;
 import fr.univartois.butinfo.s5.api_rest.model.Post;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.mongodb.repository.Aggregation;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Repository;
 
@@ -70,4 +71,15 @@ public interface PostRepository extends MongoRepository<Post, String> {
      * @return the count of posts created in the specified date range
      */
     long countByCreatedAtBetween(LocalDateTime start, LocalDateTime end);
+
+    /**
+     * Retrieve a list of random posts.
+     *
+     * @return a list of random Post entities
+     */
+    @Aggregation( pipeline = {
+            "{ '$match': { 'author.$id': { '$ne': ?1 } } }",
+            "{ '$sample': { 'size': ?0 } }"
+    })
+    List<Post> findRandomPosts(int count, String excludedUserId);
 }

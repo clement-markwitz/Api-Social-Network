@@ -14,6 +14,8 @@ public record CommunityCreateDto(
 
         @Size(max = 500)
         String description,
+        
+        String avatarUrl,
 
         List<String> topics
 ) {
