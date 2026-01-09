@@ -3,6 +3,12 @@ package fr.univartois.butinfo.s5.api_rest.service;
 import fr.univartois.butinfo.s5.api_rest.dto.recommendation.FriendRecommendationDto;
 import fr.univartois.butinfo.s5.api_rest.dto.recommendation.PageRecommendationDto;
 import fr.univartois.butinfo.s5.api_rest.dto.recommendation.PostRecommendationDto;
+import fr.univartois.butinfo.s5.api_rest.model.Page;
+import fr.univartois.butinfo.s5.api_rest.model.Post;
+import fr.univartois.butinfo.s5.api_rest.model.User;
+import fr.univartois.butinfo.s5.api_rest.repository.PageRepository;
+import fr.univartois.butinfo.s5.api_rest.repository.PostRepository;
+import fr.univartois.butinfo.s5.api_rest.repository.UserRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
@@ -12,6 +18,7 @@ import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -34,14 +41,29 @@ public class RecommendationService {
 
     private final RestTemplate restTemplate;
 
+    private final UserRepository userRepository;
+
+    private final PostRepository postRepository;
+
+    private final PageRepository pageRepository;
+
+    private static final int RANDOM_FRIEND_RECOMMENDATION_COUNT = 5;
+
+    private static final int RANDOM_PAGE_RECOMMENDATION_COUNT = 5;
+
+    private static final int RANDOM_POST_RECOMMENDATION_COUNT = 10;
+
     @Value("${recommendation.api.url}")
     private String recommendationApiUrl;
 
     /**
      * Default constructor initializing the HTTP client.
      */
-    public RecommendationService() {
+    public RecommendationService(UserRepository userRepository, PostRepository postRepository, PageRepository pageRepository) {
         this.restTemplate = new RestTemplate();
+        this.userRepository = userRepository;
+        this.postRepository = postRepository;
+        this.pageRepository = pageRepository;
     }
 
     /**
@@ -69,6 +91,26 @@ public class RecommendationService {
             return Collections.emptyList();
         }
     }
+    /**
+     * Retrieves a list of random friend recommendations for a specific user.
+     *
+     * @param userId The unique identifier of the user for whom recommendations are generated.
+     * @return A list of {@link FriendRecommendationDto} containing suggested users.
+     */
+    public List<FriendRecommendationDto> getRandomFriendRecommendations(String userId) {
+
+        List<User> randomUsers = userRepository.findRandomUsers(RANDOM_FRIEND_RECOMMENDATION_COUNT, userId);
+
+        return randomUsers.stream().map(user -> {
+            FriendRecommendationDto dto = new FriendRecommendationDto();
+            dto.setCandidateId(user.getId());
+            dto.setCandidateName(user.getProfile().getPseudo());
+            // set a random score between 0.0 and 10.0
+            dto.setTotalScore(Math.random() * 10.0);
+            return dto;
+        }).toList();
+
+    }
 
     /**
      * Retrieves a list of page recommendations (communities, businesses, etc.) for a user.
@@ -92,6 +134,23 @@ public class RecommendationService {
         }
     }
 
+    /**
+     * Retrieves a list of random page recommendations.
+     *
+     * @return A list of {@link PageRecommendationDto} containing suggested pages.
+     */
+    public List<PageRecommendationDto> getRandomPageRecommendations() {
+        List<Page> randomPages = pageRepository.findRandomPages(RANDOM_PAGE_RECOMMENDATION_COUNT);
+
+        return randomPages.stream().map(page -> {
+            PageRecommendationDto dto = new PageRecommendationDto();
+            dto.setId(page.getId());
+            dto.setName(page.getName());
+            dto.setTotalScore(Math.random() * 10.0);
+            return dto;
+        }).toList();
+    }
+
 
     /**
      * Retrieves a list of post recommendations likely to interest the user.
@@ -113,5 +172,22 @@ public class RecommendationService {
             logger.error("Error calling recommendation service (Posts): {}", e.getMessage());
             return Collections.emptyList();
         }
+    }
+
+    /**
+     * Retrieves a list of random post recommendations.
+     *
+     * @return A list of {@link PostRecommendationDto} containing suggested posts.
+     */
+    public List<PostRecommendationDto> getRandomPostRecommendations(String userId) {
+
+        List<Post> randomPosts = postRepository.findRandomPosts(RANDOM_POST_RECOMMENDATION_COUNT, userId);
+
+        return randomPosts.stream().map(post -> {
+            PostRecommendationDto dto = new PostRecommendationDto();
+            dto.setId(post.getId());
+            dto.setLikedByFriends((long)( Math.random() * 20));
+            return dto;
+        }).toList();
     }
 }

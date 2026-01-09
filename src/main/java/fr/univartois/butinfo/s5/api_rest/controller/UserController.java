@@ -244,7 +244,8 @@ public class UserController {
     public ResponseEntity<List<FriendRecommendationDto>> getUserRecommendations(@PathVariable String id) {
 
         userService.getById(id);
-        List<FriendRecommendationDto> recommendations = recommendationService.getFriendRecommendations(id);
+        List<FriendRecommendationDto> recommendations = recommendationService.getRandomFriendRecommendations(id);
+        // List<FriendRecommendationDto> recommendations = recommendationService.getFriendRecommendations(id);
 
         return ResponseEntity.ok(recommendations);
     }
@@ -267,7 +268,9 @@ public class UserController {
     })
     public ResponseEntity<List<PageRecommendationDto>> getPageRecommendations(@PathVariable String id) {
         userService.getById(id);
-        return ResponseEntity.ok(recommendationService.getPageRecommendations(id));
+        //List<PageRecommendationDto> recommendations = recommendationService.getPageRecommendations(id);
+        List<PageRecommendationDto> recommendations = recommendationService.getRandomPageRecommendations();
+        return ResponseEntity.ok(recommendations);
     }
 
     /**
@@ -288,6 +291,8 @@ public class UserController {
     })
     public ResponseEntity<List<PostRecommendationDto>> getPostRecommendations(@PathVariable String id) {
         userService.getById(id);
-        return ResponseEntity.ok(recommendationService.getPostRecommendations(id));
+        //List<PostRecommendationDto> recommendations = recommendationService.getPostRecommendations(id);
+        List<PostRecommendationDto> recommendations = recommendationService.getRandomPostRecommendations(id);
+        return ResponseEntity.ok(recommendations);
     }
 }
