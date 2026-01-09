@@ -40,11 +40,12 @@ public class CommunityController {
      * Constructor for CommunityController.
      *
      * @param communityService the community service
-     * @param communityMapper the community mapper
-     * @param postService the post service
-     * @param postMapper the post mapper
+     * @param communityMapper  the community mapper
+     * @param postService      the post service
+     * @param postMapper       the post mapper
      */
-    public CommunityController(CommunityService communityService, CommunityMapper communityMapper, PostService postService, PostMapper postMapper) {
+    public CommunityController(CommunityService communityService, CommunityMapper communityMapper,
+            PostService postService, PostMapper postMapper) {
         this.communityService = communityService;
         this.communityMapper = communityMapper;
         this.postService = postService;
@@ -82,13 +83,14 @@ public class CommunityController {
     })
     public ResponseEntity<CommunityDetailDto> getCommunity(@PathVariable String id) {
         Community community = communityService.getById(id);
-        return ResponseEntity.ok(communityMapper.toDetailDto(community));
+        List<User> members = communityService.getMembersByCommunityId(id);
+        return ResponseEntity.ok(communityMapper.toDetailDto(community, members));
     }
 
     /**
      * Create a new community.
      *
-     * @param createDto CommunityCreateDto
+     * @param createDto      CommunityCreateDto
      * @param authentication Authentication
      * @return ResponseEntity with CommunityDetailDto
      */
@@ -98,22 +100,24 @@ public class CommunityController {
             @ApiResponse(responseCode = "201", description = "Community created successfully"),
             @ApiResponse(responseCode = "400", description = "Invalid community data")
     })
-    public ResponseEntity<CommunityDetailDto> createCommunity(@Valid @RequestBody CommunityCreateDto createDto, Authentication authentication) {
+    public ResponseEntity<CommunityDetailDto> createCommunity(@Valid @RequestBody CommunityCreateDto createDto,
+            Authentication authentication) {
 
         Community entity = communityMapper.toEntity(createDto);
         User admin = (User) authentication.getPrincipal();
         entity.addAdmin(admin);
         Community savedCommunity = communityService.createCommunity(entity);
+        List<User> members = communityService.getMembersByCommunityId(savedCommunity.getId());
 
         return ResponseEntity.status(HttpStatus.CREATED)
-                .body(communityMapper.toDetailDto(savedCommunity));
+                .body(communityMapper.toDetailDto(savedCommunity, members));
     }
 
     /**
      * Update a community.
      *
-     * @param id Community ID
-     * @param updateDto CommunityUpdateDto
+     * @param id             Community ID
+     * @param updateDto      CommunityUpdateDto
      * @param authentication Authentication
      * @return ResponseEntity with CommunityDetailDto
      */
@@ -138,14 +142,15 @@ public class CommunityController {
         }
         communityMapper.updateEntityFromDto(updateDto, existingCommunity);
         Community updatedCommunity = communityService.updateCommunity(existingCommunity);
+        List<User> members = communityService.getMembersByCommunityId(id);
 
-        return ResponseEntity.ok(communityMapper.toDetailDto(updatedCommunity));
+        return ResponseEntity.ok(communityMapper.toDetailDto(updatedCommunity, members));
     }
 
     /**
      * Delete a community.
      *
-     * @param id Community ID
+     * @param id             Community ID
      * @param authentication Authentication
      * @return ResponseEntity with no content
      */
@@ -191,6 +196,7 @@ public class CommunityController {
 
     /**
      * Follow a community.
+     * 
      * @param id Community ID
      * @return
      */
@@ -211,6 +217,7 @@ public class CommunityController {
 
     /**
      * Unfollow a community.
+     * 
      * @param id Community ID
      * @return
      */

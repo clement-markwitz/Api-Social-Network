@@ -4,6 +4,7 @@ import fr.univartois.butinfo.s5.api_rest.dto.community.CommunityCreateDto;
 import fr.univartois.butinfo.s5.api_rest.dto.community.CommunityDetailDto;
 import fr.univartois.butinfo.s5.api_rest.dto.community.CommunitySummaryDto;
 import fr.univartois.butinfo.s5.api_rest.dto.community.CommunityUpdateDto;
+import fr.univartois.butinfo.s5.api_rest.dto.user.UserSummaryDto;
 import fr.univartois.butinfo.s5.api_rest.model.Community;
 import fr.univartois.butinfo.s5.api_rest.model.User;
 import org.mapstruct.*;
@@ -15,7 +16,8 @@ import java.util.List;
  * Mapper pour les communautés.
  * Utilise MapStruct pour la conversion entre entités et DTOs.
  */
-@Mapper(componentModel = "spring", nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
+@Mapper(componentModel = "spring", nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE, uses = {
+        UserMapper.class })
 public interface CommunityMapper {
 
     /**
@@ -28,18 +30,19 @@ public interface CommunityMapper {
      */
     void updateEntityFromDto(CommunityUpdateDto dto, @MappingTarget Community entity);
 
-
     /**
      * Convertit une Entité en DTO résumé.
      */
     CommunitySummaryDto toSummaryDto(Community entity);
 
     /**
-     * We need to explicitly map the list of admins (List<User>) to a list of their IDs (List<String>)
-     * when converting to CommunityDetailDto.
+     * Converts a Community entity to a CommunityDetailDto with members.
+     * Note: members must be provided separately as they come from
+     * CommunityMembership.
      */
-    @Mapping(target = "adminIds", source = "admins", qualifiedByName = "mapUsersToIds")
-    CommunityDetailDto toDetailDto(Community entity);
+    @Mapping(target = "adminIds", source = "entity.admins", qualifiedByName = "mapUsersToIds")
+    @Mapping(target = "members", source = "members")
+    CommunityDetailDto toDetailDto(Community entity, List<User> members);
 
     /**
      * Method helper to map a list of User entities to a list of their IDs.
@@ -53,4 +56,9 @@ public interface CommunityMapper {
                 .map(User::getId)
                 .toList();
     }
+
+    /**
+     * Convert a list of Users to a list of UserSummaryDto.
+     */
+    List<UserSummaryDto> toUserSummaryDtoList(List<User> users);
 }
