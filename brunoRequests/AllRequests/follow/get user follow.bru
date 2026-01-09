@@ -1,23 +1,19 @@
 meta {
-  name: Get Users
+  name: get user follow
   type: http
-  seq: 2
+  seq: 4
 }
 
-post {
-  url: http://10.26.233.123:8080/api/follows/:id
+get {
+  url: http://10.26.233.123:8080/api/follows/:id/following
   body: none
   auth: bearer
 }
 
 params:path {
-  id: 6960cae5f25ec0feb6c204ba
+  id: 5b6f040941bb4a13a5da05e1
 }
 
 auth:bearer {
   token: eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJyb2JlcnQgZHVjaG1vbCIsImlhdCI6MTc2Nzk1MDg4MywiZXhwIjoxNzY4MDM3MjgzfQ.-5uqQttvVUEEG5BEaqaEr7czcvSmfhsT6tIC5jeYCf8ZPsI-c5zjgCPO4uZOSG00
-}
-
-docs {
-  This request retrieves a list of users from the JSONPlaceholder API.
 }

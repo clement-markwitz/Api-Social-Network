@@ -141,4 +141,27 @@ public class FollowController {
         List<User> friends = followService.getFriends(userId);
         return ResponseEntity.ok(friends.stream().map(userMapper::toSummaryDto).toList());
     }
+
+    @Operation(summary = "Get Following Users for a given user")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "List of following users retrieved successfully"),
+            @ApiResponse(responseCode = "404", description = "User not found")
+    })
+    @GetMapping("/{userId}/following")
+    public ResponseEntity<List<UserSummaryDto>> getFollowingByUser(@PathVariable String userId) {
+        List<User> users = followService.getFollowing(userId);
+        return ResponseEntity.ok(users.stream().map(userMapper::toSummaryDto).toList());
+    }
+
+    @Operation(summary = "Get Followers Users for a given user")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "List of followers retrieved successfully"),
+            @ApiResponse(responseCode = "404", description = "User not found")
+    })
+    @GetMapping("/{userId}/followers")
+    public ResponseEntity<List<UserSummaryDto>> getFollowersByUser(@PathVariable String userId) {
+        List<User> users = followService.getFollowers(userId);
+        return ResponseEntity.ok(users.stream().map(userMapper::toSummaryDto).toList());
+    }
 }
+
