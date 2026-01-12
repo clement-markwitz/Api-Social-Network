@@ -88,8 +88,11 @@ public class PageService {
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, PAGE_NOT_FOUND));
         if (dto.description() != null) page.setDescription(dto.description());
         if (dto.topics() != null) page.setTopics(dto.topics());
+        if (dto.name() != null) page.setName(dto.name());
+        if (dto.avatarUrl() != null) page.setAvatarUrl(dto.avatarUrl());
 
         page.setUpdatedAt(LocalDateTime.now());
+
 
         Page updatedPage = pageRepository.save(page);
         return pageMapper.toDetailDto(updatedPage);

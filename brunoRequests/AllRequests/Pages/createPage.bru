@@ -5,19 +5,20 @@ meta {
 }
 
 post {
-  url: http://localhost:8080/api/pages
+  url: http://10.26.233.123:8080/api/pages
   body: json
   auth: bearer
 }
 
 auth:bearer {
-  token: eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJzaW1vbnJhZHVyZyIsImlhdCI6MTc2NjEzNTk3MywiZXhwIjoxNzY2MjIyMzczfQ.QJA-Jw4fDDpJ0gX5ujW4iy_aVr5DbG7aL9gqBI3KbKeoaoMGL4n_lWojDMGlr_xq
+  token: eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJyb2JlcnQgZHVjaG1vbCIsImlhdCI6MTc2ODIxODYyNSwiZXhwIjoxNzY4MzA1MDI1fQ.eepqlRq5CPxqMMuBoODW23-gjS57NnvUqAq4yUEmUPjg2HI-nfNV-z-sw3QvWfyC
 }
 
 body:json {
   {
     "name": "Stret",
     "description": "Tout sur la cuisine de rue japonaise : Takoyaki, Yakitori et Ramen.",
-    "topics": ["Asie", "Street Food", "Voyage"]
+    "topics": ["Asie", "Street Food", "Voyage"],
+    "avatarUrl": "test"
   }
 }

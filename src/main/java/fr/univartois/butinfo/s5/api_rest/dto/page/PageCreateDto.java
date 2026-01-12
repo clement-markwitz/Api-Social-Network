@@ -15,6 +15,8 @@ public record PageCreateDto(
         @Size(max = 500)
         String description,
 
-        List<String> topics
+        List<String> topics,
+
+        String avatarUrl
 ) {
 }
