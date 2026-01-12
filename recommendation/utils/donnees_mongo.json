@@ -2,6 +2,41 @@
   "users": [
     {
       "_id": {
+        "$oid": "d3f5e8c4e6f4a2b1c0d9e8f7"
+      },
+      "username" : "robert_duchmol",
+      "email" : "robert_duchmol@example.com",
+      "password" : "$2y$10$o2vVH81okFJ88iqGdkGdIu.Gn8Jdyn1GlRkBcsin4.RzGCPxfK.5m",
+      "role" : "ADMIN",
+      "profile" : {
+        "pseudo" : "Admin",
+        "bio" : "I am the administrator of this application.",
+        "avatarUrl" : "https://example.com/avatar/admin.png",
+        "location" : "Headquarters",
+        "languages" : [
+          "en",
+          "fr"
+        ]
+      },
+      "prefs" : {
+        "diets" : [ "vegetarian" ],
+        "allergies" : [ "peanuts" ],
+        "dislikedIngredients" : [ "broccoli" ]
+      },
+      "interests" : {
+        "cuisines" : [ "French", "Italian" ],
+        "techniques" : [ "baking", "grilling" ]
+      },
+      "banned" : false,
+      "createdAt": {
+        "$date": "2025-11-09T15:12:03Z"
+      },
+      "updatedAt": {
+        "$date": "2025-09-05T15:46:14Z"
+      }
+    },
+    {
+      "_id": {
         "$oid": "018144f03d41e711b8c74a4b"
       },
       "username": "capucine21_0",
