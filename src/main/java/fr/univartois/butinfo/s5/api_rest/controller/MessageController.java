@@ -64,12 +64,6 @@ public class MessageController {
         User sender = (User) authentication.getPrincipal();
         Conversation conversation = conversationService.findById(conversationId);
 
-        boolean isMember = conversation.getMembers().stream()
-                .anyMatch(u -> u.getId().equals(sender.getId()));
-        if (!isMember) {
-            throw new ResponseStatusException(HttpStatus.FORBIDDEN, "Not a member of this conversation");
-        }
-
         Message message = messageMapper.toEntity(dto);
         return messageService.sendMessage(conversation, message, sender);
     }

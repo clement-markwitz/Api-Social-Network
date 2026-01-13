@@ -50,12 +50,4 @@ public interface BlockRepository extends MongoRepository<Block, String> {
      */
     void deleteByBlockerIdAndBlockedId(String blockerId, String blockedId);
 
-    /**
-     * Find a block by its id, blocker id, and blocked id.
-     * @param id the ID of the block
-     * @param blockerId the ID of the user who initiated the block
-     * @param blockedId the ID of the user who is blocked
-     * @return the block if found
-     */
-    Optional<Block> findByIdAndBlockerIdAndBlockedId(String id, String blockerId, String blockedId);
 }

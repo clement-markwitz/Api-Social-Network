@@ -5,6 +5,7 @@ import fr.univartois.butinfo.s5.api_rest.mapper.MessageMapper;
 import fr.univartois.butinfo.s5.api_rest.model.Conversation;
 import fr.univartois.butinfo.s5.api_rest.model.Message;
 import fr.univartois.butinfo.s5.api_rest.model.User;
+import fr.univartois.butinfo.s5.api_rest.repository.BlockRepository;
 import fr.univartois.butinfo.s5.api_rest.repository.ConversationRepository;
 import fr.univartois.butinfo.s5.api_rest.repository.MessageRepository;
 import lombok.RequiredArgsConstructor;
@@ -31,6 +32,7 @@ public class MessageService {
 
     private final MessageRepository messageRepository;
     private final ConversationRepository conversationRepository;
+    private final BlockRepository  blockRepository;
     private final MessageMapper messageMapper;
 
     private final SimpMessagingTemplate messagingTemplate;
@@ -66,6 +68,41 @@ public class MessageService {
      */
     public MessageDto sendMessage(Conversation conversation, Message message, User sender) {
 
+        boolean isMember = conversation.getMembers().stream()
+                .anyMatch(u -> u.getId().equals(sender.getId()));
+        if (!isMember) {
+            throw new ResponseStatusException(HttpStatus.FORBIDDEN, "Not a member of this conversation");
+        }
+
+        // 1. Select all other members of the conversation
+        List<User> otherMembers = conversation.getMembers().stream()
+                .filter(member -> !member.getId().equals(sender.getId()))
+                .toList();
+
+        if (!otherMembers.isEmpty()) {
+            // 2. Count how many have blocked the sender
+            long blockersCount = otherMembers.stream()
+                    .filter(member -> blockRepository.existsByBlockerIdAndBlockedId(member.getId(), sender.getId()))
+                    .count();
+
+            // 3. Calculate non-blockers count
+            long nonBlockersCount = otherMembers.size() - blockersCount;
+
+            // 4. If majority blocked, refuse the message
+            if (blockersCount > nonBlockersCount) {
+                String messageError;
+                if(conversation.getMembers().size() == 3) {
+                    messageError = "Message refusé : Un des membres de cette conversation vous a bloqué.";
+                }
+                else if(conversation.getMembers().size() == 2) {
+                    messageError = "Message refusé : Le membre de cette conversation vous a bloqué.";
+                }
+                else {
+                    messageError = "Message refusé : La majorité des membres de cette conversation vous ont bloqué.";
+                }
+                throw new ResponseStatusException(HttpStatus.FORBIDDEN, messageError);
+            }
+        }
         message.setConversation(conversation);
         message.setSender(sender);
         message.setCreatedAt(LocalDateTime.now());
